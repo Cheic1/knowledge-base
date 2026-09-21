@@ -56,31 +56,6 @@ Aggiungi al file `.vscode/settings.json` o alle impostazioni di Cursor:
 }
 ```
 
-### Claude Desktop
-Aggiungi al file `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
-
-```json
-{
-  "mcpServers": {
-    "agentmemory": {
-      "command": "npx",
-      "args": ["-y", "@agentmemory/mcp"],
-      "env": {
-        "AGENTMEMORY_URL": "http://localhost:3111",
-        "AGENTMEMORY_DATA_DIR": "/DATA/AppData/my-knowledge-base/.agentmemory"
-      }
-    },
-    "llm-wiki": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-fetch"],
-      "env": {
-        "LLM_WIKI_URL": "http://127.0.0.1:19828"
-      }
-    }
-  }
-}
-```
-
 ### Hermes
 Aggiungi al file di configurazione di Hermes (formato MCP standard):
 

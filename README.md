@@ -91,7 +91,6 @@ curl http://localhost:3111/agentmemory/health
 ### Agenti AI supportati
 - **OpenCode**: via MCP
 - **VS Code / Cursor**: via MCP
-- **Claude Desktop**: via MCP
 - **Hermes**: via MCP
 - **Qualsiasi agente MCP**: configurazione standard
 

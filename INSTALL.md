@@ -99,17 +99,7 @@ OPENAI_MODEL=qwen3:8b
 3. Installa e avvia
 4. Apri il progetto: `/DATA/AppData/my-knowledge-base/wiki`
 
-#### Opzione 2: Claude Code Skill
-```bash
-# Installa la skill
-git clone https://github.com/read2001/wiki.git ~/.claude/skills/wiki
-
-# In Claude Code
-cd /DATA/AppData/my-knowledge-base/wiki
-/wiki init
-```
-
-#### Opzione 3: Build from source
+#### Opzione 2: Build from source
 ```bash
 git clone https://github.com/nashsu/llm_wiki.git
 cd llm_wiki
@@ -184,23 +174,6 @@ Aggiungi a `~/.config/opencode/opencode.json`:
 
 ### VS Code / Cursor
 Aggiungi a `.vscode/settings.json`:
-```json
-{
-  "mcpServers": {
-    "agentmemory": {
-      "command": "npx",
-      "args": ["-y", "@agentmemory/mcp"],
-      "env": {
-        "AGENTMEMORY_URL": "http://localhost:3111",
-        "AGENTMEMORY_DATA_DIR": "/DATA/AppData/my-knowledge-base/.agentmemory"
-      }
-    }
-  }
-}
-```
-
-### Claude Desktop
-Aggiungi a `~/Library/Application Support/Claude/claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {

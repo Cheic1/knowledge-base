@@ -11,7 +11,6 @@
 
 ### Strumenti
 - [[VS Code]] - Editor IDE
-- [[Claude]] - AI Assistant
 - [[OpenCode]] - Coding Agent
 - [[Git]] - Version Control
 

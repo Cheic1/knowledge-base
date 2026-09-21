@@ -126,13 +126,6 @@ memory_recall "ultime sessioni"
 memory_timeline "ultima settimana"
 ```
 
-### In Claude Desktop
-```
-# Chiedi alla knowledge base
-"Cosa dice la mia wiki su Docker?"
-"Quali sono le mie best practices per React?"
-```
-
 ---
 
 ## 📊 Monitoraggio
