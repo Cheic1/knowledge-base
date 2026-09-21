@@ -1,0 +1,10 @@
+{
+  "currentalem": true,
+  "hoverParent": "markdown",
+  "allowAboveCenter": true,
+  "allowLinks": true,
+  "allowUnsupported": false,
+  "allowInline": true,
+  "wait": 500,
+  "fade": 300
+}

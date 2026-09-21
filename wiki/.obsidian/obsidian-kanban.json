@@ -1,0 +1,23 @@
+{
+  "prependDateFormat": "YYYY-MM-DD",
+  "prependDailyNote": false,
+  "linkDatesToDailyNote": false,
+  "hideTagsInTitle": false,
+  "hideTagsInDisplay": false,
+  "hideDateInTitle": false,
+  "hideTagsInCard": false,
+  "show CheckBoxes": true,
+  "hideTagsInHeader": false,
+  "hideTagsInBoard": false,
+  "hideTagsInLane": false,
+  "hideTagsInCard": false,
+  "hideDateInCard": false,
+  "hideLanes": false,
+  "hideLabels": false,
+  "hideTags": false,
+  "hideTagsInHeader": false,
+  "hideTagsInBoard": false,
+  "hideTagsInLane": false,
+  "hideTagsInCard": false,
+  "hideDateInCard": false
+}

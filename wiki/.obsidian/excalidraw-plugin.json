@@ -1,0 +1,23 @@
+{
+  "folder": "wiki/diagrams",
+  "templateFile": "wiki/templates/diagram",
+  "automaticallyOpen": false,
+  "automaticallyOpenForStencils": true,
+  "showLinkIconToLink": true,
+  "openLink": true,
+  "openInNewTab": true,
+  "openInActiveTab": false,
+  "openInMaximizedMode": false,
+  "openInAdjacentTab": false,
+  "openInNonCompound": false,
+  "openInCurrentPane": false,
+  "openInNewWindow": false,
+  "openInNewTabFromActiveTab": false,
+  "openInNewTabFromActiveTabWithSticker": false,
+  "openInNewTabFromActiveTabWithStickerAndLink": false,
+  "openInNewTabFromActiveTabWithStickerAndLinkAndImage": false,
+  "openInNewTabFromActiveTabWithStickerAndLinkAndImageAndFile": false,
+  "openInNewTabFromActiveTabWithStickerAndLinkAndImageAndFileAndFolder": false,
+  "openInNewTabFromActiveTabWithStickerAndLinkAndImageAndFileAndFolderAndCanvas": false,
+  "openInNewTabFromActiveTabWithStickerAndLinkAndImageAndFileAndFolderAndCanvasAndMindmap": false
+}

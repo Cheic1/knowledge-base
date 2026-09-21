@@ -1,0 +1,8 @@
+{
+  "shouldConfirmBeforeCreate": true,
+  "wordsInCurlyBraces": false,
+  "showWeeklyNote": false,
+  "weekStart": "monday",
+  "showFileDecorationInFileExplorer": true,
+  "showFileDecorationInCalendar": true
+}

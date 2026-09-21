@@ -1,0 +1,112 @@
+# ============================================
+# My Knowledge Base - .gitignore
+# ============================================
+
+# --------------------------------------------
+# agentmemory
+# --------------------------------------------
+.agentmemory/data/*.tmp
+.agentmemory/data/*.log
+agentmemory.log
+*.backup
+*.bak
+
+# --------------------------------------------
+# LLM Wiki
+# --------------------------------------------
+wiki/.obsidian/workspace.json
+wiki/.obsidian/workspace-mobile.json
+wiki/.obsidian/plugins/
+wiki/.obsidian/themes/
+wiki/.llm-wiki/chats/*.json
+wiki/.llm-wiki/reviews/*.json
+
+# --------------------------------------------
+# Node.js
+# --------------------------------------------
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --------------------------------------------
+# Python
+# --------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# --------------------------------------------
+# OS
+# --------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# --------------------------------------------
+# IDE
+# --------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# --------------------------------------------
+# Temporanei
+# --------------------------------------------
+*.tmp
+*.temp
+*.log
+*.cache
+*.bak
+*.old
+*.orig
+
+# --------------------------------------------
+# Sensitive (API keys, tokens)
+# --------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# --------------------------------------------
+# Grandi file (usa Git LFS)
+# --------------------------------------------
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.zip
+*.tar.gz
+*.rar
+
+# --------------------------------------------
+# Git LFS (decommentare se necessario)
+# --------------------------------------------
+# *.pdf filter=lfs diff=lfs merge=lfs -text
+# *.png filter=lfs diff=lfs merge=lfs -text
+# *.jpg filter=lfs diff=lfs merge=lfs -text
+# *.mp4 filter=lfs diff=lfs merge=lfs -text

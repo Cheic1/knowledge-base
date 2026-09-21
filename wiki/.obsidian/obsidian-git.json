@@ -1,0 +1,17 @@
+{
+  "autoSaveInterval": 5,
+  "autoPullInterval": 5,
+  "autoPushInterval": 5,
+  "autoPullOnBoot": true,
+  "autoPushOnBoot": true,
+  "disablePush": false,
+  "pullBeforePush": true,
+  "disablePopups": false,
+  "listChangedFilesInMessageBody": true,
+  "commitMessage": "Auto-commit: {{date}}",
+  "commitDateFormat": "YYYY-MM-DD HH:mm",
+  "autoCommitMessage": "Daily note update",
+  "mergeOnPull": true,
+  "branch": "main",
+  "refreshSourceControl": true
+}

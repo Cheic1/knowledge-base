@@ -1,0 +1,38 @@
+{
+  "templates_folder": "wiki/templates",
+  "templates_pairs": [
+    ["", ""]
+  ],
+  "trigger_on_file_creation": false,
+  "auto_jump_to_cursor": true,
+  "enable_system_commands": true,
+  "shell_path": "",
+  "user_scripts_folder": "",
+  "enable_folder_templates": true,
+  "folder_templates": [
+    {
+      "folder": "wiki/entities",
+      "template": "wiki/templates/entity"
+    },
+    {
+      "folder": "wiki/concepts",
+      "template": "wiki/templates/concept"
+    },
+    {
+      "folder": "wiki/sources",
+      "template": "wiki/templates/source"
+    },
+    {
+      "folder": "wiki/queries",
+      "template": "wiki/templates/query"
+    }
+  ],
+  "syntax_highlighting": true,
+  "enabled_templates_hotkeys": [
+    "wiki/templates/entity.md",
+    "wiki/templates/concept.md",
+    "wiki/templates/source.md",
+    "wiki/templates/query.md"
+  ],
+  "startup_templates": []
+}

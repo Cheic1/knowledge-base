@@ -1,0 +1,8 @@
+{
+  "lineLength": 80,
+  "unwrapLine": true,
+  "trimLine": false,
+  "useYamlFrontMatter": true,
+  "frontMatterTitle": true,
+  "markdownFileExtension": ".md"
+}

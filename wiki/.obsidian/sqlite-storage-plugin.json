@@ -1,0 +1,9 @@
+{
+  "enable": true,
+  "enableForAttachments": false,
+  "enableForBin": false,
+  "enableForCache": false,
+  "enableForThemes": false,
+  "enableForWorkspaces": false,
+  "enableForStats": false
+}

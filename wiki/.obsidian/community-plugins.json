@@ -1,0 +1,10 @@
+{
+  "dataview": true,
+  "templater-obsidian": true,
+  "calendar": true,
+  "obsidian-kanban": true,
+  "obsidian-mind-map": true,
+  "obsidian-excalidraw-plugin": true,
+  "obsidian-git": true,
+  "obsidian-sqlite-storage": true
+}
