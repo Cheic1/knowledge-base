@@ -97,7 +97,8 @@ start_agentmemory() {
     cd "$KB_DIR"
     
     # Avvia agentmemory in background
-    AGENTMEMORY_DATA_DIR="$AGENTMEMORY_DIR" npx agentmemory &
+    cd "$KB_DIR"
+    AGENTMEMORY_DATA_DIR="$AGENTMEMORY_DIR" npx @agentmemory/agentmemory &
     
     # Attendi che sia pronto
     log_info "Attendo che agentmemory sia pronto..."

@@ -1,0 +1,20 @@
+{
+  "name": "my-knowledge-base",
+  "version": "1.0.0",
+  "description": "Knowledge base personale ibrida per tutti i progetti e le idee.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cheic1/knowledge-base.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cheic1/knowledge-base/issues"
+  },
+  "homepage": "https://github.com/Cheic1/knowledge-base#readme"
+}

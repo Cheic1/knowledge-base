@@ -2,17 +2,25 @@
 
 ## 🎯 In 5 minuti
 
-### 1. Configura (2 min)
+### 1. Aggiorna Node.js (se necessario)
+```bash
+# Verifica versione
+node --version
+
+# Se < 20.0.0, aggiorna (vedi UPDATE_NODEJS.md)
+```
+
+### 2. Configura (2 min)
 ```bash
 cd /DATA/AppData/my-knowledge-base
 cp .env.example .env
-nano .env  # Inserisci le tue API keys
+nano .env  # Le API keys sono già configurate!
 ```
 
-### 2. Avvia servizi (1 min)
+### 3. Avvia servizi (1 min)
 ```bash
 # Terminal 1: agentmemory
-npx agentmemory &
+./scripts/start-agentmemory.sh start
 
 # Terminal 2: LLM Wiki (apri Desktop App)
 # Vai su: https://github.com/nashsu/llm_wiki/releases

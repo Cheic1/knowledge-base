@@ -26,31 +26,38 @@ my-knowledge-base/
 
 ## 🚀 Setup rapido
 
-### 1. Inizializza Git
+### 1. Aggiorna Node.js (necessario)
+```bash
+# Verifica versione
+node --version
+
+# Se < 20.0.0, aggiorna (vedi UPDATE_NODEJS.md)
+```
+
+### 2. Configura le API keys
 ```bash
 cd /DATA/AppData/my-knowledge-base
-git init
-git remote add origin git@github.com:tuo-username/knowledge-base.git
+cp .env.example .env
+nano .env  # Inserisci le tue API keys
 ```
 
-### 2. Configura agentmemory
+### 3. Inizializza Git
 ```bash
-# Avvia agentmemory (memoria operativa)
-npx agentmemory &
-
-# Configura gli agenti (vedi AGENTS.md)
+git remote add origin git@github.com:Cheic1/knowledge-base.git
+git add .
+git commit -m "Initial setup"
+git push -u origin main
 ```
 
-### 3. Configura LLM Wiki
+### 4. Avvia agentmemory
 ```bash
-# Avvia nashsu/llm_wiki (desktop app)
-# Punto alla cartella wiki/ del progetto
+./scripts/start-agentmemory.sh start
 ```
 
-### 4. Sincronizza
+### 5. Avvia LLM Wiki
 ```bash
-# Script di sync automatico
-./scripts/sync.sh
+# Scarica da: https://github.com/nashsu/llm_wiki/releases
+# Apri la cartella: /DATA/AppData/my-knowledge-base/wiki
 ```
 
 ## 📚 Componenti

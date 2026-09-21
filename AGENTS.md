@@ -125,7 +125,11 @@ Aggiungi al file di configurazione di Hermes (formato MCP standard):
 ### 1. Avvia agentmemory
 ```bash
 cd /DATA/AppData/my-knowledge-base
-npx agentmemory &
+# Verifica che Node.js sia >= 20
+node --version
+
+# Avvia agentmemory
+./scripts/start-agentmemory.sh start
 ```
 
 ### 2. Avvia LLM Wiki
