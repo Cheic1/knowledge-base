@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Cheic1/knowledge-base/issues"
   },
-  "homepage": "https://github.com/Cheic1/knowledge-base#readme"
+  "homepage": "https://github.com/Cheic1/knowledge-base#readme",
+  "dependencies": {
+    "@agentmemory/agentmemory": "^0.9.29"
+  }
 }

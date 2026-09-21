@@ -51,7 +51,14 @@ git push -u origin main
 
 ### 4. Avvia agentmemory
 ```bash
+# Assicurati di usare Node.js 20+
+export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use 20
+
+# Avvia agentmemory
 ./scripts/start-agentmemory.sh start
+
+# Verifica che sia attivo
+curl http://localhost:3111/agentmemory/health
 ```
 
 ### 5. Avvia LLM Wiki
