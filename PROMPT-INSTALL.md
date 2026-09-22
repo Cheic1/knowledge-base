@@ -12,6 +12,15 @@ L'intero pacchetto (agentmemory + proxy) gira già sul server. Qui cabli solo l'
 ```
 Collega questa macchina alla knowledge base condivisa (server: 192.168.68.55).
 
+0. CONTROLLA se è già installata (NON reinstallare se lo è):
+   - Repo presente?   ls ~/knowledge-base/.git  (o /DATA/AppData/my-knowledge-base/.git)
+   - Server vivo?     curl -sf http://192.168.68.55:8311/agentmemory/health
+                      → JSON con "status":"healthy" = server OK
+   - Agente già cablato? grep -q agentmemory ~/.config/opencode/opencode.json
+                      (oppure ~/.hermes/config.yaml / ~/.cursor/mcp.json)
+   Se TUTTO già così: salta al punto 6 (test), non reinstallare nulla.
+   Se manca solo il cablaggio: esegui solo il punto 4 (connect-agent.sh).
+
 1. CLONA la repo (scegli una cartella che esiste; usa ~/knowledge-base se non sai dove):
    git clone https://github.com/Cheic1/knowledge-base.git ~/knowledge-base
    cd ~/knowledge-base
