@@ -57,6 +57,15 @@ Il server è già installato e funzionante. Per un rebuild da zero o un nuovo se
 ```
 Installazione completa della knowledge base sul server.
 
+0. CONTROLLA se è già installata (NON reinstallare se lo è):
+   - Repo presente?     ls /DATA/AppData/my-knowledge-base/.git
+   - agentmemory vivo?  curl -sf http://127.0.0.1:3111/agentmemory/health
+                        → "status":"healthy" = già installato e sano
+   - Proxy vivo?        ss -tlnp | grep 8311   (oppure curl -sf http://<IP>:8311/agentmemory/health)
+   Se TUTTO già così: salta al punto 7 (verifica remoto) e comunque esegui
+   il punto 6 (connect-agent.sh, è idempotente) per cablare gli agenti.
+   Se manca solo il proxy: ./scripts/start-kb.sh (riavvia tutto in modo sicuro).
+
 1. CLONA:
    cd /DATA/AppData && git clone https://github.com/Cheic1/knowledge-base.git my-knowledge-base
 

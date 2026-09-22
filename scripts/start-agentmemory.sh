@@ -96,9 +96,12 @@ start_agentmemory() {
     # Vai nella directory knowledge base
     cd "$KB_DIR"
     
+    # Configura III per accesso remoto
+    export III_HOST=0.0.0.0
+    
     # Avvia agentmemory in background
     cd "$KB_DIR"
-    nohup agentmemory > /tmp/agentmemory.log 2>&1 &
+    nohup env III_HOST=0.0.0.0 agentmemory > /tmp/agentmemory.log 2>&1 &
     
     # Attendi che sia pronto
     log_info "Attendo che agentmemory sia pronto..."
