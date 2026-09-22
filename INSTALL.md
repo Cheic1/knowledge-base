@@ -19,7 +19,7 @@
 ### 1. Clone la knowledge base
 ```bash
 cd /DATA/AppData
-git clone git@github.com:tuo-username/knowledge-base.git my-knowledge-base
+git clone https://github.com/Cheic1/knowledge-base.git my-knowledge-base
 cd my-knowledge-base
 ```
 
@@ -52,7 +52,7 @@ npm install -g @tobilu/qmd
 ### 4. Inizializza Git
 ```bash
 git init
-git remote add origin git@github.com:tuo-username/knowledge-base.git
+git remote add origin https://github.com/Cheic1/knowledge-base.git
 git add .
 git commit -m "Initial setup"
 git push -u origin main

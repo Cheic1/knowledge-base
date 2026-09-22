@@ -87,7 +87,7 @@ cp paper.pdf wiki/raw/sources/
 ### Da un nuovo PC
 ```bash
 # Clone la knowledge base
-git clone git@github.com:tuo-username/knowledge-base.git
+git clone https://github.com/Cheic1/knowledge-base.git
 cd knowledge-base
 
 # Configura

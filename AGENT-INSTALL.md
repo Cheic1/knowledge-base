@@ -51,25 +51,27 @@ mkdir -p ~/.agentmemory
 cp .agentmemory/.env ~/.agentmemory/.env
 ```
 
-### STEP 6: Configura III per accesso remoto
-Modifica il file `data/iii-config.yaml`:
-1. Cambia `host: 127.0.0.1` in `host: 0.0.0.0` per `iii-http`
-2. Cambia `host: 127.0.0.1` in `host: 0.0.0.0` per `iii-stream`
-3. Cambia `allowed_origins` in `["*"]` per `iii-http`
-
-### STEP 7: Avvia agentmemory
+### STEP 6: Avvia servizi (agentmemory + proxy LAN)
+Non modificare `data/iii-config.yaml`: iii riscrive l'host a 127.0.0.1 ad ogni boot.
+L'esposizione sulla LAN è gestita da `scripts/kb-proxy.js` (porta 8311→API, 8313→viewer, 8318→wiki).
 ```bash
 cd /DATA/AppData/my-knowledge-base
-nohup agentmemory > /tmp/agentmemory.log 2>&1 &
-sleep 10
-curl http://localhost:3111/agentmemory/health
+./scripts/start-kb.sh
 ```
+
+### STEP 7: Cabla gli agenti di questa macchina
+```bash
+cd /DATA/AppData/my-knowledge-base
+./scripts/connect-agent.sh
+```
+Lo script rileva OpenCode / Hermes / Cursor / VS Code e scrive la config MCP
+puntando a `KB_API_URL` (definito in `config/endpoint.env`).
 
 ### STEP 8: Verifica installazione
 Controlla che:
-1. agentmemory risponde: `curl http://localhost:3111/agentmemory/health`
-2. Le porte sono aperte: `ss -tlnp | grep -E '3111|3113'`
-3. Il bind è su 0.0.0.0: `ss -tlnp | grep '0.0.0.0:3111'`
+1. agentmemory risponde: `curl http://localhost:3111/agentmemory/health` → `"status":"healthy"`
+2. Il proxy è su: `ss -tlnp | grep -E '8311|8313'`
+3. Raggiungibile dalla LAN: `curl http://<IP_SERVER>:8311/agentmemory/health`
 
 ### STEP 9: Inizializza Git
 ```bash
@@ -111,18 +113,30 @@ Mostra all'utente gli indirizzi di accesso e come riavviare il servizio.
 
 ## 📋 Indirizzi di accesso (dopo installazione)
 
+L'endpoint è centralizzato in `config/endpoint.env` (cambiabile).
+
 | Servizio | Indirizzo |
 |----------|-----------|
-| REST API | http://192.168.68.55:3111 |
-| Viewer Web | http://192.168.68.55:3113 |
-| WebSocket | ws://192.168.68.55:3112 |
-| Engine | ws://192.168.68.55:49134 |
+| REST API | `KB_API_URL` → http://192.168.68.55:8311 |
+| Viewer Web | `KB_VIEWER_URL` → http://192.168.68.55:8313 |
+| LLM Wiki API | `KB_WIKI_URL` → http://192.168.68.55:8318 |
+| Locale (solo server) | http://127.0.0.1:3111/agentmemory/health |
+
+Le porte 83xx sono del proxy LAN (`scripts/kb-proxy.js`): iii resta su 127.0.0.1.
 
 ## 🔧 Riavvio rapido
 
-Dopo l'installazione, per riavviare la knowledge base:
 ```bash
-~/start-kb.sh
+cd /DATA/AppData/my-knowledge-base
+./scripts/start-kb.sh          # avvia tutto
+./scripts/start-kb.sh status   # stato
+./scripts/start-kb.sh stop     # ferma tutto
+```
+
+## 🔌 Collegamento nuovi agenti/PC
+
+```bash
+./scripts/connect-agent.sh     # cabla MCP leggendo config/endpoint.env
 ```
 
 ## 📦 Struttura installata

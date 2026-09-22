@@ -6,8 +6,13 @@ Questa knowledge base si integra con diversi agenti AI tramite **MCP (Model Cont
 
 ## 🔌 Configurazione per agente
 
+> ⚡ **Cablaggio automatico**: invece di editare i file a mano, esegui
+> `./scripts/connect-agent.sh` — legge l'endpoint da `config/endpoint.env`
+> e configura MCP in OpenCode, Hermes, Cursor e VS Code trovati sulla macchina.
+> I blocchi sotto sono il riferimento di cosa scrive lo script.
+
 ### OpenCode
-Aggiungi al file `~/.config/opencode/opencode.json`:
+Aggiungi al file `~/.config/opencode/opencode.json` (nota: il campo env si chiama `environment`):
 
 ```json
 {
@@ -15,24 +20,26 @@ Aggiungi al file `~/.config/opencode/opencode.json`:
     "agentmemory": {
       "type": "local",
       "command": ["npx", "-y", "@agentmemory/mcp"],
-      "env": {
-        "AGENTMEMORY_URL": "http://localhost:3111",
-        "AGENTMEMORY_DATA_DIR": "/DATA/AppData/my-knowledge-base/.agentmemory"
-      }
+      "environment": { "AGENTMEMORY_URL": "http://192.168.68.55:8311" },
+      "enabled": true,
+      "timeout": 10000
     },
     "llm-wiki": {
       "type": "local",
-      "command": ["npx", "-y", "@anthropic/mcp-server-fetch"],
-      "env": {
-        "LLM_WIKI_URL": "http://127.0.0.1:19828"
-      }
+      "command": ["node", "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
+      "environment": { "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318" },
+      "enabled": true,
+      "timeout": 10000
     }
   }
 }
 ```
 
+L'endpoint (`KB_API_URL`, `KB_WIKI_URL`) è centralizzato in `config/endpoint.env`:
+cambialo lì e riesegui `scripts/connect-agent.sh` su ogni macchina.
+
 ### VS Code / Cursor
-Aggiungi al file `.vscode/settings.json` o alle impostazioni di Cursor:
+Cursor: `~/.cursor/mcp.json` — VS Code: `.vscode/mcp.json`:
 
 ```json
 {
@@ -40,38 +47,35 @@ Aggiungi al file `.vscode/settings.json` o alle impostazioni di Cursor:
     "agentmemory": {
       "command": "npx",
       "args": ["-y", "@agentmemory/mcp"],
-      "env": {
-        "AGENTMEMORY_URL": "http://localhost:3111",
-        "AGENTMEMORY_DATA_DIR": "/DATA/AppData/my-knowledge-base/.agentmemory"
-      }
+      "env": { "AGENTMEMORY_URL": "http://192.168.68.55:8311" }
     },
     "llm-wiki": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-fetch"],
-      "env": {
-        "LLM_WIKI_URL": "http://127.0.0.1:19828"
-      }
+      "command": "node",
+      "args": ["<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
+      "env": { "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318" }
     }
   }
 }
 ```
 
 ### Hermes
-Aggiungi al file di configurazione di Hermes (formato MCP standard):
+Blocco `mcp_servers:` in `~/.hermes/config.yaml`:
 
-```json
-{
-  "mcpServers": {
-    "agentmemory": {
-      "command": "npx",
-      "args": ["-y", "@agentmemory/mcp"],
-      "env": {
-        "AGENTMEMORY_URL": "http://localhost:3111",
-        "AGENTMEMORY_DATA_DIR": "/DATA/AppData/my-knowledge-base/.agentmemory"
-      }
-    }
-  }
-}
+```yaml
+mcp_servers:
+  agentmemory:
+    command: npx
+    args: ["-y", "@agentmemory/mcp"]
+    env:
+      AGENTMEMORY_URL: http://192.168.68.55:8311
+    enabled: true
+  llm-wiki:
+    command: node
+    args:
+      - <REPO>/mcp/llm-wiki-mcp/dist/src/index.js
+    env:
+      LLM_WIKI_API_BASE_URL: http://192.168.68.55:8318
+    enabled: true
 ```
 
 ## 🛠️ Strumenti disponibili
@@ -97,30 +101,35 @@ Aggiungi al file di configurazione di Hermes (formato MCP standard):
 
 ## 🚀 Avvio servizi
 
-### 1. Avvia agentmemory
+### 1. Avvia tutto (server)
 ```bash
 cd /DATA/AppData/my-knowledge-base
-# Verifica che Node.js sia >= 20
-node --version
-
-# Avvia agentmemory
-./scripts/start-agentmemory.sh start
+./scripts/start-kb.sh          # agentmemory + kb-proxy (LAN 8311/8313/8318)
+./scripts/start-kb.sh status   # stato
 ```
 
-### 2. Avvia LLM Wiki
+### 2. Avvia LLM Wiki (opzionale)
 ```bash
 # Avvia l'app desktop nashsu/llm_wiki
 # Punto alla cartella: /DATA/AppData/my-knowledge-base/wiki
+# API esposta via proxy su 8318 quando l'app è attiva
 ```
 
 ### 3. Verifica servizi
 ```bash
-# Verifica agentmemory
-curl http://localhost:3111/agentmemory/health
-
-# Verifica LLM Wiki
-curl http://127.0.0.1:19828/api/v1/health
+# Locale
+curl http://127.0.0.1:3111/agentmemory/health     # → "status":"healthy"
+# Remoto (LAN)
+curl http://192.168.68.55:8311/agentmemory/health # → "status":"healthy"
+# Viewer remoto
+curl -o /dev/null -w "%{http_code}\n" http://192.168.68.55:8313/
 ```
+
+### Mappe porte (perché esistono le 83xx)
+iii v0.11.2 riscrive `data/iii-config.yaml` a `host: 127.0.0.1` ad ogni boot
+(e III_HOST non funziona), quindi i servizi restano in locale e `kb-proxy.js`
+li espone sulla LAN: **8311→3111** (API), **8313→3113** (viewer),
+**8318→19828** (wiki). Non serve modificare iii-config.yaml.
 
 ## 📝 Utilizzo
 
@@ -144,7 +153,17 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 
 ## 🔒 Sicurezza
 
-- **Accesso locale**: solo 127.0.0.1
-- **API keys**: mai committate (usa .env)
-- **Git privato**: usa repo privato su GitHub/GitLab
-- **Backup**: automatico con Git
+- **Accesso LAN**: servizi in ascolto su 127.0.0.1, esposti solo dal
+  kb-proxy su 8311/8313/8318 (rete 192.168.68.0/24, **senza auth**:
+  in rete fidata domestica; non esporre l'host a internet)
+- **API keys**: mai committate (usa .env, `chmod 600 .env`)
+- **Git privato**: repo GitHub Cheic1/knowledge-base
+- **Backup**: Git per wiki/progetti; `data/` (stato runtime) è escluso
+
+## 🔌 Riepilogo collegamento
+
+| Da dove | Cosa fa l'agente |
+|---------|------------------|
+| **Server** (OpenCode, Hermes) | `./scripts/connect-agent.sh` → cabla MCP a `localhost` via endpoint |
+| **PC client** (OpenCode) | clone repo + `./scripts/connect-agent.sh` → cabla MCP a `192.168.68.55:8311` |
+| Cambio endpoint | modifica `config/endpoint.env` + riesegui `connect-agent.sh` ovunque |

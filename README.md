@@ -49,22 +49,28 @@ git commit -m "Initial setup"
 git push -u origin main
 ```
 
-### 4. Avvia agentmemory
+### 4. Avvia knowledge base (server)
 ```bash
 # Assicurati di usare Node.js 20+
 export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use 20
 
-# Avvia agentmemory
-./scripts/start-agentmemory.sh start
+# Avvia agentmemory + kb-proxy (LAN 8311/8313/8318)
+./scripts/start-kb.sh
 
-# Verifica che sia attivo
-curl http://localhost:3111/agentmemory/health
+# Verifica
+curl http://localhost:3111/agentmemory/health   # → "status":"healthy"
 ```
 
-### 5. Avvia LLM Wiki
+### 5. Cabla i tuoi agenti
+```bash
+./scripts/connect-agent.sh    # rileva OpenCode/Hermes/Cursor/VS Code e scrive il config MCP
+```
+
+### 6. Avvia LLM Wiki (opzionale)
 ```bash
 # Scarica da: https://github.com/nashsu/llm_wiki/releases
 # Apri la cartella: /DATA/AppData/my-knowledge-base/wiki
+# API esposta dal proxy su http://<IP>:8318
 ```
 
 ## 📚 Componenti
@@ -88,17 +94,23 @@ curl http://localhost:3111/agentmemory/health
 
 ## 🔌 Integrazioni
 
+### Collegamento (endpoint unico e cambiabile)
+- **Endpoint centralizzato**: `config/endpoint.env` (`KB_API_URL`, `KB_VIEWER_URL`, `KB_WIKI_URL`)
+- **Server**: `./scripts/start-kb.sh` (agentmemory + proxy LAN 8311/8313/8318)
+- **Ogni macchina**: `./scripts/connect-agent.sh` (cabla MCP negli agenti trovati)
+- **Prompt per agenti**: `PROMPT-INSTALL.md` (blocco copy-paste)
+
 ### Agenti AI supportati
-- **OpenCode**: via MCP
-- **VS Code / Cursor**: via MCP
-- **Hermes**: via MCP
-- **Qualsiasi agente MCP**: configurazione standard
+- **OpenCode**: via MCP (`~/.config/opencode/opencode.json`)
+- **Hermes**: via MCP (`~/.hermes/config.yaml`, blocco `mcp_servers:`)
+- **VS Code / Cursor**: via MCP (`mcp.json`)
+- **Qualsiasi agente MCP**: `MCP-CONFIG.json` come riferimento
 
 ### File di configurazione
-- `AGENTS.md`: Configurazione agenti AI
-- `MCP-CONFIG.json`: Configurazione MCP
-- `scripts/sync.sh`: Script di sincronizzazione
-- `scripts/backup.sh`: Script di backup
+- `config/endpoint.env`: endpoint unico di rete
+- `AGENTS.md`: configurazione dettagliata agenti
+- `MCP-CONFIG.json`: riferimento MCP per ogni agente
+- `scripts/start-kb.sh`, `scripts/connect-agent.sh`, `scripts/sync.sh`
 
 ## 📖 Utilizzo
 
@@ -134,9 +146,10 @@ git push origin main
 
 ## 🔒 Sicurezza
 
-- **API keys**: mai committate (usa .env)
-- **Dati sensibili**: criptati o esclusi da Git
-- **Accesso**: solo locale (127.0.0.1)
+- **API keys**: mai committate (usa .env, `chmod 600 .env`)
+- **Dati sensibili**: `data/` escluso da Git
+- **Accesso**: servizi su 127.0.0.1, esposti in LAN solo dal kb-proxy
+  (8311/8313/8318, rete fidata 192.168.68.0/24 — senza auth, non esporre a internet)
 - **Backup**: automatico su Git privato
 
 ## 📝 Licenza

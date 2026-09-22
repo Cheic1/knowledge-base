@@ -151,61 +151,57 @@ step4_configura_env() {
 }
 
 # --------------------------------------------
-# Step 5: Configura III per accesso remoto
+# Step 5: Avvia kb-proxy (esposizione LAN)
 # --------------------------------------------
 step5_configura_iii() {
-    log_step "Step 5: Configura III per accesso remoto"
+    log_step "Step 5: kb-proxy (esposizione LAN)"
     
-    # Modifica iii-config.yaml per bind su 0.0.0.0
-    if [ -f "$KB_DIR/data/iii-config.yaml" ]; then
-        sed -i 's/host: 127.0.0.1/host: 0.0.0.0/g' "$KB_DIR/data/iii-config.yaml"
-        sed -i 's/allowed_origins: \["http:\/\/localhost:3111.*\]/allowed_origins: ["*"]/g' "$KB_DIR/data/iii-config.yaml"
-        log_success "III configurato per accesso remoto"
+    # NOTA: non modificare iii-config.yaml — iii riscrive host:127.0.0.1
+    # ad ogni boot. L'esposizione LAN è fatta dal proxy su 8311/8313/8318.
+    if [ -f "$KB_DIR/scripts/kb-proxy.js" ]; then
+        log_info "kb-proxy disponibile (script/kb-proxy.js, porte 8311/8313/8315/8318)"
+        log_success "esposizione LAN tramite kb-proxy"
     else
-        log_warning "iii-config.yaml non trovato - configurazione III manuale necessaria"
+        log_warning "scripts/kb-proxy.js non trovato"
     fi
 }
 
 # --------------------------------------------
-# Step 6: Avvia agentmemory
+# Step 6: Avvia agentmemory + kb-proxy
 # --------------------------------------------
 step6_avvia_agentmemory() {
-    log_step "Step 6: Avvia agentmemory"
+    log_step "Step 6: Avvia agentmemory + kb-proxy"
     
-    # Ferma eventuali processi esistenti
-    pkill -f agentmemory 2>/dev/null || true
-    pkill -f iii 2>/dev/null || true
-    sleep 2
-    
-    # Avvia agentmemory
-    cd "$KB_DIR"
-    nohup agentmemory > /tmp/agentmemory.log 2>&1 &
-    AGENTMEMORY_PID=$!
-    
-    log_info "agentmemory avviato (PID: $AGENTMEMORY_PID)"
+    # Usa lo script unificato (agentmemory + proxy LAN)
+    if [ -x "$KB_DIR/scripts/start-kb.sh" ]; then
+        "$KB_DIR/scripts/start-kb.sh" start || true
+    else
+        # Fallback: solo agentmemory
+        pkill -f "bin/agentmemory" 2>/dev/null || true
+        sleep 2
+        cd "$KB_DIR"
+        nohup agentmemory > /tmp/agentmemory.log 2>&1 &
+        sleep 10
+    fi
     
     # Attendi che sia pronto
     log_info "Attendo che agentmemory sia pronto..."
     for i in {1..30}; do
         if curl -s http://localhost:3111/agentmemory/health > /dev/null 2>&1; then
             log_success "agentmemory è attivo!"
-            
-            # Mostra informazioni
+            IP=$(hostname -I | awk '{print $1}')
             echo ""
             echo "┌─────────────────────────────────────────────┐"
-            echo "│  agentmemory v0.9.29 - STATO: ATTIVO        │"
+            echo "│  agentmemory - STATO: ATTIVO                │"
             echo "├─────────────────────────────────────────────┤"
-            echo "│  REST API:  http://0.0.0.0:3111             │"
-            echo "│  Viewer:    http://0.0.0.0:3113             │"
-            echo "│  Streams:   ws://0.0.0.0:3112               │"
-            echo "│  Engine:    ws://0.0.0.0:49134              │"
+            echo "│  API locale:  http://127.0.0.1:3111         │"
+            echo "│  API LAN:     http://$IP:8311           │"
+            echo "│  Viewer LAN:  http://$IP:8313           │"
+            echo "│  Wiki LAN:    http://$IP:8318           │"
             echo "└─────────────────────────────────────────────┘"
             echo ""
-            
-            # Verifica health
             curl -s http://localhost:3111/agentmemory/health | head -c 200
             echo ""
-            
             return 0
         fi
         sleep 1
@@ -242,20 +238,28 @@ step7_verifica() {
         log_warning "⚠️ Porta 3113: NON IN ASCOLTO"
     fi
     
-    # Verifica bind
-    if ss -tlnp | grep -q "0.0.0.0:3111"; then
-        log_success "✅ Bind: 0.0.0.0 (accesso remoto abilitato)"
+    # Verifica kb-proxy (LAN)
+    if ss -tlnp | grep -q "0.0.0.0:8311"; then
+        log_success "✅ kb-proxy 8311: IN ASCOLTO (API LAN)"
     else
-        log_warning "⚠️ Bind: 127.0.0.1 (solo locale)"
+        log_warning "⚠️ kb-proxy 8311: NON IN ASCOLTO (LAN non esposta)"
+    fi
+    
+    if ss -tlnp | grep -q "0.0.0.0:8313"; then
+        log_success "✅ kb-proxy 8313: IN ASCOLTO (Viewer LAN)"
+    else
+        log_warning "⚠️ kb-proxy 8313: NON IN ASCOLTO"
     fi
     
     echo ""
     log_success "Installazione completata!"
+    IP=$(hostname -I | awk '{print $1}')
     echo ""
     echo "Prossimi passi:"
-    echo "  1. Apri il Viewer: http://$(hostname -I | awk '{print $1}'):3113"
-    echo "  2. Configura i tuoi agenti AI (vedi AGENTS.md)"
-    echo "  3. Sincronizza con Git: ./scripts/sync.sh"
+    echo "  1. Apri il Viewer: http://$IP:8313"
+    echo "  2. Cabla gli agenti: ./scripts/connect-agent.sh"
+    echo "  3. Endpoint cambiabile in: config/endpoint.env"
+    echo "  4. Sincronizza con Git: ./scripts/sync.sh"
     echo ""
 }
 

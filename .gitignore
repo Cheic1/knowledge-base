@@ -41,6 +41,9 @@ venv/
 env/
 *.egg-info/
 dist/
+# MCP server llm-wiki: il dist va committato (entrypoint cablato dagli agenti)
+!mcp/llm-wiki-mcp/dist/
+!mcp/llm-wiki-mcp/dist/**
 build/
 eggs/
 *.egg
