@@ -8,6 +8,8 @@
 .agentmemory/data/*.tmp
 .agentmemory/data/*.log
 agentmemory.log
+# Stato runtime di iii/agentmemory (state_store.db, iii-config.yaml riscritto ad ogni boot)
+data/
 *.backup
 *.bak
 
