@@ -1,0 +1,19 @@
+# Unit utente generata da scripts/install-systemd.sh (non editare la copia installata)
+[Unit]
+Description=Knowledge Base - kb-proxy LAN (8311/8313/8318) con token
+After=network-online.target kb-agentmemory.service
+Wants=network-online.target kb-agentmemory.service
+
+[Service]
+Type=simple
+WorkingDirectory=@REPO_DIR@
+Environment=PATH=@PATH@
+EnvironmentFile=-@REPO_DIR@/.env
+ExecStart=@NODE_BIN@ @REPO_DIR@/scripts/kb-proxy.js
+Restart=always
+RestartSec=5
+# 78 = KB_TOKEN mancante: inutile riavviare finche' non si configura
+RestartPreventExitStatus=78
+
+[Install]
+WantedBy=default.target

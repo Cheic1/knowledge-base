@@ -2,6 +2,9 @@
 # ============================================
 # start-kb.sh - Avvia knowledge base completa (agentmemory + kb-proxy)
 #
+# Se le unit systemd sono installate (scripts/install-systemd.sh)
+# delega a systemctl --user, altrimenti avvia i processi con nohup.
+#
 # Uso:
 #   ./scripts/start-kb.sh          # avvia tutto
 #   ./scripts/start-kb.sh stop     # ferma tutto
@@ -31,7 +34,24 @@ load_node() {
     fi
 }
 
+UNITS="kb-agentmemory.service kb-proxy.service"
+
+# true se le unit systemd utente sono installate e abilitate
+use_systemd() {
+    systemctl --user is-enabled kb-proxy.service > /dev/null 2>&1
+}
+
+kb_token() {
+    "$REPO_DIR/scripts/kb-token.sh" 2>/dev/null
+}
+
 start_all() {
+    if use_systemd; then
+        # shellcheck disable=SC2086
+        systemctl --user start $UNITS
+        ok "Knowledge Base avviata via systemd (riavvio automatico attivo)"
+        return
+    fi
     load_node
     cd "$REPO_DIR"
 
@@ -51,6 +71,7 @@ start_all() {
     done
 
     echo "--- Avvio kb-proxy (LAN 8311/8313/8315/8318) ---"
+    kb_token > /dev/null   # genera KB_TOKEN in .env se manca
     nohup node "$REPO_DIR/scripts/kb-proxy.js" > "$LOG_PROXY" 2>&1 &
     PROXY_PID=$!
     sleep 1
@@ -65,6 +86,7 @@ start_all() {
     echo "  Wiki API: http://$IP:8318  (serve l'app llm_wiki attiva)"
     echo "  Locale:   http://127.0.0.1:3111/agentmemory/health"
     echo ""
+    echo "  Token:    $REPO_DIR/scripts/kb-token.sh  (Bearer per i client)"
     echo "  Log: $LOG_AM / $LOG_PROXY"
     echo "  Cabla agenti: $REPO_DIR/scripts/connect-agent.sh"
     echo "=============================================="
@@ -72,6 +94,12 @@ start_all() {
 
 stop_all() {
     local MODE="${1:-}"
+    if use_systemd; then
+        # shellcheck disable=SC2086
+        systemctl --user stop $UNITS
+        [ "$MODE" = "quiet" ] || ok "Knowledge Base fermata (systemd)"
+        return
+    fi
     [ "$MODE" = "quiet" ] && exec 3>&1 1>/dev/null 2>&1
 
     # kb-proxy (node kb-proxy.js)
@@ -94,6 +122,11 @@ stop_all() {
 
 show_status() {
     echo "--- Stato ---"
+    if use_systemd; then
+        for u in $UNITS; do
+            echo "    systemd $u: $(systemctl --user is-active "$u" 2>/dev/null || true)"
+        done
+    fi
     if curl -sf -m 3 http://127.0.0.1:3111/agentmemory/health > /dev/null 2>&1; then
         ok "agentmemory: healthy (127.0.0.1:3111)"
     else
@@ -101,8 +134,9 @@ show_status() {
     fi
     if pgrep -f "kb-proxy.js" > /dev/null 2>&1; then
         ok "kb-proxy: attivo"
+        TOKEN="$(kb_token)"
         for port in 8311 8313 8315 8318; do
-            code=$(curl -sf -m 3 -o /dev/null -w "%{http_code}" "http://127.0.0.1:$port/" 2>/dev/null || echo "down")
+            code=$(curl -s -m 3 -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $TOKEN" "http://127.0.0.1:$port/" 2>/dev/null || echo "down")
             echo "    :$port -> HTTP $code"
         done
     else
