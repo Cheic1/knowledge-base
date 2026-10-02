@@ -31,6 +31,39 @@ Conclusioni:
 - Manca l'autore. Serve per la reputazione dei colleghi, quindi lo aggiunge
   la sync (vedi `docs/memory-trust-sync-change.md`).
 
+## Chi ha scritto cosa
+
+La memoria **non è divisa per persona**: dopo la sync ogni PC ha tutte le
+memorie di tutti, ed è giusto così (lo scopo è condividerle). Quello che
+serve è sapere l'autore di ciascuna, per due motivi: vedere chi ha scritto
+cosa e pesare il voto con la reputazione di chi l'ha scritta.
+
+Tre livelli:
+
+1. **PC** (`kbAuthor` sul record). Lo timbra la sync la prima volta che la
+   memoria esce dal PC dove è nata (`KB_SYNC_NODE`, di default l'hostname) e
+   poi viaggia col record. Oggi il file `memories/sync/<pc>.json` dice solo
+   "questo PC ha queste memorie", e dopo la prima sync le ha tutte: non basta.
+2. **Persona** (`memories/trust/people.json`, a mano, facoltativo). Raggruppa
+   i PC per persona, così chi ha due PC ha una reputazione sola:
+   ```json
+   { "pc-ufficio": "francesco", "laptop-fra": "francesco", "pc-mario": "mario" }
+   ```
+   Senza questo file la persona è il nome del PC.
+3. **Pregresso**: le memorie importate prima della modifica alla sync
+   risultano `sconosciuto` e partono da 0.5.
+
+Per vederlo:
+
+- `node scripts/memory-trust.mjs show --author mario` → memorie di Mario con voto
+- `node scripts/memory-trust.mjs show ID` → autore, PC, prove e motivazioni
+- `memories/trust/ledger.json` → per ogni memoria `author`, `pc`, `score`;
+  in `authors` la reputazione di ogni persona
+
+Limite: se due persone usano lo stesso PC (o lo stesso agente sul server)
+risultano un solo autore. agentmemory non sa chi c'è alla tastiera; se
+serve, ognuno imposta `KB_SYNC_NODE` col proprio nome sul proprio PC.
+
 ## Il modello: voto = probabilità che la memoria sia giusta
 
 Ogni memoria ha due contatori, `alpha` (prove a favore) e `beta` (prove

@@ -16,6 +16,7 @@
 // File:
 //   memories/trust/ledger.json        scritto SOLO dal server (prove + voti calcolati)
 //   memories/trust/votes/<pc>.jsonl   scritto SOLO dal PC <pc> (comando vote)
+//   memories/trust/people.json        PC -> persona, a mano (facoltativo)
 //
 // Il voto finisce anche dentro agentmemory, cosi' arriva agli agenti senza
 // strumenti nuovi: strength = 1..10 e, sotto soglia, un prefisso nel titolo
@@ -27,7 +28,7 @@
 //   node scripts/memory-trust.mjs rebalance [--dry-run]          ricalcola voti e reputazioni
 //   node scripts/memory-trust.mjs apply     [--dry-run]          scrive i voti in agentmemory
 //   node scripts/memory-trust.mjs vote ID up|down "motivo"       voto umano (da qualsiasi PC)
-//   node scripts/memory-trust.mjs show [ID]                      classifica o dettaglio
+//   node scripts/memory-trust.mjs show [ID | --author NOME]      classifica, dettaglio o memorie di una persona
 //
 // Variabili: KB_MEMORY_URL, AGENTMEMORY_SECRET, KB_SYNC_NODE (come memory-sync.mjs)
 import crypto from 'node:crypto';
@@ -39,6 +40,7 @@ import { fileURLToPath } from 'node:url';
 const REPO_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TRUST_DIR = process.env.KB_TRUST_DIR || path.join(REPO_DIR, 'memories', 'trust');
 const LEDGER = path.join(TRUST_DIR, 'ledger.json');
+const PEOPLE = path.join(TRUST_DIR, 'people.json');
 const VOTES_DIR = path.join(TRUST_DIR, 'votes');
 
 // Parametri del modello: cambiarli qui ricalcola tutto al prossimo rebalance
@@ -104,8 +106,16 @@ function saveLedger(ledger) {
 const bareTitle = (t) => String(t || '').replace(TAG_RE, '');
 const hashOf = (m) => crypto.createHash('sha256')
   .update(`${bareTitle(m.title)}\n${m.content || ''}`).digest('hex').slice(0, 16);
-// kbAuthor lo mette memory-sync all'export (vedi docs/memory-trust-sync-change.md)
-const authorOf = (m) => m.kbAuthor || UNKNOWN;
+// kbAuthor = PC che ha scritto la memoria, lo mette memory-sync all'export
+// (docs/memory-trust-sync-change.md). people.json raggruppa i PC per persona:
+// { "pc-ufficio": "francesco", "laptop-fra": "francesco", "pc-mario": "mario" }
+// cosi' la reputazione e' della persona, non della macchina.
+let people;
+function personOf(node) {
+  people ??= fs.existsSync(PEOPLE) ? JSON.parse(fs.readFileSync(PEOPLE, 'utf8')) : {};
+  return people[node] || node;
+}
+const authorOf = (m) => (m.kbAuthor ? personOf(m.kbAuthor) : UNKNOWN);
 const live = (m) => m.isLatest !== false && !m.deleted;
 
 function nodeName() {
@@ -186,7 +196,7 @@ function readVotes() {
   const votes = [];
   if (!fs.existsSync(VOTES_DIR)) return votes;
   for (const f of fs.readdirSync(VOTES_DIR).filter((n) => n.endsWith('.jsonl')).sort()) {
-    const voter = f.slice(0, -6);
+    const voter = personOf(f.slice(0, -6));
     for (const line of fs.readFileSync(path.join(VOTES_DIR, f), 'utf8').split('\n')) {
       if (!line.trim()) continue;
       try {
@@ -255,6 +265,7 @@ async function cmdRebalance(args) {
     Object.assign(entry, {
       title: bareTitle(m.title).slice(0, 120),
       author,
+      pc: m.kbAuthor || UNKNOWN,
       status: live(m) ? 'attiva' : 'superata',
       score,
       evidence: round(a + b),
@@ -310,12 +321,13 @@ async function cmdVote(args) {
 // ---------------------------------------------------------------- show ---
 function cmdShow(args) {
   const ledger = loadLedger();
-  if (args[0]) {
+  const who = args.indexOf('--author') >= 0 ? args[args.indexOf('--author') + 1] : null;
+  if (args[0] && args[0] !== '--author') {
     const e = ledger.memories[args[0]] || die(`${args[0]} non e' nel ledger`);
     console.log(JSON.stringify(e, null, 2));
     return;
   }
-  const rows = Object.entries(ledger.memories).filter(([, e]) => e.status === 'attiva')
+  const rows = Object.entries(ledger.memories).filter(([, e]) => e.status === 'attiva' && (!who || e.author === who))
     .sort((x, y) => (x[1].score ?? 1) - (y[1].score ?? 1));
   for (const [id, e] of rows) console.log(`${String(e.score).padEnd(5)} ${String(e.evidence ?? 0).padEnd(5)} ${(e.author || '').padEnd(14)} ${id}  ${e.title}`);
   console.log('\nautori:', JSON.stringify(ledger.authors || {}));
