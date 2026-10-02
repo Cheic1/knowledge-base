@@ -1,0 +1,348 @@
+{
+  "_note": "Dataset sintetico per confrontare i sistemi di memoria. I fatti sono inventati ma realistici; non contengono dati reali della KB. 'keywords': parole che devono comparire nei risultati per contare un hit (tutte, case-insensitive; scelte apposta per NON comparire nelle query, così un server che ripete la query nella risposta non conta come hit). 'kind': paraphrase = la query non riusa le parole del fatto (misura la ricerca semantica), keyword = la query riusa i termini (misura la ricerca lessicale), cross = la risposta è in un altro progetto.",
+  "facts": [
+    {
+      "id": "f01",
+      "project": "bench-shop",
+      "text": "Nel progetto bench-shop i prezzi sono salvati in centesimi come interi (BIGINT) per evitare errori di arrotondamento dei float.",
+      "keywords": [
+        "centesimi"
+      ]
+    },
+    {
+      "id": "f02",
+      "project": "bench-shop",
+      "text": "Il deploy di bench-shop si fa con 'make release' che builda l'immagine Docker e la pusha su registry.bench.local:5000.",
+      "keywords": [
+        "5000"
+      ]
+    },
+    {
+      "id": "f03",
+      "project": "bench-shop",
+      "text": "Bug noto bench-shop: il carrello perde gli articoli se la sessione Redis scade; TTL portato da 30 minuti a 24 ore.",
+      "keywords": [
+        "24 ore"
+      ]
+    },
+    {
+      "id": "f04",
+      "project": "bench-shop",
+      "text": "In bench-shop i test end-to-end usano Playwright e girano solo con la variabile E2E=1, altrimenti vengono saltati.",
+      "keywords": [
+        "playwright",
+        "e2e=1"
+      ]
+    },
+    {
+      "id": "f05",
+      "project": "bench-shop",
+      "text": "Decisione bench-shop: niente ORM, si usa sqlc per generare il codice Go dalle query SQL scritte a mano.",
+      "keywords": [
+        "sqlc"
+      ]
+    },
+    {
+      "id": "f06",
+      "project": "bench-api",
+      "text": "bench-api autentica le richieste con JWT firmati RS256; la chiave pubblica viene ruotata ogni 90 giorni.",
+      "keywords": [
+        "90 giorni"
+      ]
+    },
+    {
+      "id": "f07",
+      "project": "bench-api",
+      "text": "Il rate limit di bench-api è 120 richieste al minuto per token, implementato con un token bucket in memoria.",
+      "keywords": [
+        "token bucket"
+      ]
+    },
+    {
+      "id": "f08",
+      "project": "bench-api",
+      "text": "Per lanciare bench-api in locale serve Postgres 16 sulla porta 5433, non la 5432, perché la 5432 è occupata dal Postgres di sistema.",
+      "keywords": [
+        "5432"
+      ]
+    },
+    {
+      "id": "f09",
+      "project": "bench-api",
+      "text": "Le migrazioni del database di bench-api sono gestite con goose e vanno in migrations/ con prefisso timestamp.",
+      "keywords": [
+        "goose"
+      ]
+    },
+    {
+      "id": "f10",
+      "project": "bench-api",
+      "text": "Workaround bench-api: la libreria pgx v5.4 ha un leak di connessioni con i cursor, quindi è bloccata alla v5.3.1.",
+      "keywords": [
+        "5.3.1"
+      ]
+    },
+    {
+      "id": "f11",
+      "project": "bench-infra",
+      "text": "Il backup notturno di bench-infra parte alle 02:30 con restic verso un bucket S3 compatibile su MinIO.",
+      "keywords": [
+        "02:30"
+      ]
+    },
+    {
+      "id": "f12",
+      "project": "bench-infra",
+      "text": "Su bench-infra il reverse proxy è Caddy, che gestisce da solo i certificati TLS; nginx è stato dismesso.",
+      "keywords": [
+        "caddy"
+      ]
+    },
+    {
+      "id": "f13",
+      "project": "bench-infra",
+      "text": "Le metriche di bench-infra vanno su VictoriaMetrics, con retention di 13 mesi, e le dashboard su Grafana.",
+      "keywords": [
+        "victoriametrics"
+      ]
+    },
+    {
+      "id": "f14",
+      "project": "bench-infra",
+      "text": "Regola di bench-infra: mai riavviare il nodo db-02 durante l'orario di lavoro, ospita la replica sincrona.",
+      "keywords": [
+        "orario di lavoro"
+      ]
+    },
+    {
+      "id": "f15",
+      "project": "bench-infra",
+      "text": "I log di bench-infra vengono raccolti con Vector e spediti a Loki; la retention dei log è di 30 giorni.",
+      "keywords": [
+        "loki"
+      ]
+    },
+    {
+      "id": "f16",
+      "project": "bench-tools",
+      "text": "Preferenza dello sviluppatore: commit in italiano, formato Conventional Commits, niente emoji nei messaggi.",
+      "keywords": [
+        "conventional commits"
+      ]
+    },
+    {
+      "id": "f17",
+      "project": "bench-tools",
+      "text": "Lo sviluppatore usa pnpm e non npm per i progetti TypeScript; il lockfile da committare è pnpm-lock.yaml.",
+      "keywords": [
+        "typescript"
+      ]
+    },
+    {
+      "id": "f18",
+      "project": "bench-tools",
+      "text": "Il linter Python standard per tutti i progetti è ruff, configurato in pyproject.toml con line-length 100.",
+      "keywords": [
+        "ruff"
+      ]
+    },
+    {
+      "id": "f19",
+      "project": "bench-tools",
+      "text": "Sul portatile di lavoro il proxy aziendale richiede HTTPS_PROXY=http://proxy.bench.local:3128 per npm e pip.",
+      "keywords": [
+        "3128"
+      ]
+    },
+    {
+      "id": "f20",
+      "project": "bench-tools",
+      "text": "La formattazione del codice Go si fa con gofumpt invece di gofmt, eseguito in pre-commit.",
+      "keywords": [
+        "gofumpt"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "q01",
+      "fact": "f01",
+      "kind": "paraphrase",
+      "query": "Come rappresentiamo gli importi in denaro nel negozio online per non perdere precisione?"
+    },
+    {
+      "id": "q02",
+      "fact": "f02",
+      "kind": "paraphrase",
+      "query": "Qual è la procedura per mettere in produzione il negozio?"
+    },
+    {
+      "id": "q03",
+      "fact": "f03",
+      "kind": "paraphrase",
+      "query": "Perché gli utenti a volte trovano il carrello vuoto?"
+    },
+    {
+      "id": "q04",
+      "fact": "f04",
+      "kind": "paraphrase",
+      "query": "Come si abilitano i test che simulano il browser?"
+    },
+    {
+      "id": "q05",
+      "fact": "f05",
+      "kind": "paraphrase",
+      "query": "Che strumento usiamo per l'accesso al database al posto di un ORM nel negozio?"
+    },
+    {
+      "id": "q06",
+      "fact": "f06",
+      "kind": "paraphrase",
+      "query": "Con quale algoritmo vengono firmati i token di accesso dell'API?"
+    },
+    {
+      "id": "q07",
+      "fact": "f07",
+      "kind": "paraphrase",
+      "query": "Quante chiamate al minuto può fare un client prima di essere limitato?"
+    },
+    {
+      "id": "q08",
+      "fact": "f08",
+      "kind": "paraphrase",
+      "query": "Su che porta deve girare il database per sviluppare l'API sul mio PC?"
+    },
+    {
+      "id": "q09",
+      "fact": "f09",
+      "kind": "paraphrase",
+      "query": "Con cosa si gestiscono le modifiche allo schema del database dell'API?"
+    },
+    {
+      "id": "q10",
+      "fact": "f10",
+      "kind": "paraphrase",
+      "query": "Perché il driver Postgres non è aggiornato all'ultima versione?"
+    },
+    {
+      "id": "q11",
+      "fact": "f11",
+      "kind": "paraphrase",
+      "query": "A che ora e con che tool partono le copie di sicurezza?"
+    },
+    {
+      "id": "q12",
+      "fact": "f12",
+      "kind": "paraphrase",
+      "query": "Chi si occupa dei certificati HTTPS sui server?"
+    },
+    {
+      "id": "q13",
+      "fact": "f13",
+      "kind": "paraphrase",
+      "query": "Dove finiscono i dati di monitoraggio e per quanto tempo li teniamo?"
+    },
+    {
+      "id": "q14",
+      "fact": "f14",
+      "kind": "paraphrase",
+      "query": "Posso fare reboot del server del database replica alle 11 di mattina?"
+    },
+    {
+      "id": "q15",
+      "fact": "f15",
+      "kind": "paraphrase",
+      "query": "Come vengono centralizzati i log applicativi?"
+    },
+    {
+      "id": "q16",
+      "fact": "f16",
+      "kind": "paraphrase",
+      "query": "Come devo scrivere i messaggi di commit?"
+    },
+    {
+      "id": "q17",
+      "fact": "f17",
+      "kind": "paraphrase",
+      "query": "Che package manager uso per i progetti JavaScript?"
+    },
+    {
+      "id": "q18",
+      "fact": "f18",
+      "kind": "paraphrase",
+      "query": "Quale tool di analisi statica usare per il codice Python?"
+    },
+    {
+      "id": "q19",
+      "fact": "f19",
+      "kind": "paraphrase",
+      "query": "Perché npm install fallisce sul computer dell'ufficio?"
+    },
+    {
+      "id": "q20",
+      "fact": "f20",
+      "kind": "paraphrase",
+      "query": "Con cosa formatto i sorgenti Go?"
+    },
+    {
+      "id": "q21",
+      "fact": "f03",
+      "kind": "keyword",
+      "query": "sessione Redis TTL carrello"
+    },
+    {
+      "id": "q22",
+      "fact": "f08",
+      "kind": "keyword",
+      "query": "Postgres 16 porta 5433"
+    },
+    {
+      "id": "q23",
+      "fact": "f10",
+      "kind": "keyword",
+      "query": "pgx leak connessioni cursor"
+    },
+    {
+      "id": "q24",
+      "fact": "f11",
+      "kind": "keyword",
+      "query": "restic MinIO backup"
+    },
+    {
+      "id": "q25",
+      "fact": "f14",
+      "kind": "keyword",
+      "query": "db-02 replica sincrona"
+    },
+    {
+      "id": "q26",
+      "fact": "f06",
+      "kind": "keyword",
+      "query": "JWT RS256 rotazione chiave"
+    },
+    {
+      "id": "q27",
+      "fact": "f17",
+      "kind": "keyword",
+      "query": "pnpm-lock.yaml"
+    },
+    {
+      "id": "q28",
+      "fact": "f02",
+      "kind": "keyword",
+      "query": "make release docker registry"
+    },
+    {
+      "id": "q29",
+      "fact": "f19",
+      "kind": "cross",
+      "query": "Nel progetto bench-api, pip non scarica i pacchetti dalla rete aziendale: cosa devo impostare?"
+    },
+    {
+      "id": "q30",
+      "fact": "f18",
+      "kind": "cross",
+      "query": "Nel progetto bench-shop che linter uso per gli script Python?"
+    }
+  ]
+}

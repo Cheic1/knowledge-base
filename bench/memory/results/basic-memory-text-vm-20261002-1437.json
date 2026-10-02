@@ -1,0 +1,250 @@
+{
+  "system": "basic-memory-text",
+  "host": "vm",
+  "date": "2026-10-02T14:37:32",
+  "seeded": false,
+  "save_ms": [],
+  "queries": [
+    {
+      "id": "q01",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 1511,
+      "other_facts": 4,
+      "chars": 3878
+    },
+    {
+      "id": "q02",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 24,
+      "other_facts": 5,
+      "chars": 3836
+    },
+    {
+      "id": "q03",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 24,
+      "other_facts": 4,
+      "chars": 3830
+    },
+    {
+      "id": "q04",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 45,
+      "other_facts": 4,
+      "chars": 3826
+    },
+    {
+      "id": "q05",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 26,
+      "other_facts": 4,
+      "chars": 3818
+    },
+    {
+      "id": "q06",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 23,
+      "other_facts": 4,
+      "chars": 3768
+    },
+    {
+      "id": "q07",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 23,
+      "other_facts": 4,
+      "chars": 3804
+    },
+    {
+      "id": "q08",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 26,
+      "other_facts": 5,
+      "chars": 3822
+    },
+    {
+      "id": "q09",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 20,
+      "other_facts": 5,
+      "chars": 3754
+    },
+    {
+      "id": "q10",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 22,
+      "other_facts": 5,
+      "chars": 3849
+    },
+    {
+      "id": "q11",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 23,
+      "other_facts": 5,
+      "chars": 3792
+    },
+    {
+      "id": "q12",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 21,
+      "other_facts": 4,
+      "chars": 3800
+    },
+    {
+      "id": "q13",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 126,
+      "other_facts": 5,
+      "chars": 3846
+    },
+    {
+      "id": "q14",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 14,
+      "other_facts": 0,
+      "chars": 166
+    },
+    {
+      "id": "q15",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 22,
+      "other_facts": 4,
+      "chars": 3840
+    },
+    {
+      "id": "q16",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 22,
+      "other_facts": 4,
+      "chars": 3808
+    },
+    {
+      "id": "q17",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 23,
+      "other_facts": 4,
+      "chars": 3854
+    },
+    {
+      "id": "q18",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 21,
+      "other_facts": 4,
+      "chars": 3764
+    },
+    {
+      "id": "q19",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 22,
+      "other_facts": 1,
+      "chars": 1625
+    },
+    {
+      "id": "q20",
+      "kind": "paraphrase",
+      "hit": true,
+      "ms": 22,
+      "other_facts": 4,
+      "chars": 3760
+    },
+    {
+      "id": "q21",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 18,
+      "other_facts": 0,
+      "chars": 898
+    },
+    {
+      "id": "q22",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 18,
+      "other_facts": 0,
+      "chars": 926
+    },
+    {
+      "id": "q23",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 17,
+      "other_facts": 0,
+      "chars": 890
+    },
+    {
+      "id": "q24",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 18,
+      "other_facts": 0,
+      "chars": 882
+    },
+    {
+      "id": "q25",
+      "kind": "keyword",
+      "hit": false,
+      "ms": 14,
+      "other_facts": 0,
+      "chars": 166
+    },
+    {
+      "id": "q26",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 21,
+      "other_facts": 0,
+      "chars": 870
+    },
+    {
+      "id": "q27",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 17,
+      "other_facts": 0,
+      "chars": 888
+    },
+    {
+      "id": "q28",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 18,
+      "other_facts": 0,
+      "chars": 906
+    },
+    {
+      "id": "q29",
+      "kind": "cross",
+      "hit": false,
+      "ms": 24,
+      "other_facts": 5,
+      "chars": 3802
+    },
+    {
+      "id": "q30",
+      "kind": "cross",
+      "hit": false,
+      "ms": 24,
+      "other_facts": 5,
+      "chars": 3858
+    }
+  ],
+  "errors": []
+}
