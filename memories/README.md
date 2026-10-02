@@ -90,6 +90,15 @@ node scripts/memory-sync.mjs --dir "//server/share/kb-memories"
 Funziona, ma si perde lo storico e OneDrive può creare copie "in conflitto"
 se due PC scrivono lo stesso file (qui non succede, ognuno ha il suo).
 
+## Autore delle memorie (`kbAuthor`)
+
+Ogni memoria nei file di sync porta `kbAuthor`, il PC dove è nata: serve ai pesi di
+affidabilità (`scripts/memory-trust.mjs`). Lo timbra la sync al primo export e poi
+viaggia col record; un PC che conosce l'autore lo passa agli altri.
+Le memorie scambiate prima di questa regola, o arrivate da un import, restano
+`sconosciuto` finché il PC autore non le rivendica al suo primo sync.
+La sync committa anche `memories/trust/votes/<nome-pc>.jsonl`, se esiste.
+
 ## Limiti
 
 - Le **cancellazioni non si propagano**: un record cancellato su un PC torna dagli altri.

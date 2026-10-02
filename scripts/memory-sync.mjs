@@ -87,9 +87,62 @@ const byKey = (key) => (a, b) => {
   return x < y ? -1 : x > y ? 1 : 0;
 };
 
+// Legge i file degli altri PC (non il proprio) presenti nella cartella di sync
+function readOthers(syncDir, node) {
+  if (!fs.existsSync(syncDir)) return [];
+  const out = [];
+  for (const f of fs.readdirSync(syncDir).filter((n) => n.endsWith('.json')).sort()) {
+    const name = f.slice(0, -5);
+    if (name === node) continue;
+    try {
+      out.push({ name, file: f, data: JSON.parse(fs.readFileSync(path.join(syncDir, f), 'utf8')) });
+    } catch (e) {
+      log(`salto ${f}: illeggibile (${e.message})`);
+    }
+  }
+  return out;
+}
+
+// Autore delle memorie (kbAuthor), usato dai pesi di affidabilita' (memory-trust).
+// agentmemory non lo salva: lo timbra la sync al primo export e poi viaggia col record.
+//   - gia' presente nel record           -> resta
+//   - un altro PC lo ha gia' attribuito  -> si adotta quel nome
+//   - un altro PC ha la memoria senza alcun autore (file scritto prima di questa
+//     regola), oppure e' arrivata da un import -> 'sconosciuto'
+//   - altrimenti e' nata qui             -> questo PC
+// Nota: mem::import conserva origin, quindi origin.channel non basta a capire
+// se una memoria e' arrivata da un altro PC: serve guardare i loro file.
+const UNKNOWN_AUTHOR = 'sconosciuto';
+
+function authorIndex(others) {
+  const authors = new Map();
+  const seen = new Set();
+  for (const { data } of others) {
+    for (const m of data.memories || []) {
+      // 'sconosciuto' non si adotta: un PC che ha solo ricevuto la memoria la
+      // marca cosi', ma l'autore vero puo' ancora rivendicarla
+      if (m.kbAuthor && m.kbAuthor !== UNKNOWN_AUTHOR) authors.set(m.id, m.kbAuthor);
+      else if (!m.kbAuthor) seen.add(m.id); // file scritto prima di questa regola
+    }
+  }
+  return { authors, seen };
+}
+
+function stampAuthors(memories, node, index) {
+  for (const m of memories || []) {
+    if (m.kbAuthor && m.kbAuthor !== UNKNOWN_AUTHOR) continue;
+    const known = index.authors.get(m.id);
+    if (known) m.kbAuthor = known;
+    else if (m.kbAuthor) continue;
+    else if (index.seen.has(m.id) || m.origin?.channel === 'import') m.kbAuthor = UNKNOWN_AUTHOR;
+    else m.kbAuthor = node;
+  }
+}
+
 // Export stabile: stesso contenuto -> stessi byte (diff git minimi).
 // Toglie exportedAt, accessLogs e pagination che cambiano ad ogni chiamata.
-function normalize(exp) {
+function normalize(exp, ctx) {
+  if (ctx) stampAuthors(exp.memories, ctx.node, ctx.index);
   const out = { version: exp.version };
   for (const [name, key] of Object.entries(KEYED)) {
     if (Array.isArray(exp[name]) && exp[name].length) out[name] = [...exp[name]].sort(byKey(key));
@@ -126,7 +179,12 @@ function newer(remote, local) {
   if (stableStringify(remote) === stableStringify(local)) return false;
   // agentmemory marca la versione vecchia isLatest=false senza toccare updatedAt:
   // una volta superata, resta superata anche sugli altri PC
-  if (ts(remote) === ts(local)) return remote.isLatest === false && local.isLatest !== false;
+  if (ts(remote) === ts(local)) {
+    if (remote.isLatest === false && local.isLatest !== false) return true;
+    // a parita' di data si prende l'autore se qui manca o e' sconosciuto
+    return Boolean(remote.kbAuthor) && remote.kbAuthor !== UNKNOWN_AUTHOR
+      && (!local.kbAuthor || local.kbAuthor === UNKNOWN_AUTHOR);
+  }
   return ts(remote) > ts(local);
 }
 
@@ -155,19 +213,11 @@ function nodeName() {
   return name.replace(/[^A-Za-z0-9_-]/g, '-').toLowerCase() || 'pc';
 }
 
-async function stepImport(syncDir, node, dryRun) {
+// Confronta con il DB locale cosi' com'e' (senza timbro kbAuthor): se un altro PC
+// conosce l'autore e qui manca, il record viene reimportato e l'autore entra nel DB
+async function stepImport(ctx, dryRun) {
   let local = normalize(await fetchExport());
-  if (!fs.existsSync(syncDir)) return;
-  for (const f of fs.readdirSync(syncDir).filter((n) => n.endsWith('.json')).sort()) {
-    const other = f.slice(0, -5);
-    if (other === node) continue;
-    let remote;
-    try {
-      remote = JSON.parse(fs.readFileSync(path.join(syncDir, f), 'utf8'));
-    } catch (e) {
-      log(`salto ${f}: illeggibile (${e.message})`);
-      continue;
-    }
+  for (const { name: other, file: f, data: remote } of ctx.others) {
     if (remote.version !== local.version) {
       log(`salto ${f}: versione ${remote.version} != locale ${local.version}`);
       continue;
@@ -185,8 +235,9 @@ async function stepImport(syncDir, node, dryRun) {
   }
 }
 
-async function stepExport(syncDir, node, dryRun) {
-  const data = normalize(await fetchExport());
+async function stepExport(ctx, dryRun) {
+  const { syncDir, node } = ctx;
+  const data = normalize(await fetchExport(), ctx);
   const target = path.join(syncDir, `${node}.json`);
   const text = stableStringify(data);
   if (fs.existsSync(target) && fs.readFileSync(target, 'utf8') === text) {
@@ -226,12 +277,16 @@ function gitPull() {
   }
 }
 
+// Committa solo i file di questo PC: il proprio export e, se c'e', il proprio
+// file di voti di affidabilita' (memories/trust/votes/<node>.jsonl)
 function gitPush(target, node) {
-  const rel = path.relative(REPO_DIR, target).split(path.sep).join('/');
-  git(['add', '--', rel]);
-  if (git(['diff', '--cached', '--quiet', '--', rel], false).status === 0) return;
+  const files = [target, path.join(REPO_DIR, 'memories', 'trust', 'votes', `${node}.jsonl`)]
+    .filter((f) => fs.existsSync(f))
+    .map((f) => path.relative(REPO_DIR, f).split(path.sep).join('/'));
+  git(['add', '--', ...files]);
+  if (git(['diff', '--cached', '--quiet', '--', ...files], false).status === 0) return;
   const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
-  git(['commit', '-m', `memory-sync: ${node} ${stamp}`, '--', rel]);
+  git(['commit', '-m', `memory-sync: ${node} ${stamp}`, '--', ...files]);
   for (let i = 0; i < 3; i++) {
     if (git(['push'], false).status === 0) { log('push completato'); return; }
     gitPull(); // qualcun altro ha pushato nel frattempo
@@ -282,10 +337,13 @@ async function main() {
   log(`nodo '${node}', cartella ${syncDir}${useGit ? ' (git)' : ''}`);
 
   if (a.command === 'sync' && useGit && !a.dryRun) gitPull();
-  if (a.command === 'sync' || a.command === 'import') await stepImport(syncDir, node, a.dryRun);
+  const others = readOthers(syncDir, node);
+  const ctx = { syncDir, node, others, index: authorIndex(others) };
+  if (a.command === 'sync' || a.command === 'import') await stepImport(ctx, a.dryRun);
   if (a.command === 'sync' || a.command === 'export') {
-    const { target, changed } = await stepExport(syncDir, node, a.dryRun);
-    if (a.command === 'sync' && useGit && changed && !a.dryRun) gitPush(target, node);
+    const { target } = await stepExport(ctx, a.dryRun);
+    // anche con export invariato puo' esserci un voto nuovo da pushare
+    if (a.command === 'sync' && useGit && !a.dryRun) gitPush(target, node);
   }
 }
 
