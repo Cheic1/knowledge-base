@@ -1,50 +1,57 @@
-# Modifica richiesta a memory-sync.mjs (PR #2): autore delle memorie
+# Modifiche richieste a memory-sync.mjs (PR #2) per il voto di affidabilità
 
-Il voto di affidabilità parte dalla reputazione di chi ha scritto la memoria
-(`docs/memory-trust.md`). agentmemory non salva l'autore, e dopo la sync
-`origin.channel` vale `import` quasi ovunque. Serve che la sync timbri
-l'autore una volta, al primo export, e che il timbro viaggi col record.
+Già fatto nella PR #2 (commit 36071b6): `kbAuthor` timbrato e propagato.
+`memory-trust.mjs` tratta `sconosciuto` come autore ignoto (prior 0.5).
 
-## Cosa cambiare
+Restano queste modifiche, per i requisiti "spazio personale" e "voti
+invisibili, solo admin". Helper pronto: `scripts/memory-curated.mjs` (PR #7).
 
-In `normalize()` (o subito prima, in `stepExport`), per ogni elemento di
-`memories`:
+## 1. Le memorie personali non escono dal PC
+
+In `stepExport`, prima di scrivere `<node>.json`:
 
 ```js
-// Autore della memoria: la timbra il primo PC che la esporta.
-// Un record importato da un altro PC ha gia' kbAuthor (arriva dal suo file);
-// uno senza kbAuthor e senza origin "import" e' nato qui.
-for (const m of exp.memories || []) {
-  if (m.kbAuthor) continue;
-  m.kbAuthor = m.origin?.channel === 'import' ? 'sconosciuto' : node;
+import { isPersonal } from './memory-curated.mjs';
+data.memories = data.memories.filter((m) => !isPersonal(m));
+```
+
+Personale = concetto `personale` o progetto che inizia con `personale`.
+Consigliato anche: non esportare `sessions`, `observations`, `summaries`
+(restano `REQUIRED` ma vuoti), cioè condividere solo memorie e lezioni.
+
+## 2. I PC importano solo la selezione firmata dal server
+
+Ruolo: il server ha `KB_SYNC_ROLE=server` (o `--server`); tutti gli altri
+sono PC normali.
+
+- **Server**: come oggi, importa i file di tutti i PC (`memories/sync/*.json`).
+- **PC**: non legge più i file degli altri PC. In `stepImport`:
+
+```js
+import { loadCurated } from './memory-curated.mjs';
+
+let curated;
+try {
+  curated = loadCurated(REPO_DIR); // verifica la firma con config/trust-admin.pub
+} catch (e) {
+  die(`selezione condivisa rifiutata: ${e.message}`); // niente import, niente forget
+}
+if (!curated) return; // il server non ha ancora pubblicato nulla
+// a) memorie approvate: stesso delta() di oggi, con remote = { memories: curated.publish }
+// b) ritiri: cancella dal DB locale, ma non le memorie nate su questo PC
+for (const id of curated.retract) {
+  const m = localById.get(id);
+  if (!m || m.kbAuthor === node) continue;
+  if (!dryRun) await api('POST', '/agentmemory/forget', { memoryId: id });
+  log(`ritirata ${id}`);
 }
 ```
 
-`normalize` deve quindi ricevere `node` (oggi non lo riceve), oppure il ciclo
-va in `stepExport` prima di `normalize(await fetchExport())`.
+`--dir` (OneDrive/share): stessa logica, `curated.json` e `.sig` nella
+cartella invece che nel repo (`loadCurated` va reso parametrico sulla cartella).
 
-Perché funziona:
+## 3. Voti dai PC: non più necessari
 
-- il timbro è solo nel file JSON del PC autore; quando un altro PC importa,
-  `mem::import` salva il record intero, `kbAuthor` compreso, e da lì in poi
-  lo riesporta uguale;
-- sul PC autore il record nel DB resta senza `kbAuthor`, ma ogni export lo
-  ritimbra con lo stesso nome: il file non cambia, nessun diff;
-- le memorie già importate prima della modifica risultano `sconosciuto`
-  (partono da 0.5): accettabile, nessuna attribuzione sbagliata.
-
-Effetto collaterale da controllare: `newer()` confronta l'intero record,
-quindi al primo giro dopo la modifica i PC vedono i record degli altri come
-"diversi" (ora hanno `kbAuthor`) ma con lo stesso `updatedAt`: `newer()`
-restituisce false e non reimporta. Quindi chi aveva già importato quei record
-li tiene senza autore finché l'autore non li aggiorna. Se si vuole
-l'attribuzione anche sul pregresso, in `newer()` aggiungere: a parità di
-timestamp, importa se `remote.kbAuthor && !local.kbAuthor`.
-
-## Cosa NON serve cambiare
-
-- I voti aggiornati dal server viaggiano già: `apply` avanza `updatedAt`, e la
-  regola "vince il più recente" li porta sugli altri PC.
-- `memories/trust/` è nel repo, quindi `git pull` della sync porta ledger e
-  voti; i file di voto (`votes/<pc>.jsonl`) vanno committati: basta che
-  `gitPush` aggiunga anche `memories/trust/votes/<node>.jsonl` se esiste.
+Con il requisito "solo l'amministratore interviene", i voti degli utenti
+(`memories/trust/votes/<node>.jsonl`) non servono più: si può togliere il
+push di quel file da `gitPush`. I voti dell'admin stanno nel ledger sul server.

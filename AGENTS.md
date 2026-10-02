@@ -151,12 +151,13 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 3. **Cerca** quando hai bisogno di contesto
 4. **Sincronizza** tra dispositivi con Git
 
-### Affidabilità delle memorie condivise
-Ogni memoria ha un voto 0..1 (`kbTrust`, e `strength` 1..10) ricalcolato dal
-server (`docs/memory-trust.md`). Se il titolo inizia con
-`[⚠ affidabilità 0.xx]` la memoria è stata giudicata dubbia o sbagliata:
-non usarla senza verificarla. Se verifichi una memoria, vota:
-`node scripts/memory-trust.mjs vote <id> up|down "motivo"`.
+### Memorie personali e condivise
+- **Personali** (preferenze, contesto tuo o di questo PC, persone, macchina):
+  salvale con `memory_save` aggiungendo il concetto `personale`. Restano su
+  questo PC, non si sincronizzano e non vengono giudicate.
+- **Condivise**: tutto il resto. Arrivano agli altri PC solo dopo che il
+  server le ha valutate (`docs/memory-trust.md`); quelle giudicate
+  inaffidabili non vengono distribuite o vengono ritirate.
 
 ## 🔒 Sicurezza
 
