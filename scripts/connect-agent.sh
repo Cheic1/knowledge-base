@@ -96,6 +96,15 @@ if [ ! -f "$WIKI_MCP_BIN" ]; then
     [ -f "$REPO_DIR/mcp/llm-wiki-mcp/dist/src/index.js" ] && WIKI_MCP_BIN="$REPO_DIR/mcp/llm-wiki-mcp/dist/src/index.js"
 fi
 
+# Ricerca locale sulla wiki (qmd): solo se installata con scripts/wiki-search.sh setup
+WIKI_SEARCH_CMD=""
+if WS_LINES="$("$REPO_DIR/scripts/wiki-search.sh" mcp-cmd 2>/dev/null)"; then
+    WIKI_SEARCH_CMD="$(printf '%s\n' "$WS_LINES" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read().split("\n")[:-1]))')"
+    ok "wiki-search (qmd) trovato: lo cablo come MCP"
+else
+    warn "wiki-search (qmd) non installato: per la ricerca locale sulla wiki esegui scripts/wiki-search.sh setup"
+fi
+
 # ============================================
 # OpenCode
 # ============================================
@@ -103,9 +112,10 @@ wire_opencode() {
     local CFG="$HOME/.config/opencode/opencode.json"
     mkdir -p "$(dirname "$CFG")"
     [ -f "$CFG" ] || echo '{}' > "$CFG"
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$WIKI_SEARCH_CMD" <<'PYEOF'
 import json, sys, os
 cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+ws_cmd = json.loads(sys.argv[5]) if sys.argv[5] else None
 with open(cfg_path) as f:
     cfg = json.load(f)
 cfg.setdefault("mcp", {})
@@ -123,6 +133,13 @@ if os.path.isfile(wiki_bin):
         "environment": {"LLM_WIKI_API_BASE_URL": wiki_url},
         "enabled": True,
         "timeout": 10000,
+    }
+if ws_cmd:
+    cfg["mcp"]["wiki-search"] = {
+        "type": "local",
+        "command": ws_cmd,
+        "enabled": True,
+        "timeout": 30000,
     }
 with open(cfg_path, "w") as f:
     json.dump(cfg, f, indent=2, ensure_ascii=False)
@@ -147,9 +164,10 @@ wire_hermes() {
     if ! grep -q "^mcp_servers:" "$CFG"; then
         printf '\nmcp_servers:\n' >> "$CFG"
     fi
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
-import sys, re, os
+    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$WIKI_SEARCH_CMD" <<'PYEOF'
+import sys, re, os, json
 cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+ws_cmd = json.loads(sys.argv[5]) if sys.argv[5] else None
 with open(cfg_path) as f:
     text = f.read()
 
@@ -199,6 +217,15 @@ elif os.path.isfile(wiki_path):
     # inserisci prima di eventuali commenti finali dopo mcp_servers
     text = re.sub(r"(^mcp_servers:\n)", r"\1" + wiki_block, text, count=1, flags=re.M)
 
+if ws_cmd:
+    ws_block = "  wiki-search:\n    command: " + ws_cmd[0] + "\n    args:\n" + \
+        "".join(f"      - {a}\n" for a in ws_cmd[1:]) + "    enabled: true\n"
+    if re.search(r"^  wiki-search:", text, re.M):
+        # sostituisci il blocco esistente (fino alla prossima chiave a 2 spazi o fine sezione)
+        text = re.sub(r"^  wiki-search:\n(?:    .*\n|      .*\n)*", ws_block, text, count=1, flags=re.M)
+    else:
+        text = re.sub(r"(^mcp_servers:\n)", lambda m: m.group(1) + ws_block, text, count=1, flags=re.M)
+
 with open(cfg_path, "w") as f:
     f.write(text)
 print("Hermes mcp_servers aggiornato")
@@ -218,9 +245,10 @@ wire_cursor() {
     fi
     local CFG="$DIR/mcp.json"
     [ -f "$CFG" ] || echo '{"mcpServers":{}}' > "$CFG"
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$WIKI_SEARCH_CMD" <<'PYEOF'
 import json, sys, os
 cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+ws_cmd = json.loads(sys.argv[5]) if sys.argv[5] else None
 with open(cfg_path) as f:
     cfg = json.load(f)
 cfg.setdefault("mcpServers", {})
@@ -235,6 +263,8 @@ if os.path.isfile(wiki_bin):
         "args": [wiki_bin],
         "env": {"LLM_WIKI_API_BASE_URL": wiki_url},
     }
+if ws_cmd:
+    cfg["mcpServers"]["wiki-search"] = {"command": ws_cmd[0], "args": ws_cmd[1:]}
 with open(cfg_path, "w") as f:
     json.dump(cfg, f, indent=2, ensure_ascii=False)
     f.write("\n")
@@ -262,9 +292,10 @@ wire_vscode() {
     fi
     mkdir -p "$(dirname "$CFG")"
     [ -f "$CFG" ] || echo '{"servers":{}}' > "$CFG"
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$WIKI_SEARCH_CMD" <<'PYEOF'
 import json, sys, os
 cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+ws_cmd = json.loads(sys.argv[5]) if sys.argv[5] else None
 with open(cfg_path) as f:
     cfg = json.load(f)
 cfg.setdefault("servers", {})
@@ -281,6 +312,8 @@ if os.path.isfile(wiki_bin):
         "args": [wiki_bin],
         "env": {"LLM_WIKI_API_BASE_URL": wiki_url},
     }
+if ws_cmd:
+    cfg["servers"]["wiki-search"] = {"type": "stdio", "command": ws_cmd[0], "args": ws_cmd[1:]}
 with open(cfg_path, "w") as f:
     json.dump(cfg, f, indent=2, ensure_ascii=False)
     f.write("\n")
