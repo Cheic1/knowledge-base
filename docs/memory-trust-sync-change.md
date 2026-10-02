@@ -1,12 +1,17 @@
 # Modifiche richieste a memory-sync.mjs (PR #2) per il voto di affidabilità
 
-Già fatto nella PR #2 (commit 36071b6): `kbAuthor` timbrato e propagato.
-`memory-trust.mjs` tratta `sconosciuto` come autore ignoto (prior 0.5).
+Stato al 2026-10-02:
 
-Restano queste modifiche, per i requisiti "spazio personale" e "voti
-invisibili, solo admin". Helper pronto: `scripts/memory-curated.mjs` (PR #7).
+| Punto | Stato nella PR #2 |
+|---|---|
+| `kbAuthor` timbrato e propagato | fatto (36071b6); `sconosciuto` = autore ignoto, prior 0.5 |
+| 1. memorie personali non esportate | fatto (368e288), stessa regola di `isPersonal`; sessioni e osservazioni per ora restano nell'export |
+| 2. PC importano solo la selezione firmata | **non applicato**: da decidere con Francesco, quando il server curatore gira davvero |
+| 3. push di `votes/<node>.jsonl` | resta (solo se il file esiste); innocuo, `memory-trust.mjs` non lo legge |
 
-## 1. Le memorie personali non escono dal PC
+Helper pronto per il punto 2: `scripts/memory-curated.mjs` (PR #7).
+
+## 1. Le memorie personali non escono dal PC (fatto)
 
 In `stepExport`, prima di scrivere `<node>.json`:
 
@@ -19,7 +24,7 @@ Personale = concetto `personale` o progetto che inizia con `personale`.
 Consigliato anche: non esportare `sessions`, `observations`, `summaries`
 (restano `REQUIRED` ma vuoti), cioè condividere solo memorie e lezioni.
 
-## 2. I PC importano solo la selezione firmata dal server
+## 2. I PC importano solo la selezione firmata dal server (proposto)
 
 Ruolo: il server ha `KB_SYNC_ROLE=server` (o `--server`); tutti gli altri
 sono PC normali.

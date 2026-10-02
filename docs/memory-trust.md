@@ -15,6 +15,17 @@ Modifiche alla sync: `docs/memory-trust-sync-change.md`.
 
 ## Architettura
 
+> **Stato**: oggi la sync (PR #2) è ancora **diretta**: ogni PC importa i
+> file degli altri PC. In questa modalità il server calcola già i voti
+> (giudice, `rebalance`, `show`, `admin`) ma non filtra niente: le memorie
+> sbagliate arrivano comunque a tutti. Il filtro parte quando la sync passa
+> all'**hub** descritto sotto (punto 2 di `docs/memory-trust-sync-change.md`),
+> che è da decidere quando il server curatore gira davvero. `publish` si può
+> già lanciare: produce `curated.json`, che i PC ignorano finché la sync non
+> lo legge.
+
+Modalità hub (obiettivo):
+
 ```
  PC mario ─┐  memories/sync/mario.json  (solo memorie non personali)
  PC luigi ─┼──────────── git ───────────────►  SERVER
@@ -144,7 +155,7 @@ manomesso → rifiutato.
 
 Notturno, da cron, con il prompt `docs/memory-trust-judge-prompt.md`:
 
-1. `memory-sync.mjs sync` (il server importa i file di tutti)
+1. `memory-sync.mjs sync` (il server importa i file di tutti, come oggi)
 2. `memory-trust.mjs queue --out .trust-queue.json`
 3. l'agente giudica, scrive `.trust-verdicts.json`
 4. `memory-trust.mjs verdict .trust-verdicts.json`
