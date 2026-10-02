@@ -50,6 +50,65 @@ L'endpoint è centralizzato: per cambiarlo modifica config/endpoint.env nella re
 e riesegui ./scripts/connect-agent.sh. Non serve reinstallare nient'altro.
 ```
 
+## 💻 PC autonomo (senza server, memorie sincronizzate via GitHub)
+
+Per un PC che non raggiunge il server: agentmemory gira in locale e le memorie
+si allineano con gli altri PC tramite `scripts/memory-sync.mjs`.
+Serve solo **Node 20+** e **git** (senza git: OneDrive o share, vedi punto 6).
+
+```
+Configura questa macchina con una knowledge base agentmemory LOCALE,
+sincronizzata con gli altri PC via GitHub (repo Cheic1/knowledge-base).
+
+0. CONTROLLA cosa c'è già (non reinstallare ciò che funziona):
+   - node --version   → serve v20 o superiore
+   - git --version
+   - Repo presente?   ls ~/knowledge-base/.git
+   - agentmemory vivo? curl -sf http://127.0.0.1:3111/agentmemory/health
+     (su Windows senza curl: node -e "fetch('http://127.0.0.1:3111/agentmemory/health').then(r=>r.text()).then(console.log)")
+
+1. NODE 20+ se manca o è vecchio:
+   Linux/macOS: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+                export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" && nvm install 20 && nvm alias default 20
+   Windows:     winget install OpenJS.NodeJS.LTS
+
+2. CLONA la repo (serve accesso al repo privato: chiave SSH o login GitHub):
+   git clone git@github.com:Cheic1/knowledge-base.git ~/knowledge-base
+   cd ~/knowledge-base
+
+3. AVVIA agentmemory in locale (resta in ascolto su 127.0.0.1:3111, viewer su :3113):
+   Linux/macOS: nohup npx -y @agentmemory/agentmemory@0.9.29 > ~/agentmemory.log 2>&1 &
+   Windows (PowerShell):
+                Start-Process -WindowStyle Hidden npx.cmd -ArgumentList '-y','@agentmemory/agentmemory@0.9.29'
+   Attendi che /agentmemory/health risponda "healthy" (può servire un minuto al primo avvio).
+   Tutti i PC devono usare la STESSA versione di agentmemory (oggi 0.9.29).
+
+4. CABLA l'agente su agentmemory LOCALE (non sul server):
+   - Con bash e python3 disponibili:
+       KB_API_URL=http://127.0.0.1:3111 ./scripts/connect-agent.sh
+   - Altrimenti scrivi tu la config MCP dell'agente come in AGENTS.md
+     (sezioni OpenCode / VS Code-Cursor / Hermes) con
+     AGENTMEMORY_URL=http://127.0.0.1:3111. Il blocco llm-wiki si può omettere.
+   Poi riavvia l'agente.
+
+5. PRIMA SINCRONIZZAZIONE:
+   node scripts/memory-sync.mjs --dry-run   # mostra quante memorie arriverebbero dagli altri PC
+   node scripts/memory-sync.mjs             # importa, scrive memories/sync/<nome-pc>.json e fa push
+   Se il push fallisce per credenziali: configura chiave SSH o credential manager e riprova.
+
+6. SENZA git (OneDrive o cartella condivisa), al posto del punto 5:
+   node scripts/memory-sync.mjs --dir "<cartella OneDrive o share>/kb-memories"
+
+7. PIANIFICA la sincronizzazione ogni 15 minuti con il percorso ASSOLUTO di node
+   (which node / where node), come in memories/README.md:
+   Linux/macOS: crontab con  */15 * * * * cd ~/knowledge-base && /percorso/node scripts/memory-sync.mjs
+   Windows:     schtasks /Create /SC MINUTE /MO 15 /TN "KB memory-sync" /TR "C:\percorso\node.exe C:\percorso\knowledge-base\scripts\memory-sync.mjs"
+
+8. VERIFICA: dall'agente esegui memory_smart_search su un argomento noto
+   (es. "architettura"): devono comparire le memorie degli altri PC.
+   Mostra all'utente il nome del file in memories/sync/ e come rilanciare la sync.
+```
+
 ## 🖥️ Sei sul server (installazione completa)
 
 Il server è già installato e funzionante. Per un rebuild da zero o un nuovo server:

@@ -1,7 +1,7 @@
 # Memorie condivise tra PC
 
 Non c'è un server centrale: ogni PC fa girare il **proprio agentmemory locale** e
-`scripts/memory-sync.py` tiene allineate le memorie passando da questo repo.
+`scripts/memory-sync.mjs` (solo Node, niente Python) tiene allineate le memorie passando da questo repo.
 
 Il DB live (`data/state_store.db`) non va mai sincronizzato, né con git né con
 OneDrive o una share: è binario e scritto di continuo, due copie si corrompono.
@@ -17,10 +17,10 @@ Ad ogni `sync`: `git pull` → importa dagli altri file ciò che manca o è più
 ## Uso
 
 ```bash
-python3 scripts/memory-sync.py              # sync completo (default)
-python3 scripts/memory-sync.py --dry-run    # mostra cosa importerebbe
-python3 scripts/memory-sync.py export       # solo scrive il proprio file
-python3 scripts/memory-sync.py import       # solo importa dagli altri
+node scripts/memory-sync.mjs              # sync completo (default)
+node scripts/memory-sync.mjs --dry-run    # mostra cosa importerebbe
+node scripts/memory-sync.mjs export       # solo scrive il proprio file
+node scripts/memory-sync.mjs import       # solo importa dagli altri
 ```
 
 | Variabile | Default | |
@@ -35,25 +35,29 @@ python3 scripts/memory-sync.py import       # solo importa dagli altri
 Linux/macOS (`crontab -e`):
 
 ```
-*/15 * * * * cd /percorso/knowledge-base && python3 scripts/memory-sync.py >> /tmp/memory-sync.log 2>&1
+*/15 * * * * cd /percorso/knowledge-base && node scripts/memory-sync.mjs >> /tmp/memory-sync.log 2>&1
 ```
 
 Windows (Utilità di pianificazione, da PowerShell):
 
 ```powershell
 schtasks /Create /SC MINUTE /MO 15 /TN "KB memory-sync" `
-  /TR "python C:\percorso\knowledge-base\scripts\memory-sync.py"
+  /TR "node C:\percorso\knowledge-base\scripts\memory-sync.mjs"
 ```
 
+Lo scheduler non carica nvm: usa il percorso assoluto di node (`which node` / `where node`).
 Il PC deve poter fare `git push` senza password (chiave SSH o credential manager).
+
+Per configurare un PC nuovo da zero con un agente, vedi la sezione
+"PC autonomo" in [PROMPT-INSTALL.md](../PROMPT-INSTALL.md).
 
 ## OneDrive o cartella condivisa
 
 Stessa logica, senza git: ogni PC scrive il proprio file nella cartella.
 
 ```bash
-python3 scripts/memory-sync.py --dir "~/OneDrive/kb-memories"
-python3 scripts/memory-sync.py --dir "//server/share/kb-memories"
+node scripts/memory-sync.mjs --dir "~/OneDrive/kb-memories"
+node scripts/memory-sync.mjs --dir "//server/share/kb-memories"
 ```
 
 Funziona, ma si perde lo storico e OneDrive può creare copie "in conflitto"
