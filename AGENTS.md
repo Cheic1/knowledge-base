@@ -151,6 +151,13 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 3. **Cerca** quando hai bisogno di contesto
 4. **Sincronizza** tra dispositivi con Git
 
+### Affidabilità delle memorie condivise
+Ogni memoria ha un voto 0..1 (`kbTrust`, e `strength` 1..10) ricalcolato dal
+server (`docs/memory-trust.md`). Se il titolo inizia con
+`[⚠ affidabilità 0.xx]` la memoria è stata giudicata dubbia o sbagliata:
+non usarla senza verificarla. Se verifichi una memoria, vota:
+`node scripts/memory-trust.mjs vote <id> up|down "motivo"`.
+
 ## 🔒 Sicurezza
 
 - **Accesso LAN**: servizi in ascolto su 127.0.0.1, esposti solo dal
