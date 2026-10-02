@@ -151,6 +151,14 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 3. **Cerca** quando hai bisogno di contesto
 4. **Sincronizza** tra dispositivi con Git
 
+### Memorie personali e condivise
+- **Personali** (preferenze, contesto tuo o di questo PC, persone, macchina):
+  salvale con `memory_save` aggiungendo il concetto `personale`. Restano su
+  questo PC, non si sincronizzano e non vengono giudicate.
+- **Condivise**: tutto il resto. Il server le valuta
+  (`docs/memory-trust.md`); con la sync in modalità hub arriveranno agli
+  altri PC solo quelle approvate.
+
 ## 🔒 Sicurezza
 
 - **Accesso LAN**: servizi in ascolto su 127.0.0.1, esposti solo dal
