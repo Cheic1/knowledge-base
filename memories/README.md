@@ -104,6 +104,12 @@ Le memorie scambiate prima di questa regola, o arrivate da un import, restano
 `sconosciuto` finché il PC autore non le rivendica al suo primo sync.
 La sync committa anche `memories/trust/votes/<nome-pc>.jsonl`, se esiste.
 
+## Memorie personali
+
+Una memoria con il concetto `personale` (o con un progetto che inizia per `personale`)
+resta solo sul PC dove è nata: la sync non la esporta. Per salvarne una dall'agente:
+`memory_save` con `concepts: ["personale"]`.
+
 ## Limiti
 
 - Le **cancellazioni non si propagano**: un record cancellato su un PC torna dagli altri.

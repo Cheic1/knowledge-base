@@ -235,9 +235,18 @@ async function stepImport(ctx, dryRun) {
   }
 }
 
+// Spazio personale: memorie con concetto 'personale' o progetto 'personale...'
+// restano su questo PC e non finiscono nel file condiviso (stessa regola di
+// isPersonal in memory-curated.mjs)
+const isPersonal = (m) => (m.concepts || []).some((c) => String(c).toLowerCase() === 'personale')
+  || String(m.project || '').toLowerCase().startsWith('personale');
+
 async function stepExport(ctx, dryRun) {
   const { syncDir, node } = ctx;
   const data = normalize(await fetchExport(), ctx);
+  const before = data.memories.length;
+  data.memories = data.memories.filter((m) => !isPersonal(m));
+  if (data.memories.length < before) log(`${before - data.memories.length} memorie personali non esportate`);
   const target = path.join(syncDir, `${node}.json`);
   const text = stableStringify(data);
   if (fs.existsSync(target) && fs.readFileSync(target, 'utf8') === text) {
