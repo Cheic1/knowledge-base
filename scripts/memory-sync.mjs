@@ -211,7 +211,7 @@ function git(args, check = true) {
   const r = spawnSync('git', ['-C', REPO_DIR, ...args], { encoding: 'utf8', timeout: 90000 });
   if (r.error?.code === 'ETIMEDOUT') die(`git ${args[0]} bloccato da oltre 90s: ${PROXY_HINT}`);
   if (r.error) die(`git non trovato (${r.error.code}). Installa git o usa --dir con una cartella condivisa`);
-  if (r.status !== 0 && /proxy|CONNECT tunnel|502|407/i.test(r.stderr || '')) {
+  if (r.status !== 0 && /proxy|CONNECT tunnel|502|407|Failed to connect/i.test(r.stderr || '')) {
     die(`git ${args[0]}: ${r.stderr.trim()}\n  ${PROXY_HINT}`);
   }
   if (check && r.status !== 0) die(`git ${args.join(' ')}: ${(r.stderr || r.stdout).trim()}`);
