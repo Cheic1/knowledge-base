@@ -59,7 +59,7 @@ check_prerequisites() {
         log_info "Inizializzo repository..."
         cd "$KB_DIR"
         git init
-        git remote add $REMOTE git@github.com:tuo-username/knowledge-base.git
+        git remote add $REMOTE git@github.com:Cheic1/knowledge-base.git
         log_success "Repository inizializzato"
     fi
     
