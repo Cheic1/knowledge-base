@@ -117,10 +117,27 @@ sincronizzata con gli altri PC via GitHub (repo Cheic1/knowledge-base).
    Linux/macOS: crontab con  */15 * * * * cd ~/knowledge-base && /percorso/node scripts/import-agent-memories.mjs && /percorso/node scripts/memory-sync.mjs
    Windows:     schtasks /Create /SC MINUTE /MO 15 /TN "KB memory-sync" /TR "C:\percorso\node.exe C:\percorso\knowledge-base\scripts\memory-sync.mjs"
 
+Se qualcosa si blocca (proxy, porta 3111 occupata, python3 su Windows) leggi
+"Problemi noti" subito sotto questo blocco in PROMPT-INSTALL.md.
+
 9. VERIFICA: dall'agente esegui memory_smart_search su un argomento noto
    (es. "architettura"): devono comparire le memorie degli altri PC.
    Mostra all'utente il nome del file in memories/sync/ e come rilanciare la sync.
 ```
+
+### ⚠️ Problemi noti (PC Windows / rete aziendale)
+
+| Sintomo | Causa | Soluzione |
+|---------|-------|-----------|
+| `git pull`/`push` resta appeso o `CONNECT tunnel failed, response 502` | proxy aziendale (`http.proxy` globale) che non lascia passare GitHub | disattivalo **solo per questa repo**: `git config http.proxy ""`. In PowerShell le `""` vengono scartate: usa `cmd /c 'git config http.proxy ""'`. Va rifatto su ogni clone. `memory-sync.mjs` si ferma dopo 90s e lo ricorda |
+| `connect-agent.sh` fallisce su Python | su Windows `python3` è spesso lo stub del Microsoft Store | lo script ora prova `python3` e `python` e, se nessuno funziona, dice di scrivere il config MCP a mano come in AGENTS.md |
+| agentmemory non parte: `127.0.0.1:3111 already in use`, ma `/health` non risponde | un'istanza precedente inceppata tiene la porta | ferma i processi vecchi e riavvia con lo stesso data dir. PowerShell: `Get-NetTCPConnection -LocalPort 3111 \| % { Stop-Process -Id $_.OwningProcess -Force }`; Linux/macOS: `kill $(lsof -ti :3111)` |
+| Clone interrotto lascia una cartella con `.git` vuoto | rete instabile o proxy | cancella la cartella e riclona dopo aver sistemato il proxy |
+
+Il **DB live** di agentmemory (`state_store.db`) e il **repo git** possono stare in una
+cartella OneDrive solo se nessun altro PC usa quella stessa cartella: OneDrive non
+gestisce bene file scritti di continuo né i file di `.git`. Per condividere le memorie
+tra PC usa sempre `memory-sync.mjs`.
 
 ## 🖥️ Sei sul server (installazione completa)
 
