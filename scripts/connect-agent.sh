@@ -297,6 +297,18 @@ wire_hermes
 wire_cursor
 wire_vscode
 
+# --- Skill native di agentmemory (dicono all'agente quando usare la memoria) ---
+# KB_SKIP_SKILLS=1 per saltarle
+if [ "${KB_SKIP_SKILLS:-0}" != "1" ]; then
+    echo ""
+    echo "--- Skill agentmemory ---"
+    if npx -y skills add rohitg00/agentmemory -y > /tmp/kb-skills.log 2>&1; then
+        ok "skill agentmemory installate negli agenti rilevati"
+    else
+        warn "installazione skill fallita (log: /tmp/kb-skills.log). A mano: npx skills add rohitg00/agentmemory -y"
+    fi
+fi
+
 echo ""
 echo "=============================================="
 ok "Cablaggio completato!"

@@ -33,7 +33,7 @@ my-knowledge-base/
 
 Per un **PC autonomo** basta Node 20+ e git: dai all'agente la sezione
 "💻 PC autonomo" di [`PROMPT-INSTALL.md`](PROMPT-INSTALL.md) e fa tutto lui
-(agentmemory locale, cablaggio MCP, import delle memorie degli altri agenti, prima sync).
+(agentmemory locale, cablaggio MCP, skill di agentmemory, import delle memorie degli altri agenti, prima sync).
 Dettagli in [`memories/README.md`](memories/README.md).
 
 ## 🚀 Setup rapido (server)
@@ -76,6 +76,10 @@ curl http://localhost:3111/agentmemory/health   # → "status":"healthy"
 ### 5. Cabla i tuoi agenti
 ```bash
 ./scripts/connect-agent.sh    # rileva OpenCode/Hermes/Cursor/VS Code e scrive il config MCP
+
+# Skill native di agentmemory: insegnano all'agente quando cercare/salvare in memoria
+# (connect-agent.sh le installa già; KB_SKIP_SKILLS=1 per saltarle)
+npx skills add rohitg00/agentmemory -y
 ```
 
 ### 6. Avvia LLM Wiki (opzionale)

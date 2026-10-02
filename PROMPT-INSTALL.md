@@ -38,7 +38,8 @@ Collega questa macchina alla knowledge base condivisa (server: 192.168.68.55).
    Hermes, Cursor o VS Code se presenti su questa macchina):
    cd ~/knowledge-base && ./scripts/connect-agent.sh
 
-5. VERIFICA: lo script deve riportare "[OK] agentmemory cablato" e l'endpoint
+5. VERIFICA: lo script deve riportare "[OK] agentmemory cablato", le skill
+   ("[OK] skill agentmemory", altrimenti: npx skills add rohitg00/agentmemory -y) e l'endpoint
    http://192.168.68.55:8311. Poi riavvia l'agente corrente.
 
 6. TESTA la connessione dalla tua sessione:
@@ -89,6 +90,9 @@ sincronizzata con gli altri PC via GitHub (repo Cheic1/knowledge-base).
    - Altrimenti scrivi tu la config MCP dell'agente come in AGENTS.md
      (sezioni OpenCode / VS Code-Cursor / Hermes) con
      AGENTMEMORY_URL=http://127.0.0.1:3111. Il blocco llm-wiki si può omettere.
+   - Installa le skill native di agentmemory (dicono all'agente quando cercare e
+     salvare in memoria; connect-agent.sh lo fa già, altrimenti a mano):
+       npx skills add rohitg00/agentmemory -y
    Poi riavvia l'agente.
 
 5. IMPORTA le memorie degli altri agenti di questo PC (CLAUDE.md, AGENTS.md,
