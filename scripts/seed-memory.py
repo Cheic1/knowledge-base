@@ -63,8 +63,8 @@ ENTRIES = [
      "SICUREZZA: .env contiene OPENAI_BASE_URL=https://freellmapi.cheic2.it/v1, OPENAI_MODEL=auto, "
      "OPENAI_API_KEY, GIT_REMOTE=git@github.com:Cheic1/knowledge-base.git. "
      "Non è mai committato (.gitignore lo copre, solo .env.example nel repo) ma ha permessi 664: va messo a 600. "
-     "data/state_store.db (contenuti della memoria) è attualmente tracciato nel repo: "
-     "va escluso con git rm --cached e aggiunto a .gitignore."),
+     "data/ (state_store.db con i contenuti della memoria, iii-config.yaml) è escluso da Git "
+     "via .gitignore: è stato runtime, resta solo sul server."),
 
     # --- Config LLM ---
     ("config",
