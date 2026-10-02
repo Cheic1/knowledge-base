@@ -112,10 +112,14 @@ sincronizzata con gli altri PC via GitHub (repo Cheic1/knowledge-base).
 7. SENZA git (OneDrive o cartella condivisa), al posto del punto 6:
    node scripts/memory-sync.mjs --dir "<cartella OneDrive o share>/kb-memories"
 
-8. PIANIFICA import + sincronizzazione ogni 15 minuti con il percorso ASSOLUTO di node
-   (which node / where node), come in memories/README.md:
-   Linux/macOS: crontab con  */15 * * * * cd ~/knowledge-base && /percorso/node scripts/import-agent-memories.mjs && /percorso/node scripts/memory-sync.mjs
-   Windows:     schtasks /Create /SC MINUTE /MO 15 /TN "KB memory-sync" /TR "C:\percorso\node.exe C:\percorso\knowledge-base\scripts\memory-sync.mjs"
+8. AUTOMATIZZA la sync (pull, import, push) ogni 15 minuti, all'accesso e,
+   se c'è Claude Code, all'inizio e alla fine di ogni sessione:
+     node scripts/schedule-memory-sync.mjs install --every 15 --claude-hooks
+   (senza Claude Code togli --claude-hooks). Usa l'Utilità di pianificazione su
+   Windows e crontab su Linux/macOS, senza finestre che si aprono. Controlla con:
+     node scripts/schedule-memory-sync.mjs status
+   e dopo qualche minuto leggi ~/.agentmemory/memory-sync.log.
+   Per toglierla: node scripts/schedule-memory-sync.mjs uninstall
 
 Se qualcosa si blocca (proxy, porta 3111 occupata, python3 su Windows) leggi
 "Problemi noti" subito sotto questo blocco in PROMPT-INSTALL.md.

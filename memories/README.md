@@ -57,22 +57,27 @@ node scripts/import-agent-memories.mjs --root ~/progetti    # cerca anche lì (r
 - È un import a senso unico: agentmemory non riscrive i file degli agenti. Gli agenti
   restano allineati perché leggono tutti la stessa memoria via MCP.
 
-## Automatico ogni 15 minuti
+## Automatico
 
-Linux/macOS (`crontab -e`):
-
-```
-*/15 * * * * cd /percorso/knowledge-base && node scripts/import-agent-memories.mjs && node scripts/memory-sync.mjs >> /tmp/memory-sync.log 2>&1
-```
-
-Windows (Utilità di pianificazione, da PowerShell):
-
-```powershell
-schtasks /Create /SC MINUTE /MO 15 /TN "KB memory-sync" `
-  /TR "node C:\percorso\knowledge-base\scripts\memory-sync.mjs"
+```bash
+node scripts/schedule-memory-sync.mjs install --every 15 --claude-hooks
+node scripts/schedule-memory-sync.mjs status
+node scripts/schedule-memory-sync.mjs uninstall
 ```
 
-Lo scheduler non carica nvm: usa il percorso assoluto di node (`which node` / `where node`).
+- **Windows**: due attività nell'Utilità di pianificazione ("KB memory-sync" ogni N minuti
+  e "KB memory-sync logon" all'accesso), lanciate tramite `wscript` senza aprire finestre.
+- **Linux/macOS**: due righe nella crontab dell'utente (ogni N minuti e `@reboot`),
+  marcate `# kb-memory-sync`; le altre righe restano intatte.
+- **`--claude-hooks`**: aggiunge in `~/.claude/settings.json` due hook (SessionStart e
+  SessionEnd) che lanciano la sync in background: l'agente parte con le memorie degli
+  altri PC e a fine sessione pubblica le sue. Gli altri hook (es. plugin agentmemory)
+  restano; backup in `settings.json.bak-kb-sync`.
+
+Ogni giro esegue `scripts/kb-auto-sync.mjs`: import delle memorie degli altri agenti,
+poi `memory-sync`. Scrive solo nel log `~/.agentmemory/memory-sync.log`; se agentmemory
+è spento salta il giro. Le variabili (`AGENTMEMORY_SECRET`, `KB_SYNC_DIR`, ...) che lo
+scheduler non vede le legge da `.env` nella cartella del repo.
 Il PC deve poter fare `git push` senza password (chiave SSH o credential manager).
 
 Per configurare un PC nuovo da zero con un agente, vedi la sezione

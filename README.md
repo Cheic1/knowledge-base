@@ -132,6 +132,7 @@ npx skills add rohitg00/agentmemory -y
 - `scripts/start-kb.sh`, `scripts/connect-agent.sh`, `scripts/sync.sh`
 - `scripts/memory-sync.mjs`: sync delle memorie tra PC (git, OneDrive o share)
 - `scripts/import-agent-memories.mjs`: import di CLAUDE.md, AGENTS.md, regole Cursor/Copilot...
+- `scripts/schedule-memory-sync.mjs`: sync automatica (Utilità di pianificazione/crontab ogni 15 min, hook di Claude Code)
 
 ## 📖 Utilizzo
 
@@ -159,6 +160,7 @@ memory_smart_search "come implementare JWT"
 # Memorie agentmemory tra PC (import dagli altri PC + push del proprio file)
 node scripts/import-agent-memories.mjs   # porta dentro CLAUDE.md, AGENTS.md, regole...
 node scripts/memory-sync.mjs             # --dry-run per vedere cosa farebbe
+node scripts/schedule-memory-sync.mjs install --every 15 --claude-hooks   # ...oppure in automatico
 
 # Wiki e progetti
 ./scripts/sync.sh
