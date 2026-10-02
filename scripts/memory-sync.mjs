@@ -124,6 +124,9 @@ function ts(record) {
 function newer(remote, local) {
   if (local === undefined) return true;
   if (stableStringify(remote) === stableStringify(local)) return false;
+  // agentmemory marca la versione vecchia isLatest=false senza toccare updatedAt:
+  // una volta superata, resta superata anche sugli altri PC
+  if (ts(remote) === ts(local)) return remote.isLatest === false && local.isLatest !== false;
   return ts(remote) > ts(local);
 }
 

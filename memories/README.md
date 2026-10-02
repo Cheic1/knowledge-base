@@ -30,12 +30,39 @@ node scripts/memory-sync.mjs import       # solo importa dagli altri
 | `KB_SYNC_NODE` | hostname | nome del file di questo PC |
 | `KB_SYNC_DIR` | — | cartella OneDrive/share al posto di git (come `--dir`) |
 
+## Memorie degli altri agenti
+
+`scripts/import-agent-memories.mjs` cerca sul PC le memorie "native" degli agenti
+e le salva in agentmemory, così ogni agente collegato via MCP le ritrova e
+`memory-sync` le porta sugli altri PC.
+
+| Agente | Cosa legge |
+|--------|------------|
+| Claude Code | `~/.claude/CLAUDE.md`, `~/.claude/projects/*/memory/`, `CLAUDE.md` nei progetti |
+| Codex / OpenCode | `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md`, `AGENTS.md` nei progetti |
+| Hermes | `~/.hermes/memories/MEMORY.md`, `USER.md`, `~/.hermes/SOUL.md` |
+| Cursor | `~/.cursor/rules/`, `.cursor/rules/` e `.cursorrules` nei progetti |
+| Copilot | `.github/copilot-instructions.md`, `.github/instructions/` |
+| Gemini, Windsurf, Cline | `GEMINI.md`, `.windsurfrules`, `.clinerules` e le cartelle globali |
+
+```bash
+node scripts/import-agent-memories.mjs --dry-run           # cosa importerebbe
+node scripts/import-agent-memories.mjs --root ~/progetti    # cerca anche lì (ripetibile)
+```
+
+- I file sono spezzati per titoli `##`. Un blocco già importato e invariato non viene
+  rimandato (stato in `~/.agentmemory/imported-agent-memories.json`); uno modificato
+  diventa la nuova versione della memoria precedente.
+- I blocchi che sembrano contenere **segreti** (API key, token, chiavi private) sono saltati.
+- È un import a senso unico: agentmemory non riscrive i file degli agenti. Gli agenti
+  restano allineati perché leggono tutti la stessa memoria via MCP.
+
 ## Automatico ogni 15 minuti
 
 Linux/macOS (`crontab -e`):
 
 ```
-*/15 * * * * cd /percorso/knowledge-base && node scripts/memory-sync.mjs >> /tmp/memory-sync.log 2>&1
+*/15 * * * * cd /percorso/knowledge-base && node scripts/import-agent-memories.mjs && node scripts/memory-sync.mjs >> /tmp/memory-sync.log 2>&1
 ```
 
 Windows (Utilità di pianificazione, da PowerShell):

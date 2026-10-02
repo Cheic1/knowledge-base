@@ -91,20 +91,29 @@ sincronizzata con gli altri PC via GitHub (repo Cheic1/knowledge-base).
      AGENTMEMORY_URL=http://127.0.0.1:3111. Il blocco llm-wiki si può omettere.
    Poi riavvia l'agente.
 
-5. PRIMA SINCRONIZZAZIONE:
+5. IMPORTA le memorie degli altri agenti di questo PC (CLAUDE.md, AGENTS.md,
+   memorie di Claude Code e Hermes, regole di Cursor/Copilot/Windsurf/Cline, GEMINI.md):
+   node scripts/import-agent-memories.mjs --dry-run     # mostra cosa troverebbe
+   node scripts/import-agent-memories.mjs               # le salva in agentmemory
+   Se i progetti stanno fuori dalla home aggiungi --root <cartella> (ripetibile).
+   I blocchi che sembrano contenere segreti vengono saltati: riportali all'utente.
+   Opzionale, se c'è Claude Code: npx -y @agentmemory/agentmemory@0.9.29 import-jsonl
+   (importa anche le conversazioni passate di Claude Code).
+
+6. PRIMA SINCRONIZZAZIONE:
    node scripts/memory-sync.mjs --dry-run   # mostra quante memorie arriverebbero dagli altri PC
    node scripts/memory-sync.mjs             # importa, scrive memories/sync/<nome-pc>.json e fa push
    Se il push fallisce per credenziali: configura chiave SSH o credential manager e riprova.
 
-6. SENZA git (OneDrive o cartella condivisa), al posto del punto 5:
+7. SENZA git (OneDrive o cartella condivisa), al posto del punto 6:
    node scripts/memory-sync.mjs --dir "<cartella OneDrive o share>/kb-memories"
 
-7. PIANIFICA la sincronizzazione ogni 15 minuti con il percorso ASSOLUTO di node
+8. PIANIFICA import + sincronizzazione ogni 15 minuti con il percorso ASSOLUTO di node
    (which node / where node), come in memories/README.md:
-   Linux/macOS: crontab con  */15 * * * * cd ~/knowledge-base && /percorso/node scripts/memory-sync.mjs
+   Linux/macOS: crontab con  */15 * * * * cd ~/knowledge-base && /percorso/node scripts/import-agent-memories.mjs && /percorso/node scripts/memory-sync.mjs
    Windows:     schtasks /Create /SC MINUTE /MO 15 /TN "KB memory-sync" /TR "C:\percorso\node.exe C:\percorso\knowledge-base\scripts\memory-sync.mjs"
 
-8. VERIFICA: dall'agente esegui memory_smart_search su un argomento noto
+9. VERIFICA: dall'agente esegui memory_smart_search su un argomento noto
    (es. "architettura"): devono comparire le memorie degli altri PC.
    Mostra all'utente il nome del file in memories/sync/ e come rilanciare la sync.
 ```
