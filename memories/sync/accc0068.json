@@ -1,0 +1,750 @@
+{
+ "crystals": [
+  {
+   "createdAt": "2026-09-30T09:36:16.772Z",
+   "filesAffected": [],
+   "id": "crystal_a13ac607d22ccc82",
+   "keyOutcomes": [],
+   "lessons": [],
+   "narrative": "@explore",
+   "project": "unknown",
+   "sessionId": "ses_f4fe54817ffeTKIq6J7u5hsK6e",
+   "sourceActionIds": []
+  },
+  {
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "filesAffected": [],
+   "id": "crystal_ef3b71a3afbae089",
+   "keyOutcomes": [
+    "stop"
+   ],
+   "lessons": [
+    "lesson_7ad3715070008def",
+    "lesson_6933822fc6cc8a91",
+    "lesson_8148849d35682fb9",
+    "lesson_cd4e9b51c8a79216",
+    "lesson_1ef1ee3bc4067474",
+    "lesson_2a9a4ed124175682",
+    "lesson_7ee71f7f0c527495",
+    "lesson_a3ef3d8cabc2b753",
+    "lesson_ebfce2f85dacd4dc",
+    "lesson_93afe4f4d6fb6d79",
+    "lesson_29bf22c5ad0c8227",
+    "lesson_cd6fea5b582d9838",
+    "lesson_cbad2344e11eacc7",
+    "lesson_76ec790df85162f2",
+    "lesson_054d6cc35922f4a0"
+   ],
+   "narrative": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "project": "unknown",
+   "sessionId": "ses_f5ad183e4ffeaM5KdHuv2fSmfV",
+   "sourceActionIds": []
+  }
+ ],
+ "lessons": [
+  {
+   "confidence": 0.4,
+   "content": "avoid the round-trip.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_054d6cc35922f4a0",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Do not proceed without auth being set up.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_1ef1ee3bc4067474",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Don't invent write endpoints ÔÇö they don't exist in v1.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_29bf22c5ad0c8227",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Never log or echo the token.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_2a9a4ed124175682",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "don't silently call the LLM Wiki API on what might be an Obsidian vault.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_6933822fc6cc8a91",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Never leak the token.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_76ec790df85162f2",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Do NOT invoke when the user says:**",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_7ad3715070008def",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Never put it in any URL the user can see in your output** (Referer / shell history / logs all leak it).",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_7ee71f7f0c527495",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Don't install anything new.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_8148849d35682fb9",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Don't retry the same path.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_93afe4f4d6fb6d79",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Don't apply a fixed score threshold across modes.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_a3ef3d8cabc2b753",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Do not silently switch projects.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_cbad2344e11eacc7",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Always check `/api/v1/health` first ÔÇö it returns `{ enabled, authConfigured, allowUnauthenticated, tokenSource }`.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_cd4e9b51c8a79216",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Don't dump full pages unless asked.",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_cd6fea5b582d9838",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  },
+  {
+   "confidence": 0.4,
+   "content": "Always treat the status code as the contract:",
+   "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "createdAt": "2026-09-30T09:36:16.786Z",
+   "decayRate": 0.05,
+   "id": "lesson_ebfce2f85dacd4dc",
+   "project": "unknown",
+   "reinforcements": 0,
+   "source": "consolidation",
+   "sourceIds": [
+    "ses_f5ad183e4ffeaM5KdHuv2fSmfV"
+   ],
+   "tags": [
+    "auto-import"
+   ],
+   "updatedAt": "2026-09-30T09:36:16.786Z"
+  }
+ ],
+ "memories": [
+  {
+   "concepts": [
+    "agentmemory",
+    "dashboard",
+    "start-agentmemory.ps1",
+    "import-jsonl",
+    "convert-opencode-to-jsonl.ps1",
+    "opencode export",
+    "mesh sync",
+    "team feed",
+    "AGENTMEMORY_SECRET",
+    "condivisione"
+   ],
+   "content": "Setup agentmemory su PC Windows 49359: (1) iii-engine v0.11.2 in C:\\Users\\49359\\.local\\bin\\iii.exe; (2) script di avvio persistente C:\\Users\\49359\\.local\\bin\\start-agentmemory.ps1 — verifica porta 3111, avvia 'cmd /c npx @agentmemory/agentmemory' come Start-Process Hidden con redirect log in %USERPROFILE%\\.agentmemory\\logs, attende readiness 60s; dashboard http://localhost:3113, REST http://localhost:3111, streams ws://3112. Server va riavviato con questo script se netstat non mostra LISTEN su 3111. (3) Convertitore sessioni OpenCode→JSONL Claude Code: C:\\Users\\49359\\.local\\bin\\convert-opencode-to-jsonl.ps1 — esporta via 'opencode export <sesID>' (mostra solo sessioni della directory corrente!), converte parts text in JSONL senza BOM in C:\\Users\\49359\\.opencode-jsonl, poi 'npx @agentmemory/agentmemory import-jsonl <dir>' (già testato: 2 sessioni, 6 osservazioni OK, visibili in tab Replay). (4) API REST 128+ endpoint /agentmemory/* su 3111; condivisione: AGENTMEMORY_SECRET bearer token per esposizione remota (solo 3111, viewer 3113 resta loopback, tunnel SSH per remoto), TEAM_MODE=shared+TEAM_ID+USER_ID per team feed, POST /agentmemory/mesh/peers + mesh/sync push/pull/both per federazione tra istanze (richiede AGENTMEMORY_SECRET su entrambi i peer, URL pubblici no-localhost). UTENTE RICHIEDE: avviare sempre il server agentmemory nelle chat e usare la dashboard 3113.",
+   "createdAt": "2026-09-30T09:36:22.368Z",
+   "files": [],
+   "id": "mem_munwup9k_a9e0ba262001",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-09-30T09:36:22.368Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Setup agentmemory su PC Windows 49359: (1) iii-engine v0.11.2 in C:\\Users\\49359\\",
+   "type": "architecture",
+   "updatedAt": "2026-09-30T09:36:22.368Z",
+   "version": 1
+  },
+  {
+   "agentId": "ai-gateway-analysis",
+   "concepts": [
+    "GLM-4.6",
+    "GPT-4",
+    "Meta Llama",
+    "Anemos",
+    "tool-calling",
+    "code generation"
+   ],
+   "content": "FORENSIC REPORT (2026-09-30)\n\n- GLM-4.6 (Z.ai) is the backend for coding/reasoning/tool-calling/vision aliases (vLLM 0.24.0-tp8-f0ac18bb). 200K token context, MoE 355B total / 32B active, knowledge cutoff early-2025. No fine-tuning or adapters detected.\n- GPT-4 Turbo (OpenAI) powers task=general, effort=reasoning – generic QA, no tool-calling, knowledge cutoff June 2024.\n- Meta Llama-2-70B powers task=general, effort=balanced/fast – generic, no tool-calling, limited context.\n- Anemos (Leonardo S.p.A.) is a proprietary model for task=coding, effort=fast; details hidden, no technical info disclosed.\n- OCR, Vision, Embedding endpoints are stubs (no active model).\n\nRecommendations: use task=coding, effort=reasoning (GLM-4.6) for code generation and system management; use task=tool-calling, effort=extrahigh (same GLM-4.6) for generic assistance with tool calling (MATLAB, memory, data analysis).",
+   "createdAt": "2026-09-30T10:11:26.362Z",
+   "files": [],
+   "id": "mem_muny3spt_f4e92505b88b",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-09-30T10:11:26.362Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "FORENSIC REPORT (2026-09-30)\n\n- GLM-4.6 (Z.ai) is the backend for coding/reasoni",
+   "type": "fact",
+   "updatedAt": "2026-09-30T10:11:26.362Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "OneDrive",
+    "data dir",
+    "AGENTMEMORY_DATA_DIR",
+    "--data-dir",
+    "condivisione",
+    "state_store.db",
+    "start-agentmemory.ps1"
+   ],
+   "content": "Data dir di agentmemory spostata da %APPDATA%\\agentmemory a 'C:\\Users\\49359\\OneDrive - LEONARDO S.P.A\\Agentmemory' per condivisione tra PC. Configurazione: (1) variabile d'ambiente UTENTE AGENTMEMORY_DATA_DIR impostata via setx (NOTA: il ~/.agentmemory/.env NON viene caricato in process.env dal CLI, la variabile .env è solo documentativa — parseEnvFile è usato solo da doctor); (2) start-agentmemory.ps1 passa --data-dir esplicitamente (precedenza massima). La data dir contiene state_store.db\\ (cartella con .bin: memories, sessions, obs, lessons, crystals, health, audit, indici BM25), stream_store\\ e iii-config.yaml (runtime, riscritto dal CLI con writeRuntimeIiiConfig). Verificato funzionante: engine scrive su OneDrive, dati integri (15 lessons + 2 memories + 2 sessions + 2 crystals). ATTENZIONE: OneDrive sincronizza i .bin — usare UN SOLO PC alla volta per evitare conflitti/corruzione. Per condividere su un secondo PC: installare iii-engine, impostare AGENTMEMORY_DATA_DIR (setx) o usare --data-dir con lo stesso percorso OneDrive. Fermare il server con 'npx @agentmemory/agentmemory stop --force' prima di modificare i file.",
+   "createdAt": "2026-09-30T10:44:51.029Z",
+   "files": [],
+   "id": "mem_munzarj7_e0a9b0fa0f94",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-09-30T10:44:51.029Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Data dir di agentmemory spostata da %APPDATA%\\agentmemory a 'C:\\Users\\49359\\OneD",
+   "type": "architecture",
+   "updatedAt": "2026-09-30T10:44:51.029Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "DART",
+    "flight data",
+    "helicopter",
+    "AW189",
+    "AW149",
+    "multi-agent",
+    "MATLAB",
+    "figure generation",
+    "SANDRAmatdata",
+    "LR110",
+    "plotting",
+    "analysis pipeline"
+   ],
+   "content": "PROJECT KICKOFF — DART Flight Analytics Explorer (2026-09-30). Goal: multi-agent system that generates MATLAB flight-data figures based on the requested analysis objective, with iterative conversation about the figures. Data: AW189/AW149 flight data at Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data — SANDRAmatdata .mat files (59302 files in Flt_803), each file = one struct with fields {t, engValue, validity, info.param(label,description,pstd,typology,valueMin/Max/Mid,SSMerror)}. Consolidated LR110 signals matched by *_LR110_2_OUT__LAB_*.mat (skip _SSM/FAIL_CODE/_DISCRETE) → 37 unique signals, 32 Hz, ~378 s. Existing pipeline: HeliAnalysis folder (runHeliAnalysis.m, loadHeliMatData.m, cleanAndAlignHeliData.m, computeHeliStats.m, plotHeliSummary.m) — outputs to <flight>/HeliAnalysisResults (PDF report, alignedData.mat, statsSummary.csv). DART tool: local DART_2.6 at Flights_Data root (DART_Launcher.m, Utils/DART.m, DARTreproduction_FigureGenerator.m, XDTS2DART conversion); reference examples READ-ONLY at X:\\FLIGHT_ACTIVITY\\Flight_Data_Plotting_Tools\\DART_2.0\\Analysis_Examples_DO. MATLAB via MCP: R2024b, ~60 toolboxes. Team model: coordinator + functional analyst + plotting engineer + pilot/expert validator, using agentmemory for shared context.",
+   "createdAt": "2026-09-30T15:39:23.888Z",
+   "files": [],
+   "id": "mem_muo9tjzz_7ac3677757c8",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-09-30T15:39:23.888Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "PROJECT KICKOFF — DART Flight Analytics Explorer (2026-09-30). Goal: multi-agent",
+   "type": "fact",
+   "updatedAt": "2026-09-30T15:39:23.888Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "DART",
+    "flight-data",
+    "AW189",
+    "AW149",
+    "SANDRAmatdata",
+    "LR110",
+    "HeliAnalysis",
+    "multi-agent",
+    "figure-generation",
+    "MATLAB"
+   ],
+   "content": "PROJECT STATE (2026-10-01) - DART Flight Analytics Explorer. Updated from session transcript explore-request.json (session ses_f136d5fa0ffeYU9Sa7X2PbzTQo, origin dir Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data).\n\nGOAL: multi-agent system that generates MATLAB flight-data figures based on the user's analysis objective, with iterative conversation about figures. User always wants: team of collaborating subagents per task, agent memory updated always, responses in Italian.\n\nDATA (server share): Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data\\AW149S\\AW149P6\\{Flt_803,Flt_805,Flt_806}.\nSANDRAmatdata structure: <flight>\\SANDRAmatdata\\c+NNN or c-NNN (pre-top '-' / top '+')\\<SIGNAL>_<SOURCE>__LAB_<code>.mat. Each .mat = ONE struct named like the file, fields: t (double Nx1, dt=0.03125 s = 32 Hz), engValue (double Nx1), validity (1/0 flag), info (metadata). Flt_803: 59,302 files total; consolidated Honeywell LR110 signals = files matching *_LR110_2_OUT__LAB_*.mat (1,332 files, excluding _SSM, FAIL_CODE, _DISCRETE) -> 37 unique signals. DART also auto-selects other matdata types: DTSmatdata, HEROmatdata, SOLOmatdata, OEMmatdata, FDMmatdata, FDRmatdata.\n\nHELIANALYSIS PIPELINE (local Flight_Data\\HeliAnalysis): runHeliAnalysis.m (master, edit flightName), loadHeliMatData.m (loads only LR110 consolidated), cleanAndAlignHeliData.m (masks validity==0 as NaN, interpolates onto common 32 Hz grid), computeHeliStats.m (N, mean, std, min, max, median, P5, P95, RMS), plotHeliSummary.m (2-page PDF: track/altitude/ground-speed/vertical-speed/heading/wind; roll-pitch/body rates/accelerations/velocities). Outputs -> <flight>\\HeliAnalysisResults\\: alignedData.mat, summaryStats.mat, statsSummary.csv, HeliFlightReport.pdf.\n\nDART 2.6 TOOL (local Flight_Data\\DART_2.6, GUIDE GUI, targets R2014a, Leonardo): DART_Launcher.m (singleton via figure Tag ThisIsDARTgui), Utils\\DART.m (~4900-line GUI controller; handles FlightPath, DataType, TopListBox, SelectedVarToPlot, StandAloneValidity, FigureSavingModes), Utils\\Fcn\\DARTreproduction_FigureGenerator.m (figure engine, 34 inputs: analog/boolean/enumerate lists, FMS, TOP division, conversions, PNG/FIG save), Utils\\Fcn\\OfficialLoadAndConcatenate.m (loader with global VAR cache, TOP concatenation), XDTS_2_DART_Conversion.m, fft_function.m, Spectrogram_function.m, UTCTimeManager.m, AW_189_TOP_REORDER.m. Analysis auto-save to Utils\\Fcn\\AutosavedAnalysis.\n\nDART_Analysis_System (local Flight_Data\\DART_Analysis_System): shared state files task_plan.md (coordinator-only write), findings.md, progress.md; DART_Analysis_Plan.md master plan; Agents\\README.md role contracts (COORDINATOR, FUNCTIONAL ANALYST, PLOTTING ENGINEER, PILOT EXPERT); Knowledge\\ with SANDRAmatdata format doc and signal_catalog.csv (built by matlab\\buildSignalCatalog.m). Plan: headless figure engine reusing DART patterns without the GUI.\n\nMATLAB MCP: R2024b at C:\\Program Files\\MATLAB\\R2024b\\bin\\matlab.exe; use tools.MATLAB.evaluate_matlab_code / run_matlab_file / detect_matlab_toolboxes; NEVER restoredefaultpath (breaks MCP). ~60 toolboxes incl. Signal Processing, Stats & ML, Aerospace, Sensor Fusion & Tracking, Parallel Computing.\n\nLOCAL REPO: work moved to C:\\Users\\49359\\Documents\\MATLAB\\Flight_Data (git repo initialized; git identity Francesco Maggiulli <francesco.maggiulli@leonardo.com>). Note: a git system-config referenced an unreachable network UNC path (broken worktree reference) - if git throws UNC errors, run with env GIT_CONFIG_NOSYSTEM=1.\n\nEXPLORERS: explorer on X:\\FLIGHT_ACTIVITY\\Flight_Data_Plotting_Tools\\DART_2.0\\Analysis_Examples_DO was CANCELLED (path possibly not reachable) - DART 2.0 examples still unexplored. Explorer on DART_2.6 local + HeliAnalysis completed (see above).\n\nNEXT STEPS: run HeliAnalysis on Flt_805 and Flt_806; PSD/vibration analysis of accelerations; maneuver detection (roll/yaw rate peaks); flight phase segmentation (takeoff/climb/cruise/descent/approach); cross-flight comparison; build headless figure engine in DART_Analysis_System\\matlab\\",
+   "createdAt": "2026-10-01T09:02:31.891Z",
+   "files": [
+    "C:\\Users\\49359\\Documents\\MATLAB\\Flight_Data\\DART_Analysis_System\\task_plan.md",
+    "C:\\Users\\49359\\Documents\\MATLAB\\Flight_Data\\HeliAnalysis\\runHeliAnalysis.m",
+    "C:\\Users\\49359\\Documents\\MATLAB\\Flight_Data\\DART_2.6\\Utils\\DART.m"
+   ],
+   "id": "mem_mupb317l_1b9571c8aa85",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-10-01T09:02:31.891Z",
+    "channel": "agent"
+   },
+   "project": "80ac3bdb33b543e2c752a685d27863aedf26fe6d",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "PROJECT STATE (2026-10-01) - DART Flight Analytics Explorer. Updated from sessio",
+   "type": "architecture",
+   "updatedAt": "2026-10-01T09:02:31.891Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "Flt_803",
+    "flight-results",
+    "Varese",
+    "cruise",
+    "telemetry",
+    "AW149P6"
+   ],
+   "content": "FLT_803 ANALYSIS RESULTS (HeliAnalysis pipeline, 2026-09-30). 37 LR110 consolidated signals, 378 s flight (~6.3 min), 32 Hz, 12,099 samples per signal.\nAltitude MSL: 703-1510 ft (mean 1,148). Ground speed: 0-139 kt (mean 102 kt). Roll: -19.4 to +32.3 deg (mean 1.5). Pitch: -1.8 to +20.3 deg (mean 3.9). Vertical speed: -1,036 to +261 ft/min (mean -131). Wind: 1.2-14.1 kt (mean 5.6 kt, from ~310 deg T). Position: 45.61 N, 8.83 E (Varese/Lonate - Leonardo test area).\nFunctional reading: controlled cruise test flight; moderate maneuvers (turns up to ~30 deg roll, climb pitch 20 deg); no high-energy maneuvers (accelerations < 0.35 g); AFCS stable (no divergent oscillations); controlled descent to -1,000 ft/min (approach/transition); multiple turns (heading varies +-100 deg); crosswind compensation active (track ~ heading, across-heading velocity < +-10 kt). No SSM/FAIL_CODE alarms.\nReport: Flt_803\\HeliAnalysisResults\\HeliFlightReport.pdf (2.1 MB, 2 pages); alignedData.mat 3.7 MB; statsSummary.csv; summaryStats.mat.",
+   "createdAt": "2026-10-01T09:02:31.946Z",
+   "files": [],
+   "id": "mem_mupb318u_7a8816fcd3d2",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-10-01T09:02:31.946Z",
+    "channel": "agent"
+   },
+   "project": "80ac3bdb33b543e2c752a685d27863aedf26fe6d",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "FLT_803 ANALYSIS RESULTS (HeliAnalysis pipeline, 2026-09-30). 37 LR110 consolida",
+   "type": "fact",
+   "updatedAt": "2026-10-01T09:02:31.946Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "MATLAB",
+    "agentmemory",
+    "MCP",
+    "verification"
+   ],
+   "content": "Verifica MCP (MATLAB, agentmemory) OK. MATLAB R2024b Update 2 con 73 toolbox. `test_matlab_connection.m` eseguito con successo. agentmemory `memory_recall` e `memory_sessions` funzionano; `memory_slot_list` errore HTTP 500, fallback su `memory_recall`/`memory_save`.",
+   "createdAt": "2026-10-01T12:41:08.144Z",
+   "files": [],
+   "id": "mem_mupiw5ru_59ff42433577",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-10-01T12:41:08.144Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Verifica MCP (MATLAB, agentmemory) OK. MATLAB R2024b Update 2 con 73 toolbox. `t",
+   "type": "workflow",
+   "updatedAt": "2026-10-01T12:41:08.144Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "KiCad",
+    "witty-engine",
+    "Cablaggio_DC_DAP",
+    "MCP setup",
+    "schematics"
+   ],
+   "content": "PROGETTO witty-engine (worktree C:\\Users\\49359\\.local\\share\\opencode\\worktree\\987b55\\witty-engine): contiene schemi KiCad in 08_Schematics\\DC-DAP\\Cablaggio_DC_DAP\\ (Cablaggio_DC_DAP.kicad_sch, file KiCad 10.0 'CAVO MAINTENANCE' con connettori D38999; anche .kicad_pcb/.kicad_pro). KiCad 10.0 installato in C:\\Users\\49359\\AppData\\LOCALAPPDATA\\Programs\\KiCad\\10.0 (python.exe in bin, NON in PATH; NON in Program Files). KiCAD-MCP-Server (mixelpixx, GitHub) NON ancora clonato/configurato: repo ha setup-windows-opencode.ps1 che clona+build+npm install+installa requirements.txt nel Python di KiCad+scrive opencode.json con backup .bak-timestamp. Server MCP attivi: agentmemory, MATLAB, llm-wiki, ddgs. Utente vuole: usare KiCAD-MCP-Server per modificare Cablaggio_DC_DAP con backup prima. NOTA: dopo Apply serve riavviare OpenCode per usare il server MCP.",
+   "createdAt": "2026-10-01T16:04:38.581Z",
+   "files": [
+    "08_Schematics/DC-DAP/Cablaggio_DC_DAP/Cablaggio_DC_DAP.kicad_sch"
+   ],
+   "id": "mem_mupq5ves_bad3aa62bee4",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-10-01T16:04:38.581Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "PROGETTO witty-engine (worktree C:\\Users\\49359\\.local\\share\\opencode\\worktree\\98",
+   "type": "fact",
+   "updatedAt": "2026-10-01T16:04:38.581Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "KiCad",
+    "Cablaggio_DC_DAP",
+    "modifica",
+    "nuova pagina",
+    "piano",
+    "witty-engine"
+   ],
+   "content": "PIANO MODIFICA Cablaggio_DC_DAP (da eseguire con KiCAD-MCP-Server nella sessione successiva al riavvio di OpenCode, richiesta dall'utente il 2026-10-01): (1) Backup GIÀ CREATO in 08_Schematics/DC-DAP/Cablaggio_DC_DAP/backup_20261001-180952 (tutti i file). (2) STRUTTURA: root Cablaggio_DC_DAP.kicad_sch = 'CAVO MAINTENANCE' (sheet_instances page 'CavoMaintenance'), contiene UN foglio gerarchico 'Stimuli&Gain' -> untitled.kicad_sch (page 2). File KiCad 10.0, version 20260306, formato A4. Altri .kicad_sch nella cartella: untitled.kicad_sch_2, untitled.kicad_sch_DC-DAP, untitled.kicad_sch_resolver, senza-titolo. (3) MODIFICA RICHIESTA DALL'UTENTE: 'fai tu una modifica su una pagina nuova' = aggiungere un nuovo foglio gerarchico (page 3) nel root schematic, es. 'Note & Revisioni' con nuovo file note_revisioni.kicad_sch contenente title_block e note di documentazione, nello stesso stile del progetto (connettori D38999, etichette SU24 WH, CAVO PATCH RS 286-3094). (4) Server MCP kicad configurato in C:\\Users\\49359\\tools\\KiCAD-MCP-Server con setup-windows-opencode.ps1.",
+   "createdAt": "2026-10-01T16:11:16.807Z",
+   "files": [
+    "08_Schematics/DC-DAP/Cablaggio_DC_DAP/Cablaggio_DC_DAP.kicad_sch"
+   ],
+   "id": "mem_mupqeeoj_cf12950455aa",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-10-01T16:11:16.807Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "PIANO MODIFICA Cablaggio_DC_DAP (da eseguire con KiCAD-MCP-Server nella sessione",
+   "type": "workflow",
+   "updatedAt": "2026-10-01T16:11:16.807Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "TEST memory-sync dal PC accc0068 2026-10-02 16:49",
+   "createdAt": "2026-10-02T14:49:39.460Z",
+   "files": [],
+   "id": "mem_mur2xaiv_128ee1c288f3",
+   "isLatest": true,
+   "origin": {
+    "capturedAt": "2026-10-02T14:49:39.460Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "TEST memory-sync dal PC accc0068 2026-10-02 16:49",
+   "type": "fact",
+   "updatedAt": "2026-10-02T14:49:39.460Z",
+   "version": 1
+  }
+ ],
+ "observations": {
+  "ses_f4fe54817ffeTKIq6J7u5hsK6e": [
+   {
+    "concepts": [],
+    "confidence": 0.3,
+    "facts": [],
+    "files": [],
+    "id": "obs_munwukxm_91fe8c004842",
+    "importance": 5,
+    "narrative": "@explore ",
+    "origin": {
+     "capturedAt": "2026-09-18T08:00:38.361Z",
+     "channel": "import",
+     "detail": "jsonl"
+    },
+    "sessionId": "ses_f4fe54817ffeTKIq6J7u5hsK6e",
+    "timestamp": "2026-09-18T08:00:38.361Z",
+    "title": "prompt_submit",
+    "type": "conversation"
+   },
+   {
+    "concepts": [],
+    "confidence": 0.3,
+    "facts": [],
+    "files": [],
+    "id": "obs_munwukxm_ecaf97e0c8e7",
+    "importance": 5,
+    "narrative": "abilita qusto mcp {\r  \"mcpServers\": {\r\n    \"llm-wiki\": {\r\n      \"command\": \"node\",\r\n      \"args\": [\r\n        \"\\\\\\\\?\\\\C:\\\\Users\\\\49359\\\\AppData\\\\Local\\\\LLM Wiki\\\\mcp-server\\\\dist\\\\src\\\\index.js\"\r\n      ]\r\n    }\r\n  }\r\n}",
+    "origin": {
+     "capturedAt": "2026-09-18T12:27:43.377Z",
+     "channel": "import",
+     "detail": "jsonl"
+    },
+    "sessionId": "ses_f4fe54817ffeTKIq6J7u5hsK6e",
+    "timestamp": "2026-09-18T12:27:43.377Z",
+    "title": "prompt_submit",
+    "type": "conversation"
+   },
+   {
+    "concepts": [],
+    "confidence": 0.3,
+    "facts": [],
+    "files": [],
+    "id": "obs_munwukxn_06e87425f1e8",
+    "importance": 5,
+    "narrative": "@explore ",
+    "origin": {
+     "capturedAt": "2026-09-18T12:28:52.258Z",
+     "channel": "import",
+     "detail": "jsonl"
+    },
+    "sessionId": "ses_f4fe54817ffeTKIq6J7u5hsK6e",
+    "timestamp": "2026-09-18T12:28:52.258Z",
+    "title": "prompt_submit",
+    "type": "conversation"
+   }
+  ],
+  "ses_f5ad183e4ffeaM5KdHuv2fSmfV": [
+   {
+    "concepts": [],
+    "confidence": 0.3,
+    "facts": [],
+    "files": [],
+    "id": "obs_munwuky1_0c1cddd9742e",
+    "importance": 5,
+    "narrative": "",
+    "origin": {
+     "capturedAt": "2026-09-15T13:08:29.440Z",
+     "channel": "import",
+     "detail": "jsonl"
+    },
+    "sessionId": "ses_f5ad183e4ffeaM5KdHuv2fSmfV",
+    "timestamp": "2026-09-15T13:08:29.440Z",
+    "title": "stop",
+    "type": "other"
+   },
+   {
+    "concepts": [],
+    "confidence": 0.3,
+    "facts": [],
+    "files": [],
+    "id": "obs_munwuky1_14f94d6a27d6",
+    "importance": 5,
+    "narrative": "# LLM Wiki Local API Skill\n\nTalk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your environment (`curl`, `fetch`, `requests`, `http` middleware, etc.). No client library to install, no SDK to learn.\n\nTreat the wiki as a **private, structured knowledge base** the user has been curati…",
+    "origin": {
+     "capturedAt": "2026-09-15T13:08:03.026Z",
+     "channel": "import",
+     "detail": "jsonl"
+    },
+    "sessionId": "ses_f5ad183e4ffeaM5KdHuv2fSmfV",
+    "timestamp": "2026-09-15T13:08:03.026Z",
+    "title": "prompt_submit",
+    "type": "conversation"
+   },
+   {
+    "concepts": [],
+    "confidence": 0.3,
+    "facts": [],
+    "files": [],
+    "id": "obs_munwuky1_55afbff772b9",
+    "importance": 5,
+    "narrative": "",
+    "origin": {
+     "capturedAt": "2026-09-15T13:12:45.194Z",
+     "channel": "import",
+     "detail": "jsonl"
+    },
+    "sessionId": "ses_f5ad183e4ffeaM5KdHuv2fSmfV",
+    "timestamp": "2026-09-15T13:12:45.194Z",
+    "title": "stop",
+    "type": "other"
+   }
+  ]
+ },
+ "sessions": [
+  {
+   "cwd": "Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data",
+   "endedAt": "2026-09-18T12:28:52.258Z",
+   "firstPrompt": "@explore",
+   "id": "ses_f4fe54817ffeTKIq6J7u5hsK6e",
+   "observationCount": 3,
+   "project": "unknown",
+   "startedAt": "2026-09-18T08:00:38.361Z",
+   "status": "completed",
+   "tags": [
+    "jsonl-import"
+   ]
+  },
+  {
+   "cwd": "Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data",
+   "endedAt": "2026-09-15T13:12:45.194Z",
+   "firstPrompt": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
+   "id": "ses_f5ad183e4ffeaM5KdHuv2fSmfV",
+   "observationCount": 3,
+   "project": "unknown",
+   "startedAt": "2026-09-15T13:08:03.026Z",
+   "status": "completed",
+   "tags": [
+    "jsonl-import"
+   ]
+  }
+ ],
+ "summaries": [],
+ "version": "0.9.29"
+}

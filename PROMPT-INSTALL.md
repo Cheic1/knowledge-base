@@ -38,7 +38,8 @@ Collega questa macchina alla knowledge base condivisa (server: 192.168.68.55).
    Hermes, Cursor o VS Code se presenti su questa macchina):
    cd ~/knowledge-base && ./scripts/connect-agent.sh
 
-5. VERIFICA: lo script deve riportare "[OK] agentmemory cablato" e l'endpoint
+5. VERIFICA: lo script deve riportare "[OK] agentmemory cablato", le skill
+   ("[OK] skill agentmemory", altrimenti: npx skills add rohitg00/agentmemory -y) e l'endpoint
    http://192.168.68.55:8311. Poi riavvia l'agente corrente.
 
 6. TESTA la connessione dalla tua sessione:
@@ -49,6 +50,98 @@ Collega questa macchina alla knowledge base condivisa (server: 192.168.68.55).
 L'endpoint è centralizzato: per cambiarlo modifica config/endpoint.env nella repo
 e riesegui ./scripts/connect-agent.sh. Non serve reinstallare nient'altro.
 ```
+
+## 💻 PC autonomo (senza server, memorie sincronizzate via GitHub)
+
+Per un PC che non raggiunge il server: agentmemory gira in locale e le memorie
+si allineano con gli altri PC tramite `scripts/memory-sync.mjs`.
+Serve solo **Node 20+** e **git** (senza git: OneDrive o share, vedi punto 6).
+
+```
+Configura questa macchina con una knowledge base agentmemory LOCALE,
+sincronizzata con gli altri PC via GitHub (repo Cheic1/knowledge-base).
+
+0. CONTROLLA cosa c'è già (non reinstallare ciò che funziona):
+   - node --version   → serve v20 o superiore
+   - git --version
+   - Repo presente?   ls ~/knowledge-base/.git
+   - agentmemory vivo? curl -sf http://127.0.0.1:3111/agentmemory/health
+     (su Windows senza curl: node -e "fetch('http://127.0.0.1:3111/agentmemory/health').then(r=>r.text()).then(console.log)")
+
+1. NODE 20+ se manca o è vecchio:
+   Linux/macOS: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+                export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" && nvm install 20 && nvm alias default 20
+   Windows:     winget install OpenJS.NodeJS.LTS
+
+2. CLONA la repo (serve accesso al repo privato: chiave SSH o login GitHub):
+   git clone git@github.com:Cheic1/knowledge-base.git ~/knowledge-base
+   cd ~/knowledge-base
+
+3. AVVIA agentmemory in locale (resta in ascolto su 127.0.0.1:3111, viewer su :3113):
+   Linux/macOS: nohup npx -y @agentmemory/agentmemory@0.9.29 > ~/agentmemory.log 2>&1 &
+   Windows (PowerShell):
+                Start-Process -WindowStyle Hidden npx.cmd -ArgumentList '-y','@agentmemory/agentmemory@0.9.29'
+   Attendi che /agentmemory/health risponda "healthy" (può servire un minuto al primo avvio).
+   Tutti i PC devono usare la STESSA versione di agentmemory (oggi 0.9.29).
+
+4. CABLA l'agente su agentmemory LOCALE (non sul server):
+   - Con bash e python3 disponibili:
+       KB_API_URL=http://127.0.0.1:3111 ./scripts/connect-agent.sh
+   - Altrimenti scrivi tu la config MCP dell'agente come in AGENTS.md
+     (sezioni OpenCode / VS Code-Cursor / Hermes) con
+     AGENTMEMORY_URL=http://127.0.0.1:3111. Il blocco llm-wiki si può omettere.
+   - Installa le skill native di agentmemory (dicono all'agente quando cercare e
+     salvare in memoria; connect-agent.sh lo fa già, altrimenti a mano):
+       npx skills add rohitg00/agentmemory -y
+   Poi riavvia l'agente.
+
+5. IMPORTA le memorie degli altri agenti di questo PC (CLAUDE.md, AGENTS.md,
+   memorie di Claude Code e Hermes, regole di Cursor/Copilot/Windsurf/Cline, GEMINI.md):
+   node scripts/import-agent-memories.mjs --dry-run     # mostra cosa troverebbe
+   node scripts/import-agent-memories.mjs               # le salva in agentmemory
+   Se i progetti stanno fuori dalla home aggiungi --root <cartella> (ripetibile).
+   I blocchi che sembrano contenere segreti vengono saltati: riportali all'utente.
+   Opzionale, se c'è Claude Code: npx -y @agentmemory/agentmemory@0.9.29 import-jsonl
+   (importa anche le conversazioni passate di Claude Code).
+
+6. PRIMA SINCRONIZZAZIONE:
+   node scripts/memory-sync.mjs --dry-run   # mostra quante memorie arriverebbero dagli altri PC
+   node scripts/memory-sync.mjs             # importa, scrive memories/sync/<nome-pc>.json e fa push
+   Se il push fallisce per credenziali: configura chiave SSH o credential manager e riprova.
+
+7. SENZA git (OneDrive o cartella condivisa), al posto del punto 6:
+   node scripts/memory-sync.mjs --dir "<cartella OneDrive o share>/kb-memories"
+
+8. AUTOMATIZZA la sync (pull, import, push) ogni 15 minuti, all'accesso e,
+   se c'è Claude Code, all'inizio e alla fine di ogni sessione:
+     node scripts/schedule-memory-sync.mjs install --every 15 --claude-hooks
+   (senza Claude Code togli --claude-hooks). Usa l'Utilità di pianificazione su
+   Windows e crontab su Linux/macOS, senza finestre che si aprono. Controlla con:
+     node scripts/schedule-memory-sync.mjs status
+   e dopo qualche minuto leggi ~/.agentmemory/memory-sync.log.
+   Per toglierla: node scripts/schedule-memory-sync.mjs uninstall
+
+Se qualcosa si blocca (proxy, porta 3111 occupata, python3 su Windows) leggi
+"Problemi noti" subito sotto questo blocco in PROMPT-INSTALL.md.
+
+9. VERIFICA: dall'agente esegui memory_smart_search su un argomento noto
+   (es. "architettura"): devono comparire le memorie degli altri PC.
+   Mostra all'utente il nome del file in memories/sync/ e come rilanciare la sync.
+```
+
+### ⚠️ Problemi noti (PC Windows / rete aziendale)
+
+| Sintomo | Causa | Soluzione |
+|---------|-------|-----------|
+| `git pull`/`push` resta appeso o `CONNECT tunnel failed, response 502` | proxy aziendale (`http.proxy` globale) che non lascia passare GitHub | disattivalo **solo per questa repo**: `git config http.proxy ""`. In PowerShell le `""` vengono scartate: usa `cmd /c 'git config http.proxy ""'`. Va rifatto su ogni clone. `memory-sync.mjs` si ferma dopo 90s e lo ricorda |
+| `connect-agent.sh` fallisce su Python | su Windows `python3` è spesso lo stub del Microsoft Store | lo script ora prova `python3` e `python` e, se nessuno funziona, dice di scrivere il config MCP a mano come in AGENTS.md |
+| agentmemory non parte: `127.0.0.1:3111 already in use`, ma `/health` non risponde | un'istanza precedente inceppata tiene la porta | ferma i processi vecchi e riavvia con lo stesso data dir. PowerShell: `Get-NetTCPConnection -LocalPort 3111 \| % { Stop-Process -Id $_.OwningProcess -Force }`; Linux/macOS: `kill $(lsof -ti :3111)` |
+| Clone interrotto lascia una cartella con `.git` vuoto | rete instabile o proxy | cancella la cartella e riclona dopo aver sistemato il proxy |
+
+Il **DB live** di agentmemory (`state_store.db`) e il **repo git** possono stare in una
+cartella OneDrive solo se nessun altro PC usa quella stessa cartella: OneDrive non
+gestisce bene file scritti di continuo né i file di `.git`. Per condividere le memorie
+tra PC usa sempre `memory-sync.mjs`.
 
 ## 🖥️ Sei sul server (installazione completa)
 
