@@ -116,6 +116,26 @@ mcp_servers:
 - `GET /api/v1/projects/{id}/graph`: Grafo della conoscenza
 - `POST /api/v1/projects/{id}/sources/rescan`: Ris scanning fonti
 
+### wiki-search (qmd, ricerca locale sulla wiki)
+Funziona **senza l'app LLM Wiki aperta**: indicizza in locale i markdown di
+`wiki/wiki/` e `projects/` (parole chiave + ricerca semantica + rerank, modelli locali).
+- `query`: ricerca con sotto-query `lex` (parole), `vec` (semantica), `hyde`
+- `get` / `multi_get`: leggi una pagina (path o `#docid`) o più pagine
+- `status`: stato dell'indice
+
+Schema documenti: **una macchina fa l'ingestion** (app LLM Wiki o agente) e fa
+push di `wiki/`; gli altri PC fanno pull e cercano con wiki-search, in sola lettura.
+
+```bash
+./scripts/wiki-search.sh setup     # una volta per PC: Node 22+, installa qmd, indice, hook git
+./scripts/connect-agent.sh         # aggiunge il MCP "wiki-search" agli agenti
+./scripts/wiki-search.sh search "docker"   # prova da terminale
+```
+Dopo ogni `git pull` l'indice si aggiorna da solo in background (hook git,
+log in `~/.cache/qmd/kb-update.log`). L'indice (`~/.cache/qmd/kb.sqlite`) è
+per-PC e non va in git. Il primo `setup` scarica ~2 GB di modelli; senza
+modelli resta la ricerca per parole.
+
 ## 🚀 Avvio servizi
 
 ### 1. Avvia tutto (server)
