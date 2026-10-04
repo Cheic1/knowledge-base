@@ -20,12 +20,14 @@ set -e
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 # --- Endpoint ---
+# Le variabili gia' impostate nell'ambiente vincono su config/endpoint.env
+_ENV_API="${KB_API_URL:-}"; _ENV_WIKI="${KB_WIKI_URL:-}"
 if [ -f "$REPO_DIR/config/endpoint.env" ]; then
     # shellcheck disable=SC1091
     . "$REPO_DIR/config/endpoint.env"
 fi
-KB_API_URL="${KB_API_URL:-http://192.168.68.55:8311}"
-KB_WIKI_URL="${KB_WIKI_URL:-http://192.168.68.55:8318}"
+KB_API_URL="${_ENV_API:-${KB_API_URL:-http://192.168.68.55:8311}}"
+KB_WIKI_URL="${_ENV_WIKI:-${KB_WIKI_URL:-http://192.168.68.55:8318}}"
 
 # --- Token kb-proxy ---
 if [ -z "${KB_TOKEN:-}" ] && [ -f "$REPO_DIR/.env" ]; then

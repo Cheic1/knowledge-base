@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/Cheic1/knowledge-base#readme",
   "dependencies": {
-    "@agentmemory/agentmemory": "^0.9.29"
+    "@agentmemory/agentmemory": "0.9.29"
   }
 }
