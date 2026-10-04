@@ -441,16 +441,26 @@ async function install(opt) {
   pull(true);
   npmInstall();
   await ensureAgentmemory(role);
-  if (opt.wikiSearch) wikiSearchSetup();
+  // Stato subito, poi a ogni tappa: se l'installazione viene interrotta (timeout
+  // dell'agente, rete) `status` lo dice e il rilancio riprende da qui.
+  const base = { ...state, role, every: opt.every, wikiSearch: false, appliedCommit: head(),
+    agentmemory: pinnedVersion(), installedAt: new Date().toISOString(), completed: false };
+  saveState(base);
   const agents = wireAgents(role);
   installSkills();
   scheduleSync(opt.every);
   firstSync();
-  saveState({ ...state, role, every: opt.every, wikiSearch: opt.wikiSearch || state.wikiSearch || false,
-    appliedCommit: head(), agentmemory: pinnedVersion(), agents, installedAt: new Date().toISOString() });
+  saveState({ ...base, agents, completed: true });
   log('');
   log('FATTO. Riavvia gli agenti cablati per caricare gli strumenti MCP.');
   log('Da qui in poi la macchina si aggiorna da sola: non serve rilanciare nulla.');
+  // Per ultima, perche' scarica fino a ~2 GB di modelli e puo' durare molti minuti:
+  // se l'agente la interrompe, tutto il resto e' gia' a posto.
+  if (opt.wikiSearch) {
+    wikiSearchSetup();
+    const again = wireAgents(role); // ora c'e' anche wiki-search
+    saveState({ ...base, agents: again, completed: true, wikiSearch: Boolean(wikiSearchCmd()) });
+  }
 }
 
 // Chiamato dalla sync automatica: aggiorna il clone e riapplica cio' che e' cambiato
@@ -490,7 +500,7 @@ async function status() {
   console.log(`repo:        ${REPO}`);
   console.log(`remote:      ${git(['remote', 'get-url', 'origin']).stdout.trim()}`);
   console.log(`branch:      ${currentBranch()} (${behind === '0' ? 'aggiornato' : `${behind} commit indietro rispetto a origin/${main}`})`);
-  console.log(`ruolo:       ${state.role || 'non installato'}`);
+  console.log(`ruolo:       ${state.role ? `${state.role}${state.completed === false ? ' (INSTALLAZIONE INCOMPLETA: rilancia bootstrap.mjs)' : ''}` : 'non installato (kb.mjs install non e\' arrivato in fondo)'}`);
   console.log(`agentmemory: ${h ? `attivo, ${h.version}` : 'NON risponde'} (repo vuole ${pinnedVersion()})`);
   console.log(`agenti:      ${(state.agents || []).join(', ') || '-'}`);
   console.log(`installato:  ${state.installedAt || '-'}   ultimo aggiornamento: ${state.updatedAt || '-'}`);
