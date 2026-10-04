@@ -45,7 +45,8 @@ install() {
         nvm use 20 > /dev/null 2>&1 || nvm use --lts > /dev/null 2>&1 || true
     fi
     NODE_BIN="$(command -v node || true)"
-    AM_BIN="$(command -v agentmemory || true)"
+    # AGENTMEMORY_BIN: la versione fissata nel repo (la passa scripts/kb.mjs)
+    AM_BIN="${AGENTMEMORY_BIN:-$(command -v agentmemory || true)}"
     if [ -z "$NODE_BIN" ] || [ "$("$NODE_BIN" -v | cut -d'v' -f2 | cut -d'.' -f1)" -lt 20 ]; then
         err "Node 20+ non trovato"; exit 1
     fi

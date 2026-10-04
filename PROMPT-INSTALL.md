@@ -1,5 +1,43 @@
 # 📋 Prompt Copia e Incolla
 
+## ⭐ Installazione unica (consigliata, ogni macchina)
+
+Un solo comando installa e cabla tutto, e da quel momento la macchina si aggiorna
+da sola dal remote da cui e' stata clonata (GitHub o GitLab):
+
+```
+node scripts/kb.mjs install                 # PC (Windows, Linux, macOS)
+node scripts/kb.mjs install --wiki-search   # server Linux, con la ricerca wiki (qmd)
+node scripts/kb.mjs status                  # controllo
+```
+
+Cosa fa: porta il clone su `main`, installa agentmemory alla versione fissata in
+`package.json` (uguale su tutte le macchine), lo avvia in locale e lo fa ripartire
+da solo (systemd sul server, Utilita' di pianificazione su Windows, crontab altrove),
+cabla Claude Code, OpenCode e Hermes su `http://127.0.0.1:3111`, installa la sync
+delle memorie ogni 15 minuti e a ogni sessione di Claude Code, e fa la prima sync.
+A ogni giro la sync esegue anche `kb.mjs update`: `git pull` e, se il codice e'
+cambiato, riapplica solo cio' che serve. Log in `~/.agentmemory/kb-update.log`.
+
+Prompt da incollare nell'agente della macchina:
+
+```
+Installa la knowledge base Cheic1/knowledge-base su questa macchina.
+1. Se il clone esiste gia' (cercalo: E:\knowledge-base, ~/knowledge-base, /DATA/AppData/my-knowledge-base),
+   entra nella cartella ed esegui: git fetch origin && git checkout main && git pull
+   (se git si blocca dietro un proxy aziendale: git config http.proxy "" e riprova).
+   Se non esiste: git clone https://github.com/Cheic1/knowledge-base.git ~/knowledge-base
+2. Serve Node.js 20+ e git (Windows: winget install OpenJS.NodeJS.LTS / Git.Git).
+3. Esegui: node scripts/kb.mjs install
+4. Mostrami l'output e poi: node scripts/kb.mjs status
+Non cancellare nulla. Se un passo fallisce fermati e riportami l'errore esatto.
+```
+
+Le sezioni sotto restano come riferimento per installazioni a mano.
+
+---
+
+
 Copia il blocco sottostante e incollalo in un agente AI (OpenCode, Hermes, VS Code, Cursor).
 Funziona **sia sul server che su un PC client**: l'endpoint è unico e centralizzato.
 
