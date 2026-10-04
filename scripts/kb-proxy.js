@@ -18,7 +18,6 @@ const crypto = require('crypto');
 const PROXY_MAP = [
   { external: 8311, internal: 3111, name: 'REST API agentmemory' },
   { external: 8313, internal: 3113, name: 'Viewer agentmemory' },
-  { external: 8315, internal: 3115, name: 'Viewer fallback' },
   { external: 8318, internal: 19828, name: 'LLM Wiki API' },
 ];
 

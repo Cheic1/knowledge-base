@@ -97,6 +97,20 @@ if [ "$NODE_OK" -ne 1 ]; then
     exit 1
 fi
 
+# --- Python vero (serve per scrivere i config JSON/YAML) ---
+# Su Windows "python3" puo' essere lo stub del Microsoft Store che non esegue nulla:
+# si prova davvero a lanciarlo, e si accetta anche "python".
+PY=""
+for cand in python3 python; do
+    if "$cand" -c "import json" > /dev/null 2>&1; then PY="$cand"; break; fi
+done
+if [ -z "$PY" ]; then
+    err "Python 3 non disponibile (su Windows 'python3' e' spesso solo lo stub dello Store)."
+    err "Installa Python oppure scrivi a mano il config MCP come in AGENTS.md"
+    err "con AGENTMEMORY_URL=$KB_API_URL, poi: npx skills add rohitg00/agentmemory -y"
+    exit 1
+fi
+
 # --- 3. Installa dipendenze MCP locale (una tantum) ---
 if [ ! -d "$REPO_DIR/node_modules" ] || [ ! -d "$REPO_DIR/mcp/llm-wiki-mcp/node_modules" ]; then
     echo ""
@@ -121,7 +135,7 @@ wire_opencode() {
     local CFG="$HOME/.config/opencode/opencode.json"
     mkdir -p "$(dirname "$CFG")"
     [ -f "$CFG" ] || echo '{}' > "$CFG"
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import json, sys, os
 cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
@@ -165,7 +179,7 @@ wire_hermes() {
     if ! grep -q "^mcp_servers:" "$CFG"; then
         printf '\nmcp_servers:\n' >> "$CFG"
     fi
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import sys, re, os
 cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
@@ -253,7 +267,7 @@ wire_cursor() {
     fi
     local CFG="$DIR/mcp.json"
     [ -f "$CFG" ] || echo '{"mcpServers":{}}' > "$CFG"
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import json, sys, os
 cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
@@ -297,7 +311,7 @@ wire_vscode() {
     fi
     mkdir -p "$(dirname "$CFG")"
     [ -f "$CFG" ] || echo '{"servers":{}}' > "$CFG"
-    python3 - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import json, sys, os
 cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
@@ -331,6 +345,18 @@ wire_opencode
 wire_hermes
 wire_cursor
 wire_vscode
+
+# --- Skill native di agentmemory (dicono all'agente quando usare la memoria) ---
+# KB_SKIP_SKILLS=1 per saltarle
+if [ "${KB_SKIP_SKILLS:-0}" != "1" ]; then
+    echo ""
+    echo "--- Skill agentmemory ---"
+    if npx -y skills add rohitg00/agentmemory -y > /tmp/kb-skills.log 2>&1; then
+        ok "skill agentmemory installate negli agenti rilevati"
+    else
+        warn "installazione skill fallita (log: /tmp/kb-skills.log). A mano: npx skills add rohitg00/agentmemory -y"
+    fi
+fi
 
 echo ""
 echo "=============================================="

@@ -70,7 +70,7 @@ start_all() {
         sleep 1
     done
 
-    echo "--- Avvio kb-proxy (LAN 8311/8313/8315/8318) ---"
+    echo "--- Avvio kb-proxy (LAN 8311/8313/8318) ---"
     kb_token > /dev/null   # genera KB_TOKEN in .env se manca
     nohup node "$REPO_DIR/scripts/kb-proxy.js" > "$LOG_PROXY" 2>&1 &
     PROXY_PID=$!
@@ -112,7 +112,7 @@ stop_all() {
     # iii engine
     for pid in $(pgrep -f "iii.bin --config" 2>/dev/null); do kill "$pid" 2>/dev/null || true; done
     # listener residui sulle porte KB
-    for port in 3111 3112 3113 3115 49134 8311 8313 8315 8318; do
+    for port in 3111 3112 3113 49134 8311 8313 8318; do
         for pid in $(lsof -ti ":$port" 2>/dev/null); do kill "$pid" 2>/dev/null || true; done
     done
     sleep 2
@@ -135,7 +135,7 @@ show_status() {
     if pgrep -f "kb-proxy.js" > /dev/null 2>&1; then
         ok "kb-proxy: attivo"
         TOKEN="$(kb_token)"
-        for port in 8311 8313 8315 8318; do
+        for port in 8311 8313 8318; do
             code=$(curl -s -m 3 -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $TOKEN" "http://127.0.0.1:$port/" 2>/dev/null || echo "down")
             echo "    :$port -> HTTP $code"
         done
