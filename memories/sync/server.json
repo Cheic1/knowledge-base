@@ -41,6 +41,148 @@
    "sourceActionIds": []
   }
  ],
+ "graphEdges": [
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "ge_muty7xgu_5e14f34eb8ee",
+   "sourceNodeId": "gn_muty7xgt_9b7ac32969cc",
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "targetNodeId": "gn_muty7xgt_a1e3a0a41286",
+   "type": "related_to",
+   "weight": 0.8
+  },
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "ge_muty7xgu_c9a707cf0cb1",
+   "sourceNodeId": "gn_muty7xgt_ca27f0a2290d",
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "targetNodeId": "gn_muty7xgt_a1e3a0a41286",
+   "type": "related_to",
+   "weight": 0.9
+  },
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "ge_muty7xgu_f5347f50d1b7",
+   "sourceNodeId": "gn_muty7xgt_9b7ac32969cc",
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "targetNodeId": "gn_muty7xgt_ae0d2eef0e18",
+   "type": "uses",
+   "weight": 0.9
+  },
+  {
+   "createdAt": "2026-10-04T15:01:17.980Z",
+   "id": "ge_muty7yu4_4edf02acc45c",
+   "sourceNodeId": "gn_muty7yu4_6e4d55387c4f",
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "targetNodeId": "gn_muty7yu4_fa320fc7df33",
+   "type": "uses",
+   "weight": 0.9
+  }
+ ],
+ "graphNodes": [
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "gn_muty7xgt_9b7ac32969cc",
+   "name": "llm-wiki",
+   "properties": {
+    "command": "node",
+    "type": "MCP server"
+   },
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "type": "library"
+  },
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "gn_muty7xgt_a1e3a0a41286",
+   "name": "Model Context Protocol",
+   "properties": {
+    "abbreviation": "MCP"
+   },
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "type": "concept"
+  },
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "gn_muty7xgt_ae0d2eef0e18",
+   "name": "\\\\\\\\?\\\\C:\\\\Users\\\\49359\\\\AppData\\\\Local\\\\LLM Wiki\\\\mcp-server\\\\dist\\\\src\\\\index.js",
+   "properties": {
+    "extension": "js",
+    "purpose": "MCP server entry point"
+   },
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "type": "file"
+  },
+  {
+   "createdAt": "2026-10-04T15:01:16.204Z",
+   "id": "gn_muty7xgt_ca27f0a2290d",
+   "name": "mcpServers",
+   "properties": {
+    "context": "MCP configuration"
+   },
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "type": "concept"
+  },
+  {
+   "createdAt": "2026-10-04T15:01:17.980Z",
+   "id": "gn_muty7yu4_6e4d55387c4f",
+   "name": "node",
+   "properties": {
+    "command": "node"
+   },
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "type": "function"
+  },
+  {
+   "createdAt": "2026-10-04T15:01:17.980Z",
+   "id": "gn_muty7yu4_fa320fc7df33",
+   "name": "C:\\Users\\49359\\AppData\\Local\\LLM Wiki\\mcp-server\\dist\\src\\index.js",
+   "properties": {
+    "path": "C:\\Users\\49359\\AppData\\Local\\LLM Wiki\\mcp-server\\dist\\src\\index.js"
+   },
+   "sourceObservationIds": [
+    "obs_munwukxm_91fe8c004842",
+    "obs_munwukxn_06e87425f1e8",
+    "obs_munwukxm_ecaf97e0c8e7"
+   ],
+   "type": "file"
+  }
+ ],
  "lessons": [
   {
    "confidence": 0.4,
