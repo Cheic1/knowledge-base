@@ -1,0 +1,271 @@
+{
+  "system": "engram",
+  "host": "vm",
+  "date": "2026-10-02T14:35:41",
+  "seeded": true,
+  "save_ms": [
+    11,
+    8,
+    6,
+    9,
+    7,
+    7,
+    10,
+    7,
+    11,
+    8,
+    8,
+    10,
+    9,
+    9,
+    9,
+    13,
+    6,
+    9,
+    9,
+    8
+  ],
+  "queries": [
+    {
+      "id": "q01",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 8,
+      "other_facts": 0,
+      "chars": 191
+    },
+    {
+      "id": "q02",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 160
+    },
+    {
+      "id": "q03",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 4,
+      "other_facts": 0,
+      "chars": 155
+    },
+    {
+      "id": "q04",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 152
+    },
+    {
+      "id": "q05",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 7,
+      "other_facts": 0,
+      "chars": 181
+    },
+    {
+      "id": "q06",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 167
+    },
+    {
+      "id": "q07",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 173
+    },
+    {
+      "id": "q08",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 8,
+      "other_facts": 0,
+      "chars": 172
+    },
+    {
+      "id": "q09",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 173
+    },
+    {
+      "id": "q10",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 4,
+      "other_facts": 0,
+      "chars": 166
+    },
+    {
+      "id": "q11",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 158
+    },
+    {
+      "id": "q12",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 4,
+      "other_facts": 0,
+      "chars": 150
+    },
+    {
+      "id": "q13",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 6,
+      "other_facts": 0,
+      "chars": 171
+    },
+    {
+      "id": "q14",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 6,
+      "other_facts": 0,
+      "chars": 172
+    },
+    {
+      "id": "q15",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 3,
+      "other_facts": 0,
+      "chars": 148
+    },
+    {
+      "id": "q16",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 3,
+      "other_facts": 0,
+      "chars": 143
+    },
+    {
+      "id": "q17",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 4,
+      "other_facts": 0,
+      "chars": 153
+    },
+    {
+      "id": "q18",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 160
+    },
+    {
+      "id": "q19",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 3,
+      "other_facts": 0,
+      "chars": 157
+    },
+    {
+      "id": "q20",
+      "kind": "paraphrase",
+      "hit": false,
+      "ms": 3,
+      "other_facts": 0,
+      "chars": 135
+    },
+    {
+      "id": "q21",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 3,
+      "other_facts": 0,
+      "chars": 774
+    },
+    {
+      "id": "q22",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 730
+    },
+    {
+      "id": "q23",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 713
+    },
+    {
+      "id": "q24",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 706
+    },
+    {
+      "id": "q25",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 710
+    },
+    {
+      "id": "q26",
+      "kind": "keyword",
+      "hit": false,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 129
+    },
+    {
+      "id": "q27",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 709
+    },
+    {
+      "id": "q28",
+      "kind": "keyword",
+      "hit": true,
+      "ms": 2,
+      "other_facts": 0,
+      "chars": 718
+    },
+    {
+      "id": "q29",
+      "kind": "cross",
+      "hit": false,
+      "ms": 5,
+      "other_facts": 0,
+      "chars": 197
+    },
+    {
+      "id": "q30",
+      "kind": "cross",
+      "hit": false,
+      "ms": 4,
+      "other_facts": 0,
+      "chars": 164
+    }
+  ],
+  "errors": []
+}

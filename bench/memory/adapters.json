@@ -1,0 +1,271 @@
+{
+  "_note": "Un blocco per sistema. save/search: tool MCP e argomenti; i segnaposto {text} {query} {id} {project} {title} vengono sostituiti. Se un nome non torna, lancia 'mcp_bench.py list-tools <sistema>' e correggi qui. Le variabili $VAR negli env/args vengono espanse. Usa sempre una data dir di TEST.",
+  "server-memory": {
+    "_verified": "2026-10-02 nel container",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-memory"
+    ],
+    "env": {
+      "MEMORY_FILE_PATH": "$HOME/.kb-bench/server-memory.jsonl"
+    },
+    "save": {
+      "tool": "create_entities",
+      "args": {
+        "entities": [
+          {
+            "name": "{project} {id}",
+            "entityType": "fact",
+            "observations": [
+              "{text}"
+            ]
+          }
+        ]
+      }
+    },
+    "search": {
+      "tool": "search_nodes",
+      "args": {
+        "query": "{query}"
+      }
+    }
+  },
+  "agentmemory": {
+    "_note": "Punta a un'istanza di TEST (altra porta / altra data dir), non a quella vera su 3111.",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@agentmemory/mcp"
+    ],
+    "env": {
+      "AGENTMEMORY_URL": "http://127.0.0.1:3111"
+    },
+    "settle_seconds": 15,
+    "save": {
+      "tool": "memory_save",
+      "args": {
+        "content": "{text}",
+        "project": "{project}"
+      }
+    },
+    "search": {
+      "tool": "memory_smart_search",
+      "args": {
+        "query": "{query}",
+        "limit": 5
+      }
+    }
+  },
+  "engram": {
+    "_verified": "2026-10-02 nel container (engram mcp)",
+    "command": "engram",
+    "args": [
+      "mcp"
+    ],
+    "env": {
+      "ENGRAM_DATA_DIR": "$HOME/.kb-bench/engram"
+    },
+    "save": {
+      "tool": "mem_save",
+      "args": {
+        "title": "{title}",
+        "content": "{text}",
+        "type": "decision"
+      }
+    },
+    "search": {
+      "tool": "mem_search",
+      "args": {
+        "query": "{query}",
+        "limit": 5,
+        "all_projects": true
+      }
+    },
+    "_note": "Engram rifiuta project sconosciuti: si salva nel progetto rilevato dalla cwd (o ENGRAM_PROJECT) e si cerca con all_projects."
+  },
+  "engram-any": {
+    "_verified": "2026-10-02 nel container (engram mcp)",
+    "command": "engram",
+    "args": [
+      "mcp"
+    ],
+    "env": {
+      "ENGRAM_DATA_DIR": "$HOME/.kb-bench/engram"
+    },
+    "save": {
+      "tool": "mem_save",
+      "args": {
+        "title": "{title}",
+        "content": "{text}",
+        "type": "decision"
+      }
+    },
+    "search": {
+      "tool": "mem_search",
+      "args": {
+        "query": "{query}",
+        "limit": 5,
+        "all_projects": true,
+        "match_mode": "any"
+      }
+    },
+    "_note": "Come engram ma ricerca FTS in OR (match_mode any): più recall, più rumore."
+  },
+  "basic-memory": {
+    "command": "uvx",
+    "args": [
+      "basic-memory",
+      "mcp"
+    ],
+    "env": {
+      "BASIC_MEMORY_HOME": "$HOME/.kb-bench/basic-memory"
+    },
+    "settle_seconds": 10,
+    "save": {
+      "tool": "write_note",
+      "args": {
+        "title": "{title}",
+        "content": "{text}",
+        "directory": "bench"
+      }
+    },
+    "search": {
+      "tool": "search_notes",
+      "args": {
+        "query": "{query}",
+        "page_size": 5,
+        "search_type": "hybrid",
+        "output_format": "json"
+      }
+    },
+    "_verified": "2026-10-02 nel container (v0.22.1); la prima ricerca semantica scarica il modello FastEmbed da HuggingFace"
+  },
+  "basic-memory-text": {
+    "command": "uvx",
+    "args": [
+      "basic-memory",
+      "mcp"
+    ],
+    "env": {
+      "BASIC_MEMORY_HOME": "$HOME/.kb-bench/basic-memory"
+    },
+    "settle_seconds": 10,
+    "save": {
+      "tool": "write_note",
+      "args": {
+        "title": "{title}",
+        "content": "{text}",
+        "directory": "bench"
+      }
+    },
+    "search": {
+      "tool": "search_notes",
+      "args": {
+        "query": "{query}",
+        "page_size": 5,
+        "search_type": "text",
+        "output_format": "json"
+      }
+    },
+    "_verified": "2026-10-02 nel container (v0.22.1); la prima ricerca semantica scarica il modello FastEmbed da HuggingFace",
+    "_note": "Solo full-text (nessun modello di embedding)."
+  },
+  "mcp-memory-service": {
+    "command": "uvx",
+    "args": [
+      "--from",
+      "mcp-memory-service",
+      "memory",
+      "server"
+    ],
+    "env": {
+      "MCP_MEMORY_STORAGE_BACKEND": "sqlite_vec",
+      "MCP_MEMORY_SQLITE_PATH": "$HOME/.kb-bench/mms.db"
+    },
+    "save": {
+      "tool": "memory_store",
+      "args": {
+        "content": "{text}",
+        "metadata": {
+          "tags": [
+            "{project}"
+          ]
+        }
+      }
+    },
+    "search": {
+      "tool": "memory_search",
+      "args": {
+        "query": "{query}",
+        "limit": 5
+      }
+    },
+    "_verified": "2026-10-02 nomi tool verificati (v11.x); serve scaricare il modello di embedding da HuggingFace"
+  },
+  "mempalace": {
+    "_note": "Nomi dei tool da confermare con list-tools.",
+    "command": "uvx",
+    "args": [
+      "--from",
+      "mempalace",
+      "mempalace-mcp"
+    ],
+    "env": {
+      "MEMPALACE_HOME": "$HOME/.kb-bench/mempalace"
+    },
+    "save": {
+      "tool": "mempalace_add_drawer",
+      "args": {
+        "wing": "{project}",
+        "content": "{text}"
+      }
+    },
+    "search": {
+      "tool": "mempalace_search",
+      "args": {
+        "query": "{query}",
+        "limit": 5
+      }
+    }
+  },
+  "hindsight": {
+    "_note": "Richiede 'docker run' di Hindsight + un LLM (anche Ollama). MCP via HTTP per memory bank.",
+    "transport": "http",
+    "url": "http://127.0.0.1:8888/mcp/kb-bench/",
+    "settle_seconds": 30,
+    "save": {
+      "tool": "retain",
+      "args": {
+        "content": "{text}"
+      }
+    },
+    "search": {
+      "tool": "recall",
+      "args": {
+        "query": "{query}"
+      }
+    }
+  },
+  "codemem": {
+    "_note": "Nomi dei tool da confermare con list-tools.",
+    "command": "codemem",
+    "args": [
+      "mcp"
+    ],
+    "save": {
+      "tool": "memory_remember",
+      "args": {
+        "content": "{text}",
+        "project": "{project}"
+      }
+    },
+    "search": {
+      "tool": "memory_search",
+      "args": {
+        "query": "{query}",
+        "limit": 5
+      }
+    }
+  }
+}
