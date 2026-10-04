@@ -40,3 +40,14 @@ Errori e cosa fare:
 | install | Node < 20 | installare Node 20+ |
 | install | agentmemory non risponde | log in `~/.agentmemory/agentmemory.log` |
 | sync | push chiede la password | Git Credential Manager o chiave SSH, rilanciare |
+
+# Flusso della sync delle memorie
+
+Verificato su `scripts/kb-auto-sync.mjs`, `scripts/memory-sync.mjs` e `scripts/import-agent-memories.mjs`.
+
+1. Parte ogni 15 minuti (attività pianificata su Windows, cron su Linux/macOS), all'accesso o al riavvio, e a inizio e fine sessione di Claude Code.
+2. `kb.mjs update` aggiorna il codice con `git pull`; se agentmemory non risponde il giro salta.
+3. `import-agent-memories` salva in agentmemory (via `/agentmemory/remember`) le memorie native degli altri agenti, saltando i blocchi con segreti.
+4. `memory-sync`: `git pull --rebase`, poi per ogni file degli altri PC importa i record nuovi o con `updatedAt` più recente (`/agentmemory/import`, strategia merge), poi esporta il DB locale in `memories/sync/<pc>.json` (con `kbAuthor`, senza memorie `personale`), poi commit e push del solo proprio file (fino a 3 tentativi).
+5. Non si propagano le cancellazioni. Due memorie con id diversi e testo uguale restano due memorie. Se lo stesso id è diverso su due PC vince `updatedAt` più recente.
+6. Punti di errore: agentmemory spento (salta), versione agentmemory diversa (salta quel file), git bloccato dal proxy (timeout 90 s), push respinto 3 volte, export troppo grande (non supportato).
