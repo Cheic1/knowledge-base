@@ -10,6 +10,10 @@
 # Uso:
 #   ./scripts/connect-agent.sh              # usa config/endpoint.env
 #   KB_API_URL=... ./scripts/connect-agent.sh   # override endpoint
+#
+# Token: KB_TOKEN da env o da <repo>/.env (sul server: scripts/kb-token.sh;
+# sul client copia la riga KB_TOKEN=... nel .env del clone). Viene scritto
+# nelle config come AGENTMEMORY_SECRET e LLM_WIKI_API_TOKEN (Bearer).
 # ============================================
 set -e
 
@@ -22,6 +26,12 @@ if [ -f "$REPO_DIR/config/endpoint.env" ]; then
 fi
 KB_API_URL="${KB_API_URL:-http://192.168.68.55:8311}"
 KB_WIKI_URL="${KB_WIKI_URL:-http://192.168.68.55:8318}"
+
+# --- Token kb-proxy ---
+if [ -z "${KB_TOKEN:-}" ] && [ -f "$REPO_DIR/.env" ]; then
+    KB_TOKEN="$(sed -n 's/^[[:space:]]*KB_TOKEN[[:space:]]*=[[:space:]]*//p' "$REPO_DIR/.env" | tail -n 1 | tr -d "\"'")"
+fi
+KB_TOKEN="${KB_TOKEN:-}"
 
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
 ok()   { echo -e "${GREEN}[OK]${NC} $1"; }
@@ -37,8 +47,16 @@ echo ""
 
 # --- 1. Verifica raggiungibilita' endpoint ---
 echo "--- Verifica endpoint ---"
-if curl -sf -m 8 "$KB_API_URL/agentmemory/health" > /dev/null 2>&1; then
+HEALTH_CODE=$(curl -s -m 8 -o /dev/null -w "%{http_code}" \
+    ${KB_TOKEN:+-H "Authorization: Bearer $KB_TOKEN"} \
+    "$KB_API_URL/agentmemory/health" 2>/dev/null || true)
+if [ "$HEALTH_CODE" = "200" ]; then
     ok "agentmemory raggiungibile su $KB_API_URL"
+elif [ "$HEALTH_CODE" = "401" ]; then
+    err "kb-proxy risponde 401: KB_TOKEN mancante o errato"
+    err "  sul server: $REPO_DIR/scripts/kb-token.sh"
+    err "  sul client: aggiungi KB_TOKEN=<token> in $REPO_DIR/.env e riesegui"
+    exit 1
 else
     err "agentmemory NON raggiungibile su $KB_API_URL"
     err "Controlla che il server sia attivo e kb-proxy in esecuzione:"
@@ -117,16 +135,16 @@ wire_opencode() {
     local CFG="$HOME/.config/opencode/opencode.json"
     mkdir -p "$(dirname "$CFG")"
     [ -f "$CFG" ] || echo '{}' > "$CFG"
-    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import json, sys, os
-cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
     cfg = json.load(f)
 cfg.setdefault("mcp", {})
 cfg["mcp"]["agentmemory"] = {
     "type": "local",
     "command": ["npx", "-y", "@agentmemory/mcp"],
-    "environment": {"AGENTMEMORY_URL": api_url},
+    "environment": {"AGENTMEMORY_URL": api_url, **({"AGENTMEMORY_SECRET": token} if token else {})},
     "enabled": True,
     "timeout": 10000,
 }
@@ -134,7 +152,7 @@ if os.path.isfile(wiki_bin):
     cfg["mcp"]["llm-wiki"] = {
         "type": "local",
         "command": ["node", wiki_bin],
-        "environment": {"LLM_WIKI_API_BASE_URL": wiki_url},
+        "environment": {"LLM_WIKI_API_BASE_URL": wiki_url, **({"LLM_WIKI_API_TOKEN": token} if token else {})},
         "enabled": True,
         "timeout": 10000,
     }
@@ -161,11 +179,24 @@ wire_hermes() {
     if ! grep -q "^mcp_servers:" "$CFG"; then
         printf '\nmcp_servers:\n' >> "$CFG"
     fi
-    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import sys, re, os
-cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
     text = f.read()
+
+def set_env(text, block_name, after_key, key, value):
+    """Imposta key: "value" nel blocco env di block_name (dopo after_key)."""
+    m = re.search(r"^  " + re.escape(block_name) + r":\n((?:    .*\n|\s*\n)*)", text, re.M)
+    if not m:
+        return text
+    body = m.group(1)
+    line = f'      {key}: "{value}"\n'
+    if re.search(r"^      " + key + r":.*\n", body, re.M):
+        body = re.sub(r"^      " + key + r":.*\n", lambda _: line, body, count=1, flags=re.M)
+    else:
+        body = re.sub(r"(^      " + after_key + r":.*\n)", lambda mm: mm.group(1) + line, body, count=1, flags=re.M)
+    return text[:m.start(1)] + body + text[m.end(1):]
 
 agent_block = f"""mcp_servers:
   agentmemory:
@@ -213,6 +244,10 @@ elif os.path.isfile(wiki_path):
     # inserisci prima di eventuali commenti finali dopo mcp_servers
     text = re.sub(r"(^mcp_servers:\n)", r"\1" + wiki_block, text, count=1, flags=re.M)
 
+if token:
+    text = set_env(text, "agentmemory", "AGENTMEMORY_URL", "AGENTMEMORY_SECRET", token)
+    text = set_env(text, "llm-wiki", "LLM_WIKI_API_BASE_URL", "LLM_WIKI_API_TOKEN", token)
+
 with open(cfg_path, "w") as f:
     f.write(text)
 print("Hermes mcp_servers aggiornato")
@@ -232,22 +267,22 @@ wire_cursor() {
     fi
     local CFG="$DIR/mcp.json"
     [ -f "$CFG" ] || echo '{"mcpServers":{}}' > "$CFG"
-    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import json, sys, os
-cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
     cfg = json.load(f)
 cfg.setdefault("mcpServers", {})
 cfg["mcpServers"]["agentmemory"] = {
     "command": "npx",
     "args": ["-y", "@agentmemory/mcp"],
-    "env": {"AGENTMEMORY_URL": api_url},
+    "env": {"AGENTMEMORY_URL": api_url, **({"AGENTMEMORY_SECRET": token} if token else {})},
 }
 if os.path.isfile(wiki_bin):
     cfg["mcpServers"]["llm-wiki"] = {
         "command": "node",
         "args": [wiki_bin],
-        "env": {"LLM_WIKI_API_BASE_URL": wiki_url},
+        "env": {"LLM_WIKI_API_BASE_URL": wiki_url, **({"LLM_WIKI_API_TOKEN": token} if token else {})},
     }
 with open(cfg_path, "w") as f:
     json.dump(cfg, f, indent=2, ensure_ascii=False)
@@ -276,9 +311,9 @@ wire_vscode() {
     fi
     mkdir -p "$(dirname "$CFG")"
     [ -f "$CFG" ] || echo '{"servers":{}}' > "$CFG"
-    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" <<'PYEOF'
+    "$PY" - "$CFG" "$KB_API_URL" "$WIKI_MCP_BIN" "$KB_WIKI_URL" "$KB_TOKEN" <<'PYEOF'
 import json, sys, os
-cfg_path, api_url, wiki_bin, wiki_url = sys.argv[1:5]
+cfg_path, api_url, wiki_bin, wiki_url, token = sys.argv[1:6]
 with open(cfg_path) as f:
     cfg = json.load(f)
 cfg.setdefault("servers", {})
@@ -286,14 +321,14 @@ cfg["servers"]["agentmemory"] = {
     "type": "stdio",
     "command": "npx",
     "args": ["-y", "@agentmemory/mcp"],
-    "env": {"AGENTMEMORY_URL": api_url},
+    "env": {"AGENTMEMORY_URL": api_url, **({"AGENTMEMORY_SECRET": token} if token else {})},
 }
 if os.path.isfile(wiki_bin):
     cfg["servers"]["llm-wiki"] = {
         "type": "stdio",
         "command": "node",
         "args": [wiki_bin],
-        "env": {"LLM_WIKI_API_BASE_URL": wiki_url},
+        "env": {"LLM_WIKI_API_BASE_URL": wiki_url, **({"LLM_WIKI_API_TOKEN": token} if token else {})},
     }
 with open(cfg_path, "w") as f:
     json.dump(cfg, f, indent=2, ensure_ascii=False)
@@ -333,6 +368,7 @@ echo "  API:   $KB_API_URL"
 echo "  Wiki:  $KB_WIKI_URL"
 echo "  View:  ${KB_VIEWER_URL:-http://192.168.68.55:8313}"
 echo ""
+[ -n "$KB_TOKEN" ] || warn "Nessun KB_TOKEN: cablaggio senza token (funziona solo con KB_AUTH=off sul server)"
 echo "Prossimo passo: riavvia gli agenti cablati."
 echo "Test manuale:"
-echo "  curl -X POST $KB_API_URL/agentmemory/search -H 'Content-Type: application/json' -d '{\"query\":\"test\"}'"
+echo "  curl -X POST $KB_API_URL/agentmemory/search -H \"Authorization: Bearer \$KB_TOKEN\" -H 'Content-Type: application/json' -d '{\"query\":\"test\"}'"
