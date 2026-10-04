@@ -159,7 +159,7 @@ step5_configura_iii() {
     # NOTA: non modificare iii-config.yaml — iii riscrive host:127.0.0.1
     # ad ogni boot. L'esposizione LAN è fatta dal proxy su 8311/8313/8318.
     if [ -f "$KB_DIR/scripts/kb-proxy.js" ]; then
-        log_info "kb-proxy disponibile (script/kb-proxy.js, porte 8311/8313/8315/8318)"
+        log_info "kb-proxy disponibile (script/kb-proxy.js, porte 8311/8313/8318)"
         log_success "esposizione LAN tramite kb-proxy"
     else
         log_warning "scripts/kb-proxy.js non trovato"

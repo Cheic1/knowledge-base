@@ -28,7 +28,7 @@ nano .env  # Le API keys sono già configurate!
 # Apri la cartella: /DATA/AppData/my-knowledge-base/wiki
 ```
 
-### 3. Configura il tuo agente (1 min)
+### 4. Configura il tuo agente (1 min)
 ```bash
 # Copia la configurazione MCP
 cat MCP-CONFIG.json
@@ -37,7 +37,7 @@ cat MCP-CONFIG.json
 # (vedi AGENTS.md per istruzioni specifiche)
 ```
 
-### 4. Inizia a usare (1 min)
+### 5. Inizia a usare (1 min)
 ```bash
 # In qualsiasi agente AI:
 memory_smart_search "come implementare JWT"

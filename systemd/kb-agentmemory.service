@@ -1,0 +1,18 @@
+# Unit utente generata da scripts/install-systemd.sh (non editare la copia installata)
+[Unit]
+Description=Knowledge Base - agentmemory (127.0.0.1:3111/3113)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=@REPO_DIR@
+Environment=PATH=@PATH@
+EnvironmentFile=-@REPO_DIR@/.env
+ExecStart=@AGENTMEMORY_BIN@
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+
+[Install]
+WantedBy=default.target

@@ -9,6 +9,9 @@ Questa knowledge base si integra con diversi agenti AI tramite **MCP (Model Cont
 > ⚡ **Cablaggio automatico**: invece di editare i file a mano, esegui
 > `./scripts/connect-agent.sh` — legge l'endpoint da `config/endpoint.env`
 > e configura MCP in OpenCode, Hermes, Cursor e VS Code trovati sulla macchina.
+> Il token del proxy (`KB_TOKEN`) lo prende da `<repo>/.env`: sul server
+> stampalo con `./scripts/kb-token.sh`, sui PC client aggiungi la riga
+> `KB_TOKEN=...` al `.env` del clone prima di lanciare lo script.
 > I blocchi sotto sono il riferimento di cosa scrive lo script.
 
 ### OpenCode
@@ -20,14 +23,20 @@ Aggiungi al file `~/.config/opencode/opencode.json` (nota: il campo env si chiam
     "agentmemory": {
       "type": "local",
       "command": ["npx", "-y", "@agentmemory/mcp"],
-      "environment": { "AGENTMEMORY_URL": "http://192.168.68.55:8311" },
+      "environment": {
+        "AGENTMEMORY_URL": "http://192.168.68.55:8311",
+        "AGENTMEMORY_SECRET": "<KB_TOKEN>"
+      },
       "enabled": true,
       "timeout": 10000
     },
     "llm-wiki": {
       "type": "local",
       "command": ["node", "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
-      "environment": { "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318" },
+      "environment": {
+        "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318",
+        "LLM_WIKI_API_TOKEN": "<KB_TOKEN>"
+      },
       "enabled": true,
       "timeout": 10000
     }
@@ -47,12 +56,18 @@ Cursor: `~/.cursor/mcp.json` — VS Code: `.vscode/mcp.json`:
     "agentmemory": {
       "command": "npx",
       "args": ["-y", "@agentmemory/mcp"],
-      "env": { "AGENTMEMORY_URL": "http://192.168.68.55:8311" }
+      "env": {
+        "AGENTMEMORY_URL": "http://192.168.68.55:8311",
+        "AGENTMEMORY_SECRET": "<KB_TOKEN>"
+      }
     },
     "llm-wiki": {
       "command": "node",
       "args": ["<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
-      "env": { "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318" }
+      "env": {
+        "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318",
+        "LLM_WIKI_API_TOKEN": "<KB_TOKEN>"
+      }
     }
   }
 }
@@ -68,6 +83,7 @@ mcp_servers:
     args: ["-y", "@agentmemory/mcp"]
     env:
       AGENTMEMORY_URL: http://192.168.68.55:8311
+      AGENTMEMORY_SECRET: "<KB_TOKEN>"
     enabled: true
   llm-wiki:
     command: node
@@ -75,6 +91,7 @@ mcp_servers:
       - <REPO>/mcp/llm-wiki-mcp/dist/src/index.js
     env:
       LLM_WIKI_API_BASE_URL: http://192.168.68.55:8318
+      LLM_WIKI_API_TOKEN: "<KB_TOKEN>"
     enabled: true
 ```
 
@@ -128,6 +145,16 @@ cd /DATA/AppData/my-knowledge-base
 ./scripts/start-kb.sh status   # stato
 ```
 
+### 1b. Riavvio automatico con systemd (consigliato)
+```bash
+./scripts/install-systemd.sh            # unit utente kb-agentmemory + kb-proxy
+journalctl --user -u kb-agentmemory -u kb-proxy -f   # log
+./scripts/install-systemd.sh uninstall  # torna a nohup
+```
+Le unit hanno `Restart=always` e partono al boot (linger abilitato; se lo
+script non riesce: `sudo loginctl enable-linger $USER`). Una volta installate,
+`start-kb.sh start|stop|restart|status` usa `systemctl --user`.
+
 ### 2. Avvia LLM Wiki (opzionale)
 ```bash
 # Avvia l'app desktop nashsu/llm_wiki
@@ -140,9 +167,12 @@ cd /DATA/AppData/my-knowledge-base
 # Locale
 curl http://127.0.0.1:3111/agentmemory/health     # → "status":"healthy"
 # Remoto (LAN)
-curl http://192.168.68.55:8311/agentmemory/health # → "status":"healthy"
-# Viewer remoto
-curl -o /dev/null -w "%{http_code}\n" http://192.168.68.55:8313/
+curl -H "Authorization: Bearer $(./scripts/kb-token.sh)" \
+  http://192.168.68.55:8311/agentmemory/health   # → "status":"healthy"
+# Senza token il proxy risponde 401
+curl -o /dev/null -w "%{http_code}\n" http://192.168.68.55:8311/agentmemory/health
+# Viewer da browser: apri una volta http://192.168.68.55:8313/?token=<KB_TOKEN>
+# (imposta un cookie e torna all'URL pulito)
 ```
 
 ### Mappe porte (perché esistono le 83xx)
@@ -174,8 +204,11 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 ## 🔒 Sicurezza
 
 - **Accesso LAN**: servizi in ascolto su 127.0.0.1, esposti solo dal
-  kb-proxy su 8311/8313/8318 (rete 192.168.68.0/24, **senza auth**:
-  in rete fidata domestica; non esporre l'host a internet)
+  kb-proxy su 8311/8313/8318 (rete 192.168.68.0/24) con **token condiviso**
+  `KB_TOKEN` in `.env` (`./scripts/kb-token.sh`, `rotate` per cambiarlo).
+  Client: `Authorization: Bearer <KB_TOKEN>`; browser: `?token=` una volta.
+  Il traffico è HTTP in chiaro: resta comunque in rete fidata, non esporre
+  l'host a internet. `KB_AUTH=off` disattiva il controllo (sconsigliato)
 - **API keys**: mai committate (usa .env, `chmod 600 .env`)
 - **Git privato**: repo GitHub Cheic1/knowledge-base
 - **Backup**: Git per wiki/progetti; `data/` (stato runtime) è escluso
@@ -187,3 +220,4 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 | **Server** (OpenCode, Hermes) | `./scripts/connect-agent.sh` → cabla MCP a `localhost` via endpoint |
 | **PC client** (OpenCode) | clone repo + `./scripts/connect-agent.sh` → cabla MCP a `192.168.68.55:8311` |
 | Cambio endpoint | modifica `config/endpoint.env` + riesegui `connect-agent.sh` ovunque |
+| Cambio token | `./scripts/kb-token.sh rotate` sul server, riavvia kb-proxy, aggiorna `KB_TOKEN` nei `.env` client + `connect-agent.sh` |
