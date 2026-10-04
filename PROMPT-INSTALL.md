@@ -6,8 +6,8 @@ Un solo comando installa e cabla tutto, e da quel momento la macchina si aggiorn
 da sola dal remote da cui e' stata clonata (GitHub o GitLab):
 
 ```
-node scripts/kb.mjs install                 # PC (Windows, Linux, macOS)
-node scripts/kb.mjs install --wiki-search   # server Linux, con la ricerca wiki (qmd)
+node scripts/bootstrap.mjs                              # PC (Windows, Linux, macOS)
+node scripts/bootstrap.mjs --role server --wiki-search  # server Linux, con la ricerca wiki (qmd)
 node scripts/kb.mjs status                  # controllo
 ```
 
@@ -19,19 +19,30 @@ delle memorie ogni 15 minuti e a ogni sessione di Claude Code, e fa la prima syn
 A ogni giro la sync esegue anche `kb.mjs update`: `git pull` e, se il codice e'
 cambiato, riapplica solo cio' che serve. Log in `~/.agentmemory/kb-update.log`.
 
-Prompt da incollare nell'agente della macchina:
+Prompt da incollare nell'agente della macchina (vale per qualsiasi sistema e agente):
 
 ```
-Installa la knowledge base Cheic1/knowledge-base su questa macchina.
-1. Se il clone esiste gia' (cercalo: E:\knowledge-base, ~/knowledge-base, /DATA/AppData/my-knowledge-base),
-   entra nella cartella ed esegui: git fetch origin && git checkout main && git pull
-   (se git si blocca dietro un proxy aziendale: git config http.proxy "" e riprova).
-   Se non esiste: git clone https://github.com/Cheic1/knowledge-base.git ~/knowledge-base
-2. Serve Node.js 20+ e git (Windows: winget install OpenJS.NodeJS.LTS / Git.Git).
-3. Esegui: node scripts/kb.mjs install
-4. Mostrami l'output e poi: node scripts/kb.mjs status
-Non cancellare nulla. Se un passo fallisce fermati e riportami l'errore esatto.
+Installa la knowledge base Cheic1/knowledge-base su questo computer.
+
+1. Capisci il sistema (Windows, Linux o macOS). Servono Node.js 20+ e git: se mancano chiedimi conferma e installali (Windows: winget install OpenJS.NodeJS.LTS / Git.Git; macOS: brew install node git; Linux: nvm install 20 e il gestore pacchetti per git).
+2. Cerca se il repo e' gia' clonato (cartella knowledge-base nella home, su altri dischi, E:\knowledge-base, /DATA/AppData/my-knowledge-base).
+   - SE ESISTE: entra nella cartella ed esegui, senza fare altro prima (niente checkout, pull o stash a mano):
+       git fetch origin
+       git show origin/main:scripts/bootstrap.mjs > <cartella temporanea>/kb-bootstrap.mjs
+       node <cartella temporanea>/kb-bootstrap.mjs
+   - SE NON ESISTE: git clone https://github.com/Cheic1/knowledge-base.git ~/knowledge-base, poi dalla cartella: node scripts/bootstrap.mjs
+   Il bootstrap porta il clone su main in modo sicuro (salva una copia di data/, il database di agentmemory, e non lo tocca), poi lancia da solo l'installazione.
+   Su un server Linux sempre acceso aggiungi in coda al comando: --role server --wiki-search
+3. Se il bootstrap si ferma con un errore, riportamelo cosi' com'e': non provare a "sistemare" con checkout -f, reset --hard, clean o cancellando cartelle.
+   - "modifiche locali a file tracciati": mostrami l'elenco e aspetta.
+   - errore di rete/proxy aziendale: git config http.proxy "" solo per questo repo e rilancia.
+   - il push chiede una password: configura Git Credential Manager o una chiave SSH e rilancia lo stesso comando (e' ripetibile).
+4. Dimmi di riavviare l'agente. Poi verifica con node scripts/kb.mjs status e prova a salvare una memoria di prova e a ritrovarla con memory_smart_search.
+
+Non cancellare nulla. Alla fine riportami: sistema, cartella del repo, percorso della copia di data/ se e' stata fatta, output di status e agenti collegati.
 ```
+
+Il diagramma delle scelte e dei casi di errore e' in [docs/flusso-installazione.md](docs/flusso-installazione.md).
 
 Le sezioni sotto restano come riferimento per installazioni a mano.
 

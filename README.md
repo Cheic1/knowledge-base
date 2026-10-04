@@ -2,9 +2,9 @@
 
 Knowledge base personale ibrida per tutti i progetti e le idee.
 
-> **Installazione su una macchina nuova:** `node scripts/kb.mjs install` installa,
-> cabla gli agenti (Claude Code, OpenCode, Hermes) e attiva l'aggiornamento
-> automatico. Dettagli e prompt da incollare in [PROMPT-INSTALL.md](PROMPT-INSTALL.md).
+> **Installazione su una macchina nuova:** `node scripts/bootstrap.mjs` porta il clone
+> su main in sicurezza e lancia `scripts/kb.mjs install`, che installa, cabla gli agenti
+> (Claude Code, OpenCode, Hermes) e attiva l'aggiornamento automatico. Dettagli e prompt da incollare in [PROMPT-INSTALL.md](PROMPT-INSTALL.md).
 
 ## 🎯 Struttura
 
