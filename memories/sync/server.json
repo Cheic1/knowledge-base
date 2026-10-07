@@ -32762,6 +32762,35 @@
    "type": "preference",
    "updatedAt": "2026-10-07T21:45:14.614Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `teldrive:/MediaTest` is mounted read-only at `/DATA/AppData/teldrive-media` by the systemd **user** unit `~/.config/systemd/user/teldrive-media.service` (linger is on; logs in `mount.log`; VFS cache full, max 10G — root disk has only ~25 GB free). Manage with `systemctl --user {status,restart} teldrive-media`.\n- Jellyfin is a compose stack at `/DATA/AppData/jellyfin/docker-compose.yml`; it sees the mount at `/teldrive` (`:ro,rslave`). Recreate with `docker compose up -d` in that dir.\n- Upload media with `./rd copy` straight to `teldrive:/MediaTest/...`, never by writing into the mount (it's read-only; writes would also go through the local VFS cache). Big uploads spend a while hashing (BLAKE3) before any bytes are sent and the stats line shows `0 B / 0 B` meanwhile — that's normal.\n- Upload tuning (tested 2026-10-08): `rclone.conf` `chunk_size = 64Mi`, `upload_concurrency = 2`, and Teldrive `config.toml` `upload-threads = 4` (was 8). With 8 threads and 256Mi chunks, parallel uploads made Telegram drop connections (\"broken pipe\" → 500): each drop re-sent a whole chunk, and later uploads kept failing even on their own until `teldrive-app` was restarted. If 500s come back, restart `teldrive-app` first.\n- Local media lives in `/DATA/AppData/Film/{Film,SerieTV}` (same dir as Jellyfin's `/Film` and the streamingcommunity-downloader's `/app/videos`).",
+   "createdAt": "2026-10-07T22:45:06.336Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyp3zf8_e4675032183d",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T22:45:06.336Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `tel",
+   "type": "preference",
+   "updatedAt": "2026-10-07T22:45:06.336Z",
+   "version": 1
   }
  ],
  "observations": {
