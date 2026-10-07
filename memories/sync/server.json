@@ -32776,7 +32776,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muyp3zf8_e4675032183d",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-07T22:45:06.336Z",
@@ -32791,6 +32791,65 @@
    "type": "preference",
    "updatedAt": "2026-10-07T22:45:06.336Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/project-teldrive-jellyfin-streaming.md]\nGoal set 2026-10-07: test streaming a film stored on Teldrive v2 through an rclone mount attached to the existing `jellyfin` container (jellyfin/jellyfin:12.1, port 8097, binds under /DATA/AppData). Start with a single test folder, upload with `./rd copy` (not rsync), separate Jellyfin library.\n**Why:** keep media off local disk (only ~25 GB free on /) and pull it only when watched.\n**How to apply:** keep VFS cache small; Teldrive server has `download-bots = 0` (bots are the main speed lever). See [[user-language-italian]].\n\nStatus 2026-10-08: test film \"Amici miei - Atto III° (1985)\" uploaded and hash-verified in teldrive:/MediaTest/Film; mount readable from Jellyfin at /teldrive/Film. Next: user creates the \"Teldrive test\" library in Jellyfin (trickplay/chapter images/realtime monitor off) and tries playback. Another Claude session (teldrive-2b) also works on this Teldrive (upload tuning, nightly backup at 03:17) — coordinate before uploads/restarts.",
+   "createdAt": "2026-10-07T23:15:07.977Z",
+   "files": [
+    "~/.claude/projects/-home-francesco-teldrive/memory/project-teldrive-jellyfin-streaming.md"
+   ],
+   "id": "mem_muyq6lmu_1c57086e36e4",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T23:15:07.977Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/project-teldri",
+   "type": "preference",
+   "updatedAt": "2026-10-07T23:15:07.977Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `teldrive:/MediaTest` is mounted read-only at `/DATA/AppData/teldrive-media` by the systemd **user** unit `~/.config/systemd/user/teldrive-media.service` (linger is on; logs in `mount.log`; VFS cache full, max 10G — root disk has only ~25 GB free). Manage with `systemctl --user {status,restart} teldrive-media`.\n- Jellyfin is a compose stack at `/DATA/AppData/jellyfin/docker-compose.yml`; it sees the mount at `/teldrive` (`:ro,rslave`). Recreate with `docker compose up -d` in that dir.\n- Upload media with `./rd copy` straight to `teldrive:/MediaTest/...`, never by writing into the mount (it's read-only; writes would also go through the local VFS cache). Big uploads spend a while hashing (BLAKE3) before any bytes are sent and the stats line shows `0 B / 0 B` meanwhile — that's normal.\n- Upload tuning (tested 2026-10-08): `rclone.conf` `chunk_size = 64Mi`, `upload_concurrency = 2`, and Teldrive `config.toml` `upload-threads = 4` (was 8). With 8 threads and 256Mi chunks, parallel uploads made Telegram drop connections (\"broken pipe\" → 500): each drop re-sent a whole chunk, and later uploads kept failing even on their own until `teldrive-app` was restarted. If 500s come back, restart `teldrive-app` first.\n- Streaming read speed (measured 2026-10-08 on the mount, cold cache, `download-bots = 0`): ~2.8 MB/s (~22 Mbit/s) sustained, ~2 s to first byte, 3–4 s per seek. Fine for 1080p web files (test film ~4.5 Mbit/s); too slow for 4K remux. Adding download bots in Teldrive is the lever for more.\n- Local media lives in `/DATA/AppData/Film/{Film,SerieTV}` (same dir as Jellyfin's `/Film` and the streamingcommunity-downloader's `/app/videos`).",
+   "createdAt": "2026-10-07T23:15:08.520Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyq6m2x_1079e4da0805",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T23:15:08.520Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muyp3zf8_e4675032183d",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muyp3zf8_e4675032183d"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `tel",
+   "type": "preference",
+   "updatedAt": "2026-10-07T23:15:08.520Z",
+   "version": 2
   }
  ],
  "observations": {
