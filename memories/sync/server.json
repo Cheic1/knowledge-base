@@ -32544,7 +32544,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muyexhyp_56a29f0f9122",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-07T18:00:07.636Z",
@@ -32573,7 +32573,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muyexi23_c677424e0a22",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-07T18:00:07.762Z",
@@ -32588,6 +32588,99 @@
    "type": "preference",
    "updatedAt": "2026-10-07T18:00:07.762Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `teldrive:/MediaTest` is mounted read-only at `/DATA/AppData/teldrive-media` by the systemd **user** unit `~/.config/systemd/user/teldrive-media.service` (linger is on; logs in `mount.log`; VFS cache full, max 10G — root disk has only ~25 GB free). Manage with `systemctl --user {status,restart} teldrive-media`.\n- Jellyfin is a compose stack at `/DATA/AppData/jellyfin/docker-compose.yml`; it sees the mount at `/teldrive` (`:ro,rslave`). Recreate with `docker compose up -d` in that dir.\n- Upload media with `./rd copy` straight to `teldrive:/MediaTest/...`, never by writing into the mount (it's read-only; writes would also go through the local VFS cache). Big uploads spend a while hashing (BLAKE3) before any bytes are sent and the stats line shows `0 B / 0 B` meanwhile — that's normal.\n- Local media lives in `/DATA/AppData/Film/{Film,SerieTV}` (same dir as Jellyfin's `/Film` and the streamingcommunity-downloader's `/app/videos`).",
+   "createdAt": "2026-10-07T18:29:17.209Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyfyzzk_839c5995f32e",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:29:17.209Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `tel",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:29:17.209Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclone args>          # always uses bin/rclone + ./rclone.conf, never ~/.config/rclone\n./rd lsf teldrive:\n./rd copy ./file teldrive:/backup/\n./rd backend trash-list teldrive:\n\n./build.sh                  # rebuild bin/rclone in golang:1.27 container (Docker required); output -> build.log\n./build-static.sh           # rebuild bin/rclone-static (CGO_ENABLED=0); appends EXIT=... to build-static.log\n```\n\nBoth build scripts end by writing `EXIT=<code>` to their log — check that line to see whether the build succeeded. If `bin/rclone` is missing, `rd` falls back to the system rclone with a warning (and that won't work against v2).\n\nTeldrive backend tests (inside the source tree, needs Go or run via the same Docker image):\n\n```bash\ncd .rclone-src && go test ./backend/teldrive/...\n```\n\nThe original end-to-end check used: `mkdir` → upload 3 MB → download → compare sha256 → `./rd check` (expect 0 differences).",
+   "createdAt": "2026-10-07T18:29:17.515Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyfz09a_d5e28f6bcdbd",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:29:17.515Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muyexhyp_56a29f0f9122",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muyexhyp_56a29f0f9122"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclon",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:29:17.515Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode 600) holds the Teldrive API key secret (key name `rclone-teldrive-progetto`, revocable in Teldrive → Settings → API keys). `backups/keys/` and the `*.v1.bak` files also contain credentials (JWT secret, upload encryption key, DB password). Don't print, copy, or commit these files.",
+   "createdAt": "2026-10-07T18:29:17.899Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyfz0qu_ffbdbb449a61",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:29:17.899Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muyexi23_c677424e0a22",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muyexi23_c677424e0a22"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode ",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:29:17.899Z",
+   "version": 2
   }
  ],
  "observations": {
