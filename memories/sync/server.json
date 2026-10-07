@@ -32735,6 +32735,33 @@
    "type": "preference",
    "updatedAt": "2026-10-07T21:20:52.893Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nIPTV chain: provider vovu (XC, cf.vovu.top, **max 1 connection**) -> Dispatcharr (container `dispatcharr`, DB via `docker exec dispatcharr psql -U dispatcharr`) -> Jellyfin (port 8097, tuner `http://dispatcharr:9191/output/m3u`, guide `http://dispatcharr:9191/output/epg`; tvg-id = Dispatcharr channel number).\n\nEPG sources in Dispatcharr (set up 2026-10-07):\n- id 3 `iptv-epg.org IT` (https://iptv-epg.org/files/epg-it.xml.gz): best, 3-7 days. BUT some channels are placeholders (\"No Data\", exactly 72 hourly progs): Primafila, Real Time, Sky Cinema Due +24, Sky Sport Uno.\n- id 2 `Epgshare` (epgshare01 IT1): ~3 days; used for Real Time (`Real.Time.it`).\n- id 1 provider xmltv: only ~1 day of guide, refreshed daily -> guide often empty. Avoid.\n- No real source found for Primafila, Disney Plus Film, Kung Fu Panda, Sky Cinema Due +24: left unmapped so Dispatcharr emits dummy blocks (a channel mapped to an EPG with 0 programs shows an EMPTY guide).\n\nPitfalls:\n- Dispatcharr CPU limit (was cpus 0.5, caused celery worker SIGKILLs during EPG parses) removed on 2026-10-07 at user request — user does not want a CPU limit on it. Memory 2G and pids 200 limits remain.\n- Testing streams: sequential only (1 connection), first probes can give false \"Connection reset by peer\".\n- After EPG changes, run Jellyfin task \"Refresh Guide\" (Live TV category).\n- Mapping backup from before the 2026-10-07 change: /DATA/AppData/arr/dispatcharr_epg_mapping_backup_2026-10-07.txt (channel_id|epg_data_id).\n\nChanges 2026-10-07 (round 2):\n- Added 21 channels (Dispatcharr ids 47-67): Canale 5 (21), Rete 4 (22), Twentyseven (23), Nove (24), Sky TG24 (25), DMAX (32), Focus (33), Sky Atlantic (1060), Sky Sport Uno/Calcio/24/MotoGP/Tennis/Arena/Max/NBA/Mix/Legend/Golf (1500, 1502-1511), Rai Sport (1512), DAZN (1520, no real EPG). Sky Sport Uno & Mix use Epgshare.\n- Jellyfin tuner URL fixed to `http://dispatcharr:9191/output/m3u` (proxied; had a stray \"? direct=true\").\n- Jellyfin caches the XMLTV in /cache/xmltv (root-owned; delete with `docker exec -u 0 jellyfin rm`) — new channels got no guide until the cache was deleted and Refresh Guide re-run.\n- Jellyfin guide categories: matching is exact, case-insensitive on <category>; defaults were English only. Set Italian lists (film/cinema; sport/calcio/motori/...; notiziario/informazione/tg/...; cartoni/animazione/...). Removed \"documentary\" from news and \"family\" from kids. Rai/La7 programs often have no category at all in the source.",
+   "createdAt": "2026-10-07T21:45:14.614Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_muymz045_2b09bd5bc812",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T21:45:14.614Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nIP",
+   "type": "preference",
+   "updatedAt": "2026-10-07T21:45:14.614Z",
+   "version": 1
   }
  ],
  "observations": {
