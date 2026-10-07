@@ -32681,6 +32681,60 @@
    "type": "preference",
    "updatedAt": "2026-10-07T18:29:17.899Z",
    "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, which EPG sources work, pitfalls (1-conn provider, CPU limit)",
+   "createdAt": "2026-10-07T21:20:52.532Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_muym3nxg_27d0d134d309",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T21:20:52.532Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-10-07T21:20:52.532Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nIPTV chain: provider vovu (XC, cf.vovu.top, **max 1 connection**) -> Dispatcharr (container `dispatcharr`, DB via `docker exec dispatcharr psql -U dispatcharr`) -> Jellyfin (port 8097, tuner `http://dispatcharr:9191/output/m3u`, guide `http://dispatcharr:9191/output/epg`; tvg-id = Dispatcharr channel number).\n\nEPG sources in Dispatcharr (set up 2026-10-07):\n- id 3 `iptv-epg.org IT` (https://iptv-epg.org/files/epg-it.xml.gz): best, 3-7 days. BUT some channels are placeholders (\"No Data\", exactly 72 hourly progs): Primafila, Real Time, Sky Cinema Due +24, Sky Sport Uno.\n- id 2 `Epgshare` (epgshare01 IT1): ~3 days; used for Real Time (`Real.Time.it`).\n- id 1 provider xmltv: only ~1 day of guide, refreshed daily -> guide often empty. Avoid.\n- No real source found for Primafila, Disney Plus Film, Kung Fu Panda, Sky Cinema Due +24: left unmapped so Dispatcharr emits dummy blocks (a channel mapped to an EPG with 0 programs shows an EMPTY guide).\n\nPitfalls:\n- Dispatcharr CPU limit (was cpus 0.5, caused celery worker SIGKILLs during EPG parses) removed on 2026-10-07 at user request — user does not want a CPU limit on it. Memory 2G and pids 200 limits remain.\n- Testing streams: sequential only (1 connection), first probes can give false \"Connection reset by peer\".\n- After EPG changes, run Jellyfin task \"Refresh Guide\" (Live TV category).\n- Mapping backup from before the 2026-10-07 change: /DATA/AppData/arr/dispatcharr_epg_mapping_backup_2026-10-07.txt (channel_id|epg_data_id).",
+   "createdAt": "2026-10-07T21:20:52.893Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_muym3o7q_0650960f33b9",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T21:20:52.893Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nIP",
+   "type": "preference",
+   "updatedAt": "2026-10-07T21:20:52.893Z",
+   "version": 1
   }
  ],
  "observations": {
