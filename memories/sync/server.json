@@ -32362,6 +32362,232 @@
    "type": "preference",
    "updatedAt": "2026-10-04T14:46:33.786Z",
    "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/MEMORY.md]\n- [Lingua: italiano](user-language-italian.md) — risponde in italiano, spesso dettato a voce\n- [Streaming Teldrive→Jellyfin](project-teldrive-jellyfin-streaming.md) — obiettivo test streaming film via rclone mount",
+   "createdAt": "2026-10-07T18:00:06.703Z",
+   "files": [
+    "~/.claude/projects/-home-francesco-teldrive/memory/MEMORY.md"
+   ],
+   "id": "mem_muyexhax_7f2b42a8cbe3",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:06.703Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/MEMORY.md]\n- [",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:06.703Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/project-teldrive-jellyfin-streaming.md]\nGoal set 2026-10-07: test streaming a film stored on Teldrive v2 through an rclone mount attached to the existing `jellyfin` container (jellyfin/jellyfin:12.1, port 8097, binds under /DATA/AppData). Start with a single test folder, upload with `./rd copy` (not rsync), separate Jellyfin library.\n**Why:** keep media off local disk (only ~25 GB free on /) and pull it only when watched.\n**How to apply:** keep VFS cache small; Teldrive server has `download-bots = 0` (bots are the main speed lever). See [[user-language-italian]].",
+   "createdAt": "2026-10-07T18:00:06.950Z",
+   "files": [
+    "~/.claude/projects/-home-francesco-teldrive/memory/project-teldrive-jellyfin-streaming.md"
+   ],
+   "id": "mem_muyexhgf_85ab3c680b9e",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:06.950Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/project-teldri",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:06.950Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/user-language-italian.md]\nThe user writes in Italian, often dictated by voice (filler words, \"rsync\" may mean rclone, \"tel drive\" = Teldrive). Reply in Italian; interpret loosely-transcribed terms.",
+   "createdAt": "2026-10-07T18:00:07.114Z",
+   "files": [
+    "~/.claude/projects/-home-francesco-teldrive/memory/user-language-italian.md"
+   ],
+   "id": "mem_muyexhk4_589fb42db0dd",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:07.114Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-home-francesco-teldrive/memory/user-language-",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:07.114Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n# CLAUDE.md\n\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.",
+   "createdAt": "2026-10-07T18:00:07.267Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyexho7_eb0132033b25",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:07.267Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n# CLAUDE.md\n\nThis file provides ",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:07.267Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## What this directory is\n\nNot an application codebase: it is an ops/workspace directory for a self-hosted **Teldrive v2** instance (Telegram-backed cloud storage) and a project-local **rclone** build that can talk to it. Detailed notes (in Italian) are in `README-RCLONE.md`.\n\nKey fact driving everything here: the system rclone (`/usr/bin/rclone`) and `ghcr.io/tgdrive/rclone:latest` ship the teldrive backend **v1** (cookie `access_token` + `/api/auth/session`), which returns 404 against Teldrive v2. v2 needs the `api_key` option (`X-Api-Key` header), which only exists on `main` of `tgdrive/rclone` (commit `5895a84`, \"feat: add teldrive v2 spec\") and has never been released. So rclone is built locally from source.",
+   "createdAt": "2026-10-07T18:00:07.374Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyexhrp_25673904ccd0",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:07.374Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## What this directory is\n\nNot a",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:07.374Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Layout\n\n- `.rclone-src/` — depth-1 git clone of `github.com/tgdrive/rclone` @ `5895a84`. The teldrive backend is in `.rclone-src/backend/teldrive/`. This is upstream rclone with its own `CLAUDE.md`/`AGENTS.md`; follow those when editing Go code there.\n- `bin/rclone` — dynamic (glibc) build, used by `./rd`.\n- `bin/rclone-static` — `CGO_ENABLED=0` build for the Teldrive Docker volume plugin, which runs on Alpine (musl) and can't execute a glibc binary.\n- `plugin-base.Dockerfile` — `FROM scratch` image containing only the static rclone at `/usr/local/bin/rclone`; the volume plugin's Dockerfile does `COPY --from=binaries /usr/local/bin/rclone`. Build it with the static binary copied/renamed to `rclone` in the build context.\n- `build-cache/` — GOCACHE + GOMODCACHE (~2.5 GB) mounted into the build container; safe to delete, rebuilds will repopulate it.\n- `backups/` — Teldrive v1 → v2 migration backups from 2026-09-21: `pg_dump` of the v1 DB, `globals` SQL, the DB trigger functions (`emit_*_event`, `notify_user_event`), raw Postgres 18 data-dir copies (root-owned), and `keys/`. Treat as irreplaceable: never modify or delete.\n- `*.v1.bak` — the old v1 `config.toml` and CasaOS `docker-compose.yml` (Teldrive app on port 8084 + `groonga/pgroonga` Postgres, data under `/DATA/AppData/teldrive/`). Reference only.",
+   "createdAt": "2026-10-07T18:00:07.505Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyexhv5_0fd33f0b25ee",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:07.505Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Layout\n\n- `.rclone-src/` — de",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:07.505Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclone args>          # always uses bin/rclone + ./rclone.conf, never ~/.config/rclone\n./rd lsf teldrive:\n./rd copy ./file teldrive:/backup/\n./rd backend trash-list teldrive:\n\n./build.sh                  # rebuild bin/rclone in golang:1.27 container (Docker required); output -> build.log\n./build-static.sh           # rebuild bin/rclone-static (CGO_ENABLED=0); appends EXIT=... to build-static.log\n```\n\nBoth build scripts end by writing `EXIT=<code>` to their log — check that line to see whether the build succeeded. If `bin/rclone` is missing, `rd` falls back to the system rclone with a warning (and that won't work against v2).\n\nTeldrive backend tests (inside the source tree, needs Go or run via the same Docker image):\n\n```bash\ncd .rclone-src && go test ./backend/teldrive/...\n```\n\nThe original end-to-end check used: `mkdir` → upload 3 MB → download → compare sha256 → `./rd check` (expect 0 differences).",
+   "createdAt": "2026-10-07T18:00:07.636Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyexhyp_56a29f0f9122",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:07.636Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclon",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:07.636Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode 600) holds the Teldrive API key secret (key name `rclone-teldrive-progetto`, revocable in Teldrive → Settings → API keys). `backups/keys/` and the `*.v1.bak` files also contain credentials (JWT secret, upload encryption key, DB password). Don't print, copy, or commit these files.",
+   "createdAt": "2026-10-07T18:00:07.762Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muyexi23_c677424e0a22",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-07T18:00:07.762Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode ",
+   "type": "preference",
+   "updatedAt": "2026-10-07T18:00:07.762Z",
+   "version": 1
   }
  ],
  "observations": {
