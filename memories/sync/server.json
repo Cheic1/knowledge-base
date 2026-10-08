@@ -33014,7 +33014,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muzvfxr7_128795691eda",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-08T18:30:07.859Z",
@@ -33029,6 +33029,38 @@
    "type": "preference",
    "updatedAt": "2026-10-08T18:30:07.859Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `teldrive:/Media` is mounted read-only at `/DATA/AppData/Media/teldrive` by the systemd **user** unit `~/.config/systemd/user/teldrive-media.service` (linger is on; logs in `mount.log`; VFS cache full, max 10G / 24h, in `~/.cache/rclone/vfs`; dir listings refresh every 10m). Manage with `systemctl --user {status,restart} teldrive-media`. Don't mount on `/DATA/AppData/Media` itself: it holds other data (music used by Jellyfin \"Musica\" and downtify).\n- Jellyfin is a compose stack at `/DATA/AppData/jellyfin/docker-compose.yml`; `/DATA/AppData/Media` is bound as `/Media:rslave`. There is no separate Teldrive library: \"Film\" = `/Film/Film` + `/Media/teldrive/Film`, \"Serie TV\" = `/Film/SerieTV` + `/Media/teldrive/SerieTV`, so items stay in the same library when they move to Teldrive. Old library configs (Film2, Teldrive, pre-change Film/Serie TV) are in `/DATA/AppData/jellyfin/library-backup-20261008/`. Recreate with `docker compose up -d` in that dir.\n- Films and series are moved nightly by `scripts/move-films.sh` (user timer `teldrive-move-films.timer`, 03:10; log `logs/move-films.log`): one folder at a time from `/DATA/AppData/Film/{Film,SerieTV}/<Name (Year)>` to `teldrive:/Media/{Film,SerieTV}/...` with `rclone move` (hash-verified, then local delete; skips files newer than 2h = downloads in progress). `scripts/nomi-teldrive.txt` maps local folder names with wrong years (the downloader uses the latest season's year) to the correct name on Teldrive; local names are left alone so new episodes keep landing in the same place. The script waits for `backup-incremental.sh` (03:17) and `backup-immich` (~03:33) to finish, holds `flock .teldrive-upload.lock` while uploading, and uses `--bwlimit \"03:10,off 08:00,1M\"`. Change speed live with `scripts/velocita-upload.sh <rate|off>` (rclone rc on 127.0.0.1:5573).\n- Manual uploads: `./rd copy` straight to `teldrive:/Media/...`, never by writing into the mount (it's read-only). Big uploads spend a while hashing (BLAKE3) before any bytes are sent and the stats line shows `0 B / 0 B` meanwhile — that's normal.\n- Upload tuning (tested 2026-10-08): `rclone.conf` `chunk_size = 64Mi`, `upload_concurrency = 2`, and Teldrive `config.toml` `upload-threads = 4` (was 8). With 8 threads and 256Mi chunks, parallel uploads made Telegram drop connections (\"broken pipe\" → 500): each drop re-sent a whole chunk, and later uploads kept failing even on their own until `teldrive-app` was restarted. If 500s come back, restart `teldrive-app` first.\n- Streaming read speed (measured 2026-10-08 on the mount, cold cache, `download-bots = 0`): ~2.8 MB/s (~22 Mbit/s) sustained, ~2 s to first byte, 3–4 s per seek. Fine for 1080p web files (test film ~4.5 Mbit/s); too slow for 4K remux. Adding download bots in Teldrive is the lever for more. Tested 2026-10-09: `download-read-parallel` 8 gave no gain over 4 (single account is the limit; reverted to 4); `download-client-pool = true` kept. Bots: user creates tokens via @BotFather and adds them in the Teldrive web UI, then set `download-bots = N` in `config.toml` and `docker restart teldrive-app` (never while `teldrive-move-films` or a backup is uploading). Measure with `./rd cat <file> --offset/--count`, which bypasses the mount's VFS cache.\n- Local media lives in `/DATA/AppData/Film/{Film,SerieTV}` (same dir as Jellyfin's `/Film` and the streamingcommunity-downloader's `/app/videos`).",
+   "createdAt": "2026-10-08T23:15:09.592Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_mv05mhii_c9e31330c71f",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-08T23:15:09.592Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muzvfxr7_128795691eda",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muzvfxr7_128795691eda"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `tel",
+   "type": "preference",
+   "updatedAt": "2026-10-08T23:15:09.592Z",
+   "version": 2
   }
  ],
  "observations": {
