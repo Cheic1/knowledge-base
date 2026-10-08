@@ -32631,7 +32631,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muyfz09a_d5e28f6bcdbd",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-07T18:29:17.515Z",
@@ -32663,7 +32663,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muyfz0qu_ffbdbb449a61",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-07T18:29:17.899Z",
@@ -32877,6 +32877,99 @@
    "type": "preference",
    "updatedAt": "2026-10-08T00:15:05.700Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Immich backup\n\n`backup-immich.sh` runs nightly at ~03:30 via the systemd user timer `backup-immich.timer`, after Immich's own DB dump at 02:00. Log: `backup-immich.log`; a run that ends OK writes `EXIT=0`. Run it by hand with `systemctl --user start backup-immich`.\n- Immich data is `/DATA/AppData/immich-app/upload`. `/DATA/AppData/Gallery/immich` is a stale copy from 2025, don't use it.\n- Photos (`library`, `upload`, `profile`; not `thumbs`/`encoded-video`) → `teldrive:/Backup/immich/current`. Deleted or overwritten files go to `old/<date>`, purged after 90 days. Immich DB dumps → `teldrive:/Backup/immich/db-dumps`. Not encrypted (user's choice).\n- After the photo upload, the script makes a `pg_dump` of the Teldrive DB (without it the Telegram data can't be rebuilt). It goes into a tarball with Teldrive `config.toml`/compose, `rclone.conf`, `backups/keys`, and Immich `.env`/compose, encrypted with gpg (passphrase in `~/.config/teldrive-backup/passphrase`). The tarball goes to `gdrive:BackUp/teldrive-server` via the gdrive remote in `~/.config/rclone/rclone.conf`, keeping 30 days. Restoring the dump needs a pgroonga Postgres 18 image.",
+   "createdAt": "2026-10-08T11:15:07.799Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muzfwit2_a8a4aeb55196",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-08T11:15:07.799Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Immich backup\n\n`backup-immich",
+   "type": "preference",
+   "updatedAt": "2026-10-08T11:15:07.799Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclone args>          # always uses bin/rclone + ./rclone.conf, never ~/.config/rclone\n./rd lsf teldrive:\n./rd copy ./file teldrive:/backup/\n./rd backend trash-list teldrive:\n\n./build.sh                  # rebuild bin/rclone in golang:1.27 container (Docker required); output -> build.log\n./build-static.sh           # rebuild bin/rclone-static (CGO_ENABLED=0); appends EXIT=... to build-static.log\n```\n\nBoth build scripts end by writing `EXIT=<code>` to their log — check that line to see whether the build succeeded. If `bin/rclone` is missing, `rd` falls back to the system rclone with a warning (and that won't work against v2).\n\nTeldrive backend tests (inside the source tree, needs Go or run via the same Docker image):\n\n```bash\ncd .rclone-src && go test ./backend/teldrive/...\n```\n\nThe original end-to-end check used: `mkdir` → upload 3 MB → download → compare sha256 → `./rd check` (expect 0 differences).",
+   "createdAt": "2026-10-08T11:15:08.094Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muzfwj38_4ca830bc7ced",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-08T11:15:08.094Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muyfz09a_d5e28f6bcdbd",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muyfz09a_d5e28f6bcdbd"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclon",
+   "type": "preference",
+   "updatedAt": "2026-10-08T11:15:08.094Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode 600) holds the Teldrive API key secret (key name `rclone-teldrive-progetto`, revocable in Teldrive → Settings → API keys). `backups/keys/` and the `*.v1.bak` files also contain credentials (JWT secret, upload encryption key, DB password). Don't print, copy, or commit these files.",
+   "createdAt": "2026-10-08T11:15:08.439Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_muzfwjdn_d1efb11c1750",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-08T11:15:08.439Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muyfz0qu_ffbdbb449a61",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muyfz0qu_ffbdbb449a61"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode ",
+   "type": "preference",
+   "updatedAt": "2026-10-08T11:15:08.439Z",
+   "version": 3
   }
  ],
  "observations": {
