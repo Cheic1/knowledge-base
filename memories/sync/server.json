@@ -32850,6 +32850,33 @@
    "type": "preference",
    "updatedAt": "2026-10-07T23:15:08.520Z",
    "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nLive TV playback tuning (2026-10-08) — why Jellyfin was slow / erroring:\n- Jellyfin opens a channel twice (probe, then ffmpeg). With Dispatcharr channel_shutdown_delay=0 the channel was torn down between them -> 503 -> Jellyfin 500. Set channel_shutdown_delay=5.\n- channel_init_grace_period: 60 left stalls hanging a minute; 10 killed valid slow starts (Dispatcharr uses the SAME threshold to abort the client, so no failover during init). Settled on 20 (observed cold starts 2.6–13 s).\n- Jellyfin tuner: ReadAtNativeFramerate=false (the -re flag delayed first HLS segments); TunerCount=0 (with 1, an aborted open leaks the tuner -> \"Unable to find host to play channel\" for ALL channels).\n- Jellyfin caches the live probe per channel in /cache/mediainfo (root-owned). Cached -> no 3 s wait + no probe (first segment ~3-10 s instead of ~10-15 s). A failed probe can be cached without codec/audio -> delete those json files. Changing the tuner URL changes channel ids (cache + favorites reset).\n- Provider limits ~4-8 Mbit/s per connection (server has ~110 Mbit/s); 4K HEVC Primafila are borderline/unreliable. Provider tolerates 2 concurrent connections and switching with 0 s gap. Start latency varies 1.7-8 s by redirect edge.\n- Added backup streams (non-HEVC \"4K/UHD\"/SD variants) to 40 channels; backup of previous channel_stream rows: /DATA/AppData/arr/dispatcharr_channelstream_backup_2026-10-08.txt. Sky Sport Legend HD stream (id 2024) has no audio -> removed, SD primary. Primafila 3 has no audio at source.\n- E2E tester script idea: POST /Items/{id}/PlaybackInfo?AutoOpenLiveStream=true with an HLS ts device profile, fetch first segment, then DELETE ActiveEncodings + POST LiveStreams/Close.",
+   "createdAt": "2026-10-08T00:15:05.700Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_muysbpmb_64363e839e69",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-08T00:15:05.700Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nLi",
+   "type": "preference",
+   "updatedAt": "2026-10-08T00:15:05.700Z",
+   "version": 1
   }
  ],
  "observations": {
