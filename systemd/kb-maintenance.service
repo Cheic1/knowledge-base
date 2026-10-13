@@ -1,0 +1,12 @@
+# Unit utente generata da scripts/install-systemd.sh (non editare la copia installata)
+# Applica i riavvii rimasti in sospeso dopo un aggiornamento (kb.mjs maintenance):
+# dipendenze nuove, unit cambiate, kb-proxy cambiato. Non fa nulla se non c'e' niente in sospeso.
+[Unit]
+Description=Knowledge Base - finestra di manutenzione (riavvii in sospeso)
+
+[Service]
+Type=oneshot
+WorkingDirectory=@REPO_DIR@
+Environment=PATH=@PATH@
+EnvironmentFile=-@REPO_DIR@/.env
+ExecStart=@NODE_BIN@ @REPO_DIR@/scripts/kb.mjs maintenance --quiet

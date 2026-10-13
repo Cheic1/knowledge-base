@@ -1,18 +1,28 @@
 # Memorie condivise tra PC
 
-Non c'è un server centrale: ogni PC fa girare il **proprio agentmemory locale** e
-`scripts/memory-sync.mjs` (solo Node, niente Python) tiene allineate le memorie passando da questo repo.
+Con il **server centrale** i PC in ruolo `client` non hanno memorie locali: leggono e
+scrivono direttamente sull'agentmemory del server, e questa sync non li riguarda.
+
+Questa pagina vale per il **server** (backup) e per i PC `standalone-dev`: ognuno fa girare il
+**proprio agentmemory locale** e `scripts/memory-sync.mjs` (solo Node) tiene allineate le
+memorie passando dal branch **orfano `kb-data`** di questo repo, mai da `main`.
 
 Il DB live (`data/state_store.db`) non va mai sincronizzato, né con git né con
 OneDrive o una share: è binario e scritto di continuo, due copie si corrompono.
 Si sincronizzano gli **export JSON**, un file per PC:
 
 ```
-memories/sync/<nome-pc>.json   ← lo scrive solo quel PC, quindi git non va mai in conflitto
+kb-data:memories/sync/<nome-pc>.json   ← lo scrive solo quel PC, quindi git non va mai in conflitto
 ```
 
-Ad ogni `sync`: `git pull` → importa dagli altri file ciò che manca o è più recente
-(per `updatedAt`) → riscrive il proprio file → commit + push solo di quel file.
+Il branch `kb-data` non ha storia in comune con `main` e contiene solo i dati. Ogni clone
+lo apre come worktree in `.kb-data/` (ignorato da git): il codice di `main` e i dati non si
+toccano mai, e `kb.mjs update` aggiorna il codice senza tirare dati. Al primo giro la sync
+crea da sola il worktree; se `kb-data` non esiste ancora sul remote lo crea, con i file
+`memories/sync/*.json` presi dall'ultima versione di `main` che li conteneva, e lo pubblica.
+
+Ad ogni `sync`: `git pull` di `kb-data` → importa dagli altri file ciò che manca o è più
+recente (per `updatedAt`) → riscrive il proprio file → commit + push solo di quel file.
 
 ## Uso
 
@@ -74,14 +84,15 @@ node scripts/schedule-memory-sync.mjs uninstall
   altri PC e a fine sessione pubblica le sue. Gli altri hook (es. plugin agentmemory)
   restano; backup in `settings.json.bak-kb-sync`.
 
-Ogni giro esegue `scripts/kb-auto-sync.mjs`: import delle memorie degli altri agenti,
+Ogni giro esegue `scripts/kb-auto-sync.mjs`: controllo aggiornamenti del codice
+(`kb.mjs update`, al massimo ogni 24 ore), import delle memorie degli altri agenti,
 poi `memory-sync`. Scrive solo nel log `~/.agentmemory/memory-sync.log`; se agentmemory
 è spento salta il giro. Le variabili (`AGENTMEMORY_SECRET`, `KB_SYNC_DIR`, ...) che lo
 scheduler non vede le legge da `.env` nella cartella del repo.
 Il PC deve poter fare `git push` senza password (chiave SSH o credential manager).
 
-Per configurare un PC nuovo da zero con un agente, vedi la sezione
-"PC autonomo" in [PROMPT-INSTALL.md](../PROMPT-INSTALL.md).
+Per configurare un PC nuovo da zero con un agente, vedi
+[PROMPT-INSTALL.md](../PROMPT-INSTALL.md) (ruolo `standalone-dev`).
 
 ## OneDrive o cartella condivisa
 
@@ -102,7 +113,7 @@ affidabilità (`scripts/memory-trust.mjs`). Lo timbra la sync al primo export e 
 viaggia col record; un PC che conosce l'autore lo passa agli altri.
 Le memorie scambiate prima di questa regola, o arrivate da un import, restano
 `sconosciuto` finché il PC autore non le rivendica al suo primo sync.
-La sync committa anche `memories/trust/votes/<nome-pc>.jsonl`, se esiste.
+La sync committa anche `kb-data:memories/trust/votes/<nome-pc>.jsonl`, se esiste.
 
 ## Memorie personali
 
@@ -114,4 +125,4 @@ resta solo sul PC dove è nata: la sync non la esporta. Per salvarne una dall'ag
 
 - Le **cancellazioni non si propagano**: un record cancellato su un PC torna dagli altri.
 - Tutti i PC devono avere **la stessa versione di agentmemory** (l'export ha un campo `version`).
-- Il contenuto delle memorie finisce nel repo: tienilo privato e non salvare segreti in memoria.
+- Il contenuto delle memorie finisce nel repo (branch `kb-data`): tienilo privato e non salvare segreti in memoria.

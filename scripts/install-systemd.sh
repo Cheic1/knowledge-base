@@ -1,7 +1,9 @@
 #!/bin/bash
 # ============================================
 # install-systemd.sh - Installa agentmemory + kb-proxy come unit
-# systemd utente con riavvio automatico (Restart=always).
+# systemd utente con riavvio automatico (Restart=always), piu' il timer
+# kb-maintenance (notturno) che applica i riavvii rimasti in sospeso
+# dopo un aggiornamento (kb.mjs maintenance).
 #
 # Uso:
 #   ./scripts/install-systemd.sh             # installa/aggiorna e avvia
@@ -15,6 +17,7 @@ set -e
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 UNIT_DIR="$HOME/.config/systemd/user"
 UNITS="kb-agentmemory.service kb-proxy.service"
+TIMER_UNITS="kb-maintenance.service kb-maintenance.timer"
 
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
 ok()   { echo -e "${GREEN}[OK]${NC} $1"; }
@@ -28,7 +31,7 @@ if ! systemctl --user show-environment > /dev/null 2>&1; then
 fi
 
 uninstall() {
-    for u in $UNITS; do
+    for u in kb-maintenance.timer $UNITS kb-maintenance.service; do
         systemctl --user disable --now "$u" > /dev/null 2>&1 || true
         rm -f "$UNIT_DIR/$u"
     done
@@ -44,7 +47,8 @@ install() {
         . "$NVM_DIR/nvm.sh"
         nvm use 20 > /dev/null 2>&1 || nvm use --lts > /dev/null 2>&1 || true
     fi
-    NODE_BIN="$(command -v node || true)"
+    # KB_NODE_BIN: lo stesso node che esegue kb.mjs
+    NODE_BIN="${KB_NODE_BIN:-$(command -v node || true)}"
     # AGENTMEMORY_BIN: la versione fissata nel repo (la passa scripts/kb.mjs)
     AM_BIN="${AGENTMEMORY_BIN:-$(command -v agentmemory || true)}"
     if [ -z "$NODE_BIN" ] || [ "$("$NODE_BIN" -v | cut -d'v' -f2 | cut -d'.' -f1)" -lt 20 ]; then
@@ -56,7 +60,11 @@ install() {
     UNIT_PATH="$(dirname "$NODE_BIN"):$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin"
 
     # Token del proxy (lo genera in .env se manca)
-    "$REPO_DIR/scripts/kb-token.sh" > /dev/null
+    "$NODE_BIN" "$REPO_DIR/scripts/kb.mjs" token > /dev/null
+
+    # Ora della finestra di manutenzione (HH:MM), da .env
+    MAINT_AT="$(sed -n 's/^[[:space:]]*KB_MAINTENANCE_AT[[:space:]]*=[[:space:]]*//p' "$REPO_DIR/.env" 2>/dev/null | tail -n 1 | tr -d "\"'")"
+    case "$MAINT_AT" in [0-2][0-9]:[0-5][0-9]) ;; *) MAINT_AT="03:00" ;; esac
 
     # Ferma eventuali processi avviati a mano (nohup)
     if ! systemctl --user is-enabled kb-proxy.service > /dev/null 2>&1; then
@@ -64,11 +72,12 @@ install() {
     fi
 
     mkdir -p "$UNIT_DIR"
-    for u in $UNITS; do
+    for u in $UNITS $TIMER_UNITS; do
         sed -e "s|@REPO_DIR@|$REPO_DIR|g" \
             -e "s|@NODE_BIN@|$NODE_BIN|g" \
             -e "s|@AGENTMEMORY_BIN@|$AM_BIN|g" \
             -e "s|@PATH@|$UNIT_PATH|g" \
+            -e "s|@MAINTENANCE_AT@|$MAINT_AT|g" \
             "$REPO_DIR/systemd/$u" > "$UNIT_DIR/$u"
         ok "$UNIT_DIR/$u"
     done
@@ -78,7 +87,8 @@ install() {
     systemctl --user enable $UNITS > /dev/null
     # shellcheck disable=SC2086
     systemctl --user restart $UNITS
-    ok "Unit abilitate e avviate"
+    systemctl --user enable --now kb-maintenance.timer > /dev/null
+    ok "Unit abilitate e avviate (manutenzione ogni giorno alle $MAINT_AT)"
 
     # Senza linger le unit utente partono solo al login, non al boot
     if [ "$(loginctl show-user "$USER" -p Linger --value 2>/dev/null)" != "yes" ]; then

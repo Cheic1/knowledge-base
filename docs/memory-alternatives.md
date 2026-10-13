@@ -163,7 +163,7 @@ poi sul PC B `run <sistema> --skip-seed`. Il recall sul PC B deve essere uguale 
 | agentmemory | metodi A, B, C sopra |
 
 **Fase 3, uso reale.** I due migliori collegati a OpenCode per una settimana ciascuno, con
-la stessa configurazione MCP di `connect-agent.sh`.
+la stessa configurazione MCP di `kb.mjs connect`.
 
 ### Prime prove già fatte (container cloud, 2026-10-02)
 

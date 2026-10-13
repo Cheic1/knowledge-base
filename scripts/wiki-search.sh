@@ -13,7 +13,7 @@
 #   ./scripts/wiki-search.sh update --no-pull
 #   ./scripts/wiki-search.sh status
 #   ./scripts/wiki-search.sh search "testo"   # prova veloce da terminale
-#   ./scripts/wiki-search.sh mcp-cmd      # stampa il comando MCP (per connect-agent.sh)
+#   ./scripts/wiki-search.sh mcp-cmd      # stampa il comando MCP (per kb.mjs connect)
 #
 # Dopo `setup`, gli hook git post-merge/post-rewrite rilanciano
 # `update --no-pull` in background a ogni pull: l'indice resta allineato.
@@ -110,7 +110,7 @@ cmd_setup() {
     echo "--- Primo indice + embedding (al primo giro scarica ~2 GB di modelli) ---"
     cmd_update --no-pull
     echo ""
-    ok "Fatto. Ora esegui ./scripts/connect-agent.sh per cablare il MCP 'wiki-search' negli agenti."
+    ok "Fatto. Ora esegui node scripts/kb.mjs connect per cablare il MCP 'wiki-search' negli agenti."
 }
 
 install_hooks() {
@@ -118,7 +118,7 @@ install_hooks() {
     hooks_dir="$(git -C "$REPO_DIR" rev-parse --git-path hooks)"
     case "$hooks_dir" in /*) ;; *) hooks_dir="$REPO_DIR/$hooks_dir" ;; esac
     mkdir -p "$hooks_dir"
-    # post-merge: git pull (merge/ff) - post-rewrite: git pull --rebase (sync.sh)
+    # post-merge: git pull (merge/ff) - post-rewrite: git pull --rebase
     for hook in post-merge post-rewrite; do
         if [ -f "$hooks_dir/$hook" ] && ! grep -q "wiki-search.sh" "$hooks_dir/$hook"; then
             warn "hook $hook esistente non nostro: aggiungi a mano 'scripts/wiki-search.sh update --no-pull --background'"
@@ -178,7 +178,7 @@ cmd_status() { require_qmd; qmd status; }
 
 cmd_search() { require_qmd; qmd search "$@"; }
 
-# Comando MCP stdio, una parola per riga (letto da connect-agent.sh)
+# Comando MCP stdio, una parola per riga (letto da kb.mjs)
 cmd_mcp_cmd() {
     require_qmd
     printf '%s\n' "$NODE22" "$QMD_BIN" mcp --index "$QMD_INDEX"

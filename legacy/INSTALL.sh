@@ -118,7 +118,7 @@ step3_installa_dipendenze() {
     
     # Installa agentmemory globalmente
     log_info "Installo agentmemory globalmente..."
-    npm install -g @agentmemory/agentmemory
+    npm install -g @agentmemory/agentmemory@0.9.29
     log_success "agentmemory installato"
     
     # Verifica installazione

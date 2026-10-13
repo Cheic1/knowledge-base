@@ -1,25 +1,34 @@
 {
-  "_note": "Configurazione MCP di riferimento. Lo script scripts/connect-agent.sh genera queste entry nei file reali di ogni agente, sostituendo l'endpoint da config/endpoint.env. Formato OpenCode: chiave 'mcp' + campo 'environment'. Formato standard (Cursor/VS Code/Hermes): 'mcpServers' + campo 'env'.",
+  "_note": "Configurazione MCP di riferimento per un PC client (ruolo client). La scrive `node scripts/kb.mjs connect --role client` nei file reali di ogni agente, con l'endpoint di config/endpoint.env e il KB_TOKEN del .env del clone. Server e standalone-dev usano invece agentmemory locale (http://127.0.0.1:3111) senza token. Formato OpenCode: chiave 'mcp' + campo 'environment'. Formato standard (Cursor/VS Code/Hermes): 'mcpServers'/'servers' + campo 'env'. llm-wiki solo con --llm-wiki.",
   "_endpoint": "vedi config/endpoint.env (KB_API_URL)",
   "opencode": {
     "mcp": {
       "agentmemory": {
         "type": "local",
-        "command": ["npx", "-y", "@agentmemory/mcp"],
+        "command": [
+          "npx",
+          "-y",
+          "@agentmemory/mcp"
+        ],
         "environment": {
-          "AGENTMEMORY_URL": "http://192.168.68.55:8311"
+          "AGENTMEMORY_URL": "http://192.168.68.55:8311",
+          "AGENTMEMORY_SECRET": "<KB_TOKEN>"
         },
         "enabled": true,
-        "timeout": 10000
+        "timeout": 30000
       },
       "llm-wiki": {
         "type": "local",
-        "command": ["node", "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
+        "command": [
+          "node",
+          "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"
+        ],
         "environment": {
-          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318"
+          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318",
+          "LLM_WIKI_API_TOKEN": "<KB_TOKEN>"
         },
         "enabled": true,
-        "timeout": 10000
+        "timeout": 30000
       }
     }
   },
@@ -27,16 +36,23 @@
     "mcpServers": {
       "agentmemory": {
         "command": "npx",
-        "args": ["-y", "@agentmemory/mcp"],
+        "args": [
+          "-y",
+          "@agentmemory/mcp"
+        ],
         "env": {
-          "AGENTMEMORY_URL": "http://192.168.68.55:8311"
+          "AGENTMEMORY_URL": "http://192.168.68.55:8311",
+          "AGENTMEMORY_SECRET": "<KB_TOKEN>"
         }
       },
       "llm-wiki": {
         "command": "node",
-        "args": ["<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
+        "args": [
+          "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"
+        ],
         "env": {
-          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318"
+          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318",
+          "LLM_WIKI_API_TOKEN": "<KB_TOKEN>"
         }
       }
     }
@@ -45,17 +61,24 @@
     "mcp_servers": {
       "agentmemory": {
         "command": "npx",
-        "args": ["-y", "@agentmemory/mcp"],
+        "args": [
+          "-y",
+          "@agentmemory/mcp"
+        ],
         "env": {
-          "AGENTMEMORY_URL": "http://192.168.68.55:8311"
+          "AGENTMEMORY_URL": "http://192.168.68.55:8311",
+          "AGENTMEMORY_SECRET": "<KB_TOKEN>"
         },
         "enabled": true
       },
       "llm-wiki": {
         "command": "node",
-        "args": ["<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
+        "args": [
+          "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"
+        ],
         "env": {
-          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318"
+          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318",
+          "LLM_WIKI_API_TOKEN": "<KB_TOKEN>"
         },
         "enabled": true
       }
@@ -66,17 +89,24 @@
       "agentmemory": {
         "type": "stdio",
         "command": "npx",
-        "args": ["-y", "@agentmemory/mcp"],
+        "args": [
+          "-y",
+          "@agentmemory/mcp"
+        ],
         "env": {
-          "AGENTMEMORY_URL": "http://192.168.68.55:8311"
+          "AGENTMEMORY_URL": "http://192.168.68.55:8311",
+          "AGENTMEMORY_SECRET": "<KB_TOKEN>"
         }
       },
       "llm-wiki": {
         "type": "stdio",
         "command": "node",
-        "args": ["<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"],
+        "args": [
+          "<REPO>/mcp/llm-wiki-mcp/dist/src/index.js"
+        ],
         "env": {
-          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318"
+          "LLM_WIKI_API_BASE_URL": "http://192.168.68.55:8318",
+          "LLM_WIKI_API_TOKEN": "<KB_TOKEN>"
         }
       }
     }
