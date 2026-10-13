@@ -9,17 +9,32 @@
 //   - browser:        apri una volta http://IP:8313/?token=<KB_TOKEN>
 //                     -> cookie HttpOnly kb_token, poi redirect all'URL pulito
 //   - KB_AUTH=off     disabilita il controllo (sconsigliato)
+//
+// Arresto (SIGTERM/SIGINT, es. systemctl restart): smette di accettare connessioni,
+// lascia finire le richieste in corso fino a KB_PROXY_GRACE_MS (default 15000), poi esce.
+// Cosi' un riavvio non tronca le risposte gia' partite.
 const http = require('http');
 const net = require('net');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const PROXY_MAP = [
+const DEFAULT_MAP = [
   { external: 8311, internal: 3111, name: 'REST API agentmemory' },
   { external: 8313, internal: 3113, name: 'Viewer agentmemory' },
   { external: 8318, internal: 19828, name: 'LLM Wiki API' },
 ];
+// KB_PROXY_MAP="esterna:interna,..." sostituisce la mappa (test, porte diverse)
+const PROXY_MAP = process.env.KB_PROXY_MAP
+  ? process.env.KB_PROXY_MAP.split(',').map((p) => {
+    const [external, internal] = p.split(':').map(Number);
+    return { external, internal, name: `porta ${external}` };
+  })
+  : DEFAULT_MAP;
+const GRACE_MS = Number(process.env.KB_PROXY_GRACE_MS || 15000);
+const servers = [];
+const tunnels = new Set(); // socket WebSocket: non sono richieste, si chiudono all'uscita
+let stopping = false;
 
 const COOKIE_NAME = 'kb_token';
 const EX_CONFIG = 78; // la unit systemd non riavvia su questo exit code
@@ -100,6 +115,8 @@ function forwardHeaders(req, intPort) {
 
 function createProxy(extPort, intPort, name) {
   const server = http.createServer((req, res) => {
+    // In arresto: la risposta chiude la connessione keep-alive, cosi' il client si ricollega altrove/dopo
+    if (stopping) res.setHeader('Connection', 'close');
     const auth = checkAuth(req);
     if (!auth.ok) {
       res.writeHead(401, { 'WWW-Authenticate': 'Bearer realm="kb"', 'Content-Type': 'text/plain' });
@@ -124,7 +141,9 @@ function createProxy(extPort, intPort, name) {
       method: req.method,
       headers: forwardHeaders(req, intPort),
     }, (proxyRes) => {
-      res.writeHead(proxyRes.statusCode, proxyRes.headers);
+      const headers = { ...proxyRes.headers };
+      if (stopping) headers.connection = 'close';
+      res.writeHead(proxyRes.statusCode, headers);
       proxyRes.pipe(res);
     });
     proxyReq.on('error', (e) => {
@@ -151,9 +170,12 @@ function createProxy(extPort, intPort, name) {
       proxySocket.pipe(socket);
       socket.pipe(proxySocket);
     });
+    tunnels.add(socket);
+    socket.on('close', () => { tunnels.delete(socket); proxySocket.destroy(); });
     proxySocket.on('error', () => socket.destroy());
   });
 
+  servers.push(server);
   server.listen(extPort, '0.0.0.0', () => {
     console.log('Proxy ' + name + ': 0.0.0.0:' + extPort + ' -> 127.0.0.1:' + intPort);
   });
@@ -165,6 +187,29 @@ function createProxy(extPort, intPort, name) {
     }
   });
 }
+
+function shutdown(signal) {
+  if (stopping) return;
+  stopping = true;
+  console.log(`${signal}: kb-proxy in arresto, attendo le richieste in corso (max ${GRACE_MS} ms)`);
+  const done = (code) => {
+    for (const t of tunnels) t.destroy();
+    process.exit(code);
+  };
+  const timer = setTimeout(() => {
+    console.warn('kb-proxy: tempo scaduto, chiudo le connessioni rimaste');
+    for (const s of servers) if (s.closeAllConnections) s.closeAllConnections();
+    done(0);
+  }, GRACE_MS);
+  timer.unref();
+  let open = servers.length;
+  for (const s of servers) {
+    s.close(() => { if (--open === 0) { clearTimeout(timer); console.log('kb-proxy: arresto pulito'); done(0); } });
+    if (s.closeIdleConnections) s.closeIdleConnections(); // keep-alive inattive: subito
+  }
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
 
 PROXY_MAP.forEach((p) => createProxy(p.external, p.internal, p.name));
 console.log('Knowledge Base reverse proxy started (kb-proxy, auth ' + (AUTH_ENABLED ? 'on' : 'off') + ')');

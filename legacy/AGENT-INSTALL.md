@@ -41,7 +41,7 @@ nvm use 20
 
 ### STEP 4: Installa agentmemory
 ```bash
-npm install -g @agentmemory/agentmemory
+npm install -g @agentmemory/agentmemory@0.9.29
 ```
 
 ### STEP 5: Configura environment

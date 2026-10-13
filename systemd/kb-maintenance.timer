@@ -1,0 +1,12 @@
+# Unit utente generata da scripts/install-systemd.sh (non editare la copia installata)
+# Finestra di manutenzione notturna: KB_MAINTENANCE_AT in .env (default 03:00) al momento
+# dell'installazione delle unit.
+[Unit]
+Description=Knowledge Base - finestra di manutenzione notturna
+
+[Timer]
+OnCalendar=*-*-* @MAINTENANCE_AT@:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

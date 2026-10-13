@@ -40,13 +40,13 @@ nano .env
 ### 3. Installa dipendenze
 ```bash
 # Agentmemory
-npm install -g @agentmemory/agentmemory
+npm install -g @agentmemory/agentmemory@0.9.29
 
 # LLM Wiki (opzionale - Desktop App)
 # Scarica da: https://github.com/nashsu/llm_wiki/releases
 
 # qmd (opzionale - ricerca semantica)
-npm install -g @tobilu/qmd
+npm install -g @tobilu/qmd@2.8.3
 ```
 
 ### 4. Inizializza Git
@@ -66,7 +66,7 @@ git push -u origin main
 
 #### Installazione globale
 ```bash
-npm install -g @agentmemory/agentmemory
+npm install -g @agentmemory/agentmemory@0.9.29
 ```
 
 #### Avvio
@@ -111,7 +111,7 @@ npm run tauri dev
 
 #### Installazione
 ```bash
-npm install -g @tobilu/qmd
+npm install -g @tobilu/qmd@2.8.3
 ```
 
 #### Primo utilizzo

@@ -3,94 +3,46 @@
 Knowledge base personale ibrida per tutti i progetti e le idee.
 
 > **Installazione su una macchina nuova:** `node scripts/bootstrap.mjs` porta il clone
-> su main in sicurezza e lancia `scripts/kb.mjs install`, che installa, cabla gli agenti
-> (Claude Code, OpenCode, Hermes) e attiva l'aggiornamento automatico. Dettagli e prompt da incollare in [PROMPT-INSTALL.md](PROMPT-INSTALL.md).
+> su main in sicurezza e lancia `scripts/kb.mjs install`, che installa secondo il ruolo
+> (`server`, `client`, `standalone-dev`), cabla gli agenti e attiva l'aggiornamento automatico. Dettagli e prompt da incollare in [PROMPT-INSTALL.md](PROMPT-INSTALL.md).
 
 ## 🎯 Struttura
 
 ```
-my-knowledge-base/
-├── wiki/                    # LLM Wiki (nashsu/llm_wiki)
-│   ├── purpose.md          # Obiettivi e scope della knowledge base
-│   ├── schema.md           # Regole strutturali
-│   ├── raw/sources/        # Documenti originali (PDF, MD, ecc.)
-│   └── wiki/               # Pagine generate dall'LLM
-├── memory/                  # agentmemory (memoria operativa)
-│   ├── observations/       # Osservazioni catturate
-│   ├── memories/           # Memorie strutturate
-│   └── sessions/           # Cronologia sessioni
-├── projects/                # Progetti specifici
-│   ├── frontend-app/
-│   ├── backend-api/
-│   └── library-common/
-├── .agentmemory/           # Config agentmemory
-├── .git/                   # Version control
-└── scripts/                # Script di utilità
+knowledge-base/
+├── config/endpoint.env      # indirizzo del server centrale (unico punto da cambiare)
+├── scripts/
+│   ├── bootstrap.mjs        # primo passo dell'installazione (ritrova/porta il clone su main)
+│   ├── kb.mjs               # install | connect | update | maintenance | token | status
+│   ├── kb-proxy.js          # proxy LAN con token (8311 API, 8313 viewer, 8318 wiki)
+│   ├── memory-sync.mjs      # export/import delle memorie sul branch kb-data
+│   └── lib/                 # moduli condivisi (env, cablaggio agenti, branch dati)
+├── systemd/                 # unit utente del server (agentmemory, kb-proxy, manutenzione)
+├── wiki/                    # LLM Wiki: schema.md, purpose.md, wiki/ (pagine)
+├── projects/                # note per progetto
+├── memories/README.md       # come funziona la sync delle memorie
+├── test/                    # node --test
+├── legacy/                  # script e guide del primo setup, non piu' usati
+└── .kb-data/                # (non in git) worktree del branch orfano kb-data: dati di sync/backup
 ```
 
-## 🧭 Due modi di usarla
+## 🧭 Ruoli delle macchine
 
-| Modo | Quando | Come |
-|------|--------|------|
-| **Server LAN** | i PC raggiungono il server di casa (192.168.68.55) | agentmemory gira solo sul server, gli agenti si collegano via `config/endpoint.env` (setup qui sotto) |
-| **PC autonomo** | nessun server raggiungibile (es. PC di lavoro) | ogni PC ha il suo agentmemory locale e le memorie si allineano via GitHub con `scripts/memory-sync.mjs` |
+| Ruolo | Quando | Come |
+|-------|--------|------|
+| **server** | la macchina sempre accesa che tiene il DB primario (oggi `192.168.68.55`, domani la VM aziendale) | agentmemory locale + kb-proxy LAN con token, unit systemd, manutenzione notturna |
+| **client** | PC che usa il server centrale | niente agentmemory locale ne' sync: gli agenti puntano a `config/endpoint.env` con `KB_TOKEN` |
+| **standalone-dev** | PC autonomo/offline (default) | agentmemory locale; memorie allineate con `scripts/memory-sync.mjs` sul branch `kb-data` |
 
-Per un **PC autonomo** basta Node 20+ e git: dai all'agente la sezione
-"💻 PC autonomo" di [`PROMPT-INSTALL.md`](PROMPT-INSTALL.md) e fa tutto lui
-(agentmemory locale, cablaggio MCP, skill di agentmemory, import delle memorie degli altri agenti, prima sync).
-Dettagli in [`memories/README.md`](memories/README.md).
+Installazione e prompt da incollare nell'agente: [`PROMPT-INSTALL.md`](PROMPT-INSTALL.md).
+Passo per passo a mano: [`docs/installazione-manuale.md`](docs/installazione-manuale.md).
+Sync delle memorie: [`memories/README.md`](memories/README.md).
 
-## 🚀 Setup rapido (server)
-
-### 1. Aggiorna Node.js (necessario)
 ```bash
-# Verifica versione
-node --version
-
-# Se < 20.0.0, aggiorna (vedi UPDATE_NODEJS.md)
-```
-
-### 2. Configura le API keys
-```bash
-cd /DATA/AppData/my-knowledge-base
-cp .env.example .env
-nano .env  # Inserisci le tue API keys
-```
-
-### 3. Inizializza Git
-```bash
-git remote add origin git@github.com:Cheic1/knowledge-base.git
-git add .
-git commit -m "Initial setup"
-git push -u origin main
-```
-
-### 4. Avvia knowledge base (server)
-```bash
-# Assicurati di usare Node.js 20+
-export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm use 20
-
-# Avvia agentmemory + kb-proxy (LAN 8311/8313/8318)
-./scripts/start-kb.sh
-
-# Verifica
-curl http://localhost:3111/agentmemory/health   # → "status":"healthy"
-```
-
-### 5. Cabla i tuoi agenti
-```bash
-./scripts/connect-agent.sh    # rileva OpenCode/Hermes/Cursor/VS Code e scrive il config MCP
-
-# Skill native di agentmemory: insegnano all'agente quando cercare/salvare in memoria
-# (connect-agent.sh le installa già; KB_SKIP_SKILLS=1 per saltarle)
-npx skills add rohitg00/agentmemory -y
-```
-
-### 6. Avvia LLM Wiki (opzionale)
-```bash
-# Scarica da: https://github.com/nashsu/llm_wiki/releases
-# Apri la cartella: /DATA/AppData/my-knowledge-base/wiki
-# API esposta dal proxy su http://<IP>:8318
+node scripts/bootstrap.mjs [--role server|client|standalone-dev]   # installa (idempotente)
+node scripts/kb.mjs status                                          # stato
+node scripts/kb.mjs connect                                         # ricabla gli agenti
+npm test                                                            # test (node --test)
 ```
 
 ## 📚 Componenti
@@ -98,94 +50,59 @@ npx skills add rohitg00/agentmemory -y
 ### LLM Wiki (Knowledge Base Strutturata)
 - **Scopo**: Knowledge base statica e ricercabile
 - **Uso**: Paper tecnologici, documentazione, note strutturate
-- **Tool**: nashsu/llm_wiki (desktop app)
-- **Sincronizzazione**: Git
+- **Tool**: nashsu/llm_wiki (desktop app), ricerca locale con qmd (`scripts/wiki-search.sh`)
+- **Sincronizzazione**: Git (`wiki/` su main)
 
 ### agentmemory (Memoria Operativa)
 - **Scopo**: Memoria automatica delle sessioni di coding
 - **Uso**: Contesto operativo, decisioni, bug trovati
-- **Tool**: agentmemory (MCP server)
-- **Sincronizzazione**: export JSON per PC in `memories/sync/` via `scripts/memory-sync.mjs`
-  (il DB live `data/` non si sincronizza mai: è binario e scritto di continuo)
+- **Tool**: agentmemory (MCP server), versione fissata in `package.json`
+- **Sincronizzazione**: export JSON per macchina sul branch orfano `kb-data`
+  (worktree `.kb-data/`), mai su `main`; il DB live `data/` non si sincronizza mai
 
-### Git (Version Control)
-- **Scopo**: Sincronizzazione tra dispositivi
-- **Uso**: Versioning, backup, collaboration
-- **Branch**: main (produzione), dev (sviluppo)
+### Git
+- `main`: solo codice e documentazione. Le macchine si aggiornano da sole con
+  `kb.mjs update` (solo fast-forward, mai con modifiche locali, al massimo ogni 24 h)
+- `kb-data`: branch orfano con i soli dati di sync/backup, scritto dagli script
 
 ## 🔌 Integrazioni
 
 ### Collegamento (endpoint unico e cambiabile)
 - **Endpoint centralizzato**: `config/endpoint.env` (`KB_API_URL`, `KB_VIEWER_URL`, `KB_WIKI_URL`)
-- **Server**: `./scripts/start-kb.sh` (agentmemory + proxy LAN 8311/8313/8318)
-- **Ogni macchina**: `./scripts/connect-agent.sh` (cabla MCP negli agenti trovati)
-- **Prompt per agenti**: `PROMPT-INSTALL.md` (blocchi copy-paste: client, PC autonomo, server)
+- **Server**: unit systemd (`scripts/install-systemd.sh`, lanciato da `kb.mjs install --role server`); `./scripts/start-kb.sh status`
+- **Ogni macchina**: `node scripts/kb.mjs connect` (cabla MCP negli agenti trovati)
 
 ### Agenti AI supportati
-- **OpenCode**: via MCP (`~/.config/opencode/opencode.json`)
-- **Hermes**: via MCP (`~/.hermes/config.yaml`, blocco `mcp_servers:`)
-- **VS Code / Cursor**: via MCP (`mcp.json`)
+- **Claude Code**: `claude mcp add` (scope utente)
+- **OpenCode**: `~/.config/opencode/opencode.json`
+- **Hermes**: `~/.hermes/config.yaml`, blocco `mcp_servers:`
+- **Cursor**: `~/.cursor/mcp.json`; **VS Code**: `mcp.json` utente
 - **Qualsiasi agente MCP**: `MCP-CONFIG.json` come riferimento
 - **Memorie native degli altri agenti** (Claude Code, Codex, Cursor, Copilot, Hermes,
   Gemini, Windsurf, Cline): importate in agentmemory con `scripts/import-agent-memories.mjs`
 
-### File di configurazione
-- `config/endpoint.env`: endpoint unico di rete
-- `AGENTS.md`: configurazione dettagliata agenti
-- `MCP-CONFIG.json`: riferimento MCP per ogni agente
-- `scripts/start-kb.sh`, `scripts/connect-agent.sh`, `scripts/sync.sh`
-- `scripts/memory-sync.mjs`: sync delle memorie tra PC (git, OneDrive o share)
-- `scripts/import-agent-memories.mjs`: import di CLAUDE.md, AGENTS.md, regole Cursor/Copilot...
-- `scripts/schedule-memory-sync.mjs`: sync automatica (Utilità di pianificazione/crontab ogni 15 min, hook di Claude Code)
-
 ## 📖 Utilizzo
 
-### 1. Aggiungi conoscenza
-```bash
-# Aggiungi documenti alla wiki
-cp paper.pdf wiki/raw/sources/
-# Avvia LLM Wiki per processare
-
-# Oppure usa agentmemory per catturare sessioni
-npx agentmemory
-```
-
-### 2. Cerca conoscenza
 ```bash
 # Via MCP (in qualsiasi agente)
 memory_smart_search "come implementare JWT"
+memory_save "Ho trovato un bug in React 18 con StrictMode"
 
-# Via LLM Wiki
-# Usa l'interfaccia desktop o MCP
-```
-
-### 3. Sincronizza
-```bash
-# Memorie agentmemory tra PC (import dagli altri PC + push del proprio file)
+# Sync manuale delle memorie (standalone-dev e server; di solito e' automatica)
 node scripts/import-agent-memories.mjs   # porta dentro CLAUDE.md, AGENTS.md, regole...
 node scripts/memory-sync.mjs             # --dry-run per vedere cosa farebbe
-node scripts/schedule-memory-sync.mjs install --every 15 --claude-hooks   # ...oppure in automatico
-
-# Wiki e progetti
-./scripts/sync.sh
-
-# Oppure manuale
-git add .
-git commit -m "Aggiornamento knowledge base"
-git push origin main
 ```
 
 ## 🔒 Sicurezza
 
-- **API keys**: mai committate (usa .env, `chmod 600 .env`)
+- **API keys e token**: mai committati (`.env`, permessi 600)
 - **Dati sensibili**: `data/` escluso da Git
 - **Accesso**: servizi su 127.0.0.1, esposti in LAN solo dal kb-proxy
-  (8311/8313/8318, rete fidata 192.168.68.0/24 — senza auth, non esporre a internet)
-- **Memorie su GitHub**: `memories/sync/*.json` contiene le memorie in chiaro: il repo
+  (8311/8313/8318) con token `KB_TOKEN`; HTTP in chiaro: non esporre a internet
+- **Memorie su GitHub**: il branch `kb-data` contiene le memorie in chiaro: il repo
   deve restare privato. L'import salta i blocchi che sembrano segreti
-- **Token agentmemory**: con `AGENTMEMORY_SECRET` impostato agentmemory accetta solo
-  richieste con quel token (gli script di sync lo leggono dalla stessa variabile)
-- **Backup**: automatico su Git privato
+- **Aggiornamento automatico**: chi puo' scrivere su `main` esegue codice su tutte le
+  macchine installate: dai accesso in scrittura solo a chi gestisce la KB
 
 ## 📝 Licenza
 

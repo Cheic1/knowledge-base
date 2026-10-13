@@ -1,31 +1,37 @@
 #!/usr/bin/env node
-// kb.mjs - Installazione unica e aggiornamento automatico della knowledge base.
+// kb.mjs - Installazione, cablaggio e aggiornamento della knowledge base. Solo Node:
+// nessun bash o Python sui PC (sul server Linux le unit systemd restano in bash).
 //
-// Un solo comando per ogni macchina (server Linux, PC Windows, PC Linux/macOS):
-//
-//   node scripts/kb.mjs install [--role server|pc] [--wiki-search] [--every 15]
-//   node scripts/kb.mjs update  [--quiet]      # lo lancia da solo la sync automatica
+//   node scripts/kb.mjs install [--role server|client|standalone-dev] [--wiki-search]
+//                               [--llm-wiki] [--every 15] [--no-schedule]
+//   node scripts/kb.mjs connect [--role ...] [--llm-wiki]   # solo cablaggio agenti (ex connect-agent.sh)
+//   node scripts/kb.mjs update  [--quiet] [--force] [--apply-now]
+//   node scripts/kb.mjs maintenance [--quiet] [--force]      # server: riavvii in sospeso
+//   node scripts/kb.mjs token [show|rotate|set VALORE|set -]  # KB_TOKEN in <repo>/.env (ex kb-token.sh)
 //   node scripts/kb.mjs status
 //
-// install (idempotente, si puo' rilanciare quando si vuole):
-//   1. porta il clone sul branch principale del remote (main) e lo aggiorna
-//   2. installa la versione di agentmemory fissata in package.json (uguale ovunque)
-//   3. avvia agentmemory in locale e lo fa ripartire da solo:
-//        server Linux -> unit systemd (scripts/install-systemd.sh, con kb-proxy e token)
-//        Windows      -> attivita' "KB agentmemory" all'accesso, senza finestre
-//        Linux/macOS  -> riga @reboot nella crontab
-//   4. cabla gli agenti trovati su agentmemory locale: Claude Code, OpenCode, Hermes
-//   5. sync delle memorie ogni N minuti + hook di Claude Code (schedule-memory-sync.mjs)
-//   6. (--wiki-search) ricerca locale sulla wiki con qmd
+// Ruoli:
+//   server          agentmemory locale = DB primario, kb-proxy sulla LAN con token, unit
+//                   systemd, backup delle memorie sul branch orfano kb-data.
+//   client          niente agentmemory locale e niente sync: gli agenti usano il server
+//                   centrale (config/endpoint.env + KB_TOKEN in .env).
+//   standalone-dev  PC sviluppatore autonomo: agentmemory locale + sync P2P delle memorie
+//                   via kb-data ogni N minuti (il vecchio ruolo "pc").
 //
-// update: git pull dal remote da cui e' stato clonato (GitHub, GitLab, ...); se il
-// codice e' cambiato riapplica solo cio' che serve. Lo chiama kb-auto-sync.mjs a ogni
-// giro, quindi ogni macchina si aggiorna da sola. Log: ~/.agentmemory/kb-update.log
+// update (lo lancia da solo kb-auto-sync.mjs, al massimo una volta ogni KB_UPDATE_HOURS ore,
+// default 24): fetch + `git merge --ff-only`. Non tocca nulla se ci sono modifiche locali a
+// file tracciati, se il clone non e' su main o se la storia locale e' divergente: lo scrive
+// nel log e salta. Sul server i riavvii dei servizi non avvengono subito: vengono segnati e
+// applicati da `maintenance` (timer notturno kb-maintenance.timer) o con --apply-now.
+// Log: ~/.agentmemory/kb-update.log
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadKbConfig, newToken, readEnvFile, setEnvVar, validToken } from './lib/env.mjs';
+import { buildServers, claudeAddArgs, LOCAL_AM_URL, mergeCursor, mergeHermes, mergeOpenCode, mergeVsCode } from './lib/agents.mjs';
+import { DATA_BRANCH, dataDir } from './lib/data-branch.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '..');
@@ -34,10 +40,11 @@ const WIN = process.platform === 'win32';
 const AM_HOME = path.join(HOME, '.agentmemory');
 const STATE_FILE = path.join(AM_HOME, 'kb-install.json');
 const UPDATE_LOG = path.join(AM_HOME, 'kb-update.log');
-const AM_URL = 'http://127.0.0.1:3111';
+const ENV_FILE = path.join(REPO, '.env');
 const AM_TASK = 'KB agentmemory';
 const AM_VBS = path.join(AM_HOME, 'kb-agentmemory.vbs');
 const CRON_MARK = '# kb-agentmemory';
+const ROLES = ['server', 'client', 'standalone-dev'];
 const PROXY_HINT = 'se sei dietro un proxy aziendale che blocca il remote prova, solo per questo repo: '
   + 'git config http.proxy ""';
 
@@ -87,8 +94,15 @@ function backupOnce(file) {
   const bak = `${file}.bak-kb`;
   if (fs.existsSync(file) && !fs.existsSync(bak)) fs.copyFileSync(file, bak);
 }
-const loadState = () => readJson(STATE_FILE, {});
+// I vecchi stati hanno role 'pc': e' il comportamento che ora si chiama standalone-dev
+const normalizeRole = (r) => (r === 'pc' ? 'standalone-dev' : r);
+function loadState() {
+  const s = readJson(STATE_FILE, {});
+  if (s.role) s.role = normalizeRole(s.role);
+  return s;
+}
 const saveState = (s) => writeJson(STATE_FILE, s);
+const kbConfig = () => loadKbConfig(REPO);
 
 // ------------------------------------------------------------------ git ---
 function defaultBranch() {
@@ -102,13 +116,33 @@ function busyGit() {
   const gd = path.join(REPO, '.git');
   return ['MERGE_HEAD', 'rebase-merge', 'rebase-apply', 'CHERRY_PICK_HEAD'].some((f) => fs.existsSync(path.join(gd, f)));
 }
+// File tracciati modificati (il worktree .kb-data e i file ignorati non contano)
+const dirtyFiles = () => git(['status', '--porcelain', '--untracked-files=no']).stdout.split('\n').filter(Boolean);
 
-// Porta il clone sul branch principale. I commit locali del branch vecchio (di solito
-// solo memories/sync/<pc>.json) vengono uniti, cosi' nessuna memoria resta indietro.
+// Aggiornamento sicuro del codice: solo fast-forward, mai rebase/autostash/reset.
+// Ritorna { ok, reason }.
+function fastForward() {
+  const main = defaultBranch();
+  if (busyGit()) return { ok: false, reason: 'git ha un merge/rebase in corso nel clone' };
+  const cur = currentBranch();
+  if (cur !== main) return { ok: false, reason: `il clone e' sul branch '${cur}', non su '${main}'` };
+  const f = git(['fetch', 'origin', main]);
+  if (f.status !== 0) return { ok: false, reason: `git fetch: ${f.out.split('\n')[0]}` };
+  const dirty = dirtyFiles();
+  if (dirty.length) {
+    return { ok: false, reason: `modifiche locali a file tracciati, non aggiorno: ${dirty.map((l) => l.slice(3)).join(', ')}` };
+  }
+  const m = git(['merge', '--ff-only', '-q', `origin/${main}`]);
+  if (m.status !== 0) return { ok: false, reason: `main locale non e' un fast-forward di origin/${main} (commit locali?): ${m.out.split('\n')[0]}` };
+  return { ok: true };
+}
+
+// Install: porta il clone sul branch principale. I commit locali del branch vecchio
+// vengono uniti, cosi' nessuna modifica resta indietro.
 function ensureMainBranch() {
   const main = defaultBranch();
   const cur = currentBranch();
-  let f = git(['fetch', 'origin']);
+  const f = git(['fetch', 'origin']);
   if (f.status !== 0) die(`git fetch: ${f.out}\n  ${PROXY_HINT}`);
   if (cur === main) return;
   log(`il clone e' sul branch '${cur}': passo a '${main}'`);
@@ -118,30 +152,15 @@ function ensureMainBranch() {
     if (sw2.status !== 0) die(`non riesco a passare a ${main}: ${sw.out}`);
   }
   git(['branch', `--set-upstream-to=origin/${main}`, main]);
-  pull(true);
+  const ff = fastForward();
+  if (!ff.ok) die(ff.reason);
   if (cur !== 'HEAD' && git(['rev-list', '--count', `${main}..${cur}`]).stdout.trim() !== '0') {
     const m = git(['merge', '--no-edit', cur]);
     if (m.status !== 0) {
       git(['merge', '--abort']);
       warn(`i commit locali di '${cur}' non si uniscono da soli a ${main}: restano su quel branch (${m.out.split('\n')[0]})`);
-    } else {
-      ok(`commit locali di '${cur}' uniti in ${main}`);
-      const p = git(['push']);
-      if (p.status !== 0) warn(`push dopo l'unione non riuscito, lo rifara' la sync: ${p.out.split('\n')[0]}`);
-    }
+    } else ok(`commit locali di '${cur}' uniti in ${main} (non pubblicati: valuta tu se fare push)`);
   }
-}
-
-function pull(strict) {
-  if (busyGit()) { if (strict) die('git ha un merge/rebase in corso nel clone: risolvilo prima'); return false; }
-  const r = git(['pull', '--rebase', '--autostash']);
-  if (r.status !== 0) {
-    git(['rebase', '--abort']);
-    if (strict) die(`git pull: ${r.out}\n  ${PROXY_HINT}`);
-    warn(`git pull non riuscito, riprovo al prossimo giro: ${r.out.split('\n')[0]}`);
-    return false;
-  }
-  return true;
 }
 
 // ---------------------------------------------------------- agentmemory ---
@@ -165,9 +184,13 @@ function npmInstall() {
   ok(`agentmemory ${installedVersion()} in node_modules`);
 }
 
-async function health() {
+// Health di agentmemory: locale, o del server centrale passando dal kb-proxy con il token
+async function health(url = LOCAL_AM_URL, token = '') {
   try {
-    const res = await fetch(`${AM_URL}/agentmemory/health`, { signal: AbortSignal.timeout(5000) });
+    const res = await fetch(`${url}/agentmemory/health`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {}, signal: AbortSignal.timeout(5000),
+    });
+    if (res.status === 401) return { unauthorized: true };
     if (!res.ok) return null;
     return await res.json();
   } catch { return null; }
@@ -203,7 +226,7 @@ function hasSystemdUser() {
 function serverService(force) {
   const bin = path.join(REPO, 'node_modules', '.bin', 'agentmemory');
   const r = run('bash', [path.join(REPO, 'scripts', 'install-systemd.sh')], {
-    env: { ...process.env, AGENTMEMORY_BIN: bin }, timeout: 5 * 60000,
+    env: { ...process.env, AGENTMEMORY_BIN: bin, KB_NODE_BIN: process.execPath }, timeout: 5 * 60000,
   });
   if (r.status !== 0) die(`install-systemd.sh:\n${r.out}`);
   ok(`agentmemory + kb-proxy come servizi systemd (riavvio automatico)${force ? ', riavviati' : ''}`);
@@ -227,6 +250,23 @@ function cronAutostart(workDir) {
   kept.push(`@reboot cd "${workDir}" && "${process.execPath}" "${amCli()}" > "${path.join(AM_HOME, 'agentmemory.log')}" 2>&1 ${CRON_MARK}`);
   const w = run('crontab', ['-'], { input: kept.join('\n') + '\n' });
   if (w.status !== 0) warn(`crontab: ${w.out}`); else ok('agentmemory riparte da solo al riavvio (crontab @reboot)');
+}
+
+// Ruolo client: agentmemory locale non deve piu' ripartire da solo (non lo si ferma:
+// potrebbe avere memorie non ancora esportate; lo dice il messaggio)
+function removeLocalAutostart() {
+  if (WIN) {
+    if (run('schtasks', ['/Query', '/TN', AM_TASK]).status === 0) {
+      run('schtasks', ['/Delete', '/F', '/TN', AM_TASK]);
+      ok(`attivita' "${AM_TASK}" rimossa: agentmemory locale non riparte piu' all'accesso`);
+    }
+    return;
+  }
+  const cur = run('crontab', ['-l']);
+  if (cur.error || cur.status !== 0 || !cur.stdout.includes(CRON_MARK)) return;
+  const kept = cur.stdout.split('\n').filter((l) => l && !l.includes(CRON_MARK));
+  run('crontab', ['-'], { input: kept.length ? kept.join('\n') + '\n' : '' });
+  ok('riga @reboot di agentmemory locale rimossa dalla crontab');
 }
 
 function startDetached(workDir) {
@@ -264,65 +304,82 @@ async function ensureAgentmemory(role, { restart = false } = {}) {
     if (!h) { log('avvio agentmemory (il primo avvio puo\' richiedere un minuto)...'); startDetached(workDir); }
   }
   h = await waitHealthy(150);
-  if (!h) die(`agentmemory non risponde su ${AM_URL}. Log: ${path.join(AM_HOME, 'agentmemory.log')}`);
-  ok(`agentmemory ${h.version || ''} attivo su ${AM_URL}`);
+  if (!h) die(`agentmemory non risponde su ${LOCAL_AM_URL}. Log: ${path.join(AM_HOME, 'agentmemory.log')}`);
+  ok(`agentmemory ${h.version || ''} attivo su ${LOCAL_AM_URL}`);
+  return h;
+}
+
+// Client: il server centrale risponde e accetta il token?
+async function checkCentral() {
+  const cfg = kbConfig();
+  if (!cfg.token) warn(`KB_TOKEN mancante in ${ENV_FILE}: chiedi il token a chi gestisce il server e aggiungi la riga KB_TOKEN=...`);
+  const h = await health(cfg.apiUrl, cfg.token);
+  if (h?.unauthorized) warn(`il server ${cfg.apiUrl} risponde 401: KB_TOKEN mancante o errato in ${ENV_FILE}`);
+  else if (!h) warn(`server centrale non raggiungibile su ${cfg.apiUrl} (config/endpoint.env): cablo lo stesso, gli agenti lo useranno quando risponde`);
+  else ok(`server centrale ${cfg.apiUrl} raggiungibile (agentmemory ${h.version || ''})`);
   return h;
 }
 
 // --------------------------------------------------------------- agenti ---
-// Comando MCP di agentmemory. Su Windows npx e' un .cmd: gli agenti lo lanciano via cmd /c
-const npxCmd = (...a) => (WIN ? ['cmd', '/c', 'npx', ...a] : ['npx', ...a]);
-function mcpServers() {
-  const servers = {
-    agentmemory: { command: npxCmd('-y', '@agentmemory/mcp'), env: { AGENTMEMORY_URL: AM_URL } },
-  };
-  const ws = wikiSearchCmd();
-  if (ws) servers['wiki-search'] = { command: ws, env: {} };
-  return servers;
+function llmWikiServer(enabled) {
+  if (!enabled) return null;
+  const dir = path.join(REPO, 'mcp', 'llm-wiki-mcp');
+  const bin = path.join(dir, 'dist', 'src', 'index.js');
+  if (!fs.existsSync(path.join(dir, 'node_modules'))) {
+    const r = run('npm', ['install', '--no-audit', '--no-fund', '--omit=dev'], { cwd: dir, timeout: 10 * 60000 });
+    if (r.status !== 0) { warn(`llm-wiki-mcp: npm install fallito, salto (${r.out.split('\n').pop()})`); return null; }
+  }
+  return fs.existsSync(bin) ? { bin, url: kbConfig().wikiUrl, node: process.execPath } : null;
+}
+
+function serversFor(role, { llmWiki = false } = {}) {
+  const cfg = kbConfig();
+  return buildServers({
+    mode: role === 'client' ? 'remote' : 'local',
+    apiUrl: cfg.apiUrl, token: cfg.token, win: WIN,
+    wikiSearch: role === 'client' ? null : wikiSearchCmd(),
+    llmWiki: llmWikiServer(llmWiki),
+  });
+}
+
+function editJson(file, merge) {
+  const cfg = readJson(file, fs.existsSync(file) ? null : {});
+  if (cfg === null) { warn(`${file} non e' JSON valido: non lo tocco`); return null; }
+  backupOnce(file);
+  writeJson(file, merge(cfg));
+  return file;
 }
 
 function wireOpenCode(servers) {
   const dir = path.join(HOME, '.config', 'opencode');
   if (!fs.existsSync(dir) && !has('opencode')) return null;
-  const file = path.join(dir, 'opencode.json');
-  const cfg = readJson(file, fs.existsSync(file) ? null : {});
-  if (cfg === null) { warn(`${file} non e' JSON valido: non lo tocco`); return null; }
-  backupOnce(file);
-  cfg.mcp ??= {};
-  for (const [name, s] of Object.entries(servers)) {
-    cfg.mcp[name] = { type: 'local', command: s.command, ...(Object.keys(s.env).length ? { environment: s.env } : {}), enabled: true, timeout: 30000 };
-  }
-  writeJson(file, cfg);
-  return file;
+  return editJson(path.join(dir, 'opencode.json'), (c) => mergeOpenCode(c, servers));
 }
 
-// YAML di Hermes: si riscrivono solo i nostri blocchi sotto mcp_servers, il resto resta com'e'
 function wireHermes(servers) {
   const file = path.join(HOME, '.hermes', 'config.yaml');
   if (!fs.existsSync(file)) return null;
   backupOnce(file);
-  const lines = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n').replace(/\n*$/, '').split('\n');
-  let top = lines.findIndex((l) => /^mcp_servers:\s*$/.test(l));
-  if (top < 0) { lines.push('', 'mcp_servers:'); top = lines.length - 1; }
-  const yq = (v) => JSON.stringify(String(v));
-  for (const [name, s] of Object.entries(servers)) {
-    const env = Object.entries(s.env);
-    const block = [`  ${name}:`, `    command: ${yq(s.command[0])}`, '    args:',
-      ...s.command.slice(1).map((a) => `      - ${yq(a)}`),
-      ...(env.length ? ['    env:', ...env.map(([k, v]) => `      ${k}: ${yq(v)}`)] : []),
-      '    enabled: true'];
-    // fine della sezione mcp_servers: prima riga non vuota e non indentata
-    let end = top + 1;
-    while (end < lines.length && (lines[end] === '' || /^\s/.test(lines[end]))) end++;
-    const at = lines.findIndex((l, i) => i > top && i < end && new RegExp(`^  ${name}:\\s*$`).test(l));
-    if (at < 0) { lines.splice(top + 1, 0, ...block); continue; }
-    let stop = at + 1;
-    while (stop < end && !/^  \S/.test(lines[stop])) stop++;
-    while (stop - 1 > at && lines[stop - 1].trim() === '') stop--; // le righe vuote restano
-    lines.splice(at, stop - at, ...block);
-  }
-  fs.writeFileSync(file, lines.join('\n') + '\n');
+  fs.writeFileSync(file, mergeHermes(fs.readFileSync(file, 'utf8'), servers));
   return file;
+}
+
+function wireCursor(servers) {
+  const dir = path.join(HOME, '.cursor');
+  if (!fs.existsSync(dir)) return null;
+  return editJson(path.join(dir, 'mcp.json'), (c) => mergeCursor(c, servers));
+}
+
+// mcp.json utente di VS Code (quello di un workspace lo gestisce chi lavora nel workspace)
+function vscodeUserDir() {
+  const cands = WIN ? [path.join(process.env.APPDATA || path.join(HOME, 'AppData', 'Roaming'), 'Code', 'User')]
+    : [path.join(HOME, '.config', 'Code', 'User'), path.join(HOME, 'Library', 'Application Support', 'Code', 'User')];
+  return cands.find((d) => fs.existsSync(d)) || null;
+}
+function wireVsCode(servers) {
+  const dir = vscodeUserDir();
+  if (!dir) return null;
+  return editJson(path.join(dir, 'mcp.json'), (c) => mergeVsCode(c, servers));
 }
 
 function wireClaude(servers) {
@@ -332,49 +389,41 @@ function wireClaude(servers) {
   }
   for (const [name, s] of Object.entries(servers)) {
     run('claude', ['mcp', 'remove', '--scope', 'user', name], { timeout: 60000 });
-    const envArgs = Object.entries(s.env).flatMap(([k, v]) => ['-e', `${k}=${v}`]);
-    // il nome prima delle opzioni: -e accetta piu' valori e si mangerebbe il nome
-    const args = ['mcp', 'add', name, '--scope', 'user', ...envArgs, '--', ...s.command];
-    const r = run('claude', WIN ? args.map((a) => (/[\s&|<>^]/.test(a) ? `"${a}"` : a)) : args, { timeout: 60000 });
+    const r = run('claude', claudeAddArgs(name, s, WIN), { timeout: 60000 });
     if (r.status !== 0) { warn(`claude mcp add ${name}: ${r.out}`); return null; }
   }
   return 'claude mcp (scope user)';
 }
 
-function wireAgents(role) {
-  const servers = mcpServers();
+function wireAgents(role, opts = {}) {
+  const servers = serversFor(role, opts);
   const done = [];
-  for (const [label, fn] of [['Claude Code', wireClaude], ['OpenCode', wireOpenCode], ['Hermes', wireHermes]]) {
+  const where = role === 'client' ? `server centrale ${kbConfig().apiUrl}` : `agentmemory locale ${LOCAL_AM_URL}`;
+  for (const [label, fn] of [['Claude Code', wireClaude], ['OpenCode', wireOpenCode], ['Hermes', wireHermes],
+    ['Cursor', wireCursor], ['VS Code', wireVsCode]]) {
     try {
-      const where = fn(servers);
-      if (where) { ok(`${label} cablato (${Object.keys(servers).join(', ')}) -> ${where}`); done.push(label); }
+      const file = fn(servers);
+      if (file) { ok(`${label} cablato su ${where} (${Object.keys(servers).join(', ')}) -> ${file}`); done.push(label); }
     } catch (e) { warn(`${label}: ${e.message}`); }
   }
-  if (!done.length) warn('nessun agente trovato (Claude Code, OpenCode, Hermes): installane uno e rilancia install');
+  if (!done.length) warn('nessun agente trovato (Claude Code, OpenCode, Hermes, Cursor, VS Code): installane uno e rilancia');
   return done;
 }
 
 function installSkills() {
+  if (process.env.KB_SKIP_SKILLS === '1') return;
   const r = run('npx', ['-y', 'skills', 'add', 'rohitg00/agentmemory', '-y'], { timeout: 5 * 60000 });
   if (r.status === 0) ok('skill di agentmemory installate negli agenti');
   else warn(`skill di agentmemory non installate (${r.out.split('\n').pop()}): non blocca nulla`);
 }
 
 // ------------------------------------------------------- ricerca wiki ---
-function gitBash() {
-  if (!WIN) return 'bash';
-  const r = run('git', ['--exec-path']);
-  const cand = r.status === 0 ? path.resolve(r.stdout.trim(), '..', '..', '..', 'bin', 'bash.exe') : '';
-  return cand && fs.existsSync(cand) ? cand : null;
-}
-
 // Su Windows wiki-search.sh stampa percorsi di Git Bash (/c/...), che gli agenti nativi
-// non capiscono: per ora la ricerca wiki si cabla solo su Linux/macOS.
+// non capiscono: la ricerca wiki si cabla solo su Linux/macOS (sui PC Windows arrivera'
+// dal server centrale via MCP HTTP, Fase 2).
 function wikiSearchCmd() {
   if (WIN) return null;
-  const bash = gitBash();
-  if (!bash) return null;
-  const r = run(bash, [path.join(REPO, 'scripts', 'wiki-search.sh'), 'mcp-cmd']);
+  const r = run('bash', [path.join(REPO, 'scripts', 'wiki-search.sh'), 'mcp-cmd']);
   if (r.status !== 0) return null;
   const lines = r.stdout.split('\n').map((l) => l.trim()).filter(Boolean);
   return lines.length ? lines : null;
@@ -382,31 +431,34 @@ function wikiSearchCmd() {
 
 function wikiSearchSetup() {
   if (WIN) { warn('ricerca wiki (qmd): su Windows non ancora supportata da kb.mjs, salto'); return; }
-  const bash = gitBash();
-  if (!bash) { warn('ricerca wiki: serve bash (Git Bash su Windows), salto'); return; }
   log('installo la ricerca locale sulla wiki (qmd, scarica i modelli al primo giro)...');
-  const r = run(bash, [path.join(REPO, 'scripts', 'wiki-search.sh'), 'setup'], { timeout: 30 * 60000 });
+  const r = run('bash', [path.join(REPO, 'scripts', 'wiki-search.sh'), 'setup'], { timeout: 30 * 60000 });
   if (r.status === 0) ok('ricerca wiki (qmd) pronta');
   else warn(`ricerca wiki non installata, il resto funziona lo stesso:\n${r.out.split('\n').slice(-6).join('\n')}`);
 }
 
-// -------------------------------------------------------- sync memorie ---
-function scheduleSync(every) {
-  const args = [path.join(HERE, 'schedule-memory-sync.mjs'), 'install', '--every', String(every)];
-  const claude = has('claude') || fs.existsSync(path.join(HOME, '.claude'));
+// -------------------------------------------------- pianificazione ---
+// server/standalone-dev: sync memorie + aggiornamento ogni N minuti (+ hook Claude Code).
+// client: solo l'aggiornamento del codice (kb-auto-sync.mjs salta la sync), niente hook.
+function scheduleSync(role, every) {
+  const sched = path.join(HERE, 'schedule-memory-sync.mjs');
+  const args = [sched, 'install', '--every', String(every)];
+  const claude = role !== 'client' && (has('claude') || fs.existsSync(path.join(HOME, '.claude')));
+  if (role === 'client') run(process.execPath, [sched, 'uninstall']); // toglie anche gli hook di sync
   if (claude) args.push('--claude-hooks');
   if (!WIN && run('crontab', ['-l']).error) {
-    if (!claude) { warn('crontab non disponibile: niente sync/aggiornamento automatici su questa macchina'); return; }
+    if (!claude) { warn('crontab non disponibile: niente aggiornamento automatico su questa macchina'); return; }
     warn('crontab non disponibile: sync e aggiornamento solo a ogni sessione di Claude Code');
     args.push('--no-schedule');
   }
   const r = run(process.execPath, args);
-  if (r.status !== 0) warn(`sync automatica non installata: ${r.out}`);
-  else ok(`sync memorie + aggiornamento automatico${args.includes('--no-schedule') ? '' : ` ogni ${every} minuti`}${claude ? ' e a ogni sessione di Claude Code' : ''}`);
+  if (r.status !== 0) { warn(`pianificazione non installata: ${r.out}`); return; }
+  const what = role === 'client' ? 'controllo aggiornamenti' : 'sync memorie + controllo aggiornamenti';
+  ok(`${what}${args.includes('--no-schedule') ? '' : ` ogni ${every} minuti`}${claude ? ' e a ogni sessione di Claude Code' : ''}`);
 }
 
 function firstSync() {
-  log('prima sync delle memorie (import dagli altri agenti, poi pull/push)...');
+  log(`prima sync delle memorie (import dagli altri agenti, poi pull/push sul branch ${DATA_BRANCH})...`);
   const imp = run(process.execPath, [path.join(HERE, 'import-agent-memories.mjs')], { timeout: 10 * 60000 });
   if (imp.status !== 0) warn(`import memorie degli agenti: ${imp.out.split('\n').pop()}`);
   const s = run(process.execPath, [path.join(HERE, 'memory-sync.mjs')], { timeout: 10 * 60000 });
@@ -416,10 +468,10 @@ function firstSync() {
 
 // ---------------------------------------------------------------- ruolo ---
 function detectRole(state, flag) {
-  if (flag) return flag;
+  if (flag) return normalizeRole(flag);
   if (state.role) return state.role;
   if (process.platform === 'linux' && (REPO.startsWith('/DATA/AppData') || fs.existsSync(path.join(HOME, '.config', 'systemd', 'user', 'kb-proxy.service')))) return 'server';
-  return 'pc';
+  return 'standalone-dev';
 }
 
 function checkPrereq() {
@@ -430,6 +482,11 @@ function checkPrereq() {
   if (git(['remote', 'get-url', 'origin']).status !== 0) die('il clone non ha il remote "origin"');
 }
 
+function updateIntervalHours() {
+  const v = Number(process.env.KB_UPDATE_HOURS || readEnvFile(ENV_FILE).KB_UPDATE_HOURS || 24);
+  return Number.isFinite(v) && v >= 0 ? v : 24;
+}
+
 // ------------------------------------------------------------- comandi ---
 async function install(opt) {
   checkPrereq();
@@ -438,88 +495,205 @@ async function install(opt) {
   const remote = git(['remote', 'get-url', 'origin']).stdout.trim();
   log(`installazione: ruolo ${role}, repo ${REPO}, remote ${remote}`);
   ensureMainBranch();
-  pull(true);
-  npmInstall();
-  await ensureAgentmemory(role);
+  const ff = fastForward();
+  if (!ff.ok) die(ff.reason);
+  const base = { ...state, role, repo: REPO, every: opt.every, wikiSearch: false, llmWiki: opt.llmWiki || Boolean(state.llmWiki),
+    appliedCommit: head(), installedAt: new Date().toISOString(), completed: false, pendingRestart: false };
+  if (role === 'client') {
+    removeLocalAutostart();
+    await checkCentral();
+    delete base.agentmemory;
+  } else {
+    npmInstall();
+    await ensureAgentmemory(role);
+    base.agentmemory = pinnedVersion();
+  }
   // Stato subito, poi a ogni tappa: se l'installazione viene interrotta (timeout
   // dell'agente, rete) `status` lo dice e il rilancio riprende da qui.
-  const base = { ...state, role, every: opt.every, wikiSearch: false, appliedCommit: head(),
-    agentmemory: pinnedVersion(), installedAt: new Date().toISOString(), completed: false };
   saveState(base);
-  const agents = wireAgents(role);
+  const agents = wireAgents(role, { llmWiki: base.llmWiki });
   installSkills();
-  scheduleSync(opt.every);
-  firstSync();
+  if (opt.schedule) scheduleSync(role, opt.every);
+  if (role !== 'client') firstSync();
   saveState({ ...base, agents, completed: true });
   log('');
   log('FATTO. Riavvia gli agenti cablati per caricare gli strumenti MCP.');
   log('Da qui in poi la macchina si aggiorna da sola: non serve rilanciare nulla.');
   // Per ultima, perche' scarica fino a ~2 GB di modelli e puo' durare molti minuti:
   // se l'agente la interrompe, tutto il resto e' gia' a posto.
-  if (opt.wikiSearch) {
+  if (opt.wikiSearch && role !== 'client') {
     wikiSearchSetup();
-    const again = wireAgents(role); // ora c'e' anche wiki-search
+    const again = wireAgents(role, { llmWiki: base.llmWiki }); // ora c'e' anche wiki-search
     saveState({ ...base, agents: again, completed: true, wikiSearch: Boolean(wikiSearchCmd()) });
   }
 }
 
-// Chiamato dalla sync automatica: aggiorna il clone e riapplica cio' che e' cambiato
-async function update() {
+// Solo cablaggio degli agenti (sostituisce connect-agent.sh)
+async function connect(opt) {
   const state = loadState();
+  const role = detectRole(state, opt.role);
+  const llmWiki = opt.llmWiki || Boolean(state.llmWiki);
+  log(`cablaggio agenti: ruolo ${role}${role === 'client' ? `, server ${kbConfig().apiUrl}` : ''}`);
+  if (role === 'client') await checkCentral();
+  const agents = wireAgents(role, { llmWiki });
+  installSkills();
+  if (state.appliedCommit) saveState({ ...state, agents, llmWiki });
+  log('Riavvia gli agenti cablati per caricare gli strumenti MCP.');
+}
+
+// File che, se cambiano, richiedono di riavviare i servizi del server
+const RESTART_RE = /^package\.json$|^systemd\/|^scripts\/(install-systemd\.sh|kb-proxy\.js)$/;
+
+// Chiamato dalla sync automatica: aggiorna il clone (solo fast-forward) e riapplica cio' che e' cambiato
+async function update(opt) {
+  let state = loadState();
   if (!state.appliedCommit) { log('kb.mjs install non ancora eseguito su questa macchina: salto'); return; }
+  const hours = updateIntervalHours();
+  const last = Date.parse(state.lastUpdateCheck || '') || 0;
+  if (!opt.force && !process.env.KB_REEXEC && Date.now() - last < hours * 3600e3) {
+    if (opt.applyNow && state.pendingRestart) await maintenance({ force: true });
+    return;
+  }
+  state = { ...state, lastUpdateCheck: new Date().toISOString() };
+  saveState(state);
   const before = head();
-  if (!pull(false)) return;
+  const ff = fastForward();
+  if (!ff.ok) { warn(`aggiornamento saltato: ${ff.reason}`); return; }
   const now = head();
-  if (now === state.appliedCommit) return;
+  if (now !== before) log(`aggiornato ${before.slice(0, 7)} -> ${now.slice(0, 7)}`);
+  if (now === state.appliedCommit) {
+    if (opt.applyNow && state.pendingRestart) await maintenance({ force: true });
+    return;
+  }
   const changed = git(['diff', '--name-only', state.appliedCommit, now]).stdout.split('\n').filter(Boolean);
-  log(`aggiornato ${before.slice(0, 7)} -> ${now.slice(0, 7)} (${changed.length} file cambiati)`);
+  log(`${changed.length} file cambiati da ${state.appliedCommit.slice(0, 7)}`);
   const touched = (re) => changed.some((f) => re.test(f));
-  if (touched(/^scripts\/kb\.mjs$/) && !process.env.KB_REEXEC) {
+  if (touched(/^scripts\/kb\.mjs$|^scripts\/lib\//) && !process.env.KB_REEXEC) {
     // questo processo ha in memoria il kb.mjs vecchio: applica con quello nuovo
-    const r = spawnSync(process.execPath, [fileURLToPath(import.meta.url), 'update', '--quiet'], {
-      env: { ...process.env, KB_REEXEC: '1' }, stdio: 'ignore', windowsHide: true, timeout: 20 * 60000,
+    const args = [fileURLToPath(import.meta.url), 'update', ...(QUIET ? ['--quiet'] : []), ...(opt.applyNow ? ['--apply-now'] : [])];
+    const r = spawnSync(process.execPath, args, {
+      env: { ...process.env, KB_REEXEC: '1' }, stdio: QUIET ? 'ignore' : 'inherit', windowsHide: true, timeout: 20 * 60000,
     });
     process.exit(r.status ?? 1);
   }
-  if (touched(/^package\.json$/)) npmInstall();
-  if (touched(/^package\.json$|^systemd\/|^scripts\/(install-systemd\.sh|kb-proxy\.js)$/)) {
-    await ensureAgentmemory(state.role, { restart: state.role === 'server' });
+  let pendingRestart = Boolean(state.pendingRestart);
+  let applyNow = opt.applyNow;
+  if (state.role === 'server') {
+    if (touched(RESTART_RE)) {
+      pendingRestart = true;
+      if (hasSystemdUser() && run('systemctl', ['--user', 'is-enabled', 'kb-maintenance.timer']).status !== 0) {
+        // server installato prima del timer: nessuno applicherebbe il riavvio, lo si fa ora (una volta)
+        log('timer di manutenzione non ancora installato: applico subito (lo installa install-systemd.sh)');
+        applyNow = true;
+      } else log('servizi da riavviare: lo fa la finestra di manutenzione (kb-maintenance.timer) o `kb.mjs update --apply-now`');
+    }
+  } else if (state.role === 'standalone-dev') {
+    if (touched(/^package\.json$/)) npmInstall();
+    if (touched(RESTART_RE)) await ensureAgentmemory(state.role, { restart: false });
   }
-  if (touched(/^scripts\/(kb\.mjs|wiki-search\.sh)$|^mcp\//)) wireAgents(state.role);
-  if (touched(/^scripts\/(kb\.mjs|schedule-memory-sync\.mjs|kb-auto-sync\.mjs)$/)) scheduleSync(state.every || 15);
-  saveState({ ...state, appliedCommit: now, agentmemory: pinnedVersion(), updatedAt: new Date().toISOString() });
+  if (touched(/^scripts\/(kb\.mjs|wiki-search\.sh)$|^scripts\/lib\/|^mcp\/|^config\/endpoint\.env$/)) wireAgents(state.role, { llmWiki: state.llmWiki });
+  if (touched(/^scripts\/(kb\.mjs|schedule-memory-sync\.mjs|kb-auto-sync\.mjs)$/)) scheduleSync(state.role, state.every || 15);
+  state = { ...state, repo: REPO, appliedCommit: now, updatedAt: new Date().toISOString(), pendingRestart };
+  if (state.role !== 'client') state.agentmemory = pinnedVersion();
+  saveState(state);
   log('aggiornamento applicato');
+  if (applyNow && pendingRestart) await maintenance({ force: true });
+}
+
+// Server: applica i riavvii in sospeso (dipendenze nuove, unit, kb-proxy). Lo lancia il
+// timer notturno kb-maintenance.timer; kb-proxy svuota le richieste in corso prima di uscire.
+async function maintenance(opt) {
+  const state = loadState();
+  if (state.role !== 'server') { log('maintenance serve solo sul server: niente da fare'); return; }
+  if (!state.pendingRestart && !opt.force) { log('nessun riavvio in sospeso'); return; }
+  log('manutenzione: dipendenze e riavvio dei servizi');
+  npmInstall();
+  await ensureAgentmemory('server', { restart: true });
+  saveState({ ...loadState(), pendingRestart: false, maintenanceAt: new Date().toISOString(), agentmemory: pinnedVersion() });
+  ok('manutenzione completata');
+}
+
+// KB_TOKEN del kb-proxy in <repo>/.env (sostituisce kb-token.sh)
+async function token(args) {
+  const [sub = 'show', value] = args;
+  const cur = readEnvFile(ENV_FILE).KB_TOKEN || '';
+  const comment = 'Token condiviso kb-proxy (node scripts/kb.mjs token)';
+  if (sub === 'show') {
+    if (cur) { console.log(cur); return; }
+    const t = newToken();
+    setEnvVar(ENV_FILE, 'KB_TOKEN', t, comment);
+    console.error(`Nuovo KB_TOKEN generato in ${ENV_FILE}`);
+    console.log(t);
+  } else if (sub === 'rotate') {
+    const t = newToken();
+    setEnvVar(ENV_FILE, 'KB_TOKEN', t, comment);
+    console.error(`KB_TOKEN ruotato in ${ENV_FILE}: riavvia kb-proxy e aggiorna KB_TOKEN nei .env dei client`);
+    console.log(t);
+  } else if (sub === 'set') {
+    let t = value || '';
+    if (t === '-') t = fs.readFileSync(0, 'utf8').split(/\r?\n/)[0];
+    t = t.trim();
+    if (!t) die('Uso: kb.mjs token set VALORE (oppure: echo VALORE | kb.mjs token set -)');
+    if (!validToken(t)) die('token non valido: usa solo lettere, cifre e . _ ~ + = -');
+    if (t.length < 12) console.error(`ATTENZIONE: token corto (${t.length} caratteri): facile da indovinare, va bene solo in rete fidata`);
+    setEnvVar(ENV_FILE, 'KB_TOKEN', t, comment);
+    console.error(`KB_TOKEN impostato in ${ENV_FILE}: riavvia kb-proxy (systemctl --user restart kb-proxy)`);
+  } else die('Uso: kb.mjs token {show|rotate|set VALORE}');
 }
 
 async function status() {
   const state = loadState();
   const main = defaultBranch();
-  git(['fetch', 'origin']);
+  const cfg = kbConfig();
+  const fetched = git(['fetch', 'origin', main]).status === 0;
   const behind = git(['rev-list', '--count', `HEAD..origin/${main}`]).stdout.trim();
-  const h = await health();
-  console.log(`repo:        ${REPO}`);
-  console.log(`remote:      ${git(['remote', 'get-url', 'origin']).stdout.trim()}`);
-  console.log(`branch:      ${currentBranch()} (${behind === '0' ? 'aggiornato' : `${behind} commit indietro rispetto a origin/${main}`})`);
-  console.log(`ruolo:       ${state.role ? `${state.role}${state.completed === false ? ' (INSTALLAZIONE INCOMPLETA: rilancia bootstrap.mjs)' : ''}` : 'non installato (kb.mjs install non e\' arrivato in fondo)'}`);
-  console.log(`agentmemory: ${h ? `attivo, ${h.version}` : 'NON risponde'} (repo vuole ${pinnedVersion()})`);
-  console.log(`agenti:      ${(state.agents || []).join(', ') || '-'}`);
-  console.log(`installato:  ${state.installedAt || '-'}   ultimo aggiornamento: ${state.updatedAt || '-'}`);
-  console.log(`log:         ${UPDATE_LOG}, ${path.join(AM_HOME, 'memory-sync.log')}`);
+  const dirty = dirtyFiles();
+  const role = state.role;
+  const line = (k, v) => console.log(`${`${k}:`.padEnd(14)}${v}`);
+  line('repo', REPO);
+  line('remote', git(['remote', 'get-url', 'origin']).stdout.trim());
+  line('branch', `${currentBranch()} (${!fetched ? 'remote non raggiungibile' : behind === '0' ? 'aggiornato' : `${behind} commit indietro rispetto a origin/${main}`})`
+    + `${dirty.length ? `, ${dirty.length} file tracciati modificati: l'aggiornamento automatico e' fermo` : ''}`);
+  line('ruolo', role ? `${role}${state.completed === false ? ' (INSTALLAZIONE INCOMPLETA: rilancia bootstrap.mjs)' : ''}` : 'non installato (kb.mjs install non e\' arrivato in fondo)');
+  if (role === 'client') {
+    const h = await health(cfg.apiUrl, cfg.token);
+    line('server', `${cfg.apiUrl} -> ${h?.unauthorized ? '401: KB_TOKEN mancante o errato' : h ? `attivo, agentmemory ${h.version || ''}` : 'NON raggiungibile'}`);
+    line('token', cfg.token ? `presente in ${ENV_FILE}` : `MANCANTE (KB_TOKEN in ${ENV_FILE})`);
+  } else {
+    const h = await health();
+    line('agentmemory', `${h ? `attivo, ${h.version}` : 'NON risponde'} su ${LOCAL_AM_URL} (repo vuole ${pinnedVersion()})`);
+    const dd = dataDir(REPO);
+    line('dati sync', fs.existsSync(path.join(dd, '.git')) ? `${dd} (branch ${DATA_BRANCH})` : `worktree ${DATA_BRANCH} non ancora creato (lo crea la prima sync)`);
+  }
+  if (role === 'server') line('manutenzione', state.pendingRestart ? 'riavvio dei servizi IN SOSPESO (kb-maintenance.timer o kb.mjs update --apply-now)' : `nessun riavvio in sospeso${state.maintenanceAt ? `, ultima ${state.maintenanceAt}` : ''}`);
+  line('agenti', (state.agents || []).join(', ') || '-');
+  line('installato', state.installedAt || '-');
+  line('aggiornato', `${state.updatedAt || '-'}   ultimo controllo: ${state.lastUpdateCheck || '-'} (ogni ${updateIntervalHours()} h)`);
+  line('log', `${UPDATE_LOG}${role === 'client' ? '' : `, ${path.join(AM_HOME, 'memory-sync.log')}`}`);
   run(process.execPath, [path.join(HERE, 'schedule-memory-sync.mjs'), 'status'], { shell: false }).out.split('\n').forEach((l) => console.log(l));
 }
 
 const [cmd = 'status', ...rest] = process.argv.slice(2);
-const opt = { role: null, every: 15, wikiSearch: false };
+const opt = { role: null, every: 15, wikiSearch: false, llmWiki: false, schedule: true, force: false, applyNow: false };
+const positional = [];
 for (let i = 0; i < rest.length; i++) {
   if (rest[i] === '--role') opt.role = rest[++i];
   else if (rest[i] === '--every') opt.every = Number(rest[++i]);
   else if (rest[i] === '--wiki-search') opt.wikiSearch = true;
+  else if (rest[i] === '--llm-wiki') opt.llmWiki = true;
+  else if (rest[i] === '--no-schedule') opt.schedule = false;
+  else if (rest[i] === '--force') opt.force = true;
+  else if (rest[i] === '--apply-now') opt.applyNow = true;
   else if (rest[i] === '--quiet') QUIET = true;
+  else if (cmd === 'token' && !rest[i].startsWith('--')) positional.push(rest[i]);
   else die(`argomento sconosciuto: ${rest[i]}`);
 }
-if (opt.role && !['server', 'pc'].includes(opt.role)) die('--role vuole server o pc');
+if (opt.role && !ROLES.includes(normalizeRole(opt.role))) die(`--role vuole ${ROLES.join(' | ')}`);
 
 if (cmd === 'install') await install(opt);
-else if (cmd === 'update') await update();
+else if (cmd === 'connect') await connect(opt);
+else if (cmd === 'update') await update(opt);
+else if (cmd === 'maintenance') await maintenance(opt);
+else if (cmd === 'token') await token(positional);
 else if (cmd === 'status') await status();
-else die(`comando sconosciuto: ${cmd} (install | update | status)`);
+else die(`comando sconosciuto: ${cmd} (install | connect | update | maintenance | token | status)`);

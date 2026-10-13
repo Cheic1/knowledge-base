@@ -115,6 +115,9 @@ desktop.ini
 # *.png filter=lfs diff=lfs merge=lfs -text
 # *.jpg filter=lfs diff=lfs merge=lfs -text
 # *.mp4 filter=lfs diff=lfs merge=lfs -text
-# memory-sync (scripts/memory-sync.py)
+# memory-sync (scripts/memory-sync.mjs)
 .memory-sync.lock
 memories/sync/*.tmp
+# I dati di sync stanno sul branch orfano kb-data, aperto in .kb-data/ (mai su main)
+.kb-data/
+memories/sync/*.json

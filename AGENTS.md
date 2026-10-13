@@ -7,12 +7,13 @@ Questa knowledge base si integra con diversi agenti AI tramite **MCP (Model Cont
 ## 🔌 Configurazione per agente
 
 > ⚡ **Cablaggio automatico**: invece di editare i file a mano, esegui
-> `./scripts/connect-agent.sh` — legge l'endpoint da `config/endpoint.env`
-> e configura MCP in OpenCode, Hermes, Cursor e VS Code trovati sulla macchina.
-> Il token del proxy (`KB_TOKEN`) lo prende da `<repo>/.env`: sul server
-> stampalo con `./scripts/kb-token.sh`, sui PC client aggiungi la riga
-> `KB_TOKEN=...` al `.env` del clone prima di lanciare lo script.
-> I blocchi sotto sono il riferimento di cosa scrive lo script.
+> `node scripts/kb.mjs connect` (solo Node, niente bash/Python) — configura MCP in
+> Claude Code, OpenCode, Hermes, Cursor e VS Code trovati sulla macchina, secondo il
+> ruolo dell'installazione (`server`, `client`, `standalone-dev`, vedi PROMPT-INSTALL.md).
+> Con `--role client` usa l'endpoint di `config/endpoint.env` e il token del proxy
+> (`KB_TOKEN`) da `<repo>/.env`: sul server stampalo con `node scripts/kb.mjs token`,
+> sui PC client aggiungi la riga `KB_TOKEN=...` al `.env` del clone.
+> I blocchi sotto sono il riferimento di cosa scrive per un client.
 
 ### OpenCode
 Aggiungi al file `~/.config/opencode/opencode.json` (nota: il campo env si chiama `environment`):
@@ -45,7 +46,8 @@ Aggiungi al file `~/.config/opencode/opencode.json` (nota: il campo env si chiam
 ```
 
 L'endpoint (`KB_API_URL`, `KB_WIKI_URL`) è centralizzato in `config/endpoint.env`:
-cambialo lì e riesegui `scripts/connect-agent.sh` su ogni macchina.
+cambialo lì e riesegui `node scripts/kb.mjs connect` su ogni macchina (passare dal server
+di casa alla VM aziendale è solo un cambio di questo file).
 
 ### VS Code / Cursor
 Cursor: `~/.cursor/mcp.json` — VS Code: `.vscode/mcp.json`:
@@ -128,7 +130,7 @@ push di `wiki/`; gli altri PC fanno pull e cercano con wiki-search, in sola lett
 
 ```bash
 ./scripts/wiki-search.sh setup     # una volta per PC: Node 22+, installa qmd, indice, hook git
-./scripts/connect-agent.sh         # aggiunge il MCP "wiki-search" agli agenti
+node scripts/kb.mjs connect       # aggiunge il MCP "wiki-search" agli agenti
 ./scripts/wiki-search.sh search "docker"   # prova da terminale
 ```
 Dopo ogni `git pull` l'indice si aggiorna da solo in background (hook git,
@@ -167,7 +169,7 @@ script non riesce: `sudo loginctl enable-linger $USER`). Una volta installate,
 # Locale
 curl http://127.0.0.1:3111/agentmemory/health     # → "status":"healthy"
 # Remoto (LAN)
-curl -H "Authorization: Bearer $(./scripts/kb-token.sh)" \
+curl -H "Authorization: Bearer $(node scripts/kb.mjs token)" \
   http://192.168.68.55:8311/agentmemory/health   # → "status":"healthy"
 # Senza token il proxy risponde 401
 curl -o /dev/null -w "%{http_code}\n" http://192.168.68.55:8311/agentmemory/health
@@ -205,7 +207,7 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 
 - **Accesso LAN**: servizi in ascolto su 127.0.0.1, esposti solo dal
   kb-proxy su 8311/8313/8318 (rete 192.168.68.0/24) con **token condiviso**
-  `KB_TOKEN` in `.env` (`./scripts/kb-token.sh`, `rotate` per cambiarlo).
+  `KB_TOKEN` in `.env` (`node scripts/kb.mjs token`, `token rotate` per cambiarlo).
   Client: `Authorization: Bearer <KB_TOKEN>`; browser: `?token=` una volta.
   Il traffico è HTTP in chiaro: resta comunque in rete fidata, non esporre
   l'host a internet. `KB_AUTH=off` disattiva il controllo (sconsigliato)
@@ -217,7 +219,8 @@ memory_save "Ho trovato un bug in React 18 con StrictMode"
 
 | Da dove | Cosa fa l'agente |
 |---------|------------------|
-| **Server** (OpenCode, Hermes) | `./scripts/connect-agent.sh` → cabla MCP a `localhost` via endpoint |
-| **PC client** (OpenCode) | clone repo + `./scripts/connect-agent.sh` → cabla MCP a `192.168.68.55:8311` |
-| Cambio endpoint | modifica `config/endpoint.env` + riesegui `connect-agent.sh` ovunque |
-| Cambio token | `./scripts/kb-token.sh rotate` sul server, riavvia kb-proxy, aggiorna `KB_TOKEN` nei `.env` client + `connect-agent.sh` |
+| **Server** (OpenCode, Hermes) | `node scripts/kb.mjs install --role server` → cabla MCP all'agentmemory locale |
+| **PC client** | clone repo + `KB_TOKEN` in `.env` + `node scripts/kb.mjs install --role client` → cabla MCP al server di `config/endpoint.env` |
+| **PC autonomo** | `node scripts/kb.mjs install` (`standalone-dev`) → agentmemory locale + sync sul branch `kb-data` |
+| Cambio endpoint | modifica `config/endpoint.env` + `node scripts/kb.mjs connect` ovunque |
+| Cambio token | `node scripts/kb.mjs token rotate` sul server, riavvia kb-proxy, aggiorna `KB_TOKEN` nei `.env` client + `node scripts/kb.mjs connect` |

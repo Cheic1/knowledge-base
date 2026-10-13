@@ -86,9 +86,9 @@ start_all() {
     echo "  Wiki API: http://$IP:8318  (serve l'app llm_wiki attiva)"
     echo "  Locale:   http://127.0.0.1:3111/agentmemory/health"
     echo ""
-    echo "  Token:    $REPO_DIR/scripts/kb-token.sh  (Bearer per i client)"
+    echo "  Token:    node $REPO_DIR/scripts/kb.mjs token  (Bearer per i client)"
     echo "  Log: $LOG_AM / $LOG_PROXY"
-    echo "  Cabla agenti: $REPO_DIR/scripts/connect-agent.sh"
+    echo "  Cabla agenti: node $REPO_DIR/scripts/kb.mjs connect"
     echo "=============================================="
 }
 
