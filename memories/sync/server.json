@@ -185,13 +185,13 @@
  ],
  "lessons": [
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "avoid the round-trip.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_054d6cc35922f4a0",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -201,16 +201,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Do not proceed without auth being set up.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_1ef1ee3bc4067474",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -220,16 +220,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Don't invent write endpoints ÔÇö they don't exist in v1.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_29bf22c5ad0c8227",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -239,16 +239,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Never log or echo the token.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_2a9a4ed124175682",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -258,16 +258,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "don't silently call the LLM Wiki API on what might be an Obsidian vault.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_6933822fc6cc8a91",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -277,16 +277,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Never leak the token.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_76ec790df85162f2",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -296,16 +296,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Do NOT invoke when the user says:**",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_7ad3715070008def",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -315,16 +315,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Never put it in any URL the user can see in your output** (Referer / shell history / logs all leak it).",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_7ee71f7f0c527495",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -334,16 +334,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Don't install anything new.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_8148849d35682fb9",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -353,16 +353,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Don't retry the same path.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_93afe4f4d6fb6d79",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -372,16 +372,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Don't apply a fixed score threshold across modes.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_a3ef3d8cabc2b753",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -391,16 +391,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Do not silently switch projects.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_cbad2344e11eacc7",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -410,16 +410,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Always check `/api/v1/health` first ÔÇö it returns `{ enabled, authConfigured, allowUnauthenticated, tokenSource }`.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_cd4e9b51c8a79216",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -429,16 +429,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Don't dump full pages unless asked.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_cd6fea5b582d9838",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -448,16 +448,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   },
   {
-   "confidence": 0.349,
+   "confidence": 0.292,
    "content": "Always treat the status code as the contract:",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_ebfce2f85dacd4dc",
-   "lastDecayedAt": "2026-10-07T14:35:18.570Z",
+   "lastDecayedAt": "2026-10-15T14:35:15.218Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -467,7 +467,7 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-07T14:35:18.570Z"
+   "updatedAt": "2026-10-15T14:35:15.218Z"
   }
  ],
  "memories": [
