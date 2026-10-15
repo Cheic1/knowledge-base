@@ -33115,6 +33115,60 @@
    "type": "preference",
    "updatedAt": "2026-10-09T19:15:08.153Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-pre-ape/memory/MEMORY.md]\n- [CENED XML import](cened-xml-import.md) — CENED+2 import needs engine hash; no forging, needs ARIA licence",
+   "createdAt": "2026-10-15T04:45:04.587Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-pre-ape/memory/MEMORY.md"
+   ],
+   "id": "mem_mv921vgh_d18abcc34801",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-15T04:45:04.587Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-pre-ape/memory/MEMORY.md]\n- [CEN",
+   "type": "preference",
+   "updatedAt": "2026-10-15T04:45:04.587Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.md]\nUser (Lombardia, never used CENED) wants pre-ape to export XML importable into CENED+2.0. Findings 2026-10-15 (client 1.1.15, Linux build at https://plus.cened.it/cenedplus2/CENED_Linux.zip, test cases CENED2_TCS1/2.zip on cened.it/software-cened2):\n- Import format = `c:calcolo` (namespaces http://www.cened.it/cenedplus2/{calcolo,datiCalcolo,...}); XSDs in cened2-lib-*-full.jar under `xml/` (calcolo.xsd, datiCalcolo.xsd).\n- `CenedImportXML.verificaValidita` rejects files without a valid engine hash / licence block (\"validazioni minime\") → a file we generate cannot be imported unless produced through a licensed CENED+2 Motore (ARIA S.p.A. accreditation, like TerMolog/Edilclima).\n- Decision: do NOT forge the hash (circumvents the Region's integrity control).\n\n**Why:** determines whether \"auto XML for CENED\" is feasible without an ARIA licence.\n**How to apply:** propose licence path or alternatives (CENED-ordered data sheet); keep CENED binaries/XSDs out of the repo (licence).",
+   "createdAt": "2026-10-15T04:45:04.842Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.md"
+   ],
+   "id": "mem_mv921vmn_8e987a953fe0",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-15T04:45:04.842Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.",
+   "type": "preference",
+   "updatedAt": "2026-10-15T04:45:04.842Z",
+   "version": 1
   }
  ],
  "observations": {
