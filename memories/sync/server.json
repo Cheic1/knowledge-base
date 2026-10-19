@@ -33155,7 +33155,7 @@
     "~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.md"
    ],
    "id": "mem_mv921vmn_8e987a953fe0",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-15T04:45:04.842Z",
@@ -33169,6 +33169,36 @@
    "type": "preference",
    "updatedAt": "2026-10-15T04:45:04.842Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.md]\nUser (Lombardia, never used CENED) wants pre-ape to export XML importable into CENED+2.0. Findings 2026-10-15 (client 1.1.15, Linux build at https://plus.cened.it/cenedplus2/CENED_Linux.zip, test cases CENED2_TCS1/2.zip on cened.it/software-cened2):\n- Import format = `c:calcolo` (namespaces http://www.cened.it/cenedplus2/{calcolo,datiCalcolo,...}); XSDs in cened2-lib-*-full.jar under `xml/` (calcolo.xsd, datiCalcolo.xsd).\n- `CenedImportXML.verificaValidita` rejects files without a valid engine hash / licence block (\"validazioni minime\") → a file we generate cannot be imported unless produced through a licensed CENED+2 Motore (ARIA S.p.A. accreditation, like TerMolog/Edilclima).\n- Possible legit route (untested): CENED publishes the legacy CENED+ 1.2 DTD (cened.it download \"File .XML (CENED+ vers. 1.2)\", cened_Versione-1-0-5.dtd); the client imports 1.2 files by converting them through its own engine (`imp(..., xml12=true)`), so the hash check may pass. User (2026-10-19) wants to generate XML and test import in CENED himself.\n- Decision: do NOT forge the hash (circumvents the Region's integrity control).\n\n**Why:** determines whether \"auto XML for CENED\" is feasible without an ARIA licence.\n**How to apply:** propose licence path or alternatives (CENED-ordered data sheet); keep CENED binaries/XSDs out of the repo (licence).",
+   "createdAt": "2026-10-19T07:45:04.503Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.md"
+   ],
+   "id": "mem_mvey8rcc_9af3ffe56f73",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-19T07:45:04.503Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mv921vmn_8e987a953fe0",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mv921vmn_8e987a953fe0"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-pre-ape/memory/cened-xml-import.",
+   "type": "preference",
+   "updatedAt": "2026-10-19T07:45:04.503Z",
+   "version": 2
   }
  ],
  "observations": {
