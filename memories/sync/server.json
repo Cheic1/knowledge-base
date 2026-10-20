@@ -33274,7 +33274,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
    ],
    "id": "mem_mvh75m6h_c1f7c158badf",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-20T21:30:06.665Z",
@@ -33475,6 +33475,63 @@
    "type": "preference",
    "updatedAt": "2026-10-20T21:30:09.352Z",
    "version": 4
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nLive TV playback tuning (2026-10-08) — why Jellyfin was slow / erroring:\n- Jellyfin opens a channel twice (probe, then ffmpeg). With Dispatcharr channel_shutdown_delay=0 the channel was torn down between them -> 503 -> Jellyfin 500. Set channel_shutdown_delay=5.\n- channel_init_grace_period: 60 left stalls hanging a minute; 10 killed valid slow starts (Dispatcharr uses the SAME threshold to abort the client, so no failover during init). Settled on 20 (observed cold starts 2.6–13 s).\n- Jellyfin tuner: ReadAtNativeFramerate=false (the -re flag delayed first HLS segments); TunerCount=0 (with 1, an aborted open leaks the tuner -> \"Unable to find host to play channel\" for ALL channels).\n- Jellyfin caches the live probe per channel in /cache/mediainfo (root-owned). Cached -> no 3 s wait + no probe (first segment ~3-10 s instead of ~10-15 s). A failed probe can be cached without codec/audio -> delete those json files. Changing the tuner URL changes channel ids (cache + favorites reset).\n- Provider limits ~4-8 Mbit/s per connection (server has ~110 Mbit/s); 4K HEVC Primafila are borderline/unreliable. Provider tolerates 2 concurrent connections and switching with 0 s gap. Start latency varies 1.7-8 s by redirect edge.\n- Added backup streams (non-HEVC \"4K/UHD\"/SD variants) to 40 channels; backup of previous channel_stream rows: /DATA/AppData/arr/dispatcharr_channelstream_backup_2026-10-08.txt. Sky Sport Legend HD stream (id 2024) has no audio -> removed, SD primary. Primafila 3 has no audio at source.\n- E2E tester script idea: POST /Items/{id}/PlaybackInfo?AutoOpenLiveStream=true with an HLS ts device profile, fetch first segment, then DELETE ActiveEncodings + POST LiveStreams/Close.\n\nLive TV freeze/\"loop\" fix (2026-10-09):\n- Root cause: provider drops the connection every ~10 min (or a stream dies) -> Dispatcharr reconnects/fails over -> its output TS timestamps restart from ~0. Jellyfin always runs live remux with `-copyts` (+ `-fflags +igndts` from tuner IgnoreDts=true); with those flags ffmpeg can't fix the backwards jump -> a ~95000 s HLS segment then frozen segments (\"Non-monotonic DTS\" flood) -> player freezes/loops. Other IPTV apps (VLC/TiviMate) tolerate the discontinuity.\n- Fix: ffmpeg wrapper /DATA/AppData/jellyfin/config/ffmpeg-wrapper/ffmpeg (+ ffprobe symlink), enabled via env JELLYFIN_FFMPEG in /DATA/AppData/jellyfin/docker-compose.yml. For http inputs only it strips -copyts and +igndts; ffmpeg then logs \"timestamp discontinuity ... new offset\" and keeps HLS continuous. Verified by killing Dispatcharr's upstream ffmpeg mid-play.\n- 2026-10-20 freeze again (CIELO, Litefin + Android): ffmpeg log showed \"DTS 32071180 < 8622002772 out of order\" repeating (8622002772 = 2^33 + 356 s = wrap reference) and A/V offsets flip-flopping ±95443 s; HLS time ran ~40 min ahead of wall clock. Cause: ffmpeg 33-bit wrap (\"correct_ts_overflow\") treats Dispatcharr's ts reset as a wrap when Jellyfin joined a channel already running >60 s. Wrapper now also adds `-correct_ts_overflow 0` before http `-i` (backup ffmpeg.bak-2026-10-20). Couldn't reproduce the full breakdown offline (synthetic splices stay clean in both modes); real-world confirmation pending.\n- Same night: Dispatcharr failed over on \"Buffering timeout\" at speed 0.999x (buffering_speed was 1.0) -> switched between CIELO variants with different res/audio rate (720p/44.1k vs 1080p/48k). Set buffering_speed 0.9 (backup dispatcharr_proxy_settings_backup_2026-10-20.txt). CoreSettings are cached in Redis: after SQL edits, run `o.save()` via `python manage.py shell` to invalidate. buffering_speed is read once per channel at start (input/manager.py), so already-running channels keep the old value (Primafila 1 still false-switched at 0.999x at 23:08 that night and froze). Same Primafila session showed a plain reconnect discontinuity (-2470 s) handled cleanly by the wrapper.\n- Tests 2026-10-21 night (tester /home/francesco/livetv-test/livetv_test.py \"<channel>\" <min> <outdir>: simulates Jellyf",
+   "createdAt": "2026-10-20T23:00:03.843Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvhadamf_9feeb0783c24",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T23:00:03.843Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvh75m6h_c1f7c158badf",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvh75m6h_c1f7c158badf"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nLi",
+   "type": "preference",
+   "updatedAt": "2026-10-20T23:00:03.843Z",
+   "version": 4
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin HLS player + taps Dispatcharr; never run while the user watches — 1 provider slot, my tests broke their zapping once):\n  - Someone had set Dispatcharr stream_settings default_output_format=fmp4 (+ default UA VLC). Jellyfin then got fMP4 -> timeline raced up to 6x. Restored mpegts (backup dispatcharr_stream_settings_backup_2026-10-21.txt); VLC UA left.\n  - Provider (player_api: max_connections 1) kills each session every ~7-11 min, with TS AND with HLS (.m3u8 works: XC `live/u/p/id.m3u8`), and refuses reconnects for a few s (407/4XX/509, or a black.ts+ENDLIST placeholder) because the old slot is still held. This is the root of the \"freezes after ~10 min\".\n  - After each reconnect Jellyfin's HLS timeline still jumps +10..20 min (input ts weirdness like 600 s -> 0 right after a reset), even with the wrapper.\n  - M3U profile search/replace does NOT change XC playback URLs (credentials.py builds .ts hardcoded) — setting it broke playback; reverted. A stream profile `sh -c 'u=\"$1\"; exec ffmpeg ... -i \"${u%.ts}.m3u8\" ...' {userAgent} {streamUrl}` (id 6 \"ffmpeg-hls\") works but didn't help; Cielo back on profile 1.\n  - M3U account max_streams=0 (unlimited) although provider allows 1.\n- Jellyfin's FFmpeg.*.log still shows -copyts (logged before the wrapper). Tuner URL back to proxied `http://dispatcharr:9191/output/m3u` (no direct=true). Backups: docker-compose.yml.bak-2026-10-09, config/config/livetv.xml.bak-2026-10-09.",
+   "createdAt": "2026-10-20T23:00:04.286Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvhadaz9_181e53f62b06",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T23:00:04.286Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin",
+   "type": "preference",
+   "updatedAt": "2026-10-20T23:00:04.286Z",
+   "version": 1
   }
  ],
  "observations": {
