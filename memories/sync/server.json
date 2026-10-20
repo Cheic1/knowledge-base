@@ -32891,7 +32891,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muzfwit2_a8a4aeb55196",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-08T11:15:07.799Z",
@@ -32920,7 +32920,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muzfwj38_4ca830bc7ced",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-08T11:15:08.094Z",
@@ -32952,7 +32952,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_muzfwjdn_d1efb11c1750",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-08T11:15:08.439Z",
@@ -33212,7 +33212,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
    ],
    "id": "mem_mvh60p5f_38c550082f84",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-20T20:58:17.494Z",
@@ -33243,7 +33243,7 @@
     "~/teldrive/CLAUDE.md"
    ],
    "id": "mem_mvh60pwx_5d04f9021675",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-20T20:58:18.598Z",
@@ -33261,6 +33261,220 @@
    "type": "preference",
    "updatedAt": "2026-10-20T20:58:18.598Z",
    "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nLive TV playback tuning (2026-10-08) — why Jellyfin was slow / erroring:\n- Jellyfin opens a channel twice (probe, then ffmpeg). With Dispatcharr channel_shutdown_delay=0 the channel was torn down between them -> 503 -> Jellyfin 500. Set channel_shutdown_delay=5.\n- channel_init_grace_period: 60 left stalls hanging a minute; 10 killed valid slow starts (Dispatcharr uses the SAME threshold to abort the client, so no failover during init). Settled on 20 (observed cold starts 2.6–13 s).\n- Jellyfin tuner: ReadAtNativeFramerate=false (the -re flag delayed first HLS segments); TunerCount=0 (with 1, an aborted open leaks the tuner -> \"Unable to find host to play channel\" for ALL channels).\n- Jellyfin caches the live probe per channel in /cache/mediainfo (root-owned). Cached -> no 3 s wait + no probe (first segment ~3-10 s instead of ~10-15 s). A failed probe can be cached without codec/audio -> delete those json files. Changing the tuner URL changes channel ids (cache + favorites reset).\n- Provider limits ~4-8 Mbit/s per connection (server has ~110 Mbit/s); 4K HEVC Primafila are borderline/unreliable. Provider tolerates 2 concurrent connections and switching with 0 s gap. Start latency varies 1.7-8 s by redirect edge.\n- Added backup streams (non-HEVC \"4K/UHD\"/SD variants) to 40 channels; backup of previous channel_stream rows: /DATA/AppData/arr/dispatcharr_channelstream_backup_2026-10-08.txt. Sky Sport Legend HD stream (id 2024) has no audio -> removed, SD primary. Primafila 3 has no audio at source.\n- E2E tester script idea: POST /Items/{id}/PlaybackInfo?AutoOpenLiveStream=true with an HLS ts device profile, fetch first segment, then DELETE ActiveEncodings + POST LiveStreams/Close.\n\nLive TV freeze/\"loop\" fix (2026-10-09):\n- Root cause: provider drops the connection every ~10 min (or a stream dies) -> Dispatcharr reconnects/fails over -> its output TS timestamps restart from ~0. Jellyfin always runs live remux with `-copyts` (+ `-fflags +igndts` from tuner IgnoreDts=true); with those flags ffmpeg can't fix the backwards jump -> a ~95000 s HLS segment then frozen segments (\"Non-monotonic DTS\" flood) -> player freezes/loops. Other IPTV apps (VLC/TiviMate) tolerate the discontinuity.\n- Fix: ffmpeg wrapper /DATA/AppData/jellyfin/config/ffmpeg-wrapper/ffmpeg (+ ffprobe symlink), enabled via env JELLYFIN_FFMPEG in /DATA/AppData/jellyfin/docker-compose.yml. For http inputs only it strips -copyts and +igndts; ffmpeg then logs \"timestamp discontinuity ... new offset\" and keeps HLS continuous. Verified by killing Dispatcharr's upstream ffmpeg mid-play.\n- 2026-10-20 freeze again (CIELO, Litefin + Android): ffmpeg log showed \"DTS 32071180 < 8622002772 out of order\" repeating (8622002772 = 2^33 + 356 s = wrap reference) and A/V offsets flip-flopping ±95443 s; HLS time ran ~40 min ahead of wall clock. Cause: ffmpeg 33-bit wrap (\"correct_ts_overflow\") treats Dispatcharr's ts reset as a wrap when Jellyfin joined a channel already running >60 s. Wrapper now also adds `-correct_ts_overflow 0` before http `-i` (backup ffmpeg.bak-2026-10-20). Couldn't reproduce the full breakdown offline (synthetic splices stay clean in both modes); real-world confirmation pending.\n- Same night: Dispatcharr failed over on \"Buffering timeout\" at speed 0.999x (buffering_speed was 1.0) -> switched between CIELO variants with different res/audio rate (720p/44.1k vs 1080p/48k). Set buffering_speed 0.9 (backup dispatcharr_proxy_settings_backup_2026-10-20.txt). CoreSettings are cached in Redis: after SQL edits, run `o.save()` via `python manage.py shell` to invalidate. buffering_speed is read once per channel at start (input/manager.py), so already-running channels keep the old value (Primafila 1 still false-switched at 0.999x at 23:08 that night and froze). Same Primafila session showed a plain reconnect discontinuity (-2470 s) handled cleanly by the wrapper.\n- Jellyfin's FFmpeg.*.log still shows -copyts (logged before the wrapper). Tuner URL back to proxied `http://dispatcharr",
+   "createdAt": "2026-10-20T21:30:06.665Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvh75m6h_c1f7c158badf",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:06.665Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvh60p5f_38c550082f84",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvh60p5f_38c550082f84"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nLi",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:06.665Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\n:9191/output/m3u` (no direct=true). Backups: docker-compose.yml.bak-2026-10-09, config/config/livetv.xml.bak-2026-10-09.",
+   "createdAt": "2026-10-20T21:30:07.426Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvh75mtl_b8c5196a05b4",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:07.426Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\n:9",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:07.426Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `teldrive:/Media` is mounted read-only at `/DATA/AppData/Media/teldrive` by the systemd **user** unit `~/.config/systemd/user/teldrive-media.service` (linger is on; logs in `mount.log`; VFS cache full, max 10G / 24h, in `~/.cache/rclone/vfs`; dir listings refresh every 10m). Manage with `systemctl --user {status,restart} teldrive-media`. Don't mount on `/DATA/AppData/Media` itself: it holds other data (music used by Jellyfin \"Musica\" and downtify).\n- Jellyfin is a compose stack at `/DATA/AppData/jellyfin/docker-compose.yml`; `/DATA/AppData/Media` is bound as `/Media:rslave`. There is no separate Teldrive library: \"Film\" = `/Film/Film` + `/Media/teldrive/Film`, \"Serie TV\" = `/Film/SerieTV` + `/Media/teldrive/SerieTV`, so items stay in the same library when they move to Teldrive. Old library configs (Film2, Teldrive, pre-change Film/Serie TV) are in `/DATA/AppData/jellyfin/library-backup-20261008/`. Recreate with `docker compose up -d` in that dir.\n- Films and series are moved nightly by `scripts/move-films.sh` (user timer `teldrive-move-films.timer`, 03:10; log `logs/move-films.log`): one folder at a time from `/DATA/AppData/Film/{Film,SerieTV}/<Name (Year)>` to `teldrive:/Media/{Film,SerieTV}/...` with `rclone move` (hash-verified, then local delete; skips files newer than 2h = downloads in progress). `scripts/nomi-teldrive.txt` maps local folder names with wrong years (the downloader uses the latest season's year) to the correct name on Teldrive; local names are left alone so new episodes keep landing in the same place. The script waits for `backup-incremental.sh` (03:17) and `backup-immich` (~03:33) to finish, holds `flock .teldrive-upload.lock` while uploading, and uses `--bwlimit \"03:10,off 08:00,1M\"`. Change speed live with `scripts/velocita-upload.sh <rate|off>` (rclone rc on 127.0.0.1:5573).\n- Web GUI: user unit `rclone-gui.service` runs `rclone gui` on `:5580` (LAN 192.168.68.55, Tailscale 100.103.112.15). It's a GUI only: at login set the rc URL to the mount (`http://<ip>:5572`, always on) or the nightly move (`http://<ip>:5573`, only while it runs). Both rc servers use user `francesco` + `~/.config/rclone-webui/htpasswd` (plaintext in `pass`, read by `velocita-upload.sh`). The login form has no URL field and wipes params on a failed attempt, so log in only via the full link printed by `scripts/gui-link.sh` (includes pass) and `--rc-allow-origin \"*\"` so the GUI can call them. This build has no `--rc-web-gui` (superseded by `rclone gui`): adding it makes rclone exit and takes the mount down.\n- Manual uploads: `./rd copy` straight to `teldrive:/Media/...`, never by writing into the mount (it's read-only). Big uploads spend a while hashing (BLAKE3) before any bytes are sent and the stats line shows `0 B / 0 B` meanwhile — that's normal.\n- Upload tuning (tested 2026-10-08): `rclone.conf` `chunk_size = 64Mi`, `upload_concurrency = 2`, and Teldrive `config.toml` `upload-threads = 4` (was 8). With 8 threads and 256Mi chunks, parallel uploads made Telegram drop connections (\"broken pipe\" → 500): each drop re-sent a whole chunk, and later uploads kept failing even on their own until `teldrive-app` was restarted. If 500s come back, restart `teldrive-app` first.\n- Streaming read speed (measured 2026-10-08 on the mount, cold cache, `download-bots = 0`): ~2.8 MB/s (~22 Mbit/s) sustained, ~2 s to first byte, 3–4 s per seek. Fine for 1080p web files (test film ~4.5 Mbit/s); too slow for 4K remux. Adding download bots in Teldrive is the lever for more. Tested 2026-10-09: `download-read-parallel` 8 gave no gain over 4 (single account is the limit; reverted to 4); `download-client-pool = true` kept. Bots: user creates tokens via @BotFather and adds them in the Teldrive web UI, then set `download-bots = N` in `config.toml` and `docker restart teldrive-app` (never while `teldrive-move-films` or a backup is uploading). Measure with `./rd cat <file> --offset/--count`, which bypasses the mount's VFS cache.\n- Loca",
+   "createdAt": "2026-10-20T21:30:07.907Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_mvh75n4c_8eb64b655679",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:07.907Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvh60pwx_5d04f9021675",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvh60pwx_5d04f9021675"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Streaming to Jellyfin\n\n- `tel",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:07.907Z",
+   "version": 4
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\nl media lives in `/DATA/AppData/Film/{Film,SerieTV}` (same dir as Jellyfin's `/Film` and the streamingcommunity-downloader's `/app/videos`).",
+   "createdAt": "2026-10-20T21:30:08.278Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_mvh75nfr_9ab47cedc616",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:08.278Z",
+    "channel": "agent"
+   },
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\nl media lives in `/DATA/AppData/",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:08.278Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Immich backup\n\n`backup-immich.sh` runs nightly at ~03:30 via the systemd user timer `backup-immich.timer`, after Immich's own DB dump at 02:00. Log: `backup-immich.log`; a run that ends OK writes `EXIT=0`. Run it by hand with `systemctl --user start backup-immich`.\n- Immich data is `/DATA/AppData/immich-app/upload`. `/DATA/AppData/Gallery/immich` is a stale copy from 2025, don't use it.\n- Photos (`library`, `upload`, `profile`; not `thumbs`/`encoded-video`) → `teldrive:/Backup/immich/current`. Deleted or overwritten files go to `old/<date>`, purged after 90 days. Immich DB dumps → `teldrive:/Backup/immich/db-dumps`. Not encrypted (user's choice).\n- After the photo upload, the script makes a `pg_dump` of the Teldrive DB (without it the Telegram data can't be rebuilt). It goes into a tarball with Teldrive `config.toml`/compose, `rclone.conf`, `backups/keys`, and Immich `.env`/compose, encrypted with gpg (passphrase in `~/.config/teldrive-backup/passphrase`). The tarball goes to `gdrive:BackUp/teldrive-server` via the gdrive remote in `~/.config/rclone/rclone.conf`, keeping 30 days. Restoring the dump needs a pgroonga Postgres 18 image.",
+   "createdAt": "2026-10-20T21:30:08.655Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_mvh75no8_98db260fba8c",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:08.655Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muzfwit2_a8a4aeb55196",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muzfwit2_a8a4aeb55196"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Immich backup\n\n`backup-immich",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:08.655Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclone args>          # always uses bin/rclone + ./rclone.conf, never ~/.config/rclone\n./rd lsf teldrive:\n./rd copy ./file teldrive:/backup/\n./rd backend trash-list teldrive:\n\n./build.sh                  # rebuild bin/rclone in golang:1.27 container (Docker required); output -> build.log\n./build-static.sh           # rebuild bin/rclone-static (CGO_ENABLED=0); appends EXIT=... to build-static.log\n```\n\nBoth build scripts end by writing `EXIT=<code>` to their log — check that line to see whether the build succeeded. If `bin/rclone` is missing, `rd` falls back to the system rclone with a warning (and that won't work against v2).\n\nTeldrive backend tests (inside the source tree, needs Go or run via the same Docker image):\n\n```bash\ncd .rclone-src && go test ./backend/teldrive/...\n```\n\nThe original end-to-end check used: `mkdir` → upload 3 MB → download → compare sha256 → `./rd check` (expect 0 differences).",
+   "createdAt": "2026-10-20T21:30:08.852Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_mvh75nyn_5af97cc33f7a",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:08.852Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muzfwj38_4ca830bc7ced",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muzfwj38_4ca830bc7ced"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Commands\n\n```bash\n./rd <rclon",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:08.852Z",
+   "version": 4
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "teldrive"
+   ],
+   "content": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode 600) holds the Teldrive API key secret (key name `rclone-teldrive-progetto`, revocable in Teldrive → Settings → API keys). `backups/keys/` and the `*.v1.bak` files also contain credentials (JWT secret, upload encryption key, DB password). Don't print, copy, or commit these files.",
+   "createdAt": "2026-10-20T21:30:09.352Z",
+   "files": [
+    "~/teldrive/CLAUDE.md"
+   ],
+   "id": "mem_mvh75o8p_166b573e279c",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-20T21:30:09.352Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_muzfwjdn_d1efb11c1750",
+   "project": "teldrive",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_muzfwjdn_d1efb11c1750"
+   ],
+   "title": "[claude-code · teldrive · ~/teldrive/CLAUDE.md]\n## Secrets\n\n`rclone.conf` (mode ",
+   "type": "preference",
+   "updatedAt": "2026-10-20T21:30:09.352Z",
+   "version": 4
   }
  ],
  "observations": {
