@@ -489,7 +489,7 @@
    "files": [],
    "id": "mem_munwup9k_a9e0ba262001",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-09-30T09:36:22.368Z",
     "channel": "agent"
@@ -518,7 +518,7 @@
    "files": [],
    "id": "mem_muny3spt_f4e92505b88b",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-09-30T10:11:26.362Z",
     "channel": "agent"
@@ -549,7 +549,7 @@
    "files": [],
    "id": "mem_munzarj7_e0a9b0fa0f94",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-09-30T10:44:51.029Z",
     "channel": "agent"
@@ -583,7 +583,7 @@
    "files": [],
    "id": "mem_muo9tjzz_7ac3677757c8",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-09-30T15:39:23.888Z",
     "channel": "agent"
@@ -619,7 +619,7 @@
    ],
    "id": "mem_mupb317l_1b9571c8aa85",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-10-01T09:02:31.891Z",
     "channel": "agent"
@@ -648,7 +648,7 @@
    "files": [],
    "id": "mem_mupb318u_7a8816fcd3d2",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-10-01T09:02:31.946Z",
     "channel": "agent"
@@ -675,7 +675,7 @@
    "files": [],
    "id": "mem_mupiw5ru_59ff42433577",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-10-01T12:41:08.144Z",
     "channel": "agent"
@@ -704,7 +704,7 @@
    ],
    "id": "mem_mupq5ves_bad3aa62bee4",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-10-01T16:04:38.581Z",
     "channel": "agent"
@@ -734,7 +734,7 @@
    ],
    "id": "mem_mupqeeoj_cf12950455aa",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-10-01T16:11:16.807Z",
     "channel": "agent"
@@ -755,7 +755,7 @@
    "files": [],
    "id": "mem_mur2xaiv_128ee1c288f3",
    "isLatest": true,
-   "kbAuthor": "sconosciuto",
+   "kbAuthor": "accc0068",
    "origin": {
     "capturedAt": "2026-10-02T14:49:39.460Z",
     "channel": "agent"
@@ -767,6 +767,34 @@
    "title": "TEST memory-sync dal PC accc0068 2026-10-02 16:49",
    "type": "fact",
    "updatedAt": "2026-10-02T14:49:39.460Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "knowledge-base",
+    "agentmemory",
+    "memory-sync",
+    "git proxy",
+    "502",
+    "Windows"
+   ],
+   "content": "Setup knowledge-base agentmemory LOCALE su PC Windows accc0068 (2026-10-02): repo clonata in C:\\Users\\49359\\OneDrive - LEONARDO S.P.A\\knowledge-base, branch claude/project-thread-qw3kii. IL PROXY AZIENDALE git (global http.proxy=http://10.17.16.102:8080) dà CONNECT tunnel failed 502 verso github.com: la fix è la config LOCALE della repo '[http] proxy =' (vuota, scritta via cmd /c perché PowerShell scarta l'argomento vuoto) — così git pull/push di memory-sync vanno in diretto senza toccare la config globale. Istanza agentmemory 0.9.29 con --data-dir 'C:\\Users\\49359\\OneDrive - LEONARDO S.P.A\\Agentmemory': se il worker iii-http si inceppa (porta 3111 in LISTENING ma connessioni rifiutate e nuovo avvio fallisce con 'address already in use'), risolvere uccidendo l'albero di processi (cmd→npx→cmd→cli.mjs→iii.exe) e rilanciando con lo stesso --data-dir (i dati in state_store.db restano). connect-agent.sh NON gira su questo PC (python3 è solo lo stub Microsoft Store): config MCP scritta a mano in ~/.config/opencode/opencode.json con AGENTMEMORY_URL=http://127.0.0.1:3111.",
+   "createdAt": "2026-10-02T14:59:52.835Z",
+   "files": [],
+   "id": "mem_mur3aft2_b89b8d251745",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-02T14:59:52.835Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Setup knowledge-base agentmemory LOCALE su PC Windows accc0068 (2026-10-02): rep",
+   "type": "workflow",
+   "updatedAt": "2026-10-02T14:59:52.835Z",
    "version": 1
   },
   {
@@ -33678,6 +33706,19 @@
    }
   ]
  },
+ "profiles": [
+  {
+   "commonErrors": [],
+   "conventions": [],
+   "project": "unknown",
+   "recentActivity": [],
+   "sessionCount": 2,
+   "topConcepts": [],
+   "topFiles": [],
+   "totalObservations": 6,
+   "updatedAt": "2026-10-05T12:30:19.859Z"
+  }
+ ],
  "sessions": [
   {
    "cwd": "Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data",
