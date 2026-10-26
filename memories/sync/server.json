@@ -33590,6 +33590,163 @@
    "type": "preference",
    "updatedAt": "2026-10-22T21:00:04.793Z",
    "version": 2
+  },
+  {
+   "concepts": [],
+   "content": "kb-test ACCC0068 2026-10-26 - installazione knowledge-base completata su questo PC (v0.9.29, sync OK)",
+   "createdAt": "2026-10-26T10:26:02.704Z",
+   "files": [],
+   "id": "mem_mvp42qno_fdd87f91f349",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T10:26:02.704Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "kb-test ACCC0068 2026-10-26 - installazione knowledge-base completata su questo ",
+   "type": "fact",
+   "updatedAt": "2026-10-26T10:26:02.704Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "llm-wiki",
+    "SYRS",
+    "setup",
+    "security",
+    "app-state",
+    "project-registration"
+   ],
+   "content": "LLM Wiki SYRS setup (26/10/2026): Two projects registered — 'SYRS' OneDrive (6f116ceb-3796-4414-be63-793ee32329f8) and 'SYRS Desktop' (a91262d5-7e0d-4371-b0cb-1110cd17a7a6, C:/Users/49359/Desktop/Python/wiki/SYRS), Desktop is the user's active one. App v0.6.11 at 127.0.0.1:19828. USER CHOICE: token auth disabled (allowUnauthenticated=true) AND allowLanAccess=true despite warnings — docs are sensitive (contracts, payslips). Config: gateway https://ai-gateway.leonardo.com/v1, model 'auto', embeddings 'task=embedding, context=qwen', batchSize 8. API has no POST /projects — register projects by editing %APPDATA%/com.llmwiki.app/app-state.json (clone projectRegistry + sourceWatchConfig + scheduledImportConfig keys + recentProjects + lastProject) with app killed (taskkill /F). Desktop project scheduled import intentionally disabled.",
+   "createdAt": "2026-10-26T11:11:03.017Z",
+   "files": [
+    "C:/Users/49359/AppData/Roaming/com.llmwiki.app/app-state.json"
+   ],
+   "id": "mem_mvp5om9x_797428c00163",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T11:11:03.017Z",
+    "channel": "agent"
+   },
+   "project": "llm-wiki-syrs",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "LLM Wiki SYRS setup (26/10/2026): Two projects registered — 'SYRS' OneDrive (6f1",
+   "type": "fact",
+   "updatedAt": "2026-10-26T11:11:03.017Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "llm-wiki",
+    "embedding",
+    "backfill",
+    "powershell",
+    "gotchas",
+    "503",
+    "rate-limit"
+   ],
+   "content": "LLM Wiki gotchas (verified): (1) Node fetch to 127.0.0.1:19828 HANGS (proxy issue) — use PowerShell Invoke-RestMethod for the local API. (2) Backfill embeddings via POST /api/v1/projects/{id}/pages/embed {path, force:false} — idempotent (already-indexed pages return 0 vectors written). (3) wiki root files (index.md, log.md, overview.md) are excluded from indexing by design (400). (4) 409 = conflict, retry with force:true. (5) The embedding gateway (ai-gateway.leonardo.com) returns 503 when hammered: 8 parallel requests -> ~85% failure; concurrency 2 + retry with backoff (2s/5s/10s/20s) works. (6) llm_wiki_search returns formatted text, parse 'Mode: ... | Token hits: N | Vector hits: N'. (7) llm_wiki_files with root 'all' 413s over 2000 files. (8) OpenCode background shells get killed on server restarts — for long jobs use Start-Process (detached) + a separate watcher loop.",
+   "createdAt": "2026-10-26T11:11:05.544Z",
+   "files": [
+    "C:/Users/49359/AppData/Local/Temp/opencode/wiki-backfill.ps1"
+   ],
+   "id": "mem_mvp5onyv_4db0c8fa381d",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T11:11:05.544Z",
+    "channel": "agent"
+   },
+   "project": "llm-wiki-syrs",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "LLM Wiki gotchas (verified): (1) Node fetch to 127.0.0.1:19828 HANGS (proxy issu",
+   "type": "pattern",
+   "updatedAt": "2026-10-26T11:11:05.544Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "knowledge-base",
+    "schtasks-block",
+    "MDE",
+    "autostart",
+    "npx-slow",
+    "mcp-wiring"
+   ],
+   "content": "PC ACCC0068 (Win10 Enterprise, MDE attivo): kb.mjs install/update NON completabili - MDE uccide ogni processo che crea task pianificati con trigger ONLOGON via schtasks (exit -536870873) o PowerShell (exit 39); via CIM 'Access is denied'. I task con trigger DAILY sono invece permessi. Autostart di agentmemory risolto con file kb-agentmemory.cmd nella cartella Esecuzione automatica (lancia ~/.agentmemory/kb-agentmemory.vbs). Inoltre npx su questa rete corporate impiega ~23s per avviare @agentmemory/mcp (verifica registry ogni volta) -> l'MCP va in timeout in opencode; fix: pacchetto installato globalmente (npm i -g @agentmemory/mcp, 0.9.30) e cablato come node.exe + bin.mjs diretto in opencode.json, .claude.json e VS Code mcp.json.",
+   "createdAt": "2026-10-26T11:12:53.702Z",
+   "files": [
+    "scripts/kb.mjs"
+   ],
+   "id": "mem_mvp5r09d_f3804d29b085",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T11:12:53.702Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "PC ACCC0068 (Win10 Enterprise, MDE attivo): kb.mjs install/update NON completabi",
+   "type": "fact",
+   "updatedAt": "2026-10-26T11:12:53.702Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "MDS OEM pipeline: (1) Export per-parametro dell'app MDS = un .mat per ICD, struct con campi engValue, t (s relativi), absT (epoch ms), validity (3=ok, 12=altro, 0=invalid), info{FLTdate,T0,ICDname,units,rate(Hz)}. (2) Report automatico: C:\\Users\\49359\\Desktop\\MDS_OEM_Report\\oem_report.m -> XLSX (Info/Parametri/Cicli/Alert); cicli di volo da WOW1, check radar alt vs WOW + disaccordo RA1/RA2. (3) Export precedenti ingegnere: Y:\\...\\93002\\2025_08_26\\MATLAB\\c+005..c+018 (5 voli) + cartella Figures. (4) MATLAB R2024b: avviato con 'matlab.engine.shareEngine'; MCP evaluate_matlab_code si aggancia dopo il boot (~2 min). (5) Shell opencode puo' impallarsi: usare MATLAB come accesso al sistema. (6) Data check c+013: 5 cicli volo (max 1833 ft), 441 parametri di cui 222 costanti.",
+   "createdAt": "2026-10-26T11:46:46.891Z",
+   "files": [],
+   "id": "mem_mvp6yljg_88eafe6c614a",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T11:46:46.891Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MDS OEM pipeline: (1) Export per-parametro dell'app MDS = un .mat per ICD, struc",
+   "type": "fact",
+   "updatedAt": "2026-10-26T11:46:46.891Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "MDS OEM automation v2: (1) oem_batch.m in C:\\Users\\49359\\Desktop\\MDS_OEM_Report gira oem_report su ogni sottocartella e produce oem_batch_report.xlsx (Riepilogo+Alert); firma oem_batch(root,outDir,sn). (2) Comando OpenCode globale /oem-report in C:\\Users\\49359\\.config\\opencode\\commands\\oem-report.md: l'utente lo invoca con un percorso (locale o share Y:) e l'agente esegue copia LAN + MATLAB batch + riepilogo in italiano. (3) OpenCode ricarica i comandi automaticamente senza restart.",
+   "createdAt": "2026-10-26T11:50:18.847Z",
+   "files": [],
+   "id": "mem_mvp736ah_e04515879347",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T11:50:18.847Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MDS OEM automation v2: (1) oem_batch.m in C:\\Users\\49359\\Desktop\\MDS_OEM_Report ",
+   "type": "fact",
+   "updatedAt": "2026-10-26T11:50:18.847Z",
+   "version": 1
   }
  ],
  "observations": {
