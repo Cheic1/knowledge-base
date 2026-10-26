@@ -33747,6 +33747,28 @@
    "type": "fact",
    "updatedAt": "2026-10-26T11:50:18.847Z",
    "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "Backfill vettoriale SYRS Desktop completato/verificato: ricerche ibride post-backfill 4/4 con Vector hits 10 (q3 do-334, q4 dh-150ft, q9 coc-gain ora al primo posto — era off-target, q1 syrs-revc). Report §6 compilato in REPORT-QA-SYRS.md. Verifica valida anche se il processo detached era ancora su entities/: il backfill è additivo e idempotente, nessun rischio di regressione.",
+   "createdAt": "2026-10-26T15:03:18.891Z",
+   "files": [],
+   "id": "mem_mvpdzaw1_4a092ce4eebe",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T15:03:18.891Z",
+    "channel": "agent"
+   },
+   "project": "llm-wiki-syrs",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Backfill vettoriale SYRS Desktop completato/verificato: ricerche ibride post-bac",
+   "type": "fact",
+   "updatedAt": "2026-10-26T15:03:18.891Z",
+   "version": 1
   }
  ],
  "observations": {
