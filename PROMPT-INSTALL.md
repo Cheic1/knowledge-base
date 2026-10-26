@@ -1,87 +1,56 @@
-# 📋 Prompt Copia e Incolla
+# Prompt di installazione
 
-Un solo metodo di installazione per ogni macchina: `scripts/bootstrap.mjs`, che porta il
-clone su `main` in modo sicuro e lancia `scripts/kb.mjs install`. Serve solo **Node.js 20+
-e git**: niente bash, niente Python sui PC.
+Incolla questo prompt nell'agente della macchina (Claude Code, OpenCode, Gemini CLI, ...).
+È lo stesso per tutte le macchine; cambia solo `<RUOLO>`:
 
-## Ruoli
+| Macchina | `<RUOLO>` |
+|---|---|
+| PC personale, PC di lavoro (anche fuori casa) | *(vuoto)* |
+| PC sempre in rete col server centrale | `--role client` (serve `KB_TOKEN`) |
+| Server di casa Linux sempre acceso | `--role server --wiki-search` |
 
-| Ruolo | Per chi | agentmemory | Memorie | Agenti cablati su |
-|-------|---------|-------------|---------|-------------------|
-| `server` | il server sempre acceso (oggi `192.168.68.55`, domani la VM aziendale) | locale, **DB primario** | backup sul branch orfano `kb-data` | agentmemory locale |
-| `client` | PC sviluppatore che usa il server centrale | **nessuno** | nessuna sync | server centrale (`config/endpoint.env` + `KB_TOKEN` in `.env`) |
-| `standalone-dev` | PC sviluppatore autonomo/offline (default, ex `pc`) | locale | sync P2P via `kb-data` ogni 15 min | agentmemory locale |
+Funziona sia con l'installer di oggi sia con quello nuovo della spec
+(`docs/superpowers/specs/2026-10-25-kb-tutti-agenti-design.md`): col nuovo il passo 5
+non trova più nulla da fare, perché `install` collega da solo tutti i programmi.
 
-I PC dei colleghi Windows senza Node non installano nulla di questo repo: useranno il
-launcher di OpenCode Desktop (Fase 4, `client-dist/`).
+```text
+Installa e collega la knowledge base Cheic1/knowledge-base su questo computer, per TUTTI i miei agenti e programmi.
+Regole: non cancellare nulla; niente checkout -f, reset --hard, clean; prima di modificare un file di config fanne una copia <file>.kb-backup (solo se non esiste già); non mostrare mai token o chiavi. Se un passo fallisce fermati e riportami l'errore così com'è.
 
-```
-node scripts/bootstrap.mjs                                  # standalone-dev
-node scripts/bootstrap.mjs --role client                    # usa il server centrale
-node scripts/bootstrap.mjs --role server --wiki-search      # server Linux, con la ricerca wiki (qmd)
-node scripts/kb.mjs status                                  # controllo
-node scripts/kb.mjs connect                                 # solo ricablare gli agenti
-```
+1. SISTEMA. Capisci OS, versione di Node.js e git (servono Node 20+ e git: se mancano chiedimi conferma e installali; Windows: winget install OpenJS.NodeJS.LTS / Git.Git) e se c'è un proxy aziendale.
 
-Cosa fa `install`:
-- `server` / `standalone-dev`: installa agentmemory alla versione fissata in `package.json`,
-  lo avvia e lo fa ripartire da solo (systemd sul server, Utilità di pianificazione su
-  Windows, crontab altrove), cabla Claude Code, OpenCode, Hermes, Cursor e VS Code su
-  `http://127.0.0.1:3111`, pianifica la sync delle memorie ogni 15 minuti (e a ogni sessione
-  di Claude Code) e fa la prima sync. Le memorie stanno nel worktree `.kb-data/` (branch
-  orfano `kb-data`), mai su `main`.
-- `client`: niente agentmemory locale e niente sync; cabla gli agenti sul server di
-  `config/endpoint.env` con il `KB_TOKEN` del `.env` del clone, e pianifica solo il controllo
-  degli aggiornamenti.
+2. CLONE. Cerca TUTTI i clone di knowledge-base (home, radici dei dischi come D:\ ed E:\, /DATA/AppData/my-knowledge-base) e guarda a quale puntano le config MCP degli agenti.
+   - Più clone: usa come principale quello su main a cui puntano le config (se nessuno, il più recente). Gli altri non toccarli: elencameli.
+   - Nessun clone: git clone https://github.com/Cheic1/knowledge-base.git ~/knowledge-base
 
-Aggiornamenti: `kb.mjs update` gira da solo, al massimo una volta ogni 24 ore
-(`KB_UPDATE_HOURS` in `.env`). Fa solo fast-forward di `main`: se nel clone ci sono modifiche
-a file tracciati o commit locali **non aggiorna** e lo scrive in `~/.agentmemory/kb-update.log`.
-Sul server i riavvii dei servizi avvengono nella finestra di manutenzione notturna
-(`kb-maintenance.timer`, ore `KB_MAINTENANCE_AT`, default 03:00) o con
-`node scripts/kb.mjs update --apply-now`; il kb-proxy lascia finire le richieste in corso.
-
-## Prompt per l'agente della macchina
-
-Vale per qualsiasi sistema e agente. Per un PC che deve usare il server centrale cambia
-`<RUOLO>` in `--role client`; sul server Linux in `--role server --wiki-search`; per un
-PC autonomo lascialo vuoto.
-
-```
-Installa la knowledge base Cheic1/knowledge-base su questo computer.
-
-1. Capisci il sistema (Windows, Linux o macOS). Servono Node.js 20+ e git: se mancano chiedimi conferma e installali (Windows: winget install OpenJS.NodeJS.LTS / Git.Git; macOS: brew install node git; Linux: il gestore pacchetti o nvm).
-2. Cerca se il repo e' gia' clonato (cartella knowledge-base nella home, su altri dischi, E:\knowledge-base, /DATA/AppData/my-knowledge-base).
-   - SE ESISTE: entra nella cartella ed esegui, senza fare altro prima (niente checkout, pull o stash a mano):
-       git fetch origin
-       git show origin/main:scripts/bootstrap.mjs > <cartella temporanea>/kb-bootstrap.mjs
-       node <cartella temporanea>/kb-bootstrap.mjs <RUOLO>
-   - SE NON ESISTE: git clone https://github.com/Cheic1/knowledge-base.git ~/knowledge-base, poi dalla cartella: node scripts/bootstrap.mjs <RUOLO>
-   Il bootstrap ritrova da solo il clone gia' installato, lo porta su main in modo sicuro (salva una copia di data/, il database di agentmemory, e non lo tocca), poi lancia l'installazione.
-3. Solo con --role client: il file .env nella cartella del repo deve contenere KB_TOKEN=<token>. Se manca chiedimelo (me lo da' chi gestisce il server con: node scripts/kb.mjs token).
-4. Se il bootstrap si ferma con un errore, riportamelo cosi' com'e': non provare a "sistemare" con checkout -f, reset --hard, clean o cancellando cartelle.
+3. INSTALLA. Nella cartella del clone principale, senza fare pull/checkout/stash a mano prima:
+     git fetch origin
+     git show origin/main:scripts/bootstrap.mjs > <cartella temporanea>/kb-bootstrap.mjs
+     node <cartella temporanea>/kb-bootstrap.mjs <RUOLO>
    - "modifiche locali a file tracciati": mostrami l'elenco e aspetta.
-   - errore di rete/proxy aziendale: git config http.proxy "" solo per questo repo e rilancia.
-   - il push chiede una password: configura Git Credential Manager o una chiave SSH e rilancia lo stesso comando (e' ripetibile).
-5. Dimmi di riavviare l'agente. Poi verifica con node scripts/kb.mjs status e prova a salvare una memoria di prova e a ritrovarla con memory_smart_search.
+   - errore di rete/proxy: git config http.proxy "" solo per questo repo (in PowerShell: cmd /c 'git config http.proxy ""') e rilancia.
+   - con --role client: nel .env del clone serve KB_TOKEN=...; se manca chiedimelo.
+   Annota quali agenti l'installazione dice di aver collegato.
 
-Non cancellare nulla. Alla fine riportami: sistema, cartella del repo, ruolo, percorso della copia di data/ se e' stata fatta, output di status e agenti collegati.
+4. INVENTARIO. Elenca i programmi compatibili con MCP installati davvero (comando nel PATH o app installata; una config senza programma non conta): Claude Code, OpenCode CLI/Desktop, Hermes, Gemini CLI, Codex CLI, VS Code (mcp.json utente) e le sue estensioni Cline/Roo/Continue/Kilo, Cursor, Windsurf, Zed, Claude Desktop, Antigravity IDE e CLI agy (~/.gemini/**/mcp_config.json), LM Studio, e ogni altro client MCP che trovi.
+
+5. COLLEGA QUELLI MANCANTI. Per ogni programma del passo 4 che l'installazione NON ha collegato, aggiungi nella sua config MCP un server "agentmemory" identico a quello che l'installazione ha scritto per Claude Code o OpenCode (stesso comando e stesse variabili: su Windows command "cmd" con args ["/c","npx","-y","@agentmemory/mcp"], su Linux/macOS "npx" con ["-y","@agentmemory/mcp"]; env AGENTMEMORY_URL come scritto dall'installazione, più AGENTMEMORY_SECRET solo se c'è). Formati:
+   - Gemini CLI ~/.gemini/settings.json, Claude Desktop claude_desktop_config.json, Cline cline_mcp_settings.json (tutti i file che trovi), Antigravity mcp_config.json, Cursor ~/.cursor/mcp.json, Windsurf ~/.codeium/windsurf/mcp_config.json: chiave "mcpServers" -> {command, args, env}
+   - VS Code mcp.json: chiave "servers" -> {type:"stdio", command, args, env}
+   - Codex ~/.codex/config.toml: blocco [mcp_servers.agentmemory] con command, args, [mcp_servers.agentmemory.env]
+   Tocca SOLO la voce agentmemory: tutti gli altri server (matlab, browser_mcp, ...) restano identici. Se un file non è JSON valido non toccarlo e dimmelo. Se trovi voci agentmemory o llm-wiki che puntano a un altro clone o a un indirizzo che risponde 401, dimmelo (agentmemory sostituiscila con quella nuova, llm-wiki lasciala).
+
+6. VERIFICA. Dimmi di riavviare gli agenti e le app. Poi:
+   a) se esiste esegui node scripts/kb.mjs test, altrimenti node scripts/kb.mjs status;
+   b) salva con memory_save la memoria "kb-test <nome macchina> <data>" e ritrovala con memory_smart_search;
+   c) per le CLI installate prova la KB in modalità non interattiva, per esempio
+      claude -p "usa memory_smart_search per cercare kb-test e dimmi cosa trovi"
+      gemini -p "usa memory_smart_search per cercare kb-test e dimmi cosa trovi"
+      opencode run "usa memory_smart_search per cercare kb-test e dimmi cosa trovi"
+      e controlla se compaiono anche memorie kb-test di altre macchine.
+
+Alla fine riportami una tabella: programma | collegato da (installazione / a mano / no) | file config | prova (ok / errore / da provare a mano) | note. Poi: OS, clone principale e clone ignorati, ruolo, eventuale copia di data/, output di test o status, e memorie kb-test viste da altre macchine.
 ```
 
-Il diagramma delle scelte e dei casi di errore è in [docs/flusso-installazione.md](docs/flusso-installazione.md).
-Per installare a mano, passo per passo: [docs/installazione-manuale.md](docs/installazione-manuale.md).
-
-## ⚠️ Problemi noti (PC Windows / rete aziendale)
-
-| Sintomo | Causa | Soluzione |
-|---------|-------|-----------|
-| `git fetch`/`push` resta appeso o `CONNECT tunnel failed, response 502` | proxy aziendale (`http.proxy` globale) che non lascia passare GitHub | disattivalo **solo per questa repo**: `git config http.proxy ""`. In PowerShell le `""` vengono scartate: usa `cmd /c 'git config http.proxy ""'`. Va rifatto su ogni clone |
-| `kb.mjs status` dice "l'aggiornamento automatico e' fermo" | file tracciati modificati nel clone | `git status` per vederli; salvali (`git stash`) o scartali tu: l'aggiornamento riparte da solo |
-| agentmemory non parte: `127.0.0.1:3111 already in use`, ma `/health` non risponde | un'istanza precedente inceppata tiene la porta | ferma i processi vecchi e rilancia `node scripts/kb.mjs install`. PowerShell: `Get-NetTCPConnection -LocalPort 3111 \| % { Stop-Process -Id $_.OwningProcess -Force }`; Linux/macOS: `kill $(lsof -ti :3111)` |
-| client: `401` dal server | `KB_TOKEN` mancante o vecchio nel `.env` del clone | chiedi il token attuale e rilancia `node scripts/kb.mjs connect` |
-| Clone interrotto lascia una cartella con `.git` vuoto | rete instabile o proxy | cancella la cartella e riclona dopo aver sistemato il proxy |
-
-Il **DB live** di agentmemory (`state_store.db`) e il **repo git** possono stare in una
-cartella OneDrive solo se nessun altro PC usa quella stessa cartella: OneDrive non
-gestisce bene file scritti di continuo né i file di `.git`. Per condividere le memorie
-tra PC usa il server centrale o `memory-sync.mjs`.
+Problemi comuni e codici di errore: [README](README.md#problemi-comuni).
+Flusso e casi di errore dell'installazione: [docs/flusso-installazione.md](docs/flusso-installazione.md).
