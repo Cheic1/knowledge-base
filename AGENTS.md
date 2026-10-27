@@ -8,7 +8,8 @@ Questa knowledge base si integra con diversi agenti AI tramite **MCP (Model Cont
 
 > ⚡ **Cablaggio automatico**: invece di editare i file a mano, esegui
 > `node scripts/kb.mjs connect` (solo Node, niente bash/Python) — configura MCP in
-> Claude Code, OpenCode, Hermes, Cursor e VS Code trovati sulla macchina, secondo il
+> tutti i programmi trovati sulla macchina (elenco in `scripts/lib/adapters.mjs`; verifica
+> con `node scripts/kb.mjs test`), secondo il
 > ruolo dell'installazione (`server`, `client`, `standalone-dev`, vedi PROMPT-INSTALL.md).
 > Con `--role client` usa l'endpoint di `config/endpoint.env` e il token del proxy
 > (`KB_TOKEN`) da `<repo>/.env`: sul server stampalo con `node scripts/kb.mjs token`,

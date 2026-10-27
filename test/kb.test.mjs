@@ -135,7 +135,7 @@ test('connect: client cabla Cursor e Hermes senza bash ne\' Python', () => {
   const s = sandbox();
   fs.mkdirSync(path.join(s.home, '.cursor'), { recursive: true });
   write(path.join(s.home, '.hermes', 'config.yaml'), 'model: x\n');
-  const out = s.kb('connect', '--role', 'client');
+  const out = s.kb('connect', '--role', 'client', '--all'); // Cursor ha solo la config: serve --all
   assert.equal(out.status, 0, out.stdout + out.stderr);
   const cur = JSON.parse(fs.readFileSync(path.join(s.home, '.cursor', 'mcp.json'), 'utf8'));
   assert.equal(cur.mcpServers.agentmemory.env.AGENTMEMORY_URL, 'http://127.0.0.1:9');

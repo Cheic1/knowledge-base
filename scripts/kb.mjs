@@ -2,13 +2,18 @@
 // kb.mjs - Installazione, cablaggio e aggiornamento della knowledge base. Solo Node:
 // nessun bash o Python sui PC (sul server Linux le unit systemd restano in bash).
 //
-//   node scripts/kb.mjs install [--role server|client|standalone-dev] [--wiki-search]
-//                               [--llm-wiki] [--every 15] [--no-schedule]
-//   node scripts/kb.mjs connect [--role ...] [--llm-wiki]   # solo cablaggio agenti (ex connect-agent.sh)
-//   node scripts/kb.mjs update  [--quiet] [--force] [--apply-now]
-//   node scripts/kb.mjs maintenance [--quiet] [--force]      # server: riavvii in sospeso
-//   node scripts/kb.mjs token [show|rotate|set VALORE|set -]  # KB_TOKEN in <repo>/.env (ex kb-token.sh)
+//   node scripts/kb.mjs install [--role server|client|standalone-dev] [--dry-run] [--all] [--only id,id]
+//                               [--wiki-search] [--llm-wiki] [--every 15] [--no-schedule]
+//   node scripts/kb.mjs test [--quick | --deep] [--only id,id] [--json]   # tabella per programma
+//   node scripts/kb.mjs uninstall [--restore] [--only id,id]              # toglie la KB dai programmi
+//   node scripts/kb.mjs update  [--quiet] [--force] [--apply-now]        # lo lancia tick
+//   node scripts/kb.mjs tick [--background]                              # job pianificato: update + sync
+//   node scripts/kb.mjs connect [--role ...] [--llm-wiki]                # solo cablaggio dei programmi
+//   node scripts/kb.mjs maintenance [--quiet] [--force]                  # server: riavvii in sospeso
+//   node scripts/kb.mjs token [show|rotate|set VALORE|set -]             # KB_TOKEN in <repo>/.env
 //   node scripts/kb.mjs status
+//
+// Programmi supportati: scripts/lib/adapters.mjs. Controlli di `test`: scripts/lib/checks.mjs.
 //
 // Ruoli:
 //   server          agentmemory locale = DB primario, kb-proxy sulla LAN con token, unit
@@ -30,7 +35,9 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadKbConfig, newToken, readEnvFile, setEnvVar, validToken } from './lib/env.mjs';
-import { buildServers, claudeAddArgs, LOCAL_AM_URL, mergeCursor, mergeHermes, mergeOpenCode, mergeVsCode } from './lib/agents.mjs';
+import { buildServers, LOCAL_AM_URL } from './lib/agents.mjs';
+import { ADAPTERS, applyAdapter, clonesInConfigs, restoreAdapter, selectAdapters } from './lib/adapters.mjs';
+import { allGreen, formatTable, runChecks } from './lib/checks.mjs';
 import { DATA_BRANCH, dataDir } from './lib/data-branch.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -69,7 +76,7 @@ function run(cmd, args, opts = {}) {
     encoding: 'utf8', windowsHide: true, timeout: opts.timeout ?? 120000,
     cwd: opts.cwd ?? REPO, input: opts.input, env: opts.env ?? process.env,
     // su Windows npm/npx/claude sono .cmd: servono via shell
-    shell: opts.shell ?? (WIN && ['npm', 'npx', 'claude', 'opencode'].includes(cmd)),
+    shell: opts.shell ?? (WIN && ['npm', 'npx', 'claude', 'opencode', 'gemini', 'codex'].includes(cmd)),
   });
   r.out = `${r.stdout || ''}${r.stderr || ''}`.trim();
   return r;
@@ -89,10 +96,6 @@ function readJson(file, fallback) {
 function writeJson(file, data) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
-}
-function backupOnce(file) {
-  const bak = `${file}.bak-kb`;
-  if (fs.existsSync(file) && !fs.existsSync(bak)) fs.copyFileSync(file, bak);
 }
 // I vecchi stati hanno role 'pc': e' il comportamento che ora si chiama standalone-dev
 const normalizeRole = (r) => (r === 'pc' ? 'standalone-dev' : r);
@@ -342,71 +345,27 @@ function serversFor(role, { llmWiki = false } = {}) {
   });
 }
 
-function editJson(file, merge) {
-  const cfg = readJson(file, fs.existsSync(file) ? null : {});
-  if (cfg === null) { warn(`${file} non e' JSON valido: non lo tocco`); return null; }
-  backupOnce(file);
-  writeJson(file, merge(cfg));
-  return file;
-}
+// Contesto per gli adattatori: la macchina vera
+const CTX = { home: HOME, platform: process.platform, env: process.env, has, run };
 
-function wireOpenCode(servers) {
-  const dir = path.join(HOME, '.config', 'opencode');
-  if (!fs.existsSync(dir) && !has('opencode')) return null;
-  return editJson(path.join(dir, 'opencode.json'), (c) => mergeOpenCode(c, servers));
-}
-
-function wireHermes(servers) {
-  const file = path.join(HOME, '.hermes', 'config.yaml');
-  if (!fs.existsSync(file)) return null;
-  backupOnce(file);
-  fs.writeFileSync(file, mergeHermes(fs.readFileSync(file, 'utf8'), servers));
-  return file;
-}
-
-function wireCursor(servers) {
-  const dir = path.join(HOME, '.cursor');
-  if (!fs.existsSync(dir)) return null;
-  return editJson(path.join(dir, 'mcp.json'), (c) => mergeCursor(c, servers));
-}
-
-// mcp.json utente di VS Code (quello di un workspace lo gestisce chi lavora nel workspace)
-function vscodeUserDir() {
-  const cands = WIN ? [path.join(process.env.APPDATA || path.join(HOME, 'AppData', 'Roaming'), 'Code', 'User')]
-    : [path.join(HOME, '.config', 'Code', 'User'), path.join(HOME, 'Library', 'Application Support', 'Code', 'User')];
-  return cands.find((d) => fs.existsSync(d)) || null;
-}
-function wireVsCode(servers) {
-  const dir = vscodeUserDir();
-  if (!dir) return null;
-  return editJson(path.join(dir, 'mcp.json'), (c) => mergeVsCode(c, servers));
-}
-
-function wireClaude(servers) {
-  if (!has('claude')) {
-    if (fs.existsSync(path.join(HOME, '.claude.json'))) warn('Claude Code trovato ma il comando "claude" non e\' nel PATH: MCP non cablato');
-    return null;
-  }
-  for (const [name, s] of Object.entries(servers)) {
-    run('claude', ['mcp', 'remove', '--scope', 'user', name], { timeout: 60000 });
-    const r = run('claude', claudeAddArgs(name, s, WIN), { timeout: 60000 });
-    if (r.status !== 0) { warn(`claude mcp add ${name}: ${r.out}`); return null; }
-  }
-  return 'claude mcp (scope user)';
-}
-
+// Cabla tutti i programmi installati (o --all / --only). Con dryRun dice solo cosa cambierebbe.
 function wireAgents(role, opts = {}) {
   const servers = serversFor(role, opts);
-  const done = [];
   const where = role === 'client' ? `server centrale ${kbConfig().apiUrl}` : `agentmemory locale ${LOCAL_AM_URL}`;
-  for (const [label, fn] of [['Claude Code', wireClaude], ['OpenCode', wireOpenCode], ['Hermes', wireHermes],
-    ['Cursor', wireCursor], ['VS Code', wireVsCode]]) {
+  const done = [];
+  for (const a of selectAdapters(CTX, opts)) {
     try {
-      const file = fn(servers);
-      if (file) { ok(`${label} cablato su ${where} (${Object.keys(servers).join(', ')}) -> ${file}`); done.push(label); }
-    } catch (e) { warn(`${label}: ${e.message}`); }
+      const res = applyAdapter(CTX, a, servers, { dryRun: opts.dryRun });
+      const errs = res.filter((r) => r.error);
+      for (const r of errs) warn(`${a.label}: ${r.file}: ${r.error}`);
+      const changed = res.filter((r) => r.changed).map((r) => r.file);
+      if (errs.length === res.length) continue;
+      done.push(a.id);
+      if (opts.dryRun) log(`${a.label}: ${changed.length ? `cambierebbe ${changed.join(', ')}` : 'gia\' a posto'}`);
+      else ok(`${a.label} -> ${where} (${Object.keys(servers).join(', ')})${changed.length ? `, scritto ${changed.join(', ')}` : ', gia\' a posto'}`);
+    } catch (e) { warn(`${a.label}: ${e.message}`); }
   }
-  if (!done.length) warn('nessun agente trovato (Claude Code, OpenCode, Hermes, Cursor, VS Code): installane uno e rilancia');
+  if (!done.length) warn(`nessun programma trovato (${ADAPTERS.map((a) => a.label).join(', ')}): installane uno e rilancia`);
   return done;
 }
 
@@ -492,6 +451,13 @@ async function install(opt) {
   checkPrereq();
   const state = loadState();
   const role = detectRole(state, opt.role);
+  if (opt.dryRun) {
+    log(`prova senza scrivere nulla: ruolo ${role}, repo ${REPO}`);
+    wireAgents(role, { ...opt, llmWiki: opt.llmWiki || Boolean(state.llmWiki) });
+    return;
+  }
+  const others = otherClones();
+  if (others.length) warn(`KB-CLONE altri clone di knowledge-base: ${others.join(', ')}. Non li tocco: le config dei programmi vengono riscritte su ${REPO}`);
   const remote = git(['remote', 'get-url', 'origin']).stdout.trim();
   log(`installazione: ruolo ${role}, repo ${REPO}, remote ${remote}`);
   ensureMainBranch();
@@ -511,7 +477,8 @@ async function install(opt) {
   // Stato subito, poi a ogni tappa: se l'installazione viene interrotta (timeout
   // dell'agente, rete) `status` lo dice e il rilancio riprende da qui.
   saveState(base);
-  const agents = wireAgents(role, { llmWiki: base.llmWiki });
+  const agents = wireAgents(role, { ...opt, llmWiki: base.llmWiki });
+  base.all = Boolean(opt.all);
   installSkills();
   if (opt.schedule) scheduleSync(role, opt.every);
   if (role !== 'client') firstSync();
@@ -519,11 +486,13 @@ async function install(opt) {
   log('');
   log('FATTO. Riavvia gli agenti cablati per caricare gli strumenti MCP.');
   log('Da qui in poi la macchina si aggiorna da sola: non serve rilanciare nulla.');
+  log('');
+  await test({ report: true });
   // Per ultima, perche' scarica fino a ~2 GB di modelli e puo' durare molti minuti:
   // se l'agente la interrompe, tutto il resto e' gia' a posto.
   if (opt.wikiSearch && role !== 'client') {
     wikiSearchSetup();
-    const again = wireAgents(role, { llmWiki: base.llmWiki }); // ora c'e' anche wiki-search
+    const again = wireAgents(role, { ...opt, llmWiki: base.llmWiki }); // ora c'e' anche wiki-search
     saveState({ ...base, agents: again, completed: true, wikiSearch: Boolean(wikiSearchCmd()) });
   }
 }
@@ -535,7 +504,7 @@ async function connect(opt) {
   const llmWiki = opt.llmWiki || Boolean(state.llmWiki);
   log(`cablaggio agenti: ruolo ${role}${role === 'client' ? `, server ${kbConfig().apiUrl}` : ''}`);
   if (role === 'client') await checkCentral();
-  const agents = wireAgents(role, { llmWiki });
+  const agents = wireAgents(role, { ...opt, llmWiki });
   installSkills();
   if (state.appliedCommit) saveState({ ...state, agents, llmWiki });
   log('Riavvia gli agenti cablati per caricare gli strumenti MCP.');
@@ -591,7 +560,7 @@ async function update(opt) {
     if (touched(/^package\.json$/)) npmInstall();
     if (touched(RESTART_RE)) await ensureAgentmemory(state.role, { restart: false });
   }
-  if (touched(/^scripts\/(kb\.mjs|wiki-search\.sh)$|^scripts\/lib\/|^mcp\/|^config\/endpoint\.env$/)) wireAgents(state.role, { llmWiki: state.llmWiki });
+  if (touched(/^scripts\/(kb\.mjs|wiki-search\.sh)$|^scripts\/lib\/|^mcp\/|^config\/endpoint\.env$/)) wireAgents(state.role, { llmWiki: state.llmWiki, all: state.all });
   if (touched(/^scripts\/(kb\.mjs|schedule-memory-sync\.mjs|kb-auto-sync\.mjs)$/)) scheduleSync(state.role, state.every || 15);
   state = { ...state, repo: REPO, appliedCommit: now, updatedAt: new Date().toISOString(), pendingRestart };
   if (state.role !== 'client') state.agentmemory = pinnedVersion();
@@ -673,27 +642,99 @@ async function status() {
   run(process.execPath, [path.join(HERE, 'schedule-memory-sync.mjs'), 'status'], { shell: false }).out.split('\n').forEach((l) => console.log(l));
 }
 
+// Altri clone di knowledge-base sulla macchina: nei posti soliti e nelle config dei programmi
+function otherClones() {
+  const names = ['knowledge-base', 'my-knowledge-base'];
+  const roots = [HOME, '/DATA/AppData', ...(WIN ? 'CDEFG'.split('').map((d) => `${d}:\\`) : [])];
+  const cands = roots.flatMap((r) => names.map((n) => path.join(r, n)));
+  const found = cands.filter((p) => path.resolve(p) !== path.resolve(REPO) && fs.existsSync(path.join(p, '.git')));
+  return [...new Set([...found.map((p) => path.resolve(p)), ...clonesInConfigs(CTX, REPO)])];
+}
+
+// Controllo completo: per ogni programma config, avvio MCP, memoria, altre macchine
+async function test(opt) {
+  const state = loadState();
+  const role = state.role || detectRole(state, opt.role);
+  const cfg = kbConfig();
+  const h = role === 'client' ? await health(cfg.apiUrl, cfg.token) : await health();
+  const header = {
+    repo: REPO, branch: currentBranch(), ruolo: role,
+    agentmemory: role === 'client'
+      ? `${cfg.apiUrl}: ${h?.unauthorized ? 'KB-401 token mancante o errato' : h ? `attivo ${h.version || ''}` : 'NON raggiungibile'}`
+      : `${LOCAL_AM_URL}: ${h ? `attivo ${h.version || ''}` : 'NON risponde (KB-PORT? rilancia install)'} (repo vuole ${pinnedVersion()})`,
+    'ultimo update': state.updatedAt || state.installedAt || '-',
+  };
+  const servers = serversFor(role, { llmWiki: Boolean(state.llmWiki) });
+  const adapters = selectAdapters(CTX, { all: Boolean(state.all), only: opt.only });
+  const down = h?.unauthorized ? 'KB-401: KB_TOKEN mancante o errato nel .env del clone'
+    : !h ? `agentmemory non risponde su ${role === 'client' ? cfg.apiUrl : LOCAL_AM_URL}` : null;
+  const rows = await runChecks(CTX, adapters, servers, {
+    down, host: os.hostname().toLowerCase(), day: new Date().toISOString().slice(0, 10), quick: opt.quick, deep: opt.deep,
+  });
+  if (opt.json) { console.log(JSON.stringify({ ...header, programmi: rows }, null, 2)); return; }
+  for (const [k, v] of Object.entries(header)) console.log(`${`${k}`.padEnd(14)}${v}`);
+  console.log('');
+  console.log(rows.length ? formatTable(rows, opt) : 'nessun programma trovato: installane uno e rilancia install');
+  const others = [...new Set(rows.flatMap((r) => r.others || []))];
+  if (others.length) console.log(`\naltre macchine viste: ${others.join(', ')}`);
+  console.log(allGreen(rows) ? '\nTUTTO OK' : '\nCi sono righe rosse: leggi la nota a destra di ciascuna.');
+  if (!allGreen(rows) && !opt.report) process.exitCode = 1;
+}
+
+// Toglie la KB dai programmi e le attivita' pianificate. I dati di agentmemory e il clone restano.
+async function uninstall(opt) {
+  const none = { agentmemory: null, 'wiki-search': null, 'llm-wiki': null };
+  for (const a of selectAdapters(CTX, { all: true, only: opt.only })) {
+    const restored = opt.restore ? restoreAdapter(CTX, a) : [];
+    if (restored.length) { ok(`${a.label}: rimesso il backup ${restored.join(', ')}`); continue; }
+    const changed = applyAdapter(CTX, a, none).filter((r) => r.changed);
+    if (changed.length) ok(`${a.label}: voci della KB tolte da ${changed.map((r) => r.file).join(', ')}`);
+  }
+  run(process.execPath, [path.join(HERE, 'schedule-memory-sync.mjs'), 'uninstall']);
+  ok('sync e aggiornamento automatici tolti');
+  const state = loadState();
+  if (state.role === 'server') warn('server: i servizi systemd restano (systemctl --user disable --now kb-proxy agentmemory)');
+  else removeLocalAutostart();
+  saveState({ ...state, completed: false, uninstalledAt: new Date().toISOString() });
+  log('Fatto. Il database di agentmemory e il clone non sono stati toccati. Per reinstallare: node scripts/kb.mjs install');
+}
+
+// Job pianificato: aggiornamento del codice + sync delle memorie (kb-auto-sync.mjs)
+function tick(opt) {
+  const r = spawnSync(process.execPath, [path.join(HERE, 'kb-auto-sync.mjs'), ...(opt.background ? ['--background'] : [])],
+    { stdio: 'inherit', windowsHide: true });
+  process.exitCode = r.status ?? 1;
+}
+
 const [cmd = 'status', ...rest] = process.argv.slice(2);
-const opt = { role: null, every: 15, wikiSearch: false, llmWiki: false, schedule: true, force: false, applyNow: false };
+const opt = { role: null, every: 15, wikiSearch: false, llmWiki: false, schedule: true, force: false, applyNow: false,
+  dryRun: false, all: false, only: null, quick: false, deep: false, json: false, restore: false, background: false };
 const positional = [];
 for (let i = 0; i < rest.length; i++) {
   if (rest[i] === '--role') opt.role = rest[++i];
   else if (rest[i] === '--every') opt.every = Number(rest[++i]);
+  else if (rest[i] === '--only') opt.only = String(rest[++i] || '').split(',').filter(Boolean);
   else if (rest[i] === '--wiki-search') opt.wikiSearch = true;
   else if (rest[i] === '--llm-wiki') opt.llmWiki = true;
   else if (rest[i] === '--no-schedule') opt.schedule = false;
   else if (rest[i] === '--force') opt.force = true;
   else if (rest[i] === '--apply-now') opt.applyNow = true;
+  else if (rest[i] === '--dry-run') opt.dryRun = true;
+  else if (rest[i] === '--all') opt.all = true;
+  else if (rest[i] === '--quick') opt.quick = true;
+  else if (rest[i] === '--deep') opt.deep = true;
+  else if (rest[i] === '--json') opt.json = true;
+  else if (rest[i] === '--restore') opt.restore = true;
+  else if (rest[i] === '--background') opt.background = true;
   else if (rest[i] === '--quiet') QUIET = true;
   else if (cmd === 'token' && !rest[i].startsWith('--')) positional.push(rest[i]);
   else die(`argomento sconosciuto: ${rest[i]}`);
 }
 if (opt.role && !ROLES.includes(normalizeRole(opt.role))) die(`--role vuole ${ROLES.join(' | ')}`);
+const ids = ADAPTERS.map((a) => a.id);
+if (opt.only?.some((id) => !ids.includes(id))) die(`--only vuole uno o piu' tra: ${ids.join(', ')}`);
 
-if (cmd === 'install') await install(opt);
-else if (cmd === 'connect') await connect(opt);
-else if (cmd === 'update') await update(opt);
-else if (cmd === 'maintenance') await maintenance(opt);
-else if (cmd === 'token') await token(positional);
-else if (cmd === 'status') await status();
-else die(`comando sconosciuto: ${cmd} (install | connect | update | maintenance | token | status)`);
+const COMMANDS = { install, test, update, tick, uninstall, connect, maintenance, status,
+  token: () => token(positional) };
+if (!COMMANDS[cmd]) die(`comando sconosciuto: ${cmd} (install | test | update | uninstall | tick | connect | status | token | maintenance)`);
+await COMMANDS[cmd](opt);
