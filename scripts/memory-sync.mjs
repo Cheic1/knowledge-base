@@ -8,6 +8,10 @@
 //
 //   memories/sync/<nodo>.json    scritto SOLO dal PC <nodo>
 //
+// I file stanno sul branch ORFANO `kb-data`, aperto come worktree in <repo>/.kb-data/
+// (scripts/lib/data-branch.mjs): i dati non passano mai da main, il codice si.
+// Il worktree e il branch si creano da soli al primo giro.
+//
 // Cosi' git non ha mai conflitti. Ad ogni sync:
 //   1. git pull                 (prende i file degli altri PC)
 //   2. import                   (record degli altri PC: aggiunto se manca,
@@ -34,9 +38,10 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ensureDataWorktree, pullData, pushData } from './lib/data-branch.mjs';
 
 const REPO_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DEFAULT_DIR = path.join(REPO_DIR, 'memories', 'sync');
+let DATA_DIR = ''; // worktree .kb-data, impostato da main() in modalita' git
 
 // Collezioni dell'export indicizzate per chiave (come le scrive mem::import)
 const KEYED = {
@@ -268,7 +273,7 @@ const PROXY_HINT = "se sei dietro un proxy aziendale che blocca GitHub, disattiv
 
 function git(args, check = true) {
   // timeout: dietro un proxy aziendale pull/push possono restare appesi per minuti
-  const r = spawnSync('git', ['-C', REPO_DIR, ...args], { encoding: 'utf8', timeout: 90000 });
+  const r = spawnSync('git', ['-C', DATA_DIR, ...args], { encoding: 'utf8', timeout: 90000 });
   if (r.error?.code === 'ETIMEDOUT') die(`git ${args[0]} bloccato da oltre 90s: ${PROXY_HINT}`);
   if (r.error) die(`git non trovato (${r.error.code}). Installa git o usa --dir con una cartella condivisa`);
   if (r.status !== 0 && /proxy|CONNECT tunnel|502|407|Failed to connect/i.test(r.stderr || '')) {
@@ -279,25 +284,27 @@ function git(args, check = true) {
 }
 
 function gitPull() {
-  const r = git(['pull', '--rebase', '--autostash'], false);
-  if (r.status !== 0) {
-    git(['rebase', '--abort'], false);
-    die(`git pull fallito, repo lasciato com'era: ${r.stderr.trim()}`);
+  const r = pullData(DATA_DIR, { log });
+  if (!r.ok) {
+    if (/proxy|CONNECT tunnel|502|407|Failed to connect|bloccato/i.test(r.out)) die(`git pull: ${r.out}\n  ${PROXY_HINT}`);
+    die(`git pull dei dati fallito, worktree lasciato com'era: ${r.out}`);
   }
 }
 
 // Committa solo i file di questo PC: il proprio export e, se c'e', il proprio
 // file di voti di affidabilita' (memories/trust/votes/<node>.jsonl)
 function gitPush(target, node) {
-  const files = [target, path.join(REPO_DIR, 'memories', 'trust', 'votes', `${node}.jsonl`)]
+  const files = [target, path.join(DATA_DIR, 'memories', 'trust', 'votes', `${node}.jsonl`)]
     .filter((f) => fs.existsSync(f))
-    .map((f) => path.relative(REPO_DIR, f).split(path.sep).join('/'));
+    .map((f) => path.relative(DATA_DIR, f).split(path.sep).join('/'));
   git(['add', '--', ...files]);
   if (git(['diff', '--cached', '--quiet', '--', ...files], false).status === 0) return;
   const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
   git(['commit', '-m', `memory-sync: ${node} ${stamp}`, '--', ...files]);
   for (let i = 0; i < 3; i++) {
-    if (git(['push'], false).status === 0) { log('push completato'); return; }
+    const p = pushData(DATA_DIR);
+    if (p.ok) { log('push completato'); return; }
+    if (/proxy|CONNECT tunnel|502|407|Failed to connect|bloccato/i.test(p.out)) die(`git push: ${p.out}\n  ${PROXY_HINT}`);
     gitPull(); // qualcun altro ha pushato nel frattempo
   }
   die('push fallito dopo 3 tentativi');
@@ -340,9 +347,14 @@ function parseArgs(argv) {
 async function main() {
   const a = parseArgs(process.argv.slice(2));
   const useGit = !a.dir;
-  const syncDir = a.dir ? path.resolve(a.dir.replace(/^~(?=$|[\\/])/, os.homedir())) : DEFAULT_DIR;
+  lock(); // prima del worktree: due sync in parallelo non devono crearlo insieme
+  if (useGit) {
+    try {
+      DATA_DIR = ensureDataWorktree(REPO_DIR, { log, offline: a.dryRun });
+    } catch (e) { die(e.message); }
+  }
+  const syncDir = a.dir ? path.resolve(a.dir.replace(/^~(?=$|[\\/])/, os.homedir())) : path.join(DATA_DIR, 'memories', 'sync');
   const node = nodeName();
-  lock();
   log(`nodo '${node}', cartella ${syncDir}${useGit ? ' (git)' : ''}`);
 
   if (a.command === 'sync' && useGit && !a.dryRun) gitPull();

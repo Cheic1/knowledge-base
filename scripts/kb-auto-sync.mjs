@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Sync automatica delle memorie: aggiornamento del codice (kb.mjs update),
-// import-agent-memories + memory-sync, senza output
+// Sync automatica delle memorie: aggiornamento del codice (kb.mjs update, che da solo
+// controlla al massimo una volta ogni KB_UPDATE_HOURS ore), poi import-agent-memories +
+// memory-sync (salvo il ruolo client, che non ha memorie locali), senza output
 // a video, con log in ~/.agentmemory/memory-sync.log. Pensato per essere lanciato
 // dallo scheduler (Utilita' di pianificazione, cron) e dagli hook di Claude Code.
 //
@@ -69,9 +70,18 @@ function selfUpdate() {
   if (r.status !== 0) log(`kb.mjs update uscito con codice ${r.status}: vedi ~/.agentmemory/kb-update.log`);
 }
 
+// Ruolo dalla installazione (kb.mjs install): un client non ha agentmemory locale
+// ne' sync, controlla solo gli aggiornamenti del codice
+function role() {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(os.homedir(), '.agentmemory', 'kb-install.json'), 'utf8')).role || '';
+  } catch { return ''; }
+}
+
 async function main() {
   loadEnv();
   selfUpdate();
+  if (role() === 'client') return;
   const base = (process.env.KB_MEMORY_URL || 'http://127.0.0.1:3111').replace(/\/+$/, '');
   const headers = process.env.AGENTMEMORY_SECRET ? { Authorization: `Bearer ${process.env.AGENTMEMORY_SECRET}` } : {};
   try {

@@ -19,15 +19,17 @@ flowchart TD
     H1 -- si --> H2[Ripristina dalla copia] --> I
     H1 -- no --> I[kb.mjs install]
     I --> J{Ruolo}
-    J -- server Linux --> J1[systemd: agentmemory + kb-proxy con token]
-    J -- PC Windows --> J2[Attivita' KB agentmemory all'accesso]
-    J -- PC Linux/macOS --> J3[crontab @reboot]
+    J -- server --> J1[systemd: agentmemory + kb-proxy con token + timer manutenzione]
+    J -- standalone-dev Windows --> J2[Attivita' KB agentmemory all'accesso]
+    J -- standalone-dev Linux/macOS --> J3[crontab @reboot]
+    J -- client --> JC[Niente agentmemory locale\nverifica server di endpoint.env + KB_TOKEN]
     J1 --> K
     J2 --> K
-    J3 --> K[Cabla agenti trovati: Claude Code, OpenCode, Hermes]
+    J3 --> K[Cabla agenti su agentmemory locale: Claude Code, OpenCode, Hermes, Cursor, VS Code]
+    JC --> KC[Cabla agenti sul server centrale] --> NC[Solo controllo aggiornamenti]
     K --> L[Sync memorie ogni 15 min + hook Claude Code]
-    L --> M[Prima sync: import, pull, push]
-    M --> N[Aggiornamento automatico: kb.mjs update a ogni giro]
+    L --> M[Prima sync: crea .kb-data su branch orfano kb-data, import, pull, push]
+    M --> N[Aggiornamento automatico: kb.mjs update, al massimo ogni 24 h, solo fast-forward]
 ```
 
 Errori e cosa fare:
@@ -45,9 +47,9 @@ Errori e cosa fare:
 
 Verificato su `scripts/kb-auto-sync.mjs`, `scripts/memory-sync.mjs` e `scripts/import-agent-memories.mjs`.
 
-1. Parte ogni 15 minuti (attività pianificata su Windows, cron su Linux/macOS), all'accesso o al riavvio, e a inizio e fine sessione di Claude Code.
-2. `kb.mjs update` aggiorna il codice con `git pull`; se agentmemory non risponde il giro salta.
+1. Parte ogni 15 minuti (attività pianificata su Windows, cron su Linux/macOS), all'accesso o al riavvio, e a inizio e fine sessione di Claude Code. Sui `client` fa solo il punto 2.
+2. `kb.mjs update` (al massimo ogni `KB_UPDATE_HOURS` ore, default 24) aggiorna il codice con `git merge --ff-only`: se ci sono modifiche locali a file tracciati, commit locali o il clone non è su main, non tocca nulla e lo scrive in `~/.agentmemory/kb-update.log`. Sul server i riavvii dei servizi restano in sospeso fino alla manutenzione notturna. Se agentmemory non risponde la sync salta.
 3. `import-agent-memories` salva in agentmemory (via `/agentmemory/remember`) le memorie native degli altri agenti, saltando i blocchi con segreti.
-4. `memory-sync`: `git pull --rebase`, poi per ogni file degli altri PC importa i record nuovi o con `updatedAt` più recente (`/agentmemory/import`, strategia merge), poi esporta il DB locale in `memories/sync/<pc>.json` (con `kbAuthor`, senza memorie `personale`), poi commit e push del solo proprio file (fino a 3 tentativi).
+4. `memory-sync` (nel worktree `.kb-data/`, branch orfano `kb-data`): `git pull`, poi per ogni file degli altri PC importa i record nuovi o con `updatedAt` più recente (`/agentmemory/import`, strategia merge), poi esporta il DB locale in `kb-data:memories/sync/<pc>.json` (con `kbAuthor`, senza memorie `personale`), poi commit e push del solo proprio file (fino a 3 tentativi).
 5. Non si propagano le cancellazioni. Due memorie con id diversi e testo uguale restano due memorie. Se lo stesso id è diverso su due PC vince `updatedAt` più recente.
 6. Punti di errore: agentmemory spento (salta), versione agentmemory diversa (salta quel file), git bloccato dal proxy (timeout 90 s), push respinto 3 volte, export troppo grande (non supportato).

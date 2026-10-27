@@ -14,6 +14,8 @@ Restart=always
 RestartSec=5
 # 78 = KB_TOKEN mancante: inutile riavviare finche' non si configura
 RestartPreventExitStatus=78
+# SIGTERM: kb-proxy lascia finire le richieste in corso (KB_PROXY_GRACE_MS, 15 s)
+TimeoutStopSec=25
 
 [Install]
 WantedBy=default.target

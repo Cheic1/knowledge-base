@@ -9,8 +9,12 @@
 //   # nessun clone: lo crea in ~/knowledge-base
 //   node bootstrap.mjs [--dir CARTELLA] [--url URL_REPO]
 //
-// Opzioni: --dir CARTELLA   clone da usare/creare (default: cartella git corrente,
-//                           poi ~/knowledge-base)
+// Opzioni: --dir CARTELLA   clone da usare/creare. Senza --dir lo cerca, in ordine:
+//                           KB_REPO_DIR, il clone gia' installato (campo "repo" di
+//                           ~/.agentmemory/kb-install.json), la cartella git corrente
+//                           (process.cwd(), se e' il nostro repo), ~/knowledge-base.
+//                           Non usa mai la cartella dove sta questo file: di solito e'
+//                           una cartella temporanea.
 //          --url URL        remote da clonare se il clone non esiste (GitHub, GitLab...)
 //          --no-install     fermati dopo aver aggiornato il clone
 //          tutto il resto   passato a `kb.mjs install` (--role server, --wiki-search...)
@@ -67,15 +71,28 @@ function toplevel(cwd) {
   const r = git(['rev-parse', '--show-toplevel'], { cwd });
   return r.status === 0 ? path.resolve(r.stdout.trim()) : '';
 }
-if (dir) dir = path.resolve(dir.replace(/^~(?=$|[\\/])/, HOME));
-REPO = dir ? toplevel(dir) : (toplevel(process.cwd()) || toplevel(path.join(HOME, 'knowledge-base')));
+const expand = (p) => path.resolve(p.replace(/^~(?=$|[\\/])/, HOME));
 // Un clone e' nostro se ha la configurazione dell'endpoint o il remote si chiama knowledge-base
 function isOurs(r) {
   if (!r) return false;
   if (fs.existsSync(path.join(r, 'config', 'endpoint.env'))) return true;
   return /knowledge-base/i.test(git(['remote', 'get-url', 'origin'], { cwd: r }).stdout);
 }
-if (!dir && REPO && !isOurs(REPO)) REPO = toplevel(path.join(HOME, 'knowledge-base')); // cartella corrente = altro progetto
+function installedRepo() {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(HOME, '.agentmemory', 'kb-install.json'), 'utf8')).repo || '';
+  } catch { return ''; }
+}
+if (dir) {
+  dir = expand(dir);
+  REPO = toplevel(dir);
+} else {
+  const cands = [process.env.KB_REPO_DIR, installedRepo(), process.cwd(), path.join(HOME, 'knowledge-base')];
+  for (const c of cands.filter(Boolean)) {
+    const top = toplevel(expand(c));
+    if (isOurs(top)) { REPO = top; break; }
+  }
+}
 if (!REPO) {
   const target = dir || path.join(HOME, 'knowledge-base');
   if (fs.existsSync(target) && fs.readdirSync(target).length) die(`${target} esiste e non e' un clone git: scegli un'altra cartella con --dir`);

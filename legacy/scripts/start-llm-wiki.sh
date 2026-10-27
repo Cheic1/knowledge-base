@@ -142,7 +142,7 @@ start_cli() {
     # Verifica se qmd è installato
     if ! command -v qmd &> /dev/null; then
         log_warning "qmd non installato (opzionale per ricerca semantica)"
-        log_info "Installa: npm install -g @tobilu/qmd"
+        log_info "Installa: npm install -g @tobilu/qmd@2.8.3"
     fi
     
     # Avvia CLI
