@@ -4,9 +4,7 @@ Una memoria condivisa per tutti i tuoi agenti AI (Claude Code, OpenCode, Gemini 
 VS Code, Claude Desktop, ...) su tutte le tue macchine. Quello che un agente impara,
 gli altri lo ritrovano. Si installa con un comando e si aggiorna da solo.
 
-> Questo README descrive il comportamento della spec
-> [`docs/superpowers/specs/2026-10-25-kb-tutti-agenti-design.md`](docs/superpowers/specs/2026-10-25-kb-tutti-agenti-design.md),
-> in corso di implementazione.
+> Progetto: [`docs/superpowers/specs/2026-10-25-kb-tutti-agenti-design.md`](docs/superpowers/specs/2026-10-25-kb-tutti-agenti-design.md).
 
 ## Installa
 
@@ -84,25 +82,30 @@ La wiki (`wiki/`) è cercabile con lo strumento `wiki-search` dove è attiva (`-
 
 ## Problemi comuni
 
-| Codice | Cosa fare |
+| Sintomo | Cosa fare |
 |---|---|
-| `KB-NET` | proxy aziendale: `git config http.proxy ""` solo per questo repo (PowerShell: `cmd /c 'git config http.proxy ""'`) |
-| `KB-DIRTY` | file del repo modificati a mano: l'aggiornamento è fermo finché non li salvi (`git stash`) o scarti |
-| `KB-401` | token mancante o vecchio: chiedi `KB_TOKEN` a chi gestisce il server e rilancia `install` |
-| `KB-PORT` | porta 3111 occupata da un'istanza bloccata: ferma il processo e rilancia `install` |
-| `KB-JSON` | config di un programma non valida: il file non è stato toccato, correggilo e rilancia |
+| `git fetch` appeso o `CONNECT tunnel failed` | proxy aziendale: `git config http.proxy ""` solo per questo repo (PowerShell: `cmd /c 'git config http.proxy ""'`) |
+| "aggiornamento saltato: modifiche locali" | file del repo modificati a mano: salvali (`git stash`) o scartali, poi riparte da solo |
+| `KB-401` | token mancante o vecchio: chiedi `KB_TOKEN` a chi gestisce il server, mettilo nel `.env` del clone e rilancia `install` |
+| `agentmemory non risponde` ma la porta 3111 è occupata | ferma l'istanza bloccata e rilancia `install` (PowerShell: `Get-NetTCPConnection -LocalPort 3111 \| % { Stop-Process -Id $_.OwningProcess -Force }`) |
+| `KB-JSON` | config di un programma non valida (anche JSON con commenti): non è stata toccata, correggila e rilancia |
+| `KB-CLONE` | ci sono altri clone di knowledge-base: non vengono toccati, le config puntano al clone da cui hai installato |
 
-Log unico: `~/.agentmemory/kb.log`. Per togliere tutto: `node scripts/kb.mjs uninstall --restore`.
+Log: `~/.agentmemory/kb-update.log` (aggiornamenti) e `~/.agentmemory/memory-sync.log` (sync).
+Per togliere tutto: `node scripts/kb.mjs uninstall` (con `--restore` rimette i file di config com'erano).
 
 ## Struttura
 
 ```
-scripts/kb.mjs            comando unico: install | test | update | uninstall
-scripts/bootstrap.mjs     primo passo per clone nuovi o vecchi
-scripts/lib/              moduli (adapters/, service, git, agentmemory, checks, ...)
-config/endpoint.env       indirizzo del server
-wiki/  projects/          conoscenza scritta
-test/                     npm test
+scripts/kb.mjs              comando unico: install | test | uninstall | update | tick | ...
+scripts/bootstrap.mjs       primo passo per clone nuovi o vecchi
+scripts/lib/adapters.mjs    i programmi supportati: dove sta la config e come provarli
+scripts/lib/agents.mjs      i formati delle config (JSON, YAML di Hermes, TOML di Codex)
+scripts/lib/checks.mjs      i controlli di `kb test`
+scripts/lib/mcp-client.mjs  client MCP minimo usato da `kb test`
+config/endpoint.env         indirizzo del server
+wiki/  projects/            conoscenza scritta
+test/                       npm test
 ```
 
 ## Sicurezza

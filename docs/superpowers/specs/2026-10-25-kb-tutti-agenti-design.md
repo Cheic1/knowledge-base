@@ -1,6 +1,6 @@
 # KB su tutti gli agenti: installazione semplice e test per ogni programma
 
-Data: 2026-10-25 · Stato: **da approvare** · Si appoggia su: PR #13 (Fase 1)
+Data: 2026-10-25 · Stato: **approvata, prima parte implementata (2026-10-27)** · Si appoggia su: PR #13 (Fase 1)
 
 ## 1. Obiettivo
 
@@ -266,3 +266,25 @@ che lo risolve.
 8. Prova sulle tre macchine.
 
 Il piano dettagliato si scrive dopo l'approvazione di questa spec.
+
+## 9. Stato dell'implementazione (2026-10-27)
+
+Fatto, con test (`npm test`) e prova vera contro agentmemory 0.9.29:
+
+- 11 programmi supportati, in un solo file `scripts/lib/adapters.mjs` invece di un file
+  per programma (più semplice da leggere; aggiungerne uno resta una voce + un test).
+  I formati stanno in `scripts/lib/agents.mjs`; ogni `merge` con valore `null` toglie la
+  voce, così la stessa funzione serve a `install` e a `uninstall`.
+- `kb test` con i livelli 1-5 (`--quick`, `--deep`, `--json`, `--only`), un solo avvio MCP
+  per comando, una memoria di prova per macchina al giorno. `install` finisce con `kb test`.
+- `install --dry-run | --all | --only`, avviso `KB-CLONE` sugli altri clone,
+  `uninstall [--restore]`, `tick` (oggi lancia `kb-auto-sync.mjs`, che resta com'è:
+  le attività pianificate esistenti continuano a funzionare senza shim).
+- Backup con suffisso `.bak-kb` (quello già usato da #13), non `.kb-backup`.
+
+Rimandato a una PR successiva (non serve per usare la KB):
+
+- script shell → Node (`install-systemd.sh`, `start-kb.sh`, `wiki-search.sh`) e ricerca wiki su Windows;
+- `kb.mjs` diviso in moduli `git`, `service`, `agentmemory` sotto le 150 righe;
+- log unico e codici di errore per tutti i casi (oggi: `KB-JSON`, `KB-401`, `KB-CLONE`);
+- un solo job pianificato con nome nuovo (`KB tick`).
