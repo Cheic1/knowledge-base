@@ -468,6 +468,45 @@
     "auto-import"
    ],
    "updatedAt": "2026-10-23T14:35:15.108Z"
+  },
+  {
+   "confidence": 0.9,
+   "content": "save_system of a Speedgoat harness copy (e.g. SPEEDGOAT_SYSTEM_TEST.slx made from SPEEDGOAT_HARNESS.slx) can fail with 'File ... was not saved because it contains dirty referenced subsystem files' for IO203/IO603/ENABLE_INPUT. The dirty state is phantom in-memory state of the SubsystemReference target files. Fix: close_system('IO203',0), close_system('IO603',0), close_system('ENABLE_INPUT',0) (discard, disk untouched), then save_system(topModel). Do NOT use SaveDirtyReferencedModels='on' (would write shared Speedgoat_library files); do not bother with set_param(ref,'Dirty',false) (does not stick for nested refs).",
+   "context": "Simulink model surgery on SPEEDGOAT_HARNESS copies via MATLAB MCP in the speedgoat repo",
+   "createdAt": "2026-10-26T16:27:01.707Z",
+   "decayRate": 0.05,
+   "id": "lsn_8b11e0dd660a00f4",
+   "reinforcements": 0,
+   "source": "manual",
+   "sourceIds": [],
+   "tags": [
+    "simulink",
+    "save_system",
+    "subsystem reference",
+    "speedgoat",
+    "io203",
+    "io603"
+   ],
+   "updatedAt": "2026-10-26T16:27:01.707Z"
+  },
+  {
+   "confidence": 0.9,
+   "content": "When the MATLAB MCP tools are missing from the OpenCode session (server attached before MATLAB started, session drops it), drive matlab-mcp-server.exe directly: Python stdio JSON-RPC client at C:/Users/49359/AppData/Local/Temp/opencode/mcp_client.py - initialize (protocolVersion 2024-11-05) then tools/call evaluate_matlab_code with {code: <matlab source string>}. Same effect as the MCP tool: code runs in the user's live MATLAB session. 14 tools available incl. model_edit/model_scan/run_matlab_file.",
+   "context": "speedgoat repo, Windows, MATLAB running with shared engine (matlab-mcp-server --matlab-session-mode=existing)",
+   "createdAt": "2026-10-26T16:27:02.131Z",
+   "decayRate": 0.05,
+   "id": "lsn_d34dfe0f6ba019e1",
+   "reinforcements": 0,
+   "source": "manual",
+   "sourceIds": [],
+   "tags": [
+    "mcp",
+    "matlab",
+    "opencode",
+    "workaround",
+    "stdio"
+   ],
+   "updatedAt": "2026-10-26T16:27:02.131Z"
   }
  ],
  "memories": [
@@ -33768,6 +33807,27 @@
    "title": "Backfill vettoriale SYRS Desktop completato/verificato: ricerche ibride post-bac",
    "type": "fact",
    "updatedAt": "2026-10-26T15:03:18.891Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "kb-sync ACCC0068 2026-10-26: installata sincronizzazione periodica memoria. Task pianificato 'KB kb-sync' (trigger DAILY 09:07, interattivo, l'unico tipo non bloccato da MDE) che lancia C:\\Users\\49359\\.agentmemory\\kb-sync.cmd -> node scripts/memory-sync.mjs sync. Wrapper con KB_SYNC_GIT_TIMEOUT=600000 (git dal task impiega minuti vs secondi interattivi) e un retry dopo 60s (lock OneDrive su .git/rebase-merge: rebase riesce ma git non puo' rimuovere la dir, errore transitorio, innocuo per i pull successivi). Patch locale non committata a scripts/memory-sync.mjs: timeout git configurabile via env KB_SYNC_GIT_TIMEOUT (default invariato 90000ms). Verificato end-to-end: exit 0, push su origin/main ok.",
+   "createdAt": "2026-10-26T15:28:46.570Z",
+   "files": [],
+   "id": "mem_mvpew241_4534c60b7274",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-26T15:28:46.570Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "kb-sync ACCC0068 2026-10-26: installata sincronizzazione periodica memoria. Task",
+   "type": "fact",
+   "updatedAt": "2026-10-26T15:28:46.570Z",
    "version": 1
   }
  ],
