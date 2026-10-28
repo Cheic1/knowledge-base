@@ -33829,6 +33829,72 @@
    "type": "fact",
    "updatedAt": "2026-10-26T15:28:46.570Z",
    "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "LLM Wiki SYRS Desktop — automazione e arricchimento (27/10): scheduledImportConfig attivato (enabled=true, 60 min) su progetto a91262d5; sourceWatch già attivo con autoIngest. Scrittura API (/pages/embed) richiede Bearer token da apiConfig.token in app-state.json anche con allowUnauthenticated=true (i read/search no) — 401 senza header. Creata wiki/concepts/arinc-429-label-table.md (tabella completa ARINC Data Coding da 189G2210I017%03_A.docx, 48 segnali): Label 106=Ground Speed Steering FMS; 061/062/067=Long/Coll/Lat Mode Engaged; 063=Armed; MOT engaged/armed=300. Corrupted files (page199 ecc.) risolti dall'utente. Per riscrivere app-state.json: stop app → ConvertTo-Json -Depth 100 → WriteAllText UTF8 senza BOM.",
+   "createdAt": "2026-10-27T22:59:07.051Z",
+   "files": [],
+   "id": "mem_mvraf1m3_39e7b539ed55",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-27T22:59:07.051Z",
+    "channel": "agent"
+   },
+   "project": "llm-wiki-syrs",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "LLM Wiki SYRS Desktop — automazione e arricchimento (27/10): scheduledImportConf",
+   "type": "fact",
+   "updatedAt": "2026-10-27T22:59:07.051Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "MATLAB quirk (progetto MDS_OEM_Report): dentro un classdef in package (+OemDash/+Models ecc.) le chiamate interne tra metodi NON si risolvono né bare né con nome-classe corto (DataModel.globMat / MainView.initTask falliscono). Serve la qualifica completa OemDash.Models.DataModel.x(...). Inoltre un metodo d'istanza chiamato senza obj dà 'Too many input arguments' se la firma non dichiara esplicitamente obj come primo parametro.",
+   "createdAt": "2026-10-27T23:21:38.542Z",
+   "files": [],
+   "id": "mem_mvrb80io_2e4b9d0485fd",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-27T23:21:38.542Z",
+    "channel": "agent"
+   },
+   "project": "C:\\Users\\49359\\Desktop\\MDS_OEM_Report",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MATLAB quirk (progetto MDS_OEM_Report): dentro un classdef in package (+OemDash/",
+   "type": "fact",
+   "updatedAt": "2026-10-27T23:21:38.542Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "MATLAB webwrite su API JSON (gateway Leonardo): la risposta con Content-Type application/json viene auto-convertita in struct, e jsondecode(struct) fallisce con 'JSON text must be a character vector...'. Fix: weboptions(...,'ContentType','text') e poi jsondecode sul testo grezzo.",
+   "createdAt": "2026-10-27T23:21:39.614Z",
+   "files": [],
+   "id": "mem_mvrb814e_1460a2ec7ffe",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-27T23:21:39.614Z",
+    "channel": "agent"
+   },
+   "project": "C:\\Users\\49359\\Desktop\\MDS_OEM_Report",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MATLAB webwrite su API JSON (gateway Leonardo): la risposta con Content-Type app",
+   "type": "fact",
+   "updatedAt": "2026-10-27T23:21:39.614Z",
+   "version": 1
   }
  ],
  "observations": {
@@ -33955,7 +34021,7 @@
    "topConcepts": [],
    "topFiles": [],
    "totalObservations": 6,
-   "updatedAt": "2026-10-05T12:30:19.859Z"
+   "updatedAt": "2026-10-27T11:58:07.165Z"
   }
  ],
  "sessions": [
