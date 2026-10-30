@@ -33612,7 +33612,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
    ],
    "id": "mem_mvk0yp4a_d3de064e9cc0",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-22T21:00:04.793Z",
@@ -33895,6 +33895,36 @@
    "type": "fact",
    "updatedAt": "2026-10-27T23:21:39.614Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin HLS player + taps Dispatcharr; never run while the user watches — 1 provider slot, my tests broke their zapping once):\n  - Someone had set Dispatcharr stream_settings default_output_format=fmp4 (+ default UA VLC). Jellyfin then got fMP4 -> timeline raced up to 6x. Restored mpegts (backup dispatcharr_stream_settings_backup_2026-10-21.txt); VLC UA left.\n  - Provider (player_api: max_connections 1) kills each session every ~7-11 min, with TS AND with HLS (.m3u8 works: XC `live/u/p/id.m3u8`), and refuses reconnects for a few s (407/4XX/509, or a black.ts+ENDLIST placeholder) because the old slot is still held. This is the root of the \"freezes after ~10 min\".\n  - After each reconnect Jellyfin's HLS timeline still jumps +10..20 min (input ts weirdness like 600 s -> 0 right after a reset), even with the wrapper.\n  - M3U profile search/replace does NOT change XC playback URLs (credentials.py builds .ts hardcoded) — setting it broke playback; reverted. A stream profile `sh -c 'u=\"$1\"; exec ffmpeg ... -i \"${u%.ts}.m3u8\" ...' {userAgent} {streamUrl}` (id 6 \"ffmpeg-hls\") works but didn't help; Cielo back on profile 1.\n  - 2026-10-22 two-player test (MODE=compare livetv_test.py: mpv via Jellyfin HLS vs mpv direct from Dispatcharr, + tap). With stream profile 1 (ffmpeg -c copy) BOTH players stopped (Jellyfin at 5 min, direct at 12 min): each Dispatcharr reconnect restarts ffmpeg -> ts resets of 280-600 s + corrupt data. With profile 3 \"Proxy\" (raw passthrough) both played 20 min; Jellyfin 12 freezes/37 s, direct mpv 17/125 s; freezes = provider no-data gaps (8 gaps >=5 s, 84 s in 20 min). Jellyfin timeline still raced ahead once (+35 min). => All 67 channels + default_stream_profile set to Proxy (3); backup dispatcharr_channel_streamprofile_backup_2026-10-22.txt (channel_id|profile).\n  - M3U account max_streams=0 (unlimited) although provider allows 1.\n- 2026-10-30 \"non funziona\" on SKY PRIMAFILA 1 UHD, Jellyfin Android 2.7.3 on Redmi Pad 2: Dispatcharr fine (tap of the running channel: 33 s of video in 20 s; a tap on the SAME channel shares the upstream, so it is safe while the user watches). Failure is in Jellyfin: TranscodeReasons VideoCodecNotSupported + ContainerBitrateExceedsLimit -> software HEVC 4K -> libx264 2560p on a Celeron N3150 (4 cores, HW accel none, no /dev/dri in container) runs 0.2-0.6x (6-9 fps), so the client reopens every ~40 s and ffmpeg is restarted. Probe reports 30 Mbit/s but real media rate was ~2.7 Mbit/s. /Sessions (ApiKeys from jellyfin.db, as in livetv_test.py) shows the reasons.\n- Jellyfin's FFmpeg.*.log still shows -copyts (logged before the wrapper). Tuner URL back to proxied `http://dispatcharr:9191/output/m3u` (no direct=true). Backups: docker-compose.yml.bak-2026-10-09, config/config/livetv.xml.bak-2026-10-09.",
+   "createdAt": "2026-10-30T09:00:04.886Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvuqrla3_be4b632b03bd",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-30T09:00:04.886Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvk0yp4a_d3de064e9cc0",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvk0yp4a_d3de064e9cc0"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin",
+   "type": "preference",
+   "updatedAt": "2026-10-30T09:00:04.886Z",
+   "version": 3
   }
  ],
  "observations": {
