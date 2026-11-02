@@ -470,12 +470,13 @@
    "updatedAt": "2026-10-30T20:02:10.329Z"
   },
   {
-   "confidence": 0.9,
+   "confidence": 0.849,
    "content": "save_system of a Speedgoat harness copy (e.g. SPEEDGOAT_SYSTEM_TEST.slx made from SPEEDGOAT_HARNESS.slx) can fail with 'File ... was not saved because it contains dirty referenced subsystem files' for IO203/IO603/ENABLE_INPUT. The dirty state is phantom in-memory state of the SubsystemReference target files. Fix: close_system('IO203',0), close_system('IO603',0), close_system('ENABLE_INPUT',0) (discard, disk untouched), then save_system(topModel). Do NOT use SaveDirtyReferencedModels='on' (would write shared Speedgoat_library files); do not bother with set_param(ref,'Dirty',false) (does not stick for nested refs).",
    "context": "Simulink model surgery on SPEEDGOAT_HARNESS copies via MATLAB MCP in the speedgoat repo",
    "createdAt": "2026-10-26T16:27:01.707Z",
    "decayRate": 0.05,
    "id": "lsn_8b11e0dd660a00f4",
+   "lastDecayedAt": "2026-11-02T20:02:11.343Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -487,15 +488,16 @@
     "io203",
     "io603"
    ],
-   "updatedAt": "2026-10-26T16:27:01.707Z"
+   "updatedAt": "2026-11-02T20:02:11.343Z"
   },
   {
-   "confidence": 0.9,
+   "confidence": 0.849,
    "content": "When the MATLAB MCP tools are missing from the OpenCode session (server attached before MATLAB started, session drops it), drive matlab-mcp-server.exe directly: Python stdio JSON-RPC client at C:/Users/49359/AppData/Local/Temp/opencode/mcp_client.py - initialize (protocolVersion 2024-11-05) then tools/call evaluate_matlab_code with {code: <matlab source string>}. Same effect as the MCP tool: code runs in the user's live MATLAB session. 14 tools available incl. model_edit/model_scan/run_matlab_file.",
    "context": "speedgoat repo, Windows, MATLAB running with shared engine (matlab-mcp-server --matlab-session-mode=existing)",
    "createdAt": "2026-10-26T16:27:02.131Z",
    "decayRate": 0.05,
    "id": "lsn_d34dfe0f6ba019e1",
+   "lastDecayedAt": "2026-11-02T20:02:11.343Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -506,7 +508,7 @@
     "workaround",
     "stdio"
    ],
-   "updatedAt": "2026-10-26T16:27:02.131Z"
+   "updatedAt": "2026-11-02T20:02:11.343Z"
   }
  ],
  "memories": [
