@@ -32,6 +32,10 @@
 ### 2026-10-13
 [07:34] MEM-BUG: KiCAD-MCP-Server (C:\Users\49359\tools\KiCAD-MCP-Server) richiede 2 patch per fu [mem_mv6d82tc_25b85aa9a16d]
 
+
+### 2026-11-06
+[14:58] MEM-BUG: Root cause agentmemory REST 404 (rottura dal 28 ott 2026): il worker node che re [mem_mw53nyaz_fde4f4d24de8]
+
 ---
 
-*Ultimo aggiornamento: 2026-10-13*
+*Ultimo aggiornamento: 2026-11-06*
