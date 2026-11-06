@@ -185,13 +185,13 @@
  ],
  "lessons": [
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "avoid the round-trip.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_054d6cc35922f4a0",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -201,16 +201,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Do not proceed without auth being set up.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_1ef1ee3bc4067474",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -220,16 +220,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Don't invent write endpoints ÔÇö they don't exist in v1.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_29bf22c5ad0c8227",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -239,16 +239,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Never log or echo the token.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_2a9a4ed124175682",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -258,16 +258,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "don't silently call the LLM Wiki API on what might be an Obsidian vault.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_6933822fc6cc8a91",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -277,16 +277,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Never leak the token.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_76ec790df85162f2",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -296,16 +296,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Do NOT invoke when the user says:**",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_7ad3715070008def",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -315,16 +315,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Never put it in any URL the user can see in your output** (Referer / shell history / logs all leak it).",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_7ee71f7f0c527495",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -334,16 +334,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Don't install anything new.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_8148849d35682fb9",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -353,16 +353,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Don't retry the same path.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_93afe4f4d6fb6d79",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -372,16 +372,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Don't apply a fixed score threshold across modes.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_a3ef3d8cabc2b753",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -391,16 +391,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Do not silently switch projects.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_cbad2344e11eacc7",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -410,16 +410,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Always check `/api/v1/health` first ÔÇö it returns `{ enabled, authConfigured, allowUnauthenticated, tokenSource }`.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_cd4e9b51c8a79216",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -429,16 +429,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Don't dump full pages unless asked.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_cd6fea5b582d9838",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -448,16 +448,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.235,
+   "confidence": 0.178,
    "content": "Always treat the status code as the contract:",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
    "id": "lesson_ebfce2f85dacd4dc",
-   "lastDecayedAt": "2026-10-23T14:35:15.108Z",
+   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -467,15 +467,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-23T14:35:15.108Z"
+   "updatedAt": "2026-10-31T14:37:11.055Z"
   },
   {
-   "confidence": 0.9,
+   "confidence": 0.849,
    "content": "save_system of a Speedgoat harness copy (e.g. SPEEDGOAT_SYSTEM_TEST.slx made from SPEEDGOAT_HARNESS.slx) can fail with 'File ... was not saved because it contains dirty referenced subsystem files' for IO203/IO603/ENABLE_INPUT. The dirty state is phantom in-memory state of the SubsystemReference target files. Fix: close_system('IO203',0), close_system('IO603',0), close_system('ENABLE_INPUT',0) (discard, disk untouched), then save_system(topModel). Do NOT use SaveDirtyReferencedModels='on' (would write shared Speedgoat_library files); do not bother with set_param(ref,'Dirty',false) (does not stick for nested refs).",
    "context": "Simulink model surgery on SPEEDGOAT_HARNESS copies via MATLAB MCP in the speedgoat repo",
    "createdAt": "2026-10-26T16:27:01.707Z",
    "decayRate": 0.05,
    "id": "lsn_8b11e0dd660a00f4",
+   "lastDecayedAt": "2026-11-02T20:02:11.343Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -487,15 +488,16 @@
     "io203",
     "io603"
    ],
-   "updatedAt": "2026-10-26T16:27:01.707Z"
+   "updatedAt": "2026-11-02T20:02:11.343Z"
   },
   {
-   "confidence": 0.9,
+   "confidence": 0.849,
    "content": "When the MATLAB MCP tools are missing from the OpenCode session (server attached before MATLAB started, session drops it), drive matlab-mcp-server.exe directly: Python stdio JSON-RPC client at C:/Users/49359/AppData/Local/Temp/opencode/mcp_client.py - initialize (protocolVersion 2024-11-05) then tools/call evaluate_matlab_code with {code: <matlab source string>}. Same effect as the MCP tool: code runs in the user's live MATLAB session. 14 tools available incl. model_edit/model_scan/run_matlab_file.",
    "context": "speedgoat repo, Windows, MATLAB running with shared engine (matlab-mcp-server --matlab-session-mode=existing)",
    "createdAt": "2026-10-26T16:27:02.131Z",
    "decayRate": 0.05,
    "id": "lsn_d34dfe0f6ba019e1",
+   "lastDecayedAt": "2026-11-02T20:02:11.343Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -506,7 +508,7 @@
     "workaround",
     "stdio"
    ],
-   "updatedAt": "2026-10-26T16:27:02.131Z"
+   "updatedAt": "2026-11-02T20:02:11.343Z"
   }
  ],
  "memories": [
@@ -33612,7 +33614,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
    ],
    "id": "mem_mvk0yp4a_d3de064e9cc0",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-10-22T21:00:04.793Z",
@@ -33894,6 +33896,403 @@
    "title": "MATLAB webwrite su API JSON (gateway Leonardo): la risposta con Content-Type app",
    "type": "fact",
    "updatedAt": "2026-10-27T23:21:39.614Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "MDS",
+    "OEM",
+    "Read output plain text",
+    "LASTOEMUSED properties",
+    "bypass Export dialog",
+    "bypass Browse dialog",
+    "pyjab",
+    "oemFiles binary logs"
+   ],
+   "content": "MDS OEM facts (2026-10): (1) MDS 'Read' output lives in %USERPROFILE%\\MDS_DM\\Properties\\cache\\OEM\\<code>\\ as PLAIN TEXT: '<VL>_time' files = epoch-millis timestamps one per line; parameter files (e.g. ADU1_OAT_AMMC2_AVIO_VL502) = numeric values one per line separated by blank lines; companion '<param>_VALIDITY' files same structure; time bases per VL-code (110_time/501_time/502_time/503_time) at different rates (110_time=6774 samples vs VL502 param=1694). => We can build .mat ourselves from these text files, making the MDS Export save-dialog unnecessary. (2) MDS_DM.properties key 'it.agusta.humm.LASTOEMUSED_dbs_infos' persists last-used OEM folder path; edit it with app closed + restart => internal state restored without Browse dialog (programmatic JAB setText does NOT update internal state, Scan then rejects with 'Please select a valid folder!'). (3) Raw .log in oemFiles are binary proprietary (big-endian float32 mixed patterns) - not decodable without MDS decode tables; do NOT try. (4) Transient shell bug after server restart made python scripts exit code 1 with zero output; retest with trivial python -c before blaming scripts.",
+   "createdAt": "2026-10-28T15:49:03.304Z",
+   "files": [
+    "C:\\Users\\49359\\MDS_DM\\Properties\\cache\\OEM\\2-1-0",
+    "C:\\Users\\49359\\MDS_DM\\Properties\\MDS_DM.properties"
+   ],
+   "id": "mem_mvsahtvq_6dec5104e9b9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-28T15:49:03.304Z",
+    "channel": "agent"
+   },
+   "project": "mds-oem-report",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MDS OEM facts (2026-10): (1) MDS 'Read' output lives in %USERPROFILE%\\MDS_DM\\Pro",
+   "type": "fact",
+   "updatedAt": "2026-10-28T15:49:03.304Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "MDS OEM automation (pyjab/JAB): gotca risolto — il lato-Java dell'AccessBridge dentro la JVM di MDS puo' MORIRE a sessione in corso (isJavaWindow(hwnd)=False su finestra viva e 'Responding', EnumWindows la vede, pyjab client sano). Sintomo: JABDriver TimeoutError 'no java window found by title' mentre Get-Process mostra la finestra con MainWindowTitle corretto. Rimedio: solo riavvio MDS (il bridge si riabilita da C:\\Users\\49359\\.accessibility.properties con assistive_technologies=com.sun.java.accessibility.AccessBridge — il file jre1.8.0_231\\lib\\accessibility.properties e' tutto commentato, NON conta). Comando relaunch testato da Desktop\\MDS_DataManager: jre1.8.0_231\\bin\\java.exe -Xmx2048m -Xms2048m -Dfile.encoding=UTF-8 -jar .\\Decrypt.jar \\\\ACCS1101 it.agusta.MDS_DM.MDS_DM (NON runJar.bat che e' a 4040m e fallisce per RAM libera insufficiente). Startup ~4-5 min. I nomi dei log Properties/out*.log sono UTC.",
+   "createdAt": "2026-10-29T11:47:47.147Z",
+   "files": [],
+   "id": "mem_mvthbez6_ee020e03662b",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-29T11:47:47.147Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MDS OEM automation (pyjab/JAB): gotca risolto — il lato-Java dell'AccessBridge d",
+   "type": "fact",
+   "updatedAt": "2026-10-29T11:47:47.147Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "SharePoint AI Contest form (list 68ddc769-8dba-4571-9b9a-6b383f30f52b, site leonardocompany.sharepoint.com/teams/FlightControlSystem): REST _api writes are 403-blocked for this user; only the SPFx client form UI can submit. In OpenCode built-in browser the form mounts at listforms.aspx?cid=... after full SSO; fill textarea values with tools.browser.fill_form (CDP trusted events) — native-setter+inputEvent fills DOM but not React state. Choice fields are combobox divs (id displayView-displayDiv-<internal>); click then pick [role=option]. Hidden input[type=file] must be made visible (style overrides) to appear in snapshot as [button] 'Attach Files', then files.upload with its ref; files.drop on the Add attachments button does NOT work. User prefers clicking Submit themselves.",
+   "createdAt": "2026-10-29T14:07:24.551Z",
+   "files": [],
+   "id": "mem_mvtmaz09_147f27852fcf",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-29T14:07:24.551Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "SharePoint AI Contest form (list 68ddc769-8dba-4571-9b9a-6b383f30f52b, site leon",
+   "type": "fact",
+   "updatedAt": "2026-10-29T14:07:24.551Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "OpenWhispr v1.11.0 su Windows: (1) installato in %LOCALAPPDATA%\\Programs\\OpenWhispr, dati in %APPDATA%\\open-whispr. (2) Zscaler blocca gli .exe da release-assets.githubusercontent.com e tutti i mirror GitHub (gh-proxy, moeyy, ghfast, ghproxy) e Uptodown (403 a curl): l'unica via e' il download manuale dal browser, poi verificare SHA256 contro il digest ufficiale dell'API GitHub (campo asset.digest). (3) Config BYOK: provider/baseURL stanno in localStorage (cleanupProvider=custom, cleanupCloudBaseUrl=https://ai-gateway.leonardo.com/v1) ma le CHIAVI API in localStorage vengono cancellate allo startup come 'stale secret': vanno salvate via IPC dell'app con Runtime.evaluate su window.electronAPI.saveCleanupCustomKey(key) (getter getCleanupCustomKey), tramite Chrome DevTools Protocol lanciando l'app con --remote-debugging-port=9222. (4) Il gateway Leonardo NON supporta /v1/audio/transcriptions (404): per la trascrizione vocale serve un modello locale Whisper o altro provider; il gateway funziona solo per la parte testo AI (chat/completions OK).",
+   "createdAt": "2026-10-29T14:52:24.746Z",
+   "files": [],
+   "id": "mem_mvtnwucx_b9b16600212e",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-29T14:52:24.746Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "OpenWhispr v1.11.0 su Windows: (1) installato in %LOCALAPPDATA%\\Programs\\OpenWhi",
+   "type": "fact",
+   "updatedAt": "2026-10-29T14:52:24.746Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin HLS player + taps Dispatcharr; never run while the user watches — 1 provider slot, my tests broke their zapping once):\n  - Someone had set Dispatcharr stream_settings default_output_format=fmp4 (+ default UA VLC). Jellyfin then got fMP4 -> timeline raced up to 6x. Restored mpegts (backup dispatcharr_stream_settings_backup_2026-10-21.txt); VLC UA left.\n  - Provider (player_api: max_connections 1) kills each session every ~7-11 min, with TS AND with HLS (.m3u8 works: XC `live/u/p/id.m3u8`), and refuses reconnects for a few s (407/4XX/509, or a black.ts+ENDLIST placeholder) because the old slot is still held. This is the root of the \"freezes after ~10 min\".\n  - After each reconnect Jellyfin's HLS timeline still jumps +10..20 min (input ts weirdness like 600 s -> 0 right after a reset), even with the wrapper.\n  - M3U profile search/replace does NOT change XC playback URLs (credentials.py builds .ts hardcoded) — setting it broke playback; reverted. A stream profile `sh -c 'u=\"$1\"; exec ffmpeg ... -i \"${u%.ts}.m3u8\" ...' {userAgent} {streamUrl}` (id 6 \"ffmpeg-hls\") works but didn't help; Cielo back on profile 1.\n  - 2026-10-22 two-player test (MODE=compare livetv_test.py: mpv via Jellyfin HLS vs mpv direct from Dispatcharr, + tap). With stream profile 1 (ffmpeg -c copy) BOTH players stopped (Jellyfin at 5 min, direct at 12 min): each Dispatcharr reconnect restarts ffmpeg -> ts resets of 280-600 s + corrupt data. With profile 3 \"Proxy\" (raw passthrough) both played 20 min; Jellyfin 12 freezes/37 s, direct mpv 17/125 s; freezes = provider no-data gaps (8 gaps >=5 s, 84 s in 20 min). Jellyfin timeline still raced ahead once (+35 min). => All 67 channels + default_stream_profile set to Proxy (3); backup dispatcharr_channel_streamprofile_backup_2026-10-22.txt (channel_id|profile).\n  - M3U account max_streams=0 (unlimited) although provider allows 1.\n- 2026-10-30 \"non funziona\" on SKY PRIMAFILA 1 UHD, Jellyfin Android 2.7.3 on Redmi Pad 2: Dispatcharr fine (tap of the running channel: 33 s of video in 20 s; a tap on the SAME channel shares the upstream, so it is safe while the user watches). Failure is in Jellyfin: TranscodeReasons VideoCodecNotSupported + ContainerBitrateExceedsLimit -> software HEVC 4K -> libx264 2560p on a Celeron N3150 (4 cores, HW accel none, no /dev/dri in container) runs 0.2-0.6x (6-9 fps), so the client reopens every ~40 s and ffmpeg is restarted. Probe reports 30 Mbit/s but real media rate was ~2.7 Mbit/s. /Sessions (ApiKeys from jellyfin.db, as in livetv_test.py) shows the reasons.\n- Jellyfin's FFmpeg.*.log still shows -copyts (logged before the wrapper). Tuner URL back to proxied `http://dispatcharr:9191/output/m3u` (no direct=true). Backups: docker-compose.yml.bak-2026-10-09, config/config/livetv.xml.bak-2026-10-09.",
+   "createdAt": "2026-10-30T09:00:04.886Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvuqrla3_be4b632b03bd",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-30T09:00:04.886Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvk0yp4a_d3de064e9cc0",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvk0yp4a_d3de064e9cc0"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin",
+   "type": "preference",
+   "updatedAt": "2026-10-30T09:00:04.886Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin HLS player + taps Dispatcharr; never run while the user watches — 1 provider slot, my tests broke their zapping once):\n  - Someone had set Dispatcharr stream_settings default_output_format=fmp4 (+ default UA VLC). Jellyfin then got fMP4 -> timeline raced up to 6x. Restored mpegts (backup dispatcharr_stream_settings_backup_2026-10-21.txt); VLC UA left.\n  - Provider (player_api: max_connections 1) kills each session every ~7-11 min, with TS AND with HLS (.m3u8 works: XC `live/u/p/id.m3u8`), and refuses reconnects for a few s (407/4XX/509, or a black.ts+ENDLIST placeholder) because the old slot is still held. This is the root of the \"freezes after ~10 min\".\n  - After each reconnect Jellyfin's HLS timeline still jumps +10..20 min (input ts weirdness like 600 s -> 0 right after a reset), even with the wrapper.\n  - M3U profile search/replace does NOT change XC playback URLs (credentials.py builds .ts hardcoded) — setting it broke playback; reverted. A stream profile `sh -c 'u=\"$1\"; exec ffmpeg ... -i \"${u%.ts}.m3u8\" ...' {userAgent} {streamUrl}` (id 6 \"ffmpeg-hls\") works but didn't help; Cielo back on profile 1.\n  - 2026-10-22 two-player test (MODE=compare livetv_test.py: mpv via Jellyfin HLS vs mpv direct from Dispatcharr, + tap). With stream profile 1 (ffmpeg -c copy) BOTH players stopped (Jellyfin at 5 min, direct at 12 min): each Dispatcharr reconnect restarts ffmpeg -> ts resets of 280-600 s + corrupt data. With profile 3 \"Proxy\" (raw passthrough) both played 20 min; Jellyfin 12 freezes/37 s, direct mpv 17/125 s; freezes = provider no-data gaps (8 gaps >=5 s, 84 s in 20 min). Jellyfin timeline still raced ahead once (+35 min). => All 67 channels + default_stream_profile set to Proxy (3); backup dispatcharr_channel_streamprofile_backup_2026-10-22.txt (channel_id|profile).\n  - M3U account max_streams=0 (unlimited) although provider allows 1.\n- 2026-10-30 \"non funziona\" on SKY PRIMAFILA 1 UHD, Jellyfin Android 2.7.3 on Redmi Pad 2: Dispatcharr fine (tap of the running channel: 33 s of video in 20 s; a tap on the SAME channel shares the upstream, so it is safe while the user watches). Failure is in Jellyfin: TranscodeReasons VideoCodecNotSupported + ContainerBitrateExceedsLimit -> software HEVC 4K -> libx264 2560p on a Celeron N3150 (4 cores, HW accel none, no /dev/dri in container) runs 0.2-0.6x (6-9 fps), so the client reopens every ~40 s and ffmpeg is restarted. Probe reports 30 Mbit/s but real media rate was ~2.7 Mbit/s. /Sessions (ApiKeys from jellyfin.db, as in livetv_test.py) shows the reasons.\n- 2026-10-30 stream cleanup: provider labels are unreliable (\"UHD\"/\"4K\" are mostly h264 1080p/720p; only Primafila 1-9 are real 4K HEVC). Many \"UHD\" streams return a BLACK placeholder (h264 Baseline 1080p, identical frame, ~10 MB burst then EOF) that passes ffprobe/ffmpeg \"video present\" checks: a stream test must look at the picture or read >=60 s. Reordering UHD first on that basis broke channels; rolled back to dispatcharr_channelstream_backup_2026-10-30.txt. Primafila 1-9 hidden with channels.hidden_from_output=True (backup dispatcharr_channel_hidden_backup_2026-10-30.txt); the m3u dropped from 67 to 58 channels. Scripts in /home/francesco/livetv-test: probe_streams.py, ab_streams.py, verify_picture.py.\n- Jellyfin's FFmpeg.*.log still shows -copyts (logged before the wrapper). Tuner URL back to proxied `http://dispatcharr:9191/output/m3u` (no direct=true). Backups: docker-compose.yml.bak-2026-10-09, config/config/livetv.xml.bak-2026-10-09.",
+   "createdAt": "2026-10-30T10:30:03.003Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvutzafq_5e13b31deb03",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-30T10:30:03.003Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvuqrla3_be4b632b03bd",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvuqrla3_be4b632b03bd"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin",
+   "type": "preference",
+   "updatedAt": "2026-10-30T10:30:03.003Z",
+   "version": 4
+  },
+  {
+   "concepts": [
+    "hyperframes",
+    "ffmpeg",
+    "zscaler",
+    "windows",
+    "env vars",
+    "html-to-video"
+   ],
+   "content": "HyperFrames (npm `hyperframes`, HeyGen) installed globally on this Windows box. Its own binary downloads (chrome-headless-shell, ffmpeg-static) FAIL: corporate Zscaler proxy blocks gyan.dev/GitHub/npm-postinstall TLS. Working fix: ffmpeg/ffprobe via npm @ffmpeg-installer/win32-x64 + @ffprobe-installer/win32-x64 (exes bundled in tarball), copied to C:\\Users\\49359\\AppData\\Local\\Temp\\opencode\\ffmpeg\\. Before any `hyperframes render` set: HYPERFRAMES_FFMPEG_PATH, HYPERFRAMES_FFPROBE_PATH (to those exes) and HYPERFRAMES_BROWSER_PATH=C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe, plus --low-memory-mode --workers 1 (only ~1GB free RAM). Video-from-stills = one index.html with <img class=clip data-start data-duration> per frame + root data-duration, then `hyperframes render`. Full howto: C:\\Users\\49359\\AppData\\Local\\Temp\\opencode\\HYPERFRAMES-HOWTO.md; working demo project: C:\\Users\\49359\\AppData\\Local\\Temp\\opencode\\hf-demo (out.mp4 verified 1920x1080 h264 9s).",
+   "createdAt": "2026-10-30T11:10:53.350Z",
+   "files": [],
+   "id": "mem_mvuvftrk_e74eed00e7c3",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-30T11:10:53.350Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "HyperFrames (npm `hyperframes`, HeyGen) installed globally on this Windows box. ",
+   "type": "workflow",
+   "updatedAt": "2026-10-30T11:10:53.350Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin HLS player + taps Dispatcharr; never run while the user watches — 1 provider slot, my tests broke their zapping once):\n  - Someone had set Dispatcharr stream_settings default_output_format=fmp4 (+ default UA VLC). Jellyfin then got fMP4 -> timeline raced up to 6x. Restored mpegts (backup dispatcharr_stream_settings_backup_2026-10-21.txt); VLC UA left.\n  - Provider (player_api: max_connections 1) kills each session every ~7-11 min, with TS AND with HLS (.m3u8 works: XC `live/u/p/id.m3u8`), and refuses reconnects for a few s (407/4XX/509, or a black.ts+ENDLIST placeholder) because the old slot is still held. This is the root of the \"freezes after ~10 min\".\n  - After each reconnect Jellyfin's HLS timeline still jumps +10..20 min (input ts weirdness like 600 s -> 0 right after a reset), even with the wrapper.\n  - M3U profile search/replace does NOT change XC playback URLs (credentials.py builds .ts hardcoded) — setting it broke playback; reverted. A stream profile `sh -c 'u=\"$1\"; exec ffmpeg ... -i \"${u%.ts}.m3u8\" ...' {userAgent} {streamUrl}` (id 6 \"ffmpeg-hls\") works but didn't help; Cielo back on profile 1.\n  - 2026-10-22 two-player test (MODE=compare livetv_test.py: mpv via Jellyfin HLS vs mpv direct from Dispatcharr, + tap). With stream profile 1 (ffmpeg -c copy) BOTH players stopped (Jellyfin at 5 min, direct at 12 min): each Dispatcharr reconnect restarts ffmpeg -> ts resets of 280-600 s + corrupt data. With profile 3 \"Proxy\" (raw passthrough) both played 20 min; Jellyfin 12 freezes/37 s, direct mpv 17/125 s; freezes = provider no-data gaps (8 gaps >=5 s, 84 s in 20 min). Jellyfin timeline still raced ahead once (+35 min). => All 67 channels + default_stream_profile set to Proxy (3); backup dispatcharr_channel_streamprofile_backup_2026-10-22.txt (channel_id|profile).\n  - M3U account max_streams=0 (unlimited) although provider allows 1.\n- 2026-10-30 \"non funziona\" on SKY PRIMAFILA 1 UHD, Jellyfin Android 2.7.3 on Redmi Pad 2: Dispatcharr fine (tap of the running channel: 33 s of video in 20 s; a tap on the SAME channel shares the upstream, so it is safe while the user watches). Failure is in Jellyfin: TranscodeReasons VideoCodecNotSupported + ContainerBitrateExceedsLimit -> software HEVC 4K -> libx264 2560p on a Celeron N3150 (4 cores, HW accel none, no /dev/dri in container) runs 0.2-0.6x (6-9 fps), so the client reopens every ~40 s and ffmpeg is restarted. Probe reports 30 Mbit/s but real media rate was ~2.7 Mbit/s. /Sessions (ApiKeys from jellyfin.db, as in livetv_test.py) shows the reasons.\n- 2026-10-30 stream cleanup: provider labels are unreliable (\"UHD\"/\"4K\" are mostly h264 1080p/720p; only Primafila 1-9 are real 4K HEVC). Many \"UHD\" streams return a BLACK placeholder (h264 Baseline 1080p, identical frame, ~10 MB burst then EOF) that passes ffprobe/ffmpeg \"video present\" checks: a stream test must look at the picture or read >=60 s. The black/EOF is INTERMITTENT and also hits HD streams (Italia 1 HD did it too), so a failed check is not proof a stream is dead. First reorder was rolled back; final state after picture checks: 37 channels have a verified h264 1080p UHD stream first, 11 UHD streams added, 8 streams removed from channels (1305, 1295, 1255, 1617, 1304, 1477, 1262 black or no frame twice; 1309 failed). Backups: dispatcharr_channelstream_backup_2026-10-30.txt (original) and _b.txt (just before the final apply). Results: livetv-test/picture-2026-10-30.tsv. Primafila 1-9 hidden with channels.hidden_from_output=True (backup dispatcharr_channel_hidden_backup_2026-10-30.txt); the m3u dropped from 67 to 58 channels. Scripts in /home/francesco/livetv-test: probe_streams.py, ab_streams.py, verify_picture.py.\n- Jellyfin's FFmpeg.*.log still shows -copyts (logged before the wrapper). Tuner URL back to proxied `http://dispatcharr:9191/output/m3u` (no direct=true). Backups: docker-compose.yml.bak-2026-10-09, config/config/livetv.xml.bak-2026-10-09.",
+   "createdAt": "2026-10-30T11:30:02.672Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md"
+   ],
+   "id": "mem_mvuw4fxn_986ff39a6727",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-10-30T11:30:02.672Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mvutzafq_5e13b31deb03",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mvutzafq_5e13b31deb03"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/iptv-epg-setup.md]\nin",
+   "type": "preference",
+   "updatedAt": "2026-10-30T11:30:02.672Z",
+   "version": 5
+  },
+  {
+   "concepts": [
+    "claude code",
+    "notifica push",
+    "telefono",
+    "background session",
+    "remote control",
+    "workspace trust"
+   ],
+   "content": "NOTIFICA TELEFONO via Claude Code da OpenCode (funziona): il CLI claude non è in PATH, ma il binario vive nell'estensione VS Code: c:\\Users\\49359\\.vscode\\extensions\\anthropic.claude-code-<ver>-win32-x64\\resources\\native-binary\\claude.exe. Pattern: `claude --bg --brief --tools '\"\"' --model haiku -n <nome> \"<testo notifica>\"` → sessione background con /rc active (remote control) → push sul telefono quando completa (agentPushNotifEnabled=true in ~/.claude/settings.json). Verifica: `claude agents --json` (status/state), `claude logs <id>`. GOTCHA 1: --bg confligge con -p, il prompt va posizionale. GOTCHA 2: 'Workspace not trusted' per bg sessions → ~/.claude.json, projects['c:/<path>'].hasTrustDialogAccepted=true (anche chiave con C maiuscolo duplicata); backup auto in ~/.claude.json.bak-notifica. 'claude agents' interattivo richiede TTY → usare --json.",
+   "createdAt": "2026-10-30T14:58:09.771Z",
+   "files": [],
+   "id": "mem_mvv3k376_ac006d928aa6",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-30T14:58:09.771Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "NOTIFICA TELEFONO via Claude Code da OpenCode (funziona): il CLI claude non è in",
+   "type": "workflow",
+   "updatedAt": "2026-10-30T14:58:09.771Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "sharepoint",
+    "contest",
+    "submit",
+    "LLM Wiki",
+    "AW189",
+    "report collaudo"
+   ],
+   "content": "CONTEST AI FCS 2026 SUBMIT COMPLETATO (30/10/2026 ~15:52): SharePoint list 68ddc769-8dba-4571-9b9a-6b383f30f52b (2026 AI Contest for FCS Process Improvement), nuovo item Id=15 con 4 allegati (REPORT-QA-SYRS.pdf versione selling, grafo.png, how-it-works.png, demo.mp4). Report selling: titolo 'Report di collaudo — LLM Wiki knowledge base agentic per la documentazione FCS (progetto pilota AW189)', senza problemi noti, con sezione sicurezza dati (tutto resta in Leonardo). Pipeline PDF: MD → script Python md2pdf_report.py → HTML → Chrome headless --print-to-pdf. Form URL listforms.aspx cid=NjhkZGM3... tab tab_c0962b4b-9940-42a9-a297-cce53de154be.",
+   "createdAt": "2026-10-30T14:58:10.570Z",
+   "files": [],
+   "id": "mem_mvv3k3nb_0d3aba608f25",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-30T14:58:10.570Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "CONTEST AI FCS 2026 SUBMIT COMPLETATO (30/10/2026 ~15:52): SharePoint list 68ddc",
+   "type": "fact",
+   "updatedAt": "2026-10-30T14:58:10.570Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "uncommitted move",
+    "encoding utf8",
+    "documents layout",
+    "stato_progetto"
+   ],
+   "content": "speedgoat repo (PC1, C:\\Users\\49359\\Documents\\MATLAB\\speedgoat): as of 2026-11-02 an UNCOMMITTED reorganization sits in the worktree — loose program docs from repo root (HighLevelPlan_Speedgoat.xlsx, (Customername)_Speedgoat_RealTimeTesting_Requirements.xlsx, ConnessioniFCC_RIG_NMH_AW189.xlsx, Resume Interface.docx) and the whole docs/ folder (plans/*.md, stato/stato_progetto.html) moved into 04_SPDG_Documents/ (04_SPDG_Documents/docs/plans|stato). Moved text files re-encoded UTF-16 LE -> UTF-8 no BOM, content verified unchanged; PowerShell redirection writes UTF-16 by default so use -Encoding utf8 when regenerating stato_progetto.html. git HEAD still has old paths. AGENTS.md updated accordingly (commit right after this one). Test_Launcher submodule inner branch = Speedgoat_Mod verified; AutoHarnessDashboard.m is at tools/AutoHarnessDashboard.m.",
+   "createdAt": "2026-11-02T11:47:55.267Z",
+   "files": [
+    "AGENTS.md",
+    "04_SPDG_Documents/docs/stato/stato_progetto.html"
+   ],
+   "id": "mem_mvz72zly_1fff9b2293c9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-02T11:47:55.267Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "speedgoat repo (PC1, C:\\Users\\49359\\Documents\\MATLAB\\speedgoat): as of 2026-11-0",
+   "type": "fact",
+   "updatedAt": "2026-11-02T11:47:55.267Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "commit ram",
+    "thrashing",
+    "pulizia mcp",
+    "opencode snapshot"
+   ],
+   "content": "Pulizia commit RAM ripetibile: Get-Process matlab-mcp-server | Sort StartTime -Desc | Select -Skip 1 | Stop-Process -Force (poi i rimanenti muoiono da soli alla disconnessione). ATTENZIONE: i processi git.exe su C:\\Users\\49359\\.local\\share\\opencode sono snapshot interni di OpenCode, NON ucciderli. Dopo pulizia: hard fault/s da 2672 a 244, commit da 72% a 68%. Effetto collaterale noto e innocuo: la sessione agent che ordina la pulizia perde il proprio ponte MATLAB MCP.",
+   "createdAt": "2026-11-05T11:30:51.256Z",
+   "files": [],
+   "id": "mem_mw3gsmkt_1ba78c0de8a7",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T11:30:51.256Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Pulizia commit RAM ripetibile: Get-Process matlab-mcp-server | Sort StartTime -D",
+   "type": "workflow",
+   "updatedAt": "2026-11-05T11:30:51.256Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "graphify",
+    "leonardo gateway",
+    "environment variables",
+    "OPENAI_API_KEY",
+    "persistenza API"
+   ],
+   "content": "graphify API now PERSISTENT at Windows user level (HKCU\\Environment, set 2026-11-05): OPENAI_BASE_URL=https://ai-gateway.leonardo.com/v1, OPENAI_API_KEY=dvx_pki_... (same key as opencode.json provider.leonardo), OPENAI_MODEL='task=general, effort=balanced'. Verified e2e: bare 'graphify .' (no flags) auto-detects backend 'openai' from OPENAI_API_KEY and hits the Leonardo gateway (cli.py rewrites 'graphify <path>' to 'graphify extract <path>'; detect_backend_with_source priority gemini>kimi>claude>openai). Only NEW terminals see the vars (already-open ones don't; OpenCode session shells still need inline env). --max-concurrency has NO env var in graphify 0.9.101 (default 4; gateway needs 2 for big runs, else chunks drop and heal on rerun). .graphifyrc only supports viz_node_limit and language.* keys.",
+   "createdAt": "2026-11-05T11:41:24.923Z",
+   "files": [],
+   "id": "mem_mw3h66o2_95abdd1210dd",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T11:41:24.923Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "graphify API now PERSISTENT at Windows user level (HKCU\\Environment, set 2026-11",
+   "type": "fact",
+   "updatedAt": "2026-11-05T11:41:24.923Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "Leonardo AI gateway (ai-gateway.leonardo.com/v1) model discovery DONE: behind /v1/models' single 'auto' entry, ANY model string is accepted and routed to the same deployment — 11 distinct strings probed (task=general low/balanced/high, task=coding, task=extraction, gpt-4o-mini, gpt-4.1, claude-opus-4-1, claude-sonnet-4-5, qwen3-coder-480b) all returned model='airouter', system_fingerprint='vllm-0.32.0-tp4-142f2bbb', x-serving-target='direct', and self-report 'GLM by Z.ai'. Single GLM (Z.ai) vLLM tp4 deployment behind everything; per-category model benchmark is moot; OPENAI_MODEL string choice is cosmetic (current 'task=general, effort=balanced' is fine).",
+   "createdAt": "2026-11-05T14:17:50.587Z",
+   "files": [],
+   "id": "mem_mw3mrco4_1ed43ab773c4",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T14:17:50.587Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Leonardo AI gateway (ai-gateway.leonardo.com/v1) model discovery DONE: behind /v",
+   "type": "fact",
+   "updatedAt": "2026-11-05T14:17:50.587Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "Leonardo gateway capabilities verified (2026-11-05): /v1/models lists only 'auto'; auto chat works (GLM/Z.ai, vllm-0.32.0-tp4). /v1/embeddings EXISTS but requires model='task=embedding, context=X' with X in {512,1024,qwen} (bare 'task=embedding' rejected by router validation); all return dim=1024, model field 'airouter'. Vision: chat model accepts image_url content (multimodal GLM) and answers correctly. /v1/audio/transcriptions EXISTS with only model 'Qwen/Qwen3-ASR-1.7B'; returns {text, usage:{seconds}}; empty text on pure-tone WAV (no speech) = working.",
+   "createdAt": "2026-11-05T14:21:30.925Z",
+   "files": [],
+   "id": "mem_mw3mw2dp_f2732510aee0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T14:21:30.925Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Leonardo gateway capabilities verified (2026-11-05): /v1/models lists only 'auto",
+   "type": "fact",
+   "updatedAt": "2026-11-05T14:21:30.925Z",
    "version": 1
   }
  ],
