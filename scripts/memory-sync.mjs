@@ -273,8 +273,10 @@ const PROXY_HINT = "se sei dietro un proxy aziendale che blocca GitHub, disattiv
 
 function git(args, check = true) {
   // timeout: dietro un proxy aziendale pull/push possono restare appesi per minuti
-  const r = spawnSync('git', ['-C', DATA_DIR, ...args], { encoding: 'utf8', timeout: 90000 });
-  if (r.error?.code === 'ETIMEDOUT') die(`git ${args[0]} bloccato da oltre 90s: ${PROXY_HINT}`);
+  // ponytail: dal task pianificato di questo PC git impiega anche minuti, si alza via env
+  const gitTimeoutMs = Number(process.env.KB_SYNC_GIT_TIMEOUT) || 90000;
+  const r = spawnSync('git', ['-C', DATA_DIR, ...args], { encoding: 'utf8', timeout: gitTimeoutMs });
+  if (r.error?.code === 'ETIMEDOUT') die(`git ${args[0]} bloccato da oltre ${Math.round(gitTimeoutMs / 1000)}s: ${PROXY_HINT}`);
   if (r.error) die(`git non trovato (${r.error.code}). Installa git o usa --dir con una cartella condivisa`);
   if (r.status !== 0 && /proxy|CONNECT tunnel|502|407|Failed to connect/i.test(r.stderr || '')) {
     die(`git ${args[0]}: ${r.stderr.trim()}\n  ${PROXY_HINT}`);
