@@ -80,6 +80,25 @@ memory_save "Su Windows npx va lanciato con cmd /c"
 
 La wiki (`wiki/`) è cercabile con lo strumento `wiki-search` dove è attiva (`--wiki-search`).
 
+## Cartelle di note (es. il second brain)
+
+Altre cartelle di note che sono già un clone git (es. `SecondBrain`) si tengono allineate
+su tutte le macchine e diventano cercabili dagli agenti. Nel `.env` del clone, separate da `;`:
+
+```bash
+KB_NOTES_DIRS=/DATA/AppData/secondbrain                     # mini PC
+KB_NOTES_DIRS=D:\Francesco\Desktop\Python\SecondBrain      # PC Windows
+```
+
+A ogni giro del job (ogni 15 minuti, qualsiasi ruolo) `scripts/notes-sync.mjs` fa commit
+delle modifiche (il `.gitignore` della cartella decide cosa resta fuori), `pull --rebase` e
+push. Con `*.md merge=union` nel `.gitattributes` della cartella le modifiche alla stessa
+nota da due macchine si sommano; se resta un conflitto il rebase si annulla, nulla si
+perde e il log lo segnala. Dove c'è la ricerca wiki, rilanciare
+`scripts/wiki-search.sh setup` aggiunge ogni cartella come collezione `qmd`
+(nome = nome della cartella), e l'indice si riallinea da solo dopo ogni sync.
+Prova a mano: `node scripts/notes-sync.mjs`.
+
 ## Problemi comuni
 
 | Sintomo | Cosa fare |
@@ -91,7 +110,9 @@ La wiki (`wiki/`) è cercabile con lo strumento `wiki-search` dove è attiva (`-
 | `KB-JSON` | config di un programma non valida (anche JSON con commenti): non è stata toccata, correggila e rilancia |
 | `KB-CLONE` | ci sono altri clone di knowledge-base: non vengono toccati, le config puntano al clone da cui hai installato |
 
-Log: `~/.agentmemory/kb-update.log` (aggiornamenti) e `~/.agentmemory/memory-sync.log` (sync).
+| `notes-sync ...: conflict` | la stessa riga di una nota è cambiata su due macchine: nella cartella `git pull --rebase`, sistema il file, `git rebase --continue` |
+
+Log: `~/.agentmemory/kb-update.log` (aggiornamenti) e `~/.agentmemory/memory-sync.log` (sync, anche delle note).
 Per togliere tutto: `node scripts/kb.mjs uninstall` (con `--restore` rimette i file di config com'erano).
 
 ## Struttura
@@ -102,6 +123,7 @@ scripts/bootstrap.mjs       primo passo per clone nuovi o vecchi
 scripts/lib/adapters.mjs    i programmi supportati: dove sta la config e come provarli
 scripts/lib/agents.mjs      i formati delle config (JSON, YAML di Hermes, TOML di Codex)
 scripts/lib/checks.mjs      i controlli di `kb test`
+scripts/notes-sync.mjs      sync git delle cartelle di note in KB_NOTES_DIRS
 scripts/lib/mcp-client.mjs  client MCP minimo usato da `kb test`
 config/endpoint.env         indirizzo del server
 wiki/  projects/            conoscenza scritta

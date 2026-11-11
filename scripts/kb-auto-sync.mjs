@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Sync automatica delle memorie: aggiornamento del codice (kb.mjs update, che da solo
-// controlla al massimo una volta ogni KB_UPDATE_HOURS ore), poi import-agent-memories +
+// controlla al massimo una volta ogni KB_UPDATE_HOURS ore), poi la sync git delle
+// cartelle di note in KB_NOTES_DIRS (notes-sync.mjs), poi import-agent-memories +
 // memory-sync (salvo il ruolo client, che non ha memorie locali), senza output
 // a video, con log in ~/.agentmemory/memory-sync.log. Pensato per essere lanciato
 // dallo scheduler (Utilita' di pianificazione, cron) e dagli hook di Claude Code.
@@ -54,7 +55,7 @@ function run(script) {
 function loadEnv() {
   const file = path.join(HERE, '..', '.env');
   if (!fs.existsSync(file)) return;
-  const keys = ['KB_MEMORY_URL', 'AGENTMEMORY_SECRET', 'KB_SYNC_DIR', 'KB_SYNC_NODE'];
+  const keys = ['KB_MEMORY_URL', 'AGENTMEMORY_SECRET', 'KB_SYNC_DIR', 'KB_SYNC_NODE', 'KB_NOTES_DIRS', 'KB_SYNC_GIT_TIMEOUT'];
   for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
     const m = line.match(/^\s*(?:export\s+)?([A-Z_]+)\s*=\s*(.*?)\s*$/);
     if (m && keys.includes(m[1]) && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
@@ -81,6 +82,8 @@ function role() {
 async function main() {
   loadEnv();
   selfUpdate();
+  // Note (es. il second brain) per ogni ruolo e anche ad agentmemory spento
+  if (process.env.KB_NOTES_DIRS) run('notes-sync.mjs');
   if (role() === 'client') return;
   const base = (process.env.KB_MEMORY_URL || 'http://127.0.0.1:3111').replace(/\/+$/, '');
   const headers = process.env.AGENTMEMORY_SECRET ? { Authorization: `Bearer ${process.env.AGENTMEMORY_SECRET}` } : {};

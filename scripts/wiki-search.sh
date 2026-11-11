@@ -34,6 +34,18 @@ COLLECTIONS=(
     "projects|$REPO_DIR/projects|Note e documentazione dei progetti"
 )
 
+# Cartelle di note esterne (es. il second brain), da KB_NOTES_DIRS nell'ambiente o nel
+# .env del clone, separate da ';'. Il nome della collezione e' il nome della cartella.
+if [ -z "${KB_NOTES_DIRS:-}" ] && [ -f "$REPO_DIR/.env" ]; then
+    KB_NOTES_DIRS="$(sed -n 's/^[[:space:]]*\(export[[:space:]]\+\)\{0,1\}KB_NOTES_DIRS[[:space:]]*=[[:space:]]*//p' "$REPO_DIR/.env" | tail -1 | tr -d "\"'\r")"
+fi
+IFS=';' read -r -a NOTES_DIRS <<< "${KB_NOTES_DIRS:-}"
+for d in "${NOTES_DIRS[@]}"; do
+    [ -n "$d" ] || continue
+    n="$(basename "$d" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9_\n-' '-')"
+    COLLECTIONS+=("$n|$d|Note personali di Francesco ($n): progetti, aree, coda delle cose da fare, riassunti")
+done
+
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
 ok()   { echo -e "${GREEN}[OK]${NC} $1"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
