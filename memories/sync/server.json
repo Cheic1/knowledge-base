@@ -34111,7 +34111,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwd9vr0i_7c769d932556",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T08:15:02.960Z",
@@ -34154,6 +34154,90 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-te",
    "type": "preference",
    "updatedAt": "2026-11-12T08:15:03.212Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)",
+   "createdAt": "2026-11-12T08:25:13.588Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwda8u80_2ffb8454fcde",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:25:13.588Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwd9vr0i_7c769d932556",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwd9vr0i_7c769d932556"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:25:13.588Z",
+   "version": 4
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.1.0 attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].\n- 2026-11-12: \"New External Library\" (vuota) eliminata via SQL su richiesta di Francesco.\n- Backup: user timer backup-immich.timer (~03:30) -> /home/francesco/teldrive/backup-immich.sh: foto (no thumbs/encoded-video) -> teldrive:/Backup/immich/current (+old/<data> 90gg), dump DB -> teldrive:/Backup/immich/db-dumps, DB+config Teldrive cifrati gpg -> gdrive:BackUp/teldrive-server. Log /home/francesco/teldrive/backup-immich.log. Attenzione: gdrive usa il client_id condiviso di rclone, in dismissione nel 2026.\n- Disco: entrambe le installazioni su /dev/sdc1 (1.8T, montato /DATA/AppData), non sul disco di sistema.",
+   "createdAt": "2026-11-12T08:25:13.962Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwda8uip_283bc535d2f8",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:25:13.962Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:25:13.962Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md]\n- \"teldrove\" = Teldrive (Telegram storage). rclone mount teldrive:/Media -> /DATA/AppData/Media/teldrive (ro, user service teldrive-media), used by Jellyfin.\n- StreamingCommunity panel: compose in /DATA/AppData/streamingcommunity-downloader, runs as 1000, volume nfs_storage = /DATA/AppData/Film -> /app/videos; registry in panel/panel.db table library_folder (missing_since; forgotten after 30 days).\n- ~/teldrive/scripts/move-films.sh (timer 03:10) rclone-moves Film/ and SerieTV/ to teldrive:/Media, so the panel sees folders as missing.\n- FIXED 2026-11-12: user service ~/.config/systemd/user/sc-videos-union.service (mergerfs /DATA/AppData/Film=RW:/DATA/AppData/Media/teldrive=NC -> /DATA/AppData/streamingcommunity-downloader/videos). Compose now binds that dir to /app/videos (backup docker-compose.yml.bak-20261112).\n- Pitfall: a FUSE remount on the exact bind source is NOT seen by the running container (ENOTCONN) even with rslave, so the unit's ExecStartPost restarts the container. Mountpoint must stay writable by francesco (fusermount needs it).\n- Panel reconcile can be forced: curl -X POST http://localhost:7028/api/library/reconcile\n\nRelated: [[iptv-epg-setup]]",
+   "createdAt": "2026-11-12T08:25:14.158Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md"
+   ],
+   "id": "mem_mwda8unf_c2835a5fa5cc",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:25:14.158Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-te",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:25:14.158Z",
    "version": 1
   }
  ],
