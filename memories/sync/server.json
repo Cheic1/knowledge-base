@@ -34054,7 +34054,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwd9rdtd_ad96fcb2c1a7",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T08:11:39.220Z",
@@ -34097,6 +34097,63 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
    "type": "preference",
    "updatedAt": "2026-11-12T08:11:39.390Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix",
+   "createdAt": "2026-11-12T08:15:02.960Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwd9vr0i_7c769d932556",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:15:02.960Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwd9rdtd_ad96fcb2c1a7",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwd9rdtd_ad96fcb2c1a7"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:15:02.960Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md]\n- \"teldrove\" = Teldrive (Telegram storage). rclone mount teldrive:/Media -> /DATA/AppData/Media/teldrive (ro, user service teldrive-media), used by Jellyfin.\n- StreamingCommunity panel: compose in /DATA/AppData/streamingcommunity-downloader, runs as 1000, volume nfs_storage = /DATA/AppData/Film -> /app/videos; registry in panel/panel.db table library_folder (missing_since; forgotten after 30 days).\n- ~/teldrive/scripts/move-films.sh (timer 03:10) rclone-moves Film/ and SerieTV/ to teldrive:/Media, so the panel sees folders as missing.\n- Fix proposed 2026-11-12: user service sc-videos-union (mergerfs /DATA/AppData/Film=RW:/DATA/AppData/Media/teldrive=NC -> /DATA/AppData/streamingcommunity-downloader/videos), then point the container's /app/videos there (bind, propagation rslave). Creating the systemd service was blocked by auto-mode classifier; waiting for Francesco's \"procedi\". Draft unit in thread scratchpad.\n\nRelated: [[iptv-epg-setup]]",
+   "createdAt": "2026-11-12T08:15:03.212Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md"
+   ],
+   "id": "mem_mwd9vr8b_616b9590d486",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:15:03.212Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-te",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:15:03.212Z",
    "version": 1
   }
  ],
