@@ -34000,7 +34000,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwbb5h3i_dedf7aefa661",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-10T23:15:03.862Z",
@@ -34040,6 +34040,63 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.",
    "type": "preference",
    "updatedAt": "2026-11-10T23:15:04.121Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere",
+   "createdAt": "2026-11-12T08:11:39.220Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwd9rdtd_ad96fcb2c1a7",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:11:39.220Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwbb5h3i_dedf7aefa661",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwbb5h3i_dedf7aefa661"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:11:39.220Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.1.0 attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; \"New External Library\" senza import path (warning ogni notte); 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].",
+   "createdAt": "2026-11-12T08:11:39.390Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwd9rdyw_0e2a3cfc4f6f",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:11:39.390Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:11:39.390Z",
    "version": 1
   }
  ],
