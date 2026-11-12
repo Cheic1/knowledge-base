@@ -34309,7 +34309,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
    ],
    "id": "mem_mwdl4v3z_8cc3cc42edaa",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T13:30:03.896Z",
@@ -34326,6 +34326,36 @@
    "type": "preference",
    "updatedAt": "2026-11-12T13:30:03.896Z",
    "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.4.1, IMMICH_VERSION=release (aggiornato 2026-11-12, backup .env in .env.bak-2026-11-12) attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].\n- 2026-11-12: \"New External Library\" (vuota) eliminata via SQL su richiesta di Francesco.\n- Backup: user timer backup-immich.timer (~03:30) -> /home/francesco/teldrive/backup-immich.sh: foto (no thumbs/encoded-video) -> teldrive:/Backup/immich/current (+old/<data> 90gg), dump DB -> teldrive:/Backup/immich/db-dumps, DB+config Teldrive cifrati gpg -> gdrive:BackUp/teldrive-server. Log /home/francesco/teldrive/backup-immich.log. Attenzione: gdrive usa il client_id condiviso di rclone, in dismissione nel 2026.\n- Disco: entrambe le installazioni su /dev/sdc1 (1.8T, montato /DATA/AppData), non sul disco di sistema.",
+   "createdAt": "2026-11-12T18:45:03.874Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwdwdyer_8529c907b73b",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T18:45:03.874Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwdl4v3z_8cc3cc42edaa",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwdl4v3z_8cc3cc42edaa"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T18:45:03.874Z",
+   "version": 3
   }
  ],
  "observations": {
