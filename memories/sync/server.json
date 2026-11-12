@@ -34168,7 +34168,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwda8u80_2ffb8454fcde",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T08:25:13.588Z",
@@ -34238,6 +34238,63 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-te",
    "type": "preference",
    "updatedAt": "2026-11-12T08:25:14.158Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema",
+   "createdAt": "2026-11-12T09:15:03.167Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwdc0wyt_50c477d4e806",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T09:15:03.167Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwda8u80_2ffb8454fcde",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwda8u80_2ffb8454fcde"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T09:15:03.167Z",
+   "version": 5
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/home-assistant-diorama.md]\n- 2026-11-12: Diorama card (HACS, CarlesRojas/ha-diorama v1.9.0) installed; view \"Casa 3D\" (path casa-3d, panel) added to the default Overview dashboard by writing `.storage/lovelace.lovelace` via `docker cp` (file is root-owned, no sudo) + `docker restart homeassistant`. Backup: `.storage/lovelace.lovelace.bak-pre-diorama`.\n- Floor plan source: Google Drive \"PLANIMETRIA CASA FRANCY-EMMA .pdf\" (catastale, Busto Arsizio, piano primo, scala 1:200). Rooms: camera, bagno, ingresso/disimpegno, soggiorno, cucina, balcone (~6.4 x 8.9 m). Fetch with `rclone backend copyid gdrive: <id>`.\n- Diorama config schema (card YAML): rooms[{id,name,points[[x,y]],area_id,floor_id}], decorations[{id,kind,room,position[x,y],rotation deg,variant,params{width..}}], devices[{entity_id,room,position,decorations[ids]}]. Kind list is in card.js `jb(\"kind\",...)`.\n- HA areas: camera_da_letto, cucina, soggiorno. Headless chromium can't render the card on the N3150 (software GL too slow) so visual checks need a real browser.",
+   "createdAt": "2026-11-12T09:15:03.438Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/home-assistant-diorama.md"
+   ],
+   "id": "mem_mwdc0x7g_79f64fe7dd9c",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T09:15:03.438Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/home-assistant-dioram",
+   "type": "preference",
+   "updatedAt": "2026-11-12T09:15:03.438Z",
    "version": 1
   }
  ],
