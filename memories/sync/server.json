@@ -34252,7 +34252,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwdc0wyt_50c477d4e806",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T09:15:03.167Z",
@@ -34356,6 +34356,63 @@
    "type": "preference",
    "updatedAt": "2026-11-12T18:45:03.874Z",
    "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM",
+   "createdAt": "2026-11-12T18:57:01.167Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwdwtbw7_79e87c2c3226",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T18:57:01.167Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwdc0wyt_50c477d4e806",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwdc0wyt_50c477d4e806"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T18:57:01.167Z",
+   "version": 6
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md]\nVidBee (nexmoe/VidBee) installed 2026-11-10 in /DATA/AppData/vidbee: web 3010, API 3110 (3000 left free: reserved for hunter-finder in old ctm tunnel config). Published by Francesco via CTM as vidbee-web.cheic2.it (no auth; Cloudflare Access recommended).\n\n- Bug: VidBee auto-update downloads yt-dlp_linux (glibc) into /data/vidbee/bin, which fails on the Alpine image (spawn ENOENT, downloads \"freeze\" after 5 retries). Fix: yt-dlp-wrapper.sh mounted read-only over /data/vidbee/bin/yt-dlp → /usr/bin/yt-dlp, plus YTDLP_PATH. \"yt-dlp update failed EBUSY\" in logs is expected.\n- Transcription doesn't work in the Docker image (sherpa-onnx-node missing); autoTranscribeAfterDownload set false in data/web-settings.json. For transcripts use faster-whisper (needs av<16).\n- Publishing services: tunnel \"home\" sends *.cheic2.it → NPM; new hosts are added via CTM (http://127.0.0.1:5000, /DATA/AppData/Script/native/app). Auto mode blocked me from publishing an unauthenticated service — leave that step to Francesco.",
+   "createdAt": "2026-11-12T18:57:01.674Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md"
+   ],
+   "id": "mem_mwdwtch8_6d80ad096a32",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T18:57:01.674Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md]\nVidBee (ne",
+   "type": "preference",
+   "updatedAt": "2026-11-12T18:57:01.674Z",
+   "version": 1
   }
  ],
  "observations": {
