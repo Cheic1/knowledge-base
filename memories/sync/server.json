@@ -34426,7 +34426,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwe5tea9_c6a399a22d5d",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T23:09:00.685Z",
@@ -34469,6 +34469,63 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
    "type": "preference",
    "updatedAt": "2026-11-12T23:09:01.238Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions\n- [Tuya local](tuya-local.md) — tuya_local fix Luce Camera, pending Smart IR/battery, how to edit root-owned HA storage",
+   "createdAt": "2026-11-12T23:26:12.006Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwe6fhxq_eb6eede71316",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:26:12.006Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe5tea9_c6a399a22d5d",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe5tea9_c6a399a22d5d"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:26:12.006Z",
+   "version": 8
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA config /DATA/AppData/homeassistant/config is root-owned: edit .storage only with HA stopped, via `docker run --rm -v ...config:/config --entrypoint sh <ha image>`. No HA API token available.\ntinytuya venv in /DATA/AppData/tuya_tools (snapshot.json, 600). No Tuya IoT credentials on server.\n2026-11-13: entry \"Light\" (bff12d…, really the ANTELA plug \"Ciabatta/Luce Camera\") was type zigbee_smart_bulb at .61 → fixed to smartplugv2_energyv3 at 192.168.68.50 (v3.3); new switch.luce_camera + switch_as_x light.luce_cucina (kept name so automations work). Backup in backup_manuali/20261112_232057_tuya.\nLuce Cucina plug .62 v3.5 OK. Pending: Smart IR (hircr_remote_control supported, not seen on LAN scan, needs key via tuya_local cloud QR login), TV/Luce Led are IR sub-remotes, Battery 20V likely BLE (not local). Official tuya cloud entry needs re-auth.",
+   "createdAt": "2026-11-12T23:26:12.335Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md"
+   ],
+   "id": "mem_mwe6fi81_9711d7109b97",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:26:12.335Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA con",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:26:12.335Z",
    "version": 1
   }
  ],
