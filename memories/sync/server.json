@@ -34456,7 +34456,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
    ],
    "id": "mem_mwe5tesj_1e66dba77799",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T23:09:01.238Z",
@@ -34527,6 +34527,36 @@
    "type": "preference",
    "updatedAt": "2026-11-12T23:26:12.335Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\nRead-only WhatsApp reader at /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp (Go, whatsmeow; Go SDK in ~/go-sdk). Linked 2026-11-12 by Francesco from his own SSH terminal (`./wa_lettore login`, QR). Extracts in privato/estratti (all history since 2019 saved at relink with chat_importanti = \"*\" + Emma Ferrari).\n\n**Why:** Francesco wants WhatsApp context for the SecondBrain, but explicitly read-only (no send, no ports).\n\n**How to apply:**\n- Pairing-code login failed (\"controlla il numero\" / missing link_code_pairing_wrapped_primary_ephemeral_pub); QR from his terminal works. QRs relayed via chat expire too fast.\n- History only arrives at link time: chats must be in chat_importanti.txt BEFORE login.\n- Normal mode (`./wa_lettore`, `-minuti N`) deletes extracts older than 14 days. Full history (2019→12/11/2026) is backed up in privato/estratti_backup_2026-11-12; back up again before runs if needed.\n- Never two wa_lettore at once (same sessione.db). No systemd/cron without his request.\n- Sending: separate tool invio/wa_invia (--conferma NUMERO \"testo\", private chats only, logs to privato/inviati.log). Allowed in ~/.claude/settings.json by one narrow rule. Use ONLY when Francesco explicitly gives chat + text; reader must be stopped. First send 2026-11-13 00:27 \"Ti voglio bene\" to Emma. Pending: keep \"*\" or Emma-only.",
+   "createdAt": "2026-11-12T23:30:02.955Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
+   ],
+   "id": "mem_mwe6kg4e_1cf6fcd38f67",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:30:02.955Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe5tesj_1e66dba77799",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe5tesj_1e66dba77799"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:30:02.955Z",
+   "version": 2
   }
  ],
  "observations": {
