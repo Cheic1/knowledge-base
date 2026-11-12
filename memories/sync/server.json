@@ -34369,7 +34369,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwdwtbw7_79e87c2c3226",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T18:57:01.167Z",
@@ -34412,6 +34412,63 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md]\nVidBee (ne",
    "type": "preference",
    "updatedAt": "2026-11-12T18:57:01.674Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions",
+   "createdAt": "2026-11-12T23:09:00.685Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwe5tea9_c6a399a22d5d",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:09:00.685Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwdwtbw7_79e87c2c3226",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwdwtbw7_79e87c2c3226"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:09:00.685Z",
+   "version": 7
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\nRead-only WhatsApp reader at /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp (Go, whatsmeow; Go SDK in ~/go-sdk). Linked 2026-11-12 by Francesco from his own SSH terminal (`./wa_lettore login`, QR). Extracts in privato/estratti (all history since 2019 saved at relink with chat_importanti = \"*\" + Emma Ferrari).\n\n**Why:** Francesco wants WhatsApp context for the SecondBrain, but explicitly read-only (no send, no ports).\n\n**How to apply:**\n- Pairing-code login failed (\"controlla il numero\" / missing link_code_pairing_wrapped_primary_ephemeral_pub); QR from his terminal works. QRs relayed via chat expire too fast.\n- History only arrives at link time: chats must be in chat_importanti.txt BEFORE login.\n- Normal mode (`./wa_lettore`, `-minuti N`) deletes extracts older than 14 days. Full history (2019→12/11/2026) is backed up in privato/estratti_backup_2026-11-12; back up again before runs if needed.\n- Never two wa_lettore at once (same sessione.db). No systemd/cron without his request.\n- 2026-11-12 he asked to send \"ti voglio bene\" to Emma; declined (read-only by design), offered a separate opt-in wa_invia tool — awaiting explicit yes. Also pending: keep \"*\" or Emma-only; backup before normal runs.",
+   "createdAt": "2026-11-12T23:09:01.238Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
+   ],
+   "id": "mem_mwe5tesj_1e66dba77799",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:09:01.238Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:09:01.238Z",
    "version": 1
   }
  ],
