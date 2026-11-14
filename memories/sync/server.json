@@ -34602,6 +34602,60 @@
    "type": "preference",
    "updatedAt": "2026-11-14T13:00:03.375Z",
    "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md]\n- [Servizi mini PC di casa](home-server-services.md) — porte, percorsi, OpenCode Manager",
+   "createdAt": "2026-11-14T18:30:03.863Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md"
+   ],
+   "id": "mem_mwgqqdce_2516593f6b3b",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-14T18:30:03.863Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.",
+   "type": "preference",
+   "updatedAt": "2026-11-14T18:30:03.863Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md]\nMini PC di casa: Celeron N3150, IP LAN 192.168.68.55, Tailscale 100.103.112.15. Servizi in /DATA/AppData/<nome>, Homepage su :3020 (config /DATA/AppData/homepage/config/services.yaml). Esposizione esterna via CTM tunnel su *.cheic2.it.\n\n- OpenCode Manager (installato 2026-11-14): /DATA/AppData/opencode-manager, immagine ghcr.io/chriswritescode-dev/opencode-manager:latest, porte 5003 (UI), 5004, 5100-5103 (preview). Credenziali admin in .env (chmod 600). Workspace: /DATA/AppData/opencode-manager/workspace. Usa un suo OpenCode interno (2.1.2), separato da quello del host (~/.opencode/bin, 2.0.19). Non esposto fuori casa: se serve, solo dietro Cloudflare Access. Aggiornare: `docker compose pull && docker compose up -d`.\n\n**Why:** evitare di ricontrollare porte/percorsi ogni volta.\n**How to apply:** prima di usare una porta nuova, controlla questo elenco e `docker ps`.",
+   "createdAt": "2026-11-14T18:30:04.136Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md"
+   ],
+   "id": "mem_mwgqqdi4_50ca57cdb05f",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-14T18:30:04.136Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-se",
+   "type": "preference",
+   "updatedAt": "2026-11-14T18:30:04.136Z",
+   "version": 1
   }
  ],
  "observations": {
