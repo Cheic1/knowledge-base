@@ -34042,7 +34042,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md"
    ],
    "id": "mem_mwbb5hf0_4a09e10f9402",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-10T23:15:04.121Z",
@@ -34571,6 +34571,36 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
    "type": "preference",
    "updatedAt": "2026-11-12T23:30:02.955Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md]\nAudit read-only del 2026-11-11 (nessuna modifica fatta, in attesa del via di Francesco).\n\n- Hardware: 4 core, 15 GiB RAM, swap 19 GiB. Root LV 107G al 87% (Docker /var/lib/docker sta su root). /DATA/AppData è /dev/sdc1 1.8T (40%). Nessun sudo senza password per l'utente francesco.\n- CPU hog #1: user service `hermes-webui` in crash loop (>80k restart; errore bootstrap \"cannot import both WebUI dependencies and Hermes Agent\", serve HERMES_WEBUI_PYTHON = venv di hermes-agent). Ogni ciclo ~12s CPU + pip install.\n- CPU hog #2: `netbird-crowdsec` ~45% CPU: healthcheck `cscli lapi status` ogni 10s fa un login bcrypt (123k login). Soluzione: interval 60s+ in /DATA/AppData/netbird/docker-compose.yml.\n- CPU #3: desktop GNOME (gdm, gnome-shell ~22% CPU), nxserver, gnome-remote-desktop su server headless; default target graphical.\n- Docker: 59 immagini dangling, ~17 GB recuperabili + 1.3 GB build cache; container exited residui (preape_flutter, tmp_preape_pg, preape_dev; sonarr/radarr/qbittorrent exited 137); stack test pre-ape avviato da /tmp/preape-test.\n- Cartelle: migrazione di STRUZZIONE-DIRECTORY.md (in /home/francesco) a metà: compose in networking/, home-automation/ ma i volumi puntano ancora alle cartelle radice (homeassistant, mosquitto, zigbee2mqtt). nginxproxymanager compose in /home/francesco/docker. Molte cartelle senza container (ollama 16G, nextcloud, plex, big-bear-*, gitea…), progetti dev mischiati con app data.\n- Non toccare VidBee (/DATA/AppData/vidbee), gestito da altro thread.\n\n**Why:** Francesco vuole più performance e ordine sul mini PC.\n**How to apply:** chiedere prima di cancellare/fermare/spostare; procedere per fasi (CPU fix → pulizia disco → riordino cartelle). Vedi [[iptv-epg-setup]] per la catena Dispatcharr/Jellyfin.\n\nAggiornamento 2026-11-11 (eseguito su via di Francesco): hermes-webui fermato e disabilitato; NetBird rimosso del tutto (compose down -v, cartella in /DATA/AppData/.cestino-2026-11-11); container fermi rimossi (preape_*, sonarr, radarr, qbittorrent); immagini inutilizzate e build cache eliminate (tenuta pre-ape:mvp, build locale). NB: Docker Root Dir = /DATA/AppData/Docker_Files (non sul disco root): il disco root è pieno soprattutto per la home (~55G). Le cartelle app senza container sono nel cestino; quelle di root richiedono sudo (comandi dati a Francesco). Il cestino va svuotato solo su sua conferma.\n2026-11-14: Francesco ha confermato lo svuotamento del cestino .cestino-2026-11-11 (non toccare .cestino-2026-09-30). Cancellate le cartelle di sua proprietà; restano quelle di root (serve sudo rm -rf). Gallery/immich era una vecchia istanza Immich: 329/348 file già nell'Immich attuale (checksum), i 19 mancanti copiati in /DATA/AppData/immich-app/recupero-da-gallery-2026-11-11/ per il caricamento manuale.",
+   "createdAt": "2026-11-14T13:00:03.375Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md"
+   ],
+   "id": "mem_mwgexz4h_a0302aeb6ed7",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-14T13:00:03.375Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwbb5hf0_4a09e10f9402",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwbb5hf0_4a09e10f9402"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.",
+   "type": "preference",
+   "updatedAt": "2026-11-14T13:00:03.375Z",
    "version": 2
   }
  ],
