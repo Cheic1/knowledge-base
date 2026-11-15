@@ -34642,7 +34642,7 @@
     "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md"
    ],
    "id": "mem_mwgqqdi4_50ca57cdb05f",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-14T18:30:04.136Z",
@@ -34656,6 +34656,90 @@
    "type": "preference",
    "updatedAt": "2026-11-14T18:30:04.136Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md]\n- [Servizi mini PC di casa](home-server-services.md) — porte, percorsi, OpenCode Manager\n- [Pubblica sempre su CTM](feedback-publish-via-ctm.md) — niente solo-Tailscale per i nuovi servizi",
+   "createdAt": "2026-11-15T09:30:03.572Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md"
+   ],
+   "id": "mem_mwhmvrqu_6b76d0801f27",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T09:30:03.572Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.",
+   "type": "preference",
+   "updatedAt": "2026-11-15T09:30:03.572Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/feedback-publish-via-ctm.md]\nQuando installo un servizio sul mini PC, lo pubblico subito su CTM: `curl -X POST -d 'name=<sottodominio>&port=<porta>&target_host=localhost' http://127.0.0.1:5000/add` poi `curl -X POST http://127.0.0.1:5000/toggle/<nome>` per l'autostart. Homepage punta all'URL https://<nome>.cheic2.it. Aggiungere l'URL pubblico alle origini fidate dell'app se serve.\n\n**Why:** Francesco non vuole tenere la VPN Tailscale sempre attiva (2026-11-15).\n**How to apply:** ogni nuova installazione; vedi [[home-server-services]]. Cloudflare Access non è automatizzabile dal server (manca token API), va segnalato.",
+   "createdAt": "2026-11-15T09:30:03.764Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/feedback-publish-via-ctm.md"
+   ],
+   "id": "mem_mwhmvrxb_9d3acc5b2a0c",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T09:30:03.764Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/feedbac",
+   "type": "preference",
+   "updatedAt": "2026-11-15T09:30:03.764Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md]\nMini PC di casa: Celeron N3150, IP LAN 192.168.68.55, Tailscale 100.103.112.15. Servizi in /DATA/AppData/<nome>, Homepage su :3020 (config /DATA/AppData/homepage/config/services.yaml). Esposizione esterna via CTM tunnel su *.cheic2.it.\n\n- OpenCode Manager (installato 2026-11-14): /DATA/AppData/opencode-manager, immagine ghcr.io/chriswritescode-dev/opencode-manager:latest, porte 5003 (UI), 5004, 5100-5103 (preview). Credenziali admin in .env (chmod 600). Workspace: /DATA/AppData/opencode-manager/workspace. Usa un suo OpenCode interno (2.1.2), separato da quello del host (~/.opencode/bin, 2.0.19). Pubblicato via CTM su https://opencode-manager.cheic2.it (autostart on); Cloudflare Access da configurare a mano nel dashboard (nessun token API Access sul server). Aggiornare: `docker compose pull && docker compose up -d`.\n\n**Why:** evitare di ricontrollare porte/percorsi ogni volta.\n**How to apply:** prima di usare una porta nuova, controlla questo elenco e `docker ps`.",
+   "createdAt": "2026-11-15T09:30:03.978Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md"
+   ],
+   "id": "mem_mwhmvs1y_01806bbaf2fd",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T09:30:03.978Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwgqqdi4_50ca57cdb05f",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwgqqdi4_50ca57cdb05f"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-se",
+   "type": "preference",
+   "updatedAt": "2026-11-15T09:30:03.978Z",
+   "version": 2
   }
  ],
  "observations": {
