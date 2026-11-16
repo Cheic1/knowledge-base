@@ -34770,6 +34770,33 @@
    "type": "preference",
    "updatedAt": "2026-11-15T11:05:26.033Z",
    "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA config /DATA/AppData/homeassistant/config is root-owned: edit .storage only with HA stopped, via `docker run --rm -v ...config:/config --entrypoint sh <ha image>`. No HA API token available.\ntinytuya venv in /DATA/AppData/tuya_tools (snapshot.json, 600). No Tuya IoT credentials on server.\n2026-11-13: entry \"Light\" (bff12d…, really the ANTELA plug \"Ciabatta/Luce Camera\") was type zigbee_smart_bulb at .61 → fixed to smartplugv2_energyv3 at 192.168.68.50 (v3.3); new switch.luce_camera + switch_as_x light.luce_cucina (kept name so automations work). Backup in backup_manuali/20261112_232057_tuya.\nLuce Cucina plug .62 v3.5 OK. Pending: Smart IR (hircr_remote_control supported, not seen on LAN scan, needs key via tuya_local cloud QR login), TV/Luce Led are IR sub-remotes, Battery 20V likely BLE (not local). Official tuya cloud entry needs re-auth.\n\n2026-11-16 update: Luce Camera plug (MAC 1c:90:ff:5d:03:d7) moved by DHCP to .53 → HA host updated; but it broadcasts UDP yet doesn't answer ARP/ping from server (Deco sees it on Living Room 2.4G) → needs power cycle + DHCP reservation. Derived light renamed light.luce_cucina → light.luce_camera (automations + lovelace updated, diorama \"cucina\" now points to light.luce_cucina_2 = real kitchen). Backup backup_manuali/20261115_235204_tuya2.\nSmart IR online at 192.168.68.64 (MAC e8:68:e7:6f:86:fb, ESP), no local key yet → needs Smart Life QR in tuya_local flow.\nMini PC (Zotac ZBOX CI323) has nuvoton-cir /dev/lirc0: receive only, cannot send IR.",
+   "createdAt": "2026-11-16T00:00:03.768Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md"
+   ],
+   "id": "mem_mwihylp3_9450fd483379",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-16T00:00:03.768Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA con",
+   "type": "preference",
+   "updatedAt": "2026-11-16T00:00:03.768Z",
+   "version": 1
   }
  ],
  "observations": {
