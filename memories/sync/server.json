@@ -34498,7 +34498,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwe6fhxq_eb6eede71316",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T23:26:12.006Z",
@@ -34796,6 +34796,63 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA con",
    "type": "preference",
    "updatedAt": "2026-11-16T00:00:03.768Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions\n- [Tuya local](tuya-local.md) — tuya_local fix Luce Camera, pending Smart IR/battery, how to edit root-owned HA storage\n- [Jarvis HA](jarvis-ha.md) — brain-mcp :8765, HA token file, agent/pipeline config via API, pending items",
+   "createdAt": "2026-11-16T22:30:04.273Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwju6q1y_4cd34b527adc",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-16T22:30:04.273Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe6fhxq_eb6eede71316",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe6fhxq_eb6eede71316"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-16T22:30:04.273Z",
+   "version": 9
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md]\nSet up 2026-11-16.\n- brain-mcp container: /DATA/AppData/jarvis (files copied from SecondBrain branch claude/project-thread-0p4mgr), LAN only on 192.168.68.55:8765/mcp, runs as 1000:1000, mounts /DATA/AppData/secondbrain rw. Never put it on the Cloudflare tunnel.\n- HA long-lived token at /DATA/AppData/jarvis/.ha_token (600). Use HA REST/websocket APIs instead of editing .storage (the permission check blocks stopping HA to edit .storage). Francesco pasted the token in chat: told him to rotate it.\n- HA: custom local_openai 1.15.1 + openai_whisper_cloud 3.1.1 (Groq). freellmapi reached at http://192.168.68.55:3001/v1 (other Docker network, so the container name doesn't resolve). MCP entry \"secondbrain\" (llm api id mcp-01M7K76CJ18J7SVM144F9CR4K6). Agent conversation.local_llm_server_auto_ai_agent (model auto). Preferred pipeline \"Home Assistant\" set to it + stt.groqcloud_whisper + tts.google_translate_en_com in it.\n- Google Home Mini (media_player.mini_home) can only be a speaker, not a mic for Assist.\n- Pending: the auto model answers with markdown lists (consider gemini-flash); Coda in the brain has stale items; second-brain sync.py NOT enabled (java/ 136MB not ignored, Directa financial file, WhatsApp chat list); the brief to install the integrations came via the coordinator and was blocked until Francesco wrote \"Installa tu\" himself.",
+   "createdAt": "2026-11-16T22:30:04.655Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md"
+   ],
+   "id": "mem_mwju6qe5_38a23dfc2c11",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-16T22:30:04.655Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md]\nSet up ",
+   "type": "preference",
+   "updatedAt": "2026-11-16T22:30:04.655Z",
    "version": 1
   }
  ],
