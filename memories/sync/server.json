@@ -34555,7 +34555,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
    ],
    "id": "mem_mwe6kg4e_1cf6fcd38f67",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-12T23:30:02.955Z",
@@ -34854,6 +34854,36 @@
    "type": "preference",
    "updatedAt": "2026-11-16T22:30:04.655Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\nRead-only WhatsApp reader at /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp (Go, whatsmeow; Go SDK in ~/go-sdk). Linked 2026-11-12 by Francesco from his own SSH terminal (`./wa_lettore login`, QR). Extracts in privato/estratti (all history since 2019 saved at relink with chat_importanti = \"*\" + Emma Ferrari).\n\n**Why:** Francesco wants WhatsApp context for the SecondBrain, but explicitly read-only (no send, no ports).\n\n**How to apply:**\n- Pairing-code login failed (\"controlla il numero\" / missing link_code_pairing_wrapped_primary_ephemeral_pub); QR from his terminal works. QRs relayed via chat expire too fast.\n- History only arrives at link time: chats must be in chat_importanti.txt BEFORE login.\n- Normal mode (`./wa_lettore`, `-minuti N`) deletes extracts older than 14 days. Full history (2019→12/11/2026) is backed up in privato/estratti_backup_2026-11-12; back up again before runs if needed.\n- Never two wa_lettore at once (same sessione.db). No systemd/cron without his request.\n- Sending: separate tool invio/wa_invia (--conferma NUMERO \"testo\", private chats only, logs to privato/inviati.log). Allowed in ~/.claude/settings.json by one narrow rule. Use ONLY when Francesco explicitly gives chat + text; reader must be stopped. First send 2026-11-13 00:27 \"Ti voglio bene\" to Emma. Pending: keep \"*\" or Emma-only.\n- Agent pipeline (2026-11-15/17): giro_mattina.sh via cron 7/13/19 → wa_lettore -minuti 5 + telegram_lettore --ore 48 + agente_chat.py (freellmapi 127.0.0.1:3001, auto:smart; key in agente_chat/privato/config.json) → 06_Comunicazioni/*/<date>_riassunto.md → HA webhook: phone notification + dashboard \"Riassunti chat\" (sensor.riassunto_chat). HA edits only via narrow-allowed scripts agente_chat/installa_*_ha.sh. Telegram rule: private+bots+groups ≤50 people, channels/big groups only if named in chat_importanti.txt. Self-chat photos → whatsapp/privato/media/.",
+   "createdAt": "2026-11-17T18:45:02.992Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
+   ],
+   "id": "mem_mwl1l70u_fb440a5c13b8",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-17T18:45:02.992Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe6kg4e_1cf6fcd38f67",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe6kg4e_1cf6fcd38f67"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-17T18:45:02.992Z",
+   "version": 3
   }
  ],
  "observations": {
