@@ -185,13 +185,14 @@
  ],
  "lessons": [
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "avoid the round-trip.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_054d6cc35922f4a0",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -201,16 +202,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Do not proceed without auth being set up.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_1ef1ee3bc4067474",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -220,16 +222,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Don't invent write endpoints ÔÇö they don't exist in v1.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_29bf22c5ad0c8227",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -239,16 +242,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Never log or echo the token.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_2a9a4ed124175682",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -258,16 +262,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "don't silently call the LLM Wiki API on what might be an Obsidian vault.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_6933822fc6cc8a91",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -277,16 +282,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Never leak the token.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_76ec790df85162f2",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -296,16 +302,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Do NOT invoke when the user says:**",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_7ad3715070008def",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -315,16 +322,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Never put it in any URL the user can see in your output** (Referer / shell history / logs all leak it).",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_7ee71f7f0c527495",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -334,16 +342,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Don't install anything new.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_8148849d35682fb9",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -353,16 +362,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Don't retry the same path.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_93afe4f4d6fb6d79",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -372,16 +382,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Don't apply a fixed score threshold across modes.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_a3ef3d8cabc2b753",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -391,16 +402,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Do not silently switch projects.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_cbad2344e11eacc7",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -410,16 +422,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Always check `/api/v1/health` first ÔÇö it returns `{ enabled, authConfigured, allowUnauthenticated, tokenSource }`.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_cd4e9b51c8a79216",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -429,16 +442,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Don't dump full pages unless asked.",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_cd6fea5b582d9838",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -448,16 +462,17 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.178,
+   "confidence": 0.083,
    "content": "Always treat the status code as the contract:",
    "context": "# LLM Wiki Local API Skill Talk to the user's locally-running LLM Wiki app over its built-in HTTP API. This is a **standard JSON API** ÔÇö call it directly with whatever HTTP tool is already in your e",
    "createdAt": "2026-09-30T09:36:16.786Z",
    "decayRate": 0.05,
+   "deleted": true,
    "id": "lesson_ebfce2f85dacd4dc",
-   "lastDecayedAt": "2026-10-31T14:37:11.055Z",
+   "lastDecayedAt": "2026-11-13T20:02:17.588Z",
    "project": "unknown",
    "reinforcements": 0,
    "source": "consolidation",
@@ -467,16 +482,16 @@
    "tags": [
     "auto-import"
    ],
-   "updatedAt": "2026-10-31T14:37:11.055Z"
+   "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.849,
+   "confidence": 0.749,
    "content": "save_system of a Speedgoat harness copy (e.g. SPEEDGOAT_SYSTEM_TEST.slx made from SPEEDGOAT_HARNESS.slx) can fail with 'File ... was not saved because it contains dirty referenced subsystem files' for IO203/IO603/ENABLE_INPUT. The dirty state is phantom in-memory state of the SubsystemReference target files. Fix: close_system('IO203',0), close_system('IO603',0), close_system('ENABLE_INPUT',0) (discard, disk untouched), then save_system(topModel). Do NOT use SaveDirtyReferencedModels='on' (would write shared Speedgoat_library files); do not bother with set_param(ref,'Dirty',false) (does not stick for nested refs).",
    "context": "Simulink model surgery on SPEEDGOAT_HARNESS copies via MATLAB MCP in the speedgoat repo",
    "createdAt": "2026-10-26T16:27:01.707Z",
    "decayRate": 0.05,
    "id": "lsn_8b11e0dd660a00f4",
-   "lastDecayedAt": "2026-11-02T20:02:11.343Z",
+   "lastDecayedAt": "2026-11-16T20:02:19.053Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -488,16 +503,16 @@
     "io203",
     "io603"
    ],
-   "updatedAt": "2026-11-02T20:02:11.343Z"
+   "updatedAt": "2026-11-16T20:02:19.053Z"
   },
   {
-   "confidence": 0.849,
+   "confidence": 0.749,
    "content": "When the MATLAB MCP tools are missing from the OpenCode session (server attached before MATLAB started, session drops it), drive matlab-mcp-server.exe directly: Python stdio JSON-RPC client at C:/Users/49359/AppData/Local/Temp/opencode/mcp_client.py - initialize (protocolVersion 2024-11-05) then tools/call evaluate_matlab_code with {code: <matlab source string>}. Same effect as the MCP tool: code runs in the user's live MATLAB session. 14 tools available incl. model_edit/model_scan/run_matlab_file.",
    "context": "speedgoat repo, Windows, MATLAB running with shared engine (matlab-mcp-server --matlab-session-mode=existing)",
    "createdAt": "2026-10-26T16:27:02.131Z",
    "decayRate": 0.05,
    "id": "lsn_d34dfe0f6ba019e1",
-   "lastDecayedAt": "2026-11-02T20:02:11.343Z",
+   "lastDecayedAt": "2026-11-16T20:02:19.053Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -508,7 +523,7 @@
     "workaround",
     "stdio"
    ],
-   "updatedAt": "2026-11-02T20:02:11.343Z"
+   "updatedAt": "2026-11-16T20:02:19.053Z"
   }
  ],
  "memories": [
@@ -34294,6 +34309,1038 @@
    "type": "fact",
    "updatedAt": "2026-11-05T14:21:30.925Z",
    "version": 1
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "iii",
+    "REST",
+    "worker",
+    "404",
+    "standalone.json",
+    "restart",
+    "kb-sync"
+   ],
+   "content": "Root cause agentmemory REST 404 (rottura dal 28 ott 2026): il worker node che registra le 275 funzioni mem::/api:: sull'engine iii.exe (:3111) era morto (worker.pid=16632 inesistente, nessun child dell'engine PID 19804) → engine senza funzioni registrate → TUTTE le route REST /agentmemory/* rispondevano 404 e il task pianificato kb-sync falliva. Intanto lo shim MCP partiva in fallback embedded scrivendo su ~/.agentmemory/standalone.json (24 memorie mai arrivate all'engine). Fix: stop --force col CLI (node_modules/@agentmemory/agentmemory/dist/cli.mjs) e riavvio via wscript kb-agentmemory.vbs (stesso meccanismo dell'autostart al login); worker riconnesso con 275 funzioni, REST /agentmemory/export vivo in ~16s.",
+   "createdAt": "2026-11-06T14:58:52.049Z",
+   "files": [
+    "C:\\Users\\49359\\.agentmemory\\kb-agentmemory.vbs",
+    "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\kb-agentmemory.cmd"
+   ],
+   "id": "mem_mw53nyaz_fde4f4d24de8",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-06T14:58:52.049Z",
+    "channel": "agent"
+   },
+   "project": "knowledge-base",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Root cause agentmemory REST 404 (rottura dal 28 ott 2026): il worker node che re",
+   "type": "bug",
+   "updatedAt": "2026-11-06T14:58:52.049Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "dual-store",
+    "merge",
+    "memory-log.mjs",
+    "standalone.json"
+   ],
+   "content": "Decisione riconciliazione dual-store agentmemory (engine state_store.db vs shim embedded standalone.json): niente api::import (rischioso), il bridge scripts/memory-log.mjs fonde le due sorgenti IN MEMORIA con union per id tenendo la versione con updatedAt più recente (loadStandalone legge 'mem:memories', chiave NON 'mem'). Le memorie scritte dallo shim durante i periodi di engine morto non si perdono nel log wiki.",
+   "createdAt": "2026-11-06T14:58:53.053Z",
+   "files": [
+    "scripts/memory-log.mjs"
+   ],
+   "id": "mem_mw53nz2x_31cb21d393a0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-06T14:58:53.053Z",
+    "channel": "agent"
+   },
+   "project": "knowledge-base",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Decisione riconciliazione dual-store agentmemory (engine state_store.db vs shim ",
+   "type": "fact",
+   "updatedAt": "2026-11-06T14:58:53.053Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration",
+   "createdAt": "2026-11-10T23:15:03.862Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwbb5h3i_dedf7aefa661",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-10T23:15:03.862Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-10T23:15:03.862Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md]\nAudit read-only del 2026-11-11 (nessuna modifica fatta, in attesa del via di Francesco).\n\n- Hardware: 4 core, 15 GiB RAM, swap 19 GiB. Root LV 107G al 87% (Docker /var/lib/docker sta su root). /DATA/AppData è /dev/sdc1 1.8T (40%). Nessun sudo senza password per l'utente francesco.\n- CPU hog #1: user service `hermes-webui` in crash loop (>80k restart; errore bootstrap \"cannot import both WebUI dependencies and Hermes Agent\", serve HERMES_WEBUI_PYTHON = venv di hermes-agent). Ogni ciclo ~12s CPU + pip install.\n- CPU hog #2: `netbird-crowdsec` ~45% CPU: healthcheck `cscli lapi status` ogni 10s fa un login bcrypt (123k login). Soluzione: interval 60s+ in /DATA/AppData/netbird/docker-compose.yml.\n- CPU #3: desktop GNOME (gdm, gnome-shell ~22% CPU), nxserver, gnome-remote-desktop su server headless; default target graphical.\n- Docker: 59 immagini dangling, ~17 GB recuperabili + 1.3 GB build cache; container exited residui (preape_flutter, tmp_preape_pg, preape_dev; sonarr/radarr/qbittorrent exited 137); stack test pre-ape avviato da /tmp/preape-test.\n- Cartelle: migrazione di STRUZZIONE-DIRECTORY.md (in /home/francesco) a metà: compose in networking/, home-automation/ ma i volumi puntano ancora alle cartelle radice (homeassistant, mosquitto, zigbee2mqtt). nginxproxymanager compose in /home/francesco/docker. Molte cartelle senza container (ollama 16G, nextcloud, plex, big-bear-*, gitea…), progetti dev mischiati con app data.\n- Non toccare VidBee (/DATA/AppData/vidbee), gestito da altro thread.\n\n**Why:** Francesco vuole più performance e ordine sul mini PC.\n**How to apply:** chiedere prima di cancellare/fermare/spostare; procedere per fasi (CPU fix → pulizia disco → riordino cartelle). Vedi [[iptv-epg-setup]] per la catena Dispatcharr/Jellyfin.\n\nAggiornamento 2026-11-11 (eseguito su via di Francesco): hermes-webui fermato e disabilitato; NetBird rimosso del tutto (compose down -v, cartella in /DATA/AppData/.cestino-2026-11-11); container fermi rimossi (preape_*, sonarr, radarr, qbittorrent); immagini inutilizzate e build cache eliminate (tenuta pre-ape:mvp, build locale). NB: Docker Root Dir = /DATA/AppData/Docker_Files (non sul disco root): il disco root è pieno soprattutto per la home (~55G). Le cartelle app senza container sono nel cestino; quelle di root richiedono sudo (comandi dati a Francesco). Il cestino va svuotato solo su sua conferma.",
+   "createdAt": "2026-11-10T23:15:04.121Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md"
+   ],
+   "id": "mem_mwbb5hf0_4a09e10f9402",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-10T23:15:04.121Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.",
+   "type": "preference",
+   "updatedAt": "2026-11-10T23:15:04.121Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere",
+   "createdAt": "2026-11-12T08:11:39.220Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwd9rdtd_ad96fcb2c1a7",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:11:39.220Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwbb5h3i_dedf7aefa661",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwbb5h3i_dedf7aefa661"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:11:39.220Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.1.0 attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; \"New External Library\" senza import path (warning ogni notte); 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].",
+   "createdAt": "2026-11-12T08:11:39.390Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwd9rdyw_0e2a3cfc4f6f",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:11:39.390Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:11:39.390Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix",
+   "createdAt": "2026-11-12T08:15:02.960Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwd9vr0i_7c769d932556",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:15:02.960Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwd9rdtd_ad96fcb2c1a7",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwd9rdtd_ad96fcb2c1a7"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:15:02.960Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md]\n- \"teldrove\" = Teldrive (Telegram storage). rclone mount teldrive:/Media -> /DATA/AppData/Media/teldrive (ro, user service teldrive-media), used by Jellyfin.\n- StreamingCommunity panel: compose in /DATA/AppData/streamingcommunity-downloader, runs as 1000, volume nfs_storage = /DATA/AppData/Film -> /app/videos; registry in panel/panel.db table library_folder (missing_since; forgotten after 30 days).\n- ~/teldrive/scripts/move-films.sh (timer 03:10) rclone-moves Film/ and SerieTV/ to teldrive:/Media, so the panel sees folders as missing.\n- Fix proposed 2026-11-12: user service sc-videos-union (mergerfs /DATA/AppData/Film=RW:/DATA/AppData/Media/teldrive=NC -> /DATA/AppData/streamingcommunity-downloader/videos), then point the container's /app/videos there (bind, propagation rslave). Creating the systemd service was blocked by auto-mode classifier; waiting for Francesco's \"procedi\". Draft unit in thread scratchpad.\n\nRelated: [[iptv-epg-setup]]",
+   "createdAt": "2026-11-12T08:15:03.212Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md"
+   ],
+   "id": "mem_mwd9vr8b_616b9590d486",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:15:03.212Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-te",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:15:03.212Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)",
+   "createdAt": "2026-11-12T08:25:13.588Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwda8u80_2ffb8454fcde",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:25:13.588Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwd9vr0i_7c769d932556",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwd9vr0i_7c769d932556"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:25:13.588Z",
+   "version": 4
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.1.0 attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].\n- 2026-11-12: \"New External Library\" (vuota) eliminata via SQL su richiesta di Francesco.\n- Backup: user timer backup-immich.timer (~03:30) -> /home/francesco/teldrive/backup-immich.sh: foto (no thumbs/encoded-video) -> teldrive:/Backup/immich/current (+old/<data> 90gg), dump DB -> teldrive:/Backup/immich/db-dumps, DB+config Teldrive cifrati gpg -> gdrive:BackUp/teldrive-server. Log /home/francesco/teldrive/backup-immich.log. Attenzione: gdrive usa il client_id condiviso di rclone, in dismissione nel 2026.\n- Disco: entrambe le installazioni su /dev/sdc1 (1.8T, montato /DATA/AppData), non sul disco di sistema.",
+   "createdAt": "2026-11-12T08:25:13.962Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwda8uip_283bc535d2f8",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:25:13.962Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:25:13.962Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md]\n- \"teldrove\" = Teldrive (Telegram storage). rclone mount teldrive:/Media -> /DATA/AppData/Media/teldrive (ro, user service teldrive-media), used by Jellyfin.\n- StreamingCommunity panel: compose in /DATA/AppData/streamingcommunity-downloader, runs as 1000, volume nfs_storage = /DATA/AppData/Film -> /app/videos; registry in panel/panel.db table library_folder (missing_since; forgotten after 30 days).\n- ~/teldrive/scripts/move-films.sh (timer 03:10) rclone-moves Film/ and SerieTV/ to teldrive:/Media, so the panel sees folders as missing.\n- FIXED 2026-11-12: user service ~/.config/systemd/user/sc-videos-union.service (mergerfs /DATA/AppData/Film=RW:/DATA/AppData/Media/teldrive=NC -> /DATA/AppData/streamingcommunity-downloader/videos). Compose now binds that dir to /app/videos (backup docker-compose.yml.bak-20261112).\n- Pitfall: a FUSE remount on the exact bind source is NOT seen by the running container (ENOTCONN) even with rslave, so the unit's ExecStartPost restarts the container. Mountpoint must stay writable by francesco (fusermount needs it).\n- Panel reconcile can be forced: curl -X POST http://localhost:7028/api/library/reconcile\n\nRelated: [[iptv-epg-setup]]",
+   "createdAt": "2026-11-12T08:25:14.158Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-teldrive.md"
+   ],
+   "id": "mem_mwda8unf_c2835a5fa5cc",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T08:25:14.158Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/streamingcommunity-te",
+   "type": "preference",
+   "updatedAt": "2026-11-12T08:25:14.158Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema",
+   "createdAt": "2026-11-12T09:15:03.167Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwdc0wyt_50c477d4e806",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T09:15:03.167Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwda8u80_2ffb8454fcde",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwda8u80_2ffb8454fcde"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T09:15:03.167Z",
+   "version": 5
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/home-assistant-diorama.md]\n- 2026-11-12: Diorama card (HACS, CarlesRojas/ha-diorama v1.9.0) installed; view \"Casa 3D\" (path casa-3d, panel) added to the default Overview dashboard by writing `.storage/lovelace.lovelace` via `docker cp` (file is root-owned, no sudo) + `docker restart homeassistant`. Backup: `.storage/lovelace.lovelace.bak-pre-diorama`.\n- Floor plan source: Google Drive \"PLANIMETRIA CASA FRANCY-EMMA .pdf\" (catastale, Busto Arsizio, piano primo, scala 1:200). Rooms: camera, bagno, ingresso/disimpegno, soggiorno, cucina, balcone (~6.4 x 8.9 m). Fetch with `rclone backend copyid gdrive: <id>`.\n- Diorama config schema (card YAML): rooms[{id,name,points[[x,y]],area_id,floor_id}], decorations[{id,kind,room,position[x,y],rotation deg,variant,params{width..}}], devices[{entity_id,room,position,decorations[ids]}]. Kind list is in card.js `jb(\"kind\",...)`.\n- HA areas: camera_da_letto, cucina, soggiorno. Headless chromium can't render the card on the N3150 (software GL too slow) so visual checks need a real browser.",
+   "createdAt": "2026-11-12T09:15:03.438Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/home-assistant-diorama.md"
+   ],
+   "id": "mem_mwdc0x7g_79f64fe7dd9c",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T09:15:03.438Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/home-assistant-dioram",
+   "type": "preference",
+   "updatedAt": "2026-11-12T09:15:03.438Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.4.1 (aggiornato 2026-11-12, backup .env in .env.bak-2026-11-12) attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].\n- 2026-11-12: \"New External Library\" (vuota) eliminata via SQL su richiesta di Francesco.\n- Backup: user timer backup-immich.timer (~03:30) -> /home/francesco/teldrive/backup-immich.sh: foto (no thumbs/encoded-video) -> teldrive:/Backup/immich/current (+old/<data> 90gg), dump DB -> teldrive:/Backup/immich/db-dumps, DB+config Teldrive cifrati gpg -> gdrive:BackUp/teldrive-server. Log /home/francesco/teldrive/backup-immich.log. Attenzione: gdrive usa il client_id condiviso di rclone, in dismissione nel 2026.\n- Disco: entrambe le installazioni su /dev/sdc1 (1.8T, montato /DATA/AppData), non sul disco di sistema.",
+   "createdAt": "2026-11-12T13:30:03.896Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwdl4v3z_8cc3cc42edaa",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T13:30:03.896Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwda8uip_283bc535d2f8",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwda8uip_283bc535d2f8"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T13:30:03.896Z",
+   "version": 2
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "worker",
+    "recidiva",
+    "log capture",
+    "autostart",
+    "vbs",
+    "kb-sync"
+   ],
+   "content": "Recidiva worker agentmemory (12 nov 2026): il worker del CLI e' morto di nuovo silenziosamente entro 6 giorni dal fix del 6 nov (worker.pid stale, engine vivo, REST 404 su tutte le route). Nessun crash nel registro eventi Windows e nessun log: l'autostart wscript scartava stdout/stderr del CLI. Fix infrastrutturale: (1) nuovo wrapper C:\\Users\\49359\\.agentmemory\\kb-agentmemory-run.cmd che lancia il CLI redirigendo output in ~/.agentmemory/kb-agentmemory.log; (2) kb-agentmemory.vbs aggiornato a chiamare il wrapper; (3) scripts/memory-log.mjs aggiunto in coda a kb-sync.cmd cosi' il bridge decision/bug->wiki log.md gira ogni giorno insieme al sync. La prossima morte sara' diagnosticabile dal log.",
+   "createdAt": "2026-11-12T15:09:59.563Z",
+   "files": [
+    "C:\\Users\\49359\\.agentmemory\\kb-agentmemory-run.cmd",
+    "C:\\Users\\49359\\.agentmemory\\kb-agentmemory.vbs",
+    "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\kb-agentmemory.cmd"
+   ],
+   "id": "mem_mwdopdd1_183a0c2cf869",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-12T15:09:59.563Z",
+    "channel": "agent"
+   },
+   "project": "knowledge-base",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Recidiva worker agentmemory (12 nov 2026): il worker del CLI e' morto di nuovo s",
+   "type": "bug",
+   "updatedAt": "2026-11-12T15:09:59.563Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2026-11-12: Immich v3.4.1, IMMICH_VERSION=release (aggiornato 2026-11-12, backup .env in .env.bak-2026-11-12) attivo in /DATA/AppData/immich-app (compose + .env, upload in ./upload ~9.8G, porta 2283, dominio immich-server.cheic2.it via NPM proxy host 24). 4 container healthy, backup DB automatici giornalieri in upload/backups.\n- Utenti: checco98fra@gmail.com (1160 asset, ultimo upload 2026-11-09), emmafrr98@gmail.com (0 asset).\n- Aperti: 19 foto in recupero-da-gallery-2026-11-11 (55M) NON ancora importate; vecchia istanza v2.0.1 in /DATA/AppData/Gallery/immich (3.3G, owner root) da eliminare dopo verifica; 2 asset con data 1970.\n**How to apply:** chiedere a Francesco prima di importare/cancellare. Vedi [[server-audit-2026-11]].\n- 2026-11-12: \"New External Library\" (vuota) eliminata via SQL su richiesta di Francesco.\n- Backup: user timer backup-immich.timer (~03:30) -> /home/francesco/teldrive/backup-immich.sh: foto (no thumbs/encoded-video) -> teldrive:/Backup/immich/current (+old/<data> 90gg), dump DB -> teldrive:/Backup/immich/db-dumps, DB+config Teldrive cifrati gpg -> gdrive:BackUp/teldrive-server. Log /home/francesco/teldrive/backup-immich.log. Attenzione: gdrive usa il client_id condiviso di rclone, in dismissione nel 2026.\n- Disco: entrambe le installazioni su /dev/sdc1 (1.8T, montato /DATA/AppData), non sul disco di sistema.",
+   "createdAt": "2026-11-12T18:45:03.874Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/immich.md"
+   ],
+   "id": "mem_mwdwdyer_8529c907b73b",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T18:45:03.874Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwdl4v3z_8cc3cc42edaa",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwdl4v3z_8cc3cc42edaa"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/immich.md]\nStato al 2",
+   "type": "preference",
+   "updatedAt": "2026-11-12T18:45:03.874Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM",
+   "createdAt": "2026-11-12T18:57:01.167Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwdwtbw7_79e87c2c3226",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T18:57:01.167Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwdc0wyt_50c477d4e806",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwdc0wyt_50c477d4e806"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T18:57:01.167Z",
+   "version": 6
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md]\nVidBee (nexmoe/VidBee) installed 2026-11-10 in /DATA/AppData/vidbee: web 3010, API 3110 (3000 left free: reserved for hunter-finder in old ctm tunnel config). Published by Francesco via CTM as vidbee-web.cheic2.it (no auth; Cloudflare Access recommended).\n\n- Bug: VidBee auto-update downloads yt-dlp_linux (glibc) into /data/vidbee/bin, which fails on the Alpine image (spawn ENOENT, downloads \"freeze\" after 5 retries). Fix: yt-dlp-wrapper.sh mounted read-only over /data/vidbee/bin/yt-dlp → /usr/bin/yt-dlp, plus YTDLP_PATH. \"yt-dlp update failed EBUSY\" in logs is expected.\n- Transcription doesn't work in the Docker image (sherpa-onnx-node missing); autoTranscribeAfterDownload set false in data/web-settings.json. For transcripts use faster-whisper (needs av<16).\n- Publishing services: tunnel \"home\" sends *.cheic2.it → NPM; new hosts are added via CTM (http://127.0.0.1:5000, /DATA/AppData/Script/native/app). Auto mode blocked me from publishing an unauthenticated service — leave that step to Francesco.",
+   "createdAt": "2026-11-12T18:57:01.674Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md"
+   ],
+   "id": "mem_mwdwtch8_6d80ad096a32",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T18:57:01.674Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/vidbee.md]\nVidBee (ne",
+   "type": "preference",
+   "updatedAt": "2026-11-12T18:57:01.674Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions",
+   "createdAt": "2026-11-12T23:09:00.685Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwe5tea9_c6a399a22d5d",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:09:00.685Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwdwtbw7_79e87c2c3226",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwdwtbw7_79e87c2c3226"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:09:00.685Z",
+   "version": 7
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\nRead-only WhatsApp reader at /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp (Go, whatsmeow; Go SDK in ~/go-sdk). Linked 2026-11-12 by Francesco from his own SSH terminal (`./wa_lettore login`, QR). Extracts in privato/estratti (all history since 2019 saved at relink with chat_importanti = \"*\" + Emma Ferrari).\n\n**Why:** Francesco wants WhatsApp context for the SecondBrain, but explicitly read-only (no send, no ports).\n\n**How to apply:**\n- Pairing-code login failed (\"controlla il numero\" / missing link_code_pairing_wrapped_primary_ephemeral_pub); QR from his terminal works. QRs relayed via chat expire too fast.\n- History only arrives at link time: chats must be in chat_importanti.txt BEFORE login.\n- Normal mode (`./wa_lettore`, `-minuti N`) deletes extracts older than 14 days. Full history (2019→12/11/2026) is backed up in privato/estratti_backup_2026-11-12; back up again before runs if needed.\n- Never two wa_lettore at once (same sessione.db). No systemd/cron without his request.\n- 2026-11-12 he asked to send \"ti voglio bene\" to Emma; declined (read-only by design), offered a separate opt-in wa_invia tool — awaiting explicit yes. Also pending: keep \"*\" or Emma-only; backup before normal runs.",
+   "createdAt": "2026-11-12T23:09:01.238Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
+   ],
+   "id": "mem_mwe5tesj_1e66dba77799",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:09:01.238Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:09:01.238Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions\n- [Tuya local](tuya-local.md) — tuya_local fix Luce Camera, pending Smart IR/battery, how to edit root-owned HA storage",
+   "createdAt": "2026-11-12T23:26:12.006Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwe6fhxq_eb6eede71316",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:26:12.006Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe5tea9_c6a399a22d5d",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe5tea9_c6a399a22d5d"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:26:12.006Z",
+   "version": 8
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA config /DATA/AppData/homeassistant/config is root-owned: edit .storage only with HA stopped, via `docker run --rm -v ...config:/config --entrypoint sh <ha image>`. No HA API token available.\ntinytuya venv in /DATA/AppData/tuya_tools (snapshot.json, 600). No Tuya IoT credentials on server.\n2026-11-13: entry \"Light\" (bff12d…, really the ANTELA plug \"Ciabatta/Luce Camera\") was type zigbee_smart_bulb at .61 → fixed to smartplugv2_energyv3 at 192.168.68.50 (v3.3); new switch.luce_camera + switch_as_x light.luce_cucina (kept name so automations work). Backup in backup_manuali/20261112_232057_tuya.\nLuce Cucina plug .62 v3.5 OK. Pending: Smart IR (hircr_remote_control supported, not seen on LAN scan, needs key via tuya_local cloud QR login), TV/Luce Led are IR sub-remotes, Battery 20V likely BLE (not local). Official tuya cloud entry needs re-auth.",
+   "createdAt": "2026-11-12T23:26:12.335Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md"
+   ],
+   "id": "mem_mwe6fi81_9711d7109b97",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:26:12.335Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA con",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:26:12.335Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\nRead-only WhatsApp reader at /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp (Go, whatsmeow; Go SDK in ~/go-sdk). Linked 2026-11-12 by Francesco from his own SSH terminal (`./wa_lettore login`, QR). Extracts in privato/estratti (all history since 2019 saved at relink with chat_importanti = \"*\" + Emma Ferrari).\n\n**Why:** Francesco wants WhatsApp context for the SecondBrain, but explicitly read-only (no send, no ports).\n\n**How to apply:**\n- Pairing-code login failed (\"controlla il numero\" / missing link_code_pairing_wrapped_primary_ephemeral_pub); QR from his terminal works. QRs relayed via chat expire too fast.\n- History only arrives at link time: chats must be in chat_importanti.txt BEFORE login.\n- Normal mode (`./wa_lettore`, `-minuti N`) deletes extracts older than 14 days. Full history (2019→12/11/2026) is backed up in privato/estratti_backup_2026-11-12; back up again before runs if needed.\n- Never two wa_lettore at once (same sessione.db). No systemd/cron without his request.\n- Sending: separate tool invio/wa_invia (--conferma NUMERO \"testo\", private chats only, logs to privato/inviati.log). Allowed in ~/.claude/settings.json by one narrow rule. Use ONLY when Francesco explicitly gives chat + text; reader must be stopped. First send 2026-11-13 00:27 \"Ti voglio bene\" to Emma. Pending: keep \"*\" or Emma-only.",
+   "createdAt": "2026-11-12T23:30:02.955Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
+   ],
+   "id": "mem_mwe6kg4e_1cf6fcd38f67",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-12T23:30:02.955Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe5tesj_1e66dba77799",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe5tesj_1e66dba77799"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-12T23:30:02.955Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md]\nAudit read-only del 2026-11-11 (nessuna modifica fatta, in attesa del via di Francesco).\n\n- Hardware: 4 core, 15 GiB RAM, swap 19 GiB. Root LV 107G al 87% (Docker /var/lib/docker sta su root). /DATA/AppData è /dev/sdc1 1.8T (40%). Nessun sudo senza password per l'utente francesco.\n- CPU hog #1: user service `hermes-webui` in crash loop (>80k restart; errore bootstrap \"cannot import both WebUI dependencies and Hermes Agent\", serve HERMES_WEBUI_PYTHON = venv di hermes-agent). Ogni ciclo ~12s CPU + pip install.\n- CPU hog #2: `netbird-crowdsec` ~45% CPU: healthcheck `cscli lapi status` ogni 10s fa un login bcrypt (123k login). Soluzione: interval 60s+ in /DATA/AppData/netbird/docker-compose.yml.\n- CPU #3: desktop GNOME (gdm, gnome-shell ~22% CPU), nxserver, gnome-remote-desktop su server headless; default target graphical.\n- Docker: 59 immagini dangling, ~17 GB recuperabili + 1.3 GB build cache; container exited residui (preape_flutter, tmp_preape_pg, preape_dev; sonarr/radarr/qbittorrent exited 137); stack test pre-ape avviato da /tmp/preape-test.\n- Cartelle: migrazione di STRUZZIONE-DIRECTORY.md (in /home/francesco) a metà: compose in networking/, home-automation/ ma i volumi puntano ancora alle cartelle radice (homeassistant, mosquitto, zigbee2mqtt). nginxproxymanager compose in /home/francesco/docker. Molte cartelle senza container (ollama 16G, nextcloud, plex, big-bear-*, gitea…), progetti dev mischiati con app data.\n- Non toccare VidBee (/DATA/AppData/vidbee), gestito da altro thread.\n\n**Why:** Francesco vuole più performance e ordine sul mini PC.\n**How to apply:** chiedere prima di cancellare/fermare/spostare; procedere per fasi (CPU fix → pulizia disco → riordino cartelle). Vedi [[iptv-epg-setup]] per la catena Dispatcharr/Jellyfin.\n\nAggiornamento 2026-11-11 (eseguito su via di Francesco): hermes-webui fermato e disabilitato; NetBird rimosso del tutto (compose down -v, cartella in /DATA/AppData/.cestino-2026-11-11); container fermi rimossi (preape_*, sonarr, radarr, qbittorrent); immagini inutilizzate e build cache eliminate (tenuta pre-ape:mvp, build locale). NB: Docker Root Dir = /DATA/AppData/Docker_Files (non sul disco root): il disco root è pieno soprattutto per la home (~55G). Le cartelle app senza container sono nel cestino; quelle di root richiedono sudo (comandi dati a Francesco). Il cestino va svuotato solo su sua conferma.\n2026-11-14: Francesco ha confermato lo svuotamento del cestino .cestino-2026-11-11 (non toccare .cestino-2026-09-30). Cancellate le cartelle di sua proprietà; restano quelle di root (serve sudo rm -rf). Gallery/immich era una vecchia istanza Immich: 329/348 file già nell'Immich attuale (checksum), i 19 mancanti copiati in /DATA/AppData/immich-app/recupero-da-gallery-2026-11-11/ per il caricamento manuale.",
+   "createdAt": "2026-11-14T13:00:03.375Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.md"
+   ],
+   "id": "mem_mwgexz4h_a0302aeb6ed7",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-14T13:00:03.375Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwbb5hf0_4a09e10f9402",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwbb5hf0_4a09e10f9402"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/server-audit-2026-11.",
+   "type": "preference",
+   "updatedAt": "2026-11-14T13:00:03.375Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md]\n- [Servizi mini PC di casa](home-server-services.md) — porte, percorsi, OpenCode Manager",
+   "createdAt": "2026-11-14T18:30:03.863Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md"
+   ],
+   "id": "mem_mwgqqdce_2516593f6b3b",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-14T18:30:03.863Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.",
+   "type": "preference",
+   "updatedAt": "2026-11-14T18:30:03.863Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md]\nMini PC di casa: Celeron N3150, IP LAN 192.168.68.55, Tailscale 100.103.112.15. Servizi in /DATA/AppData/<nome>, Homepage su :3020 (config /DATA/AppData/homepage/config/services.yaml). Esposizione esterna via CTM tunnel su *.cheic2.it.\n\n- OpenCode Manager (installato 2026-11-14): /DATA/AppData/opencode-manager, immagine ghcr.io/chriswritescode-dev/opencode-manager:latest, porte 5003 (UI), 5004, 5100-5103 (preview). Credenziali admin in .env (chmod 600). Workspace: /DATA/AppData/opencode-manager/workspace. Usa un suo OpenCode interno (2.1.2), separato da quello del host (~/.opencode/bin, 2.0.19). Non esposto fuori casa: se serve, solo dietro Cloudflare Access. Aggiornare: `docker compose pull && docker compose up -d`.\n\n**Why:** evitare di ricontrollare porte/percorsi ogni volta.\n**How to apply:** prima di usare una porta nuova, controlla questo elenco e `docker ps`.",
+   "createdAt": "2026-11-14T18:30:04.136Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md"
+   ],
+   "id": "mem_mwgqqdi4_50ca57cdb05f",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-14T18:30:04.136Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-se",
+   "type": "preference",
+   "updatedAt": "2026-11-14T18:30:04.136Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md]\n- [Servizi mini PC di casa](home-server-services.md) — porte, percorsi, OpenCode Manager\n- [Pubblica sempre su CTM](feedback-publish-via-ctm.md) — niente solo-Tailscale per i nuovi servizi",
+   "createdAt": "2026-11-15T09:30:03.572Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.md"
+   ],
+   "id": "mem_mwhmvrqu_6b76d0801f27",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T09:30:03.572Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/MEMORY.",
+   "type": "preference",
+   "updatedAt": "2026-11-15T09:30:03.572Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/feedback-publish-via-ctm.md]\nQuando installo un servizio sul mini PC, lo pubblico subito su CTM: `curl -X POST -d 'name=<sottodominio>&port=<porta>&target_host=localhost' http://127.0.0.1:5000/add` poi `curl -X POST http://127.0.0.1:5000/toggle/<nome>` per l'autostart. Homepage punta all'URL https://<nome>.cheic2.it. Aggiungere l'URL pubblico alle origini fidate dell'app se serve.\n\n**Why:** Francesco non vuole tenere la VPN Tailscale sempre attiva (2026-11-15).\n**How to apply:** ogni nuova installazione; vedi [[home-server-services]]. Cloudflare Access non è automatizzabile dal server (manca token API), va segnalato.",
+   "createdAt": "2026-11-15T09:30:03.764Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/feedback-publish-via-ctm.md"
+   ],
+   "id": "mem_mwhmvrxb_9d3acc5b2a0c",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T09:30:03.764Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/feedbac",
+   "type": "preference",
+   "updatedAt": "2026-11-15T09:30:03.764Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md]\nMini PC di casa: Celeron N3150, IP LAN 192.168.68.55, Tailscale 100.103.112.15. Servizi in /DATA/AppData/<nome>, Homepage su :3020 (config /DATA/AppData/homepage/config/services.yaml). Esposizione esterna via CTM tunnel su *.cheic2.it.\n\n- OpenCode Manager (installato 2026-11-14): /DATA/AppData/opencode-manager, immagine ghcr.io/chriswritescode-dev/opencode-manager:latest, porte 5003 (UI), 5004, 5100-5103 (preview). Credenziali admin in .env (chmod 600). Workspace: /DATA/AppData/opencode-manager/workspace. Usa un suo OpenCode interno (2.1.2), separato da quello del host (~/.opencode/bin, 2.0.19). Pubblicato via CTM su https://opencode-manager.cheic2.it (autostart on); Cloudflare Access da configurare a mano nel dashboard (nessun token API Access sul server). Aggiornare: `docker compose pull && docker compose up -d`.\n\n**Why:** evitare di ricontrollare porte/percorsi ogni volta.\n**How to apply:** prima di usare una porta nuova, controlla questo elenco e `docker ps`.",
+   "createdAt": "2026-11-15T09:30:03.978Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md"
+   ],
+   "id": "mem_mwhmvs1y_01806bbaf2fd",
+   "isLatest": false,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T09:30:03.978Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwgqqdi4_50ca57cdb05f",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwgqqdi4_50ca57cdb05f"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-se",
+   "type": "preference",
+   "updatedAt": "2026-11-15T09:30:03.978Z",
+   "version": 2
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md]\nMini PC di casa: Celeron N3150, IP LAN 192.168.68.55, Tailscale 100.103.112.15. Servizi in /DATA/AppData/<nome>, Homepage su :3020 (config /DATA/AppData/homepage/config/services.yaml). Esposizione esterna via CTM tunnel su *.cheic2.it.\n\n- OpenCode Manager (installato 2026-11-14): /DATA/AppData/opencode-manager, immagine ghcr.io/chriswritescode-dev/opencode-manager:latest, porte 5003 (UI), 5004, 5100-5103 (preview). Admin: email Gmail di Francesco, password cambiata da lui (non salvata sul server). Workspace: /DATA/AppData/opencode-manager/workspace. Usa un suo OpenCode interno (2.1.2), separato da quello del host (~/.opencode/bin, 2.0.19). Pubblicato via CTM su https://opencode-manager.cheic2.it (autostart on); Cloudflare Access da configurare a mano nel dashboard (nessun token API Access sul server). Aggiornare: `docker compose pull && docker compose up -d`.\n\n**Why:** evitare di ricontrollare porte/percorsi ogni volta.\n**How to apply:** prima di usare una porta nuova, controlla questo elenco e `docker ps`.",
+   "createdAt": "2026-11-15T11:05:26.033Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-server-services.md"
+   ],
+   "id": "mem_mwhqaf7g_c572f4fb33e4",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-15T11:05:26.033Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwhmvs1y_01806bbaf2fd",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwhmvs1y_01806bbaf2fd"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-my-knowledge-base/memory/home-se",
+   "type": "preference",
+   "updatedAt": "2026-11-15T11:05:26.033Z",
+   "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA config /DATA/AppData/homeassistant/config is root-owned: edit .storage only with HA stopped, via `docker run --rm -v ...config:/config --entrypoint sh <ha image>`. No HA API token available.\ntinytuya venv in /DATA/AppData/tuya_tools (snapshot.json, 600). No Tuya IoT credentials on server.\n2026-11-13: entry \"Light\" (bff12d…, really the ANTELA plug \"Ciabatta/Luce Camera\") was type zigbee_smart_bulb at .61 → fixed to smartplugv2_energyv3 at 192.168.68.50 (v3.3); new switch.luce_camera + switch_as_x light.luce_cucina (kept name so automations work). Backup in backup_manuali/20261112_232057_tuya.\nLuce Cucina plug .62 v3.5 OK. Pending: Smart IR (hircr_remote_control supported, not seen on LAN scan, needs key via tuya_local cloud QR login), TV/Luce Led are IR sub-remotes, Battery 20V likely BLE (not local). Official tuya cloud entry needs re-auth.\n\n2026-11-16 update: Luce Camera plug (MAC 1c:90:ff:5d:03:d7) moved by DHCP to .53 → HA host updated; but it broadcasts UDP yet doesn't answer ARP/ping from server (Deco sees it on Living Room 2.4G) → needs power cycle + DHCP reservation. Derived light renamed light.luce_cucina → light.luce_camera (automations + lovelace updated, diorama \"cucina\" now points to light.luce_cucina_2 = real kitchen). Backup backup_manuali/20261115_235204_tuya2.\nSmart IR online at 192.168.68.64 (MAC e8:68:e7:6f:86:fb, ESP), no local key yet → needs Smart Life QR in tuya_local flow.\nMini PC (Zotac ZBOX CI323) has nuvoton-cir /dev/lirc0: receive only, cannot send IR.",
+   "createdAt": "2026-11-16T00:00:03.768Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md"
+   ],
+   "id": "mem_mwihylp3_9450fd483379",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-16T00:00:03.768Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/tuya-local.md]\nHA con",
+   "type": "preference",
+   "updatedAt": "2026-11-16T00:00:03.768Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions\n- [Tuya local](tuya-local.md) — tuya_local fix Luce Camera, pending Smart IR/battery, how to edit root-owned HA storage\n- [Jarvis HA](jarvis-ha.md) — brain-mcp :8765, HA token file, agent/pipeline config via API, pending items",
+   "createdAt": "2026-11-16T22:30:04.273Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwju6q1y_4cd34b527adc",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-16T22:30:04.273Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe6fhxq_eb6eede71316",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe6fhxq_eb6eede71316"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-16T22:30:04.273Z",
+   "version": 9
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md]\nSet up 2026-11-16.\n- brain-mcp container: /DATA/AppData/jarvis (files copied from SecondBrain branch claude/project-thread-0p4mgr), LAN only on 192.168.68.55:8765/mcp, runs as 1000:1000, mounts /DATA/AppData/secondbrain rw. Never put it on the Cloudflare tunnel.\n- HA long-lived token at /DATA/AppData/jarvis/.ha_token (600). Use HA REST/websocket APIs instead of editing .storage (the permission check blocks stopping HA to edit .storage). Francesco pasted the token in chat: told him to rotate it.\n- HA: custom local_openai 1.15.1 + openai_whisper_cloud 3.1.1 (Groq). freellmapi reached at http://192.168.68.55:3001/v1 (other Docker network, so the container name doesn't resolve). MCP entry \"secondbrain\" (llm api id mcp-01M7K76CJ18J7SVM144F9CR4K6). Agent conversation.local_llm_server_auto_ai_agent (model auto). Preferred pipeline \"Home Assistant\" set to it + stt.groqcloud_whisper + tts.google_translate_en_com in it.\n- Google Home Mini (media_player.mini_home) can only be a speaker, not a mic for Assist.\n- Pending: the auto model answers with markdown lists (consider gemini-flash); Coda in the brain has stale items; second-brain sync.py NOT enabled (java/ 136MB not ignored, Directa financial file, WhatsApp chat list); the brief to install the integrations came via the coordinator and was blocked until Francesco wrote \"Installa tu\" himself.",
+   "createdAt": "2026-11-16T22:30:04.655Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md"
+   ],
+   "id": "mem_mwju6qe5_38a23dfc2c11",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-16T22:30:04.655Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md]\nSet up ",
+   "type": "preference",
+   "updatedAt": "2026-11-16T22:30:04.655Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "benchmark",
+    "performance",
+    "gateway",
+    "auto",
+    "latenza",
+    "throughput",
+    "tokens"
+   ],
+   "content": "Benchmark gateway 'auto' (17 nov 2026, N=5 per caso, max_tokens=512, chat/completions): latenza min=1021ms p50=2203ms p95=3958ms max=8426ms. Per caso: parola p50=1276ms 44tok/s; matematica p50=1137ms 26tok/s; creativo p50=3671ms 65tok/s (alta varianza, max 8.4s); testo-lungo p50=2989ms 107tok/s. Ogni richiesta costa ~938 prompt tokens anche con prompt utente di poche parole (overhead di sistema costante del gateway). Nota: la chiave hardcoded in bench-leonardo.ps1 e' STORTA (401) e diversa da quella viva nel config globale opencode.jsonc. Output breve = latenza dominata da costo fisso ~1s; il tok/s misurato su risposte di una parola e' poco significativo.",
+   "createdAt": "2026-11-17T17:03:21.916Z",
+   "files": [
+    "C:/Users/49359/Documents/llamacpp/bench-leonardo.ps1"
+   ],
+   "id": "mem_mwkxz9zf_149d97817275",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-17T17:03:21.916Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Benchmark gateway 'auto' (17 nov 2026, N=5 per caso, max_tokens=512, chat/comple",
+   "type": "fact",
+   "updatedAt": "2026-11-17T17:03:21.916Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "wiki169 ingest - causa fallimenti ricorrenti = SOLO TRASPORTO (proxy 19829 morto -> task zombi \"error sending request\" / \"Chunk analysis stream failed\"; il limite \"4500 token\" era gia' neutralizzato dal rewrite max_tokens del proxy, verificato live alle 18:06). Fix strutturale consegnato: attivita' pianificata \"wiki-supervisor\" (Register-ScheduledTask ogni 5 min x3650gg) esegue C:\\Users\\49359\\Documents\\llamacpp\\supervisor-wiki.ps1 -> TcpClient su 19829 e se morto riavvia python proxy-wiki.py; se coda piena e proxy-wiki.log fermo >=20 min -> ricetta sblocco motore (taskkill llm-wiki.exe -> delete .llm-wiki\\file-snapshot.json -> start llm-wiki.exe -> attendere porta 19828 -> POST rescan /api/v1/projects/f2b5fdbb-200f-40ff-9eb1-a37b10a441a0/wikisources/rescan); cooldown 60min via file .unlock-stamp + mutex anti-overlap. Lezione chiave: il motore LLM Wiki riprende da solo appena il trasporto torna (dimostrato 18:06->18:09 senza intervento). Gotcha ambiente questo box: spawn PowerShell lentissimo/degradato -> usare shell in background; Invoke-WebRequest mente su localhost per WPAD -> solo TcpClient o curl --noproxy \"*\"; Get-CimInstance/WMI va in hang; ID progetto reale wiki169 = f2b5fdbb-200f-40ff-9eb1-a37b10a441a0 (quello negli appunti era corrotto).",
+   "createdAt": "2026-11-17T17:10:29.493Z",
+   "files": [],
+   "id": "mem_mwky7lqd_a2df0865a0a6",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-17T17:10:29.493Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "wiki169 ingest - causa fallimenti ricorrenti = SOLO TRASPORTO (proxy 19829 morto",
+   "type": "fact",
+   "updatedAt": "2026-11-17T17:10:29.493Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\nRead-only WhatsApp reader at /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp (Go, whatsmeow; Go SDK in ~/go-sdk). Linked 2026-11-12 by Francesco from his own SSH terminal (`./wa_lettore login`, QR). Extracts in privato/estratti (all history since 2019 saved at relink with chat_importanti = \"*\" + Emma Ferrari).\n\n**Why:** Francesco wants WhatsApp context for the SecondBrain, but explicitly read-only (no send, no ports).\n\n**How to apply:**\n- Pairing-code login failed (\"controlla il numero\" / missing link_code_pairing_wrapped_primary_ephemeral_pub); QR from his terminal works. QRs relayed via chat expire too fast.\n- History only arrives at link time: chats must be in chat_importanti.txt BEFORE login.\n- Normal mode (`./wa_lettore`, `-minuti N`) deletes extracts older than 14 days. Full history (2019→12/11/2026) is backed up in privato/estratti_backup_2026-11-12; back up again before runs if needed.\n- Never two wa_lettore at once (same sessione.db). No systemd/cron without his request.\n- Sending: separate tool invio/wa_invia (--conferma NUMERO \"testo\", private chats only, logs to privato/inviati.log). Allowed in ~/.claude/settings.json by one narrow rule. Use ONLY when Francesco explicitly gives chat + text; reader must be stopped. First send 2026-11-13 00:27 \"Ti voglio bene\" to Emma. Pending: keep \"*\" or Emma-only.\n- Agent pipeline (2026-11-15/17): giro_mattina.sh via cron 7/13/19 → wa_lettore -minuti 5 + telegram_lettore --ore 48 + agente_chat.py (freellmapi 127.0.0.1:3001, auto:smart; key in agente_chat/privato/config.json) → 06_Comunicazioni/*/<date>_riassunto.md → HA webhook: phone notification + dashboard \"Riassunti chat\" (sensor.riassunto_chat). HA edits only via narrow-allowed scripts agente_chat/installa_*_ha.sh. Telegram rule: private+bots+groups ≤50 people, channels/big groups only if named in chat_importanti.txt. Self-chat photos → whatsapp/privato/media/.",
+   "createdAt": "2026-11-17T18:45:02.992Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md"
+   ],
+   "id": "mem_mwl1l70u_fb440a5c13b8",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-17T18:45:02.992Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwe6kg4e_1cf6fcd38f67",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwe6kg4e_1cf6fcd38f67"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/whatsapp-lettore.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-17T18:45:02.992Z",
+   "version": 3
   }
  ],
  "observations": {
