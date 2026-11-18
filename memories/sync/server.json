@@ -35341,6 +35341,2658 @@
    "type": "preference",
    "updatedAt": "2026-11-17T18:45:02.992Z",
    "version": 3
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\CLAUDE.md]\n# graphify\n- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`\nWhen the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.",
+   "createdAt": "2026-11-18T11:15:28.188Z",
+   "files": [
+    "~\\.claude\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0ywhm_7c020e1e5f6d",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:28.188Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\CLAUDE.md]\n# graphify\n- **graphify** (`~/.claude/skills",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:28.188Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-llamacpp\\memory\\MEMORY.md]\n- [Accesso Windows 2 lab](win2-remote-access.md) — win2/win2cp wrappers via Linux gateway, logged + approval required",
+   "createdAt": "2026-11-18T11:15:29.800Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-llamacpp\\memory\\MEMORY.md"
+   ],
+   "id": "mem_mwm0yxa9_0abca73ad10f",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:29.800Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-llamacpp\\memory\\MEMOR",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:29.800Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-llamacpp\\memory\\win2-remote-access.md]\nTopology: user's PC (Windows) -> Linux gateway 172.23.79.199 (user testop, alias `gateway-ssh`) -> Windows 2 192.168.7.30 (DESKTOP-LE97VKA, user Developer, admin; alias `win2`, quiet alias `win2q`). Key auth via `~/.ssh/id_lab` (set up 2026-10-07), ssh/scp only in Git Bash (not in PowerShell PATH).\n\nAlways use the wrappers in `~/bin` so the user can follow along live in `C:\\Users\\Developer\\claude_log.txt`:\n- `win2 \"<PowerShell command>\"` — runs via `C:\\Users\\Developer\\claude\\run.ps1`, logs command + output\n- `win2cp get <win2 path> <local dest>` / `win2cp put <local> <win2 dest>` — scp -r with a log note\n\nUser wants to approve each remote command: `~/.claude/settings.json` has `permissions.ask` rules for ssh/scp/win2/win2cp. Don't bypass them with raw ssh unless asked.",
+   "createdAt": "2026-11-18T11:15:30.910Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-llamacpp\\memory\\win2-remote-access.md"
+   ],
+   "id": "mem_mwm0yyb1_2e1ca41e4479",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:30.910Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-llamacpp\\memory\\win2-",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:30.910Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\always-superpowers.md]\nThe user said \"usa sempre superpower\" (2026-10-23), also for non-code work like the folder reorganisation.\n\n**Why:** they want a disciplined, recorded process (plan, ledger, verification) instead of ad-hoc steps, so they can follow what happened.\n\n**How to apply:** pick the matching superpowers skill before acting (brainstorming before new features, writing-plans for multi-step work, executing-plans to run an approved plan, systematic-debugging for failures, verification-before-completion before saying \"done\"). For non-code plans, adapt TDD to concrete checks (hashes, git status, build_autoharness) and say so. See [[session-coordination]], [[manual-test-each-step]].",
+   "createdAt": "2026-11-18T11:15:31.593Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\always-superpowers.md"
+   ],
+   "id": "mem_mwm0yyvf_aa45099b72bc",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:31.593Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:31.593Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\dts-needs-psu-on.md]\n---\r\nname: dts-needs-psu-on\r\ndescription: DTS on the HIL bench only works with the SPARC nodes powered (TDK-Lambda PSU on via Speedgoat); the CRC/checksum test is the go/no-go check\r\nmetadata:\r\n  node_type: memory\r\n  type: project\r\n  originSessionId: 19365d2f-be3e-4980-96e2-edf698c9b8ce\r\n  modified: 2026-10-20T15:35:12.319Z\r\n---\r\n\r\nThe SPARC nodes (PCOM, PMON) are powered by the TDK-Lambda PSU, switched from the Speedgoat model (HIL_DASHBOARD section 3, PSU_OUT_CMD). With the PSU off, DTSServerSock.exe cannot talk to the nodes and every DTS command fails. Answering ping on 10.6.1.72/.73 does NOT prove the nodes are up.\r\n\r\nSeparately, on win2 DTSServerSock.exe (1.0.31) crashes at SERVER_INIT right after \"Starting Core environment...\" (APPCRASH ntdll c0000005 offset 0x3ff95, in the event log since 2026-09-11) — and on 2026-10-08 15:40 it crashed the same way WITH the DUT powered, so the PSU is not the only cause. Its first start after a sync can take 15-45 s.\r\n\r\n**Why:** the user pointed this out (2026-10-08) after a DTS test on win2 failed; \"di solito il CRC test dovrebbe bastare per capire se funziona\".\r\n\r\n**How to apply:** before a real DTS test, make sure the PSU output is on (ask the user if unsure); use the checksum test (Dts_Check_Checksum per node, parameters from the session's _init.py, e.g. STRESS_TEST_init.py) as the first go/no-go check before running a full session. When DTS fails, mention the PSU first. Related: [[win2-ssh]], [[update-dts-diagram]].\r\n\r\nOn 2026-10-09 the crash repeated at every SERVER_INIT (provaDTS.bat at 15:01, startDTS via matlab -batch in the afternoon) with the layer in place; PSU state was not confirmed. `matlab -batch` over ssh on win2 hangs forever if startDTS opens a dialog (listdlg/uigetdir are invisible in session 0) — default_database is now set in config.json and startDTS skips dialogs in batch mode.\r\n\r\nUpdate 2026-10-20: the SERVER_INIT crash is gone (Init answers \"Loaded Core environment\"; a second Init answers \"already initialized\", which dts_hil treats as ok). With nodes not answering, Dts_Check_Checksum gets \"No answer from CORE environment\" after ~11 s (dts_run exit 4) — that is the PSU/nodes signal. The user swapped dts_sock.py/log_test_variable_utility.py on win2 for the vendor 1.0.32 versions (CHECKSUM_CMD 3 args, NOPE=19) while dts_mng.py still passes 4 args: dts_hil adapts the arity. With the SPARC on (2026-10-20 17:33) provaDTS.bat ran STRESS_TEST fully: CRC PCOM 0XC9DE261E, PMON 0X00E567F5, 407/407 commands OK, exit 0, recorder started. A running DTSServerSock.exe locks DLLs in XDTS SOCKET: sync_win2.sh now refuses/waits while repo programs run on win2; `--realign` recovers a half-done alignment.\r\n\r\nOn 2026-10-08 the user had DTSSocketClient reverted to 85c956d (state of 2026-10-07) because the rewrite broke it: study the original client before changing it again, and test only on win2.",
+   "createdAt": "2026-11-18T11:15:33.183Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\dts-needs-psu-on.md"
+   ],
+   "id": "mem_mwm0z061_bcce0c0d8b33",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:33.183Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:33.183Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\dts-vendor-lib-untouchable.md]\nNever modify `07_XDTS/DTSSocketClient/src/python/dts/*` (DTS Python client, frozen as of 2026-10-09) or anything in `07_XDTS/XDTS SOCKET/` (server, configuration.xml). Use them as libraries: fixes go in `src/python/dts_hil.py` (runtime patches of the vendor modules) and `src/python/dts_run.py` (runner, exit codes), which startDTS/stopDTS use.\n\n**Why:** the user said (2026-10-09) these are standard libraries that other people edit too and that the user re-downloads from time to time, so local edits would be lost or conflict.\n\n**How to apply:** when DTS behaviour needs changing, patch attributes from the layer (e.g. `dts_sock.send_command`, `dts_mng.Dts_*`), never the files. The user also wants every step tested on win2 (see [[dts-needs-psu-on]], [[win2-ssh]]). Related: [[update-dts-diagram]].",
+   "createdAt": "2026-11-18T11:15:37.046Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\dts-vendor-lib-untouchable.md"
+   ],
+   "id": "mem_mwm0z2wr_1804d1aad4a8",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:37.046Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:37.046Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\folder-structure-optimal.md]\nThe user wants the folder structure to be optimal (said 2026-10-20).\n\n**Why:** many sessions add files to this repo; a messy layout makes the HIL project hard to follow.\n\n**How to apply:** before creating files, pick the right home and keep one place per kind of thing. Current layout for phase 5 ([[test-launcher-speedgoat-plan]]): generic reusable tools in `06_TestEnviroment/00_Library/Script/<TOOL>/` (e.g. XDTS_MULTI_CONVERT, DART_PLOT_CONVERT, with `tests/`); project code in `06_TestEnviroment/05_SPDG_AutoHarness/` (`runner/` = MATLAB runner functions, `test_cases/SPARC/<GROUP>/` = bench test-case sources (`tests/` is reserved for automated unit tests), `docs/`, `tools/`). Don't put project files inside the Test_Launcher submodule (it gitignores tests/plots/STE). When structure drifts, propose the reorganisation instead of silently adding.",
+   "createdAt": "2026-11-18T11:15:38.946Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\folder-structure-optimal.md"
+   ],
+   "id": "mem_mwm0z488_6c36ed083b23",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:38.946Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:38.946Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\github-sync-second-pc.md]\nSince 2026-10-28 the private GitHub repo `https://github.com/Cheic1/HIL.git` replaces the USB stick as the exchange point between PC1 and the user's second PC ([[usb-clone-second-pc]] is now only a fallback). First push: master at 75e8fd9.\n\n- On PC1 the remote is `github`; `master` keeps tracking `origin/master` (GitLab). Don't push with `-u github`, or other sessions' `git status`/pull switch to GitHub.\n- From PC1 push to both: `git push origin master` and `git push github master`.\n- Submodules (Test_Launcher, ste_sem) stay on GitLab only; win2 still syncs from PC1 ([[win2-ssh]]).\n- GitHub warns about `02_ICD VARI/NOVA_Schematic/RESG4600E003_B.docx` (57.8 MB, over the 50 MB soft limit; the hard limit is 100 MB).\n\n**Why:** juggling the USB copy between PCs had become unsustainable.\n**How to apply:** before working, `git fetch github` and merge what the second PC pushed; after committing, push to both remotes.",
+   "createdAt": "2026-11-18T11:15:39.488Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\github-sync-second-pc.md"
+   ],
+   "id": "mem_mwm0z4nv_698827dd5794",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:39.488Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:39.488Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\graphify-matlab-scripts.md]\nSince 2026-11-04 the repo's `graphify-out/` (2467 nodes, includes the Test_Launcher and ste_sem code and 12 .slx summaries) was built by custom scripts: `select_files.py`, `slx_summary.py` (unzips .slx → per-model markdown), `matlab_extract.py` (regex call graph for .m: graphify has no MATLAB parser), `merge.py`. They live in `C:\\Users\\49359\\.claude\\tools\\graphify_matlab\\`. A plain `graphify update .` loses the MATLAB and Simulink parts: rerun those scripts in that order.\n\n**Why:** the user said \"non per ora, usali solo tu\": keep them out of the repo for now.\n\n**How to apply:** use them yourself when the graph needs refreshing; do not add them to the repo unless the user asks. Related: [[keep-repo-folders-clean]].",
+   "createdAt": "2026-11-18T11:15:39.831Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\graphify-matlab-scripts.md"
+   ],
+   "id": "mem_mwm0z4xw_3b571a2fb001",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:39.831Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:39.831Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\harness-crash-scpi-psu.md]\nSince at least 2026-10-09, `load` of SPEEDGOAT_HARNESS on TargetPC1 (10.6.1.99) fails with \"Unable to load ... Timed-out waiting for condition\" and the user has to reboot the target. Cause found 2026-10-12: at stop the app aborts (SIGABRT, \"Malloc Check Failed\" band.c:562) in slrealtime::Model::~Model -> ParamSetService; heap block headers are overwritten with 0xbff0000000000000 (= double -1.0). After the crash slrtd is restarted, an orphan app instance can survive, and the next load logs \"Another model is loaded or running on target\" (/home/slrt/logs/slrealtime.log).\n\nSame signature in /root/sgMdl_SCPI_PSU_Serial.core (Speedgoat's own example, 2026-10-06). Common component: block `speedgoatlib_scpi/SCPI PSU` (speedgoatlib 10.1.0, TDK-Lambda GEN on onboard serial port 2, FIFO 64/64 consistent), whose doc says each command's internal value is initialised to -1. Driver source is obfuscated (logic in libsg). APSW_WRAP_* S-functions are empty stubs, not the cause. Not yet confirmed by a bench test without the PSU block.\n\n**Why:** cost a long investigation; the bench is shared and the target must be reached only through MATLAB on win2 (no direct ssh to the Speedgoat).\n\n**How to apply:** to re-check, run `D:\\FM_WORKSPACE\\coredbg\\diag_speedgoat.m` on win2 in a visible MATLAB (launcher `launch_diag.cmd` via the `ClaudeDiagSpeedgoat` scheduled task): it dumps target state, downloads the /root/*.core files and runs QNX gdb. Related: [[win2-ssh]], [[dts-needs-psu-on]].",
+   "createdAt": "2026-11-18T11:15:40.195Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\harness-crash-scpi-psu.md"
+   ],
+   "id": "mem_mwm0z57j_d08250e1a72c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:40.195Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:40.195Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\keep-repo-folders-clean.md]\nKeep the original project folders clean: scripts that only serve the work (e.g. a MATLAB script that edits a .slx through the Simulink API, XML dumps of a model, check scripts) are written and run from Claude's session scratchpad, not created inside the repo (said 2026-10-28 while working on `03_NOVA/ste_sem/2-TestBench/HIL/SEM_DUT_HIL.slx`). Only the agreed deliverables (the edited model, a function the user asked for) land in the repo.\n\n**Why:** the user does not want stray helper files in the project tree (several sessions and two PCs share it; ste_sem is a released DO-178C project).\n\n**How to apply:** pass repo paths as arguments to scratchpad scripts (`matlab -batch \"run('<scratchpad>/x.m')\"`); before adding any new file to the repo, check it is a deliverable the user agreed to. Related: [[sync-script-feedback]] (the one exception: win2 sync logic belongs in sync_win2.sh).",
+   "createdAt": "2026-11-18T11:15:40.940Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\keep-repo-folders-clean.md"
+   ],
+   "id": "mem_mwm0z5rx_1675a27b61c5",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:40.940Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:40.940Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\long-matlab-runs-on-win2.md]\nOn PC1 a second MATLAB started in the background (`-batch` or `-r -minimize`, with or without MATLAB_USE_USERWORK=0) sits at ~45 s CPU and never runs its command: the user's startup.m (load_speedgoat_blockset, setupAgenticToolkit install, satk_initialize, shareMATLABSession) blocks it. The desktop MATLAB via MCP works but one SPARC SIL test takes ~43 min there, and MCP calls time out after 30 min.\n\nSince 2026-11-17 long runs go on win2: `D:\\FM_WORKSPACE\\tmp_vnv\\run_a3.bat` / `run_a4.bat` started by the scheduled tasks `vnv_A3_SIL` / `vnv_A4_golden` (`schtasks /Run /TN ...`, interactive only, so they live in the RDP session and survive ssh drops). Logs in `D:\\FM_WORKSPACE\\tmp_vnv\\a3.log` / `a4.log`. Both drivers are resumable (`06_TestEnviroment/03_SPARC_env/vnv/tools/run_sil_all.m`, `run_golden_sparc.m`).\n\n**Why:** a morning lost to frozen background MATLABs and MCP timeouts on PC1.\n\n**How to apply:** do not start hours-long MATLAB jobs on PC1; sync, then run the task on win2 and watch the logs over ssh. Related: [[matlab-mcp-session-details]], [[win2-commands-allowed]].",
+   "createdAt": "2026-11-18T11:15:41.254Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\long-matlab-runs-on-win2.md"
+   ],
+   "id": "mem_mwm0z624_17c64de790b3",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:41.254Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:41.254Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\manual-test-each-step.md]\nThe user wants to try every step manually (said 2026-10-20, phase 5 plan [[test-launcher-speedgoat-plan]]).\n\n**Why:** they want to understand and verify each piece themselves before building on it, one step at a time.\n\n**How to apply:** for every step I finish, write a short \"Prova a mano\" (commands to run in MATLAB/shell, what to look at, expected result) in the plan doc and in the reply. Mark the step \"da provare\" (not \"fatto\") until the user confirms it works; then mark it done. Do not chain several unverified steps.",
+   "createdAt": "2026-11-18T11:15:42.114Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\manual-test-each-step.md"
+   ],
+   "id": "mem_mwm0z6oz_20c9a046a18d",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:42.114Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:42.114Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\master-as-icd-database.md]\nDecided 2026-10-23: the AutoHarness becomes THE reference app for ICDs. The IO-List MASTER (`05_Specfica Tecnica/LHD/LHD_ExternalHarness_IO-List_MASTER.xlsm`) is the single database, with **clean sheets** (one per kind of data: Speedgoat channels, DUT list/settings, one sheet per DUT with one row per pin, imported ICD per DUT read-only, CHANGELOG). Old-format sheets (PinSPDG_base, Schema) become generated views. The app has one tab per DUT (SPARC first) and edits signal name, DUT pin, rack pin, test point name, add/remove rows, Speedgoat connection; everything downstream (connections, KiCad, harness book, Simulink) derives from the MASTER.\n\n**Why:** today data is scattered across folders and the MASTER is regenerated from archive versions, so manual edits get lost.\n\n**How to apply:** supersedes the dashboard/`data/dut/*.json` parts of `docs/06_harness_multidut_spec.md` (draft, never implemented). Plan it with ECC agents ([[use-ecc-agents]]). Related: [[spdg-autoharness-project]].",
+   "createdAt": "2026-11-18T11:15:42.730Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\master-as-icd-database.md"
+   ],
+   "id": "mem_mwm0z76e_32a6f2e2add9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:42.730Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:42.730Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\matlab-launched-from-claude-env.md]\nA MATLAB desktop launched by Claude (Start-Process/matlab.exe from the Bash/PowerShell tool) inherits `NoDefaultCurrentDirectoryInExePath=1` from Claude Code. cmd then never runs programs from the current folder, so `slbuild` for speedgoat.tlc stops at `make` with `'<model>.bat' is not recognized as an internal or external command` (the .bat exists in slprj/speedgoat/<model>). Found 2026-10-28 building SEM_TestHarness; CodeExecutionProfiling was a red herring.\n\n**Why:** cost several build attempts (each 2-4 min) to find; the user's own MATLAB does not have the variable.\n\n**How to apply:** in a MATLAB that Claude launched, run `setenv('NoDefaultCurrentDirectoryInExePath','')` before any slbuild / system call to a relative .bat (or launch MATLAB with the variable removed). The MATLAB MCP server needs MATLAB already open with `shareMATLABSession()` (user's startup.m does it; mode `existing`). Related: [[win2-ssh]].",
+   "createdAt": "2026-11-18T11:15:43.071Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\matlab-launched-from-claude-env.md"
+   ],
+   "id": "mem_mwm0z7io_8e84ec8f7c73",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:43.071Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:43.071Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\matlab-mcp-session-details.md]\nThe MATLAB MCP server (mode `existing`) attaches through one file, `%APPDATA%\\MathWorks\\MATLAB MCP Server\\v1\\sessionDetails.json` (port, apiKey, pid). `startup.m` (`Documents\\MATLAB\\Matlab2024b`) calls `shareMATLABSession()`, so every MATLAB that starts on PC1, `matlab -batch` included, overwrites the file. When that MATLAB exits the MCP keeps trying a dead port: \"failed to attach to MATLAB session\", server log \"timeout waiting for matlab to be ready\". Found 2026-10-30: file pid 38100 port 31516 (dead) while the desktop MATLAB was pid 8112 port 31515. The user gave the fix: run `startup` (or just `shareMATLABSession`) in the desktop MATLAB's Command Window; nothing reaches that window from outside, so the user has to type it.\n\n**Why:** it took most of a morning's MCP attempts to find, and a batch run to work around the failure can cause the very same failure.\n\n**How to apply:** on this error compare the file's pid with `Get-Process MATLAB`, then ask the user to run `shareMATLABSession`. Avoid `matlab -batch` on PC1 while the desktop MATLAB is in use; if unavoidable, warn that it detaches the MCP. Related: [[matlab-launched-from-claude-env]].",
+   "createdAt": "2026-11-18T11:15:43.619Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\matlab-mcp-session-details.md"
+   ],
+   "id": "mem_mwm0z820_a471b28a298c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:43.619Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:43.619Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\MEMORY.md]\n- [Aggiorna lo schema DTS](update-dts-diagram.md) — republish the Mappa DTS Speedgoat artifact after every DTS change\n- [win2 via SSH](win2-ssh.md) — HIL PC win2: ssh ok, no GitLab, partial+sparse clone; sync_win2.sh (--auto not yet installed, --pause during tests)\n- [DTS solo con PSU accesa](dts-needs-psu-on.md) — nodi spenti = DTS fallisce/crash; CRC test come verifica\n- [Sync tutto nello script](sync-script-feedback.md) — put every win2 sync action/check into sync_win2.sh, no ad-hoc commands\n- [Progetto SPDG AutoHarness](spdg-autoharness-project.md) — goal/phases of 05_SPDG_AutoHarness; open points in docs/PUNTI_APERTI.md\n- [Libreria DTS intoccabile](dts-vendor-lib-untouchable.md) — src/python/dts e XDTS SOCKET mai modificati: fix nel layer dts_hil/dts_run\n- [Piano Test Launcher su Speedgoat](test-launcher-speedgoat-plan.md) — fase 5: doc nel repo + artifact del piano da ripubblicare a ogni passo\n- [Prova a mano ogni passo](manual-test-each-step.md) — per ogni passo dare la procedura di prova; \"fatto\" solo dopo l'OK dell'utente\n- [Struttura cartelle ottimale](folder-structure-optimal.md) — layout deciso (00_Library/Script tool, 05_SPDG_AutoHarness runner/tests/docs); proporre riordini\n- [Merge regolare](merge-regularly.md) — dopo ogni passo: sync_win2.sh --check e sync, non durante prove al banco di altre sessioni\n- [Crash harness allo stop](harness-crash-scpi-psu.md) — load timeout = app crasha allo stop (heap -1.0), sospetto blocco SCPI PSU; diag_speedgoat.m su win2\n- [Accendi lo SPARC prima dei test](sparc-on-before-tests.md) — DUT acceso (PSU via target) prima di DTS/STRESS_TEST; se non sai come, chiedi\n- [Copia su chiavetta per il 2° PC](usb-clone-second-pc.md) — D:\\speedgoat clone autonomo (FAT32, safe.directory), remote pc1/chiavetta\n- [GitHub per il 2° PC](github-sync-second-pc.md) — repo privato Cheic1/HIL (remote `github`) = scambio tra i PC; push sia su origin sia su github\n- [Coordinamento sessioni](session-coordination.md) — una sessione coordina le altre, si resta sulla strada principale, niente lavoro orfano\n- [MASTER = database ICD](master-as-icd-database.md) — AutoHarness app di riferimento ICD, MASTER a fogli puliti modificato dall'app, schede per DUT\n- [Usa gli agenti ECC](use-ecc-agents.md) — pianificare e realizzare con planner/architect/code-explorer ECC (file in Portable/node_js/ecc-universal)\n- [Usa sempre superpowers](always-superpowers.md) — skill superpowers per ogni compito, anche non-codice (piano, ledger, verifica)\n- [Cartelle del repo pulite](keep-repo-folders-clean.md) — script di supporto (modifica .slx, dump, verifiche) solo nello scratchpad di Claude, mai nel repo\n- [MATLAB lanciato da Claude](matlab-launched-from-claude-env.md) — eredita NoDefaultCurrentDirectoryInExePath=1: slbuild SLRT fallisce su '<model>.bat'; setenv a vuoto prima del build\n- [Comandi su win2 permessi](win2-commands-allowed.md) — ssh/scp/timeout/MATLAB batch su win2: eseguire senza chiedere\n- [MCP MATLAB non si aggancia](matlab-mcp-session-details.md) — sessionDetails.json sovrascritto da ogni MATLAB che esegue startup (anche -batch); cura: shareMATLABSession nel MATLAB desktop\n- [Valori HIL SEM dal Bus Data Coding](sem-hil-values-from-bus-data-coding.md) — IO682/IO603 di SEM_DUT_HIL: label/ID/bit/scala sempre dal CSV DCDAP; convenzioni bit CAN BE\n- [IO141 di SEM_DUT_HIL: DMA nel Setup](sem-hil-io141-dma-setup.md) — larghezza AO/AI decisa da 'IO141 Setup'; DMA frame 100 rompeva la build HIL; check HIL via batch su win2\n- [XDTS nel SEM_DUT_HIL](sem-hil-xdts.md) — client DTS in DTS/IO715_XDTS, spento finché non c'è una sessione DC-DAP; tunabili ExportedGlobal\n- [Script del grafo fuori dal repo](graphify-matlab-scripts.md) — graphify-out costruito con estrattori MATLAB/.slx in ~/.claude/tools/graphify_matlab; graphify update da solo li perde\n- [Flash SEM via TFTP su win2](sem-flash-tftp-win2.md) — RunStandAloneSP.bat: NIC banco = PHYG (non \"Ethernet\"), leggere <ip>.log.txt; errore 0xd180 = ARP non bloccato\n- [SEM_DUT_HIL",
+   "createdAt": "2026-11-18T11:15:44.234Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\MEMORY.md"
+   ],
+   "id": "mem_mwm0z8o1_d42895587fd0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:44.234Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:44.234Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\MEMORY.md]\ndopo il merge Testing](sem-hil-testing-merge-pending.md) — adattamento ai bus nuovi a metà, in pausa per lo SPARC: cosa è fatto e cosa manca\n- [Run lunghi MATLAB su win2](long-matlab-runs-on-win2.md) — MATLAB in background su PC1 si blocca nello startup.m; batch SPARC su win2 via schtasks vnv_A3_SIL / vnv_A4_golden\n- [Build SEM: cache sul path](sem-build-cache-path.md) — errore codeInfo 'Time object cannot be empty' = 1-ModelUnderTest\\cache sul path (genpath del loader); toglierlo prima di slbuild",
+   "createdAt": "2026-11-18T11:15:45.016Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\MEMORY.md"
+   ],
+   "id": "mem_mwm0z8y9_1faa83818737",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:45.016Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:45.016Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\merge-regularly.md]\nThe user wants me to \"fare il merge ogni tanto\" (said 2026-10-20).\n\n**Why:** several sessions commit on master on this PC and win2 snapshots come back through the sync; long divergence means painful merges and stale code on the bench.\n\n**How to apply:** after finishing a step (committed), check `bash sync_win2.sh --check` and, if a sync is needed, run `bash sync_win2.sh --auto` (only committed work; log in `.git/sync_win2_auto.log`, ~8 min). Plain `bash sync_win2.sh` starts with `git add -A` + commit, which would sweep up other sessions' half-done changes: avoid it while the working tree has others' edits — per [[sync-script-feedback]] everything goes through that script. Since 23dd658 (2026-10-20) the script itself waits when DTSServerSock.exe runs on win2 (\"banco in uso\") and `bash sync_win2.sh --realign` recovers an interrupted alignment. Not while another session is testing on the bench: check/ask first (peer sessions announce bench use), or use `--pause` etiquette. See [[win2-ssh]].",
+   "createdAt": "2026-11-18T11:15:45.435Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\merge-regularly.md"
+   ],
+   "id": "mem_mwm0z9ab_2160c1179161",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:45.435Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:45.435Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-build-cache-path.md]\nOn 2026-11-03 every speedgoat.tlc build in the desktop MATLAB (even a trivial new model) failed with `RTW:buildProcess:CodeInfoInternalError` \"Time object cannot be empty\". Cause: `ste_sem/1-ModelUnderTest/first_engagement.m` (APSW release loader, not ours) runs `addpath(genpath(pwd))`, which puts 152 folders of `1-ModelUnderTest\\cache` (slprj, *_sg_rtw) on the path. Removing them (`p=strsplit(path,pathsep); rmpath(p{contains(p,'1-ModelUnderTest\\cache')})`) made the build pass.\n\n**Why:** hours of bisecting the model found nothing; the model was never the problem.\n\n**How to apply:** fixed in STE-Tool 14b8134 (2026-11-04): `ste.mut.loadRelease` now takes slprj/cache/*_rtw of the release off the path, and `buildTestBench` makes the bench `Single` (the HIL with Speedgoat drivers is Single; a Multi bench cannot reference it). If the error comes back, check the path for `1-ModelUnderTest\\cache` first. IO141 now runs without DMA at Ts_IO141 = 0.01 (DMA needs a subsystem triggered by the board interrupt, which the STE harness lacks). Related: [[sem-hil-values-from-bus-data-coding]], [[matlab-launched-from-claude-env]].",
+   "createdAt": "2026-11-18T11:15:45.818Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-build-cache-path.md"
+   ],
+   "id": "mem_mwm0z9m1_51483058a58a",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:45.818Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:45.818Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-flash-tftp-win2.md]\nSEM (DC-DAP) is flashed from win2 with `D:\\FM_WORKSPACE\\speedgoat\\speedgoat\\06_TestEnviroment\\03_NOVA\\DCDAPenv\\Executable\\RunStandAloneSP.bat` (untracked on win2, not in the PC1 repo): it starts `FCC_ARP_Grabber.bat` (elevated, waits for 10.6.1.68 lane A / .69 lane B in `arp -a` and locks them static) and `TFTPServerSP -v`; then the SEM is powered on. The GSS Ethernet-Loader on the SEM pulls `<ip>.commands.txt` and writes `<ip>.log.txt` there (read it to diagnose).\n\n2026-11-13: it failed with `TFTP error: 0xd180` right after the NVM_ERASE lines (lane A erased, flash not written) because the grabber had `INTERFACE=Ethernet` while win2's 10.6.1.67 NIC is named **PHYG** (`netsh ... interface=Ethernet` -> \"Element not found\", lock never set, ARP entry goes Unreachable while the loader does not answer ARP). Fixed on win2 to `PHYG` (original kept as `FCC_ARP_Grabber.bat.orig`). Lane B (.69) had never contacted the TFTP server that day: separate open point.\n\nSince 2026-11-13 16:18 TFTPServerSP is also a Windows service `TFTPServer` (auto start): at boot it binds before PHYG has its IP and listens only on 127.0.0.1 -> `sc stop/start TFTPServer` after boot and check `netstat -ano -p udp | findstr :69` shows 10.6.1.67:69. While the service runs, the standalone `tftpserverSP -v` in RunStandAloneSP.bat cannot bind port 69. Lane B: Rev B KiCad wires it to its own RJ45 \"CH1 Lane B\" (P2-103/104/113/114 -> J01-65..68 -> MNT 33-36); lane B connector J2 has no FLASH_EN (only J1-119/126), and the cable ties J2-116/123 (NVM_CLEAR) to the download-enable jumper net J01-77.\n\n17:17 run (PHYG forced 10 Mbps FD for the test, original = Auto Negotiation, restore it): a board with MAC 00:13:0d:02:19:4d (lane A of the 15:26 run was ...:4b) came up as **10.6.1.68**, read 10.6.1.68.commands.txt, and the out_flash_table.bin transfer stalled at block 95/~165; PHYG RXerr=RXdisc=586. Open question: is ...:4d lane B (then lane B never uses .69 and would get lane A's commands). The loader sends TFTP from UDP source port 0 (normal). pktmon on win2 logged only Tx: capture with dumpcap instead (Wireshark installed, PHYG = interface 5; run it via `wmic process call create` so it survives the ssh session).\n\nCorrection: …:4b = CH1 lane A, …:4d = CH2 lane A (user switched DC-DAP channel); both lanes A use .68, so the IP is per lane, not per channel. At 10 Mbps FD forced PHYG got 586 RX discards, at autoneg 0: keep PHYG on Auto (restored). 17:32 run (CH2, autoneg, clean dumpcap on `\\Device\\NPF_{FF9CFFEB-DC0C-48CE-B5D3-7E7384C81832}` = PHYG; numeric `-i 5` picked PHY when run in session 0): lane A ARP+WRQ log+RRQ commands ok, 6 erases (~78 s), then `TFTP error: 0xd005` WITHOUT ever sending the RRQ for out_flash_table.bin (failure inside the loader, not network). Lane B: zero frames (not even ARP) on both channels. End of session 2026-11-13 ~17:45: everything cleaned up (ARP watcher, captures, scripts, .orig backups removed; TFTPServerSP.ini back to original, logging off; PHYG Auto). Kept: grabber `INTERFACE=PHYG`, service `TFTPServer` set to delayed-auto so it binds after PHYG is up. For a new test: enable `All` under [LOGGING] in the ini (logs every request), capture with dumpcap on the PHYG device name. Open: lane B silent (check switch link LED), lane A error 0xd005/0xd180 before RRQ of out_flash_table.bin (suspect FLASH_EN discretes / J01-77/78 jumper). SEM power = bench PSU via SPEEDGOAT_HARNESS (user's way: HIL Dashboard / dut_on/dut_off). 17:5x: harness was loaded-not-running with PSU_OUT=1; switched off safely with matlab -batch on win2: setparam PSU_OUT=0 BEFORE start(tg), then hilDut('off') -> PSU OFF 0.02 V; app left running.\n\nssh quirk on win2: any `>nul` redirect in the remote cmd fails with \"The system cannot find the path specified\" and the command does not run; don't use `>nul` over ssh.",
+   "createdAt": "2026-11-18T11:15:46.246Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-flash-tftp-win2.md"
+   ],
+   "id": "mem_mwm0za2j_fb5adcc2f16a",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:46.246Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:46.246Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-flash-tftp-win2.md]\n**Why:** the scripts came from another PC whose NIC was called \"Ethernet\".\n**How to apply:** if flashing fails again, read the `<ip>.log.txt` first and check `arp -a` shows .68/.69 as static on PHYG. SEM power comes from SEM_DUT_HIL/TDKLambda (initSpeedgoat sequence, `PSU_POWER_CYCLE`). See [[win2-ssh]], [[sem-hil-xdts]].",
+   "createdAt": "2026-11-18T11:15:46.839Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-flash-tftp-win2.md"
+   ],
+   "id": "mem_mwm0zac8_6e06213cdf4a",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:46.839Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:46.839Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-io141-dma-setup.md]\nIn `03_NOVA/ste_sem/2-TestBench/HIL/SEM_DUT_HIL.slx`, the IO141 AO/AI port widths follow the **`IO141/IO141 Setup`** block (`parDacDmaEnable`, `parDacFrameSize`, `parDacSampleTime`, same for `parAdc*`). Setting `parDacDmaEnable`/`parDacFrameSize` on the AO block alone changes nothing: the AO input still wants `FrameSize` (100) elements.\n\n**Why:** found 2026-11-03 while merging the win2 and PC1 (28a3434) versions. DMA on with frame 100 at 1 ms made `SEM_TestBench` (STE_TARGET = HIL) fail its update diagram in all three versions. The model step is 0.01 (from the APSW release), so no block can run at 0.001 without DMA. State at ste_sem d65326a/f527a9c (2026-11-04): DMA off on both DAC and ADC, AO at `Ts_IO141 = 0.01` (model workspace), `AI (unused)` removed, DAC ±5 V on all 4 channels. Excitation sines: Frequency = `2*pi*RSLV_EXC_HZ` (the Sine Wave Frequency field is in **rad/s**), Amplitude `RSLV_EXC_AMPL_V` = 1, SampleTime `Ts_IO141`. `RSLV_EXC_HZ = 10` is a placeholder: the DC-DAP ICD gives no excitation frequency. It does say the excitation is an OUTPUT of the DC-DAP (`*_TRIM_RSLV*_Exc`, AC Excitation). So a correct resolver sim would read the DUT excitation and return exc·sin/cos, not generate its own. User decision 2026-11-04: for now the Speedgoat keeps generating the excitation; the user is preparing the hardware to acquire the DUT excitation later. Keep the model ready for a switch between generated and acquired, but don't wire an AI channel until the user says which one. Later on 2026-11-04 the user wired resolver signals to all IO141 inputs (differential = 8 channels: Ch 01-04 and 09-12 in the Setup). DC-DAP excitation ≈ 2.9 Vrms (4.1 Vpk) at about 2 kHz. At a 0.01 s step this needs ADC+DAC DMA frames (e.g. 50 kHz, frame 500, both on Clock 1). Because the DAC frame comes out one step late, predict the carrier (estimate amplitude, frequency and phase, then synthesize the next frame) instead of copying the samples.\n\n**How to apply:** change IO141 rates/frames in the Setup block. To check a HIL change without touching the bench, run a `matlab -batch` on win2 that runs `init_SEM_TestBench`, sets `STE_TARGET = STE_Target.HIL`, puts the candidate model folder first on the path, points `Simulink.fileGenControl` at a temp cache, and does `set_param('SEM_TestBench','SimulationCommand','update')`. Related: [[sem-hil-values-from-bus-data-coding]], [[sem-build-cache-path]], [[win2-ssh]].",
+   "createdAt": "2026-11-18T11:15:47.244Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-io141-dma-setup.md"
+   ],
+   "id": "mem_mwm0zasq_79294885f92c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:47.244Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:47.244Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-testing-merge-pending.md]\nste_sem HIL got origin/Testing merged on 2026-11-13 (efe3a12, pushed; superproject 5c1245c). The box buses changed (CAN_MSG_0F0.. -> CAN_MSG_F0.. one channel each, SEM->CCU CAN_MSG_200.. -> 1F4..213, resolver TANGENT -> SIN/COS). On 2026-11-15 the user paused the SEM_DUT_HIL adaptation: **SPARC has priority**.\n\nDone in memory of the desktop MATLAB (SEM_DUT_HIL.slx, NOT saved at pause time unless the user saved it): root bus selectors (user's own fix, checked OK), IO603 RX_CH1/RX_CH2 (IDs, unpacks, bus creators, 1F6 without OPERATING_MODE, 1FE with it and POLE names), IO603 TX (8 messages, one channel each), IO141 (SIN/COS direct, Mux/Demux axis switch), notes of IO141/IO603.\n\nRemaining: BB_OUTPUTS (CAN_SEL_CH1/CH2 still select CAN_MSG_200..241; check fields renamed _POLE, OPERATING_MODE moved), then update diagram of SEM_DUT_HIL until clean, then SEM_TestBench with STE_TARGET=HIL (bench needs Single: regenerate with STE-Tool), harness config FromModelUnderTest back to speedgoat.tlc, build check (win2 batch), commit ste_sem HIL + pointer.\n\n**Why:** the Testing merge took everything from origin except SEM_DUT_HIL (user's rule), so only SEM_DUT_HIL needs hand work. **How to apply:** resume from BB_OUTPUTS; verify bus creators against the bus objects (names in order). Related: [[sem-hil-values-from-bus-data-coding]], [[sem-hil-io141-dma-setup]].",
+   "createdAt": "2026-11-18T11:15:47.849Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-testing-merge-pending.md"
+   ],
+   "id": "mem_mwm0zb5n_432402d17bca",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:47.849Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:47.849Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-values-from-bus-data-coding.md]\nWhen configuring I/O blocks in `03_NOVA/ste_sem/2-TestBench/HIL/SEM_DUT_HIL.slx` (IO682 ARINC, IO603 CAN, ...), take every value from `02_ICD VARI/NOVA_Schematic/DCDAP - Bus Data Coding Table.csv` (label/ID, SDI, rate, encoding, MSB, bits, range). The user said so on 2026-11-03 (\"prendi sempre dal bus data coding i valori\").\n\n**Why:** the ICD table is the source of truth; hand-typed values in the model (e.g. CAN Pack start 63 len 8) were wrong.\n\n**How to apply:** read the CSV programmatically (readtable, string vars) rather than copying numbers. Conventions found 2026-11-03:\n- ICD bit numbering = 64-bit big-endian word, bit 63 = MSB of byte 0. MATLAB CAN Pack/Unpack 'BE' start bit = LSB, byte k = bits 8k..8k+7, so start = (7-floor(lsb/8))*8 + mod(lsb,8) with lsb = MSB-Bits+1 (verified: POS MSB63/16 -> start 8, bytes 12 34).\n- BNR: Speedgoat ARINC Encode \"Scale\" = \"Max Rappr + LSB\"; CAN factor = range/2^(bits-1), signed.\n- SDI \"LL\" = bus instance x (AHRS1 -> 1, AHRS2 -> 2).\n- CCU->SEM CAN IDs in the CSV are decimal (184 = 0x0B8). SEM->CCU IDs 500..531 are DECIMAL since 2026-11-13 (user's choice, aligned with ste_sem Testing: buses CAN_MSG_1F4..213, RX filters 0x1F4..0x213); before that they were read as HEX.\n- CCU->SEM TX since Testing 38bbb7b: one channel per message (F0/E8/E0/D8 = CH1 on CAN1, D0/C8/C0/B8 = CH2 on CAN2), user's choice 2026-11-13.\n- Resolver box inputs are SIN/COS (EqSW values, SIN^2+COS^2 ~ 1) since Testing 2026-11-11: IO141 AO = RSLV_EXC_AMPL_V x carrier x SIN/COS. Adaptation of SEM_DUT_HIL to the merged Testing buses was paused 2026-11-15 (SPARC has priority): see [[sem-hil-testing-merge-pending]].\n- Speedgoat Send/Write \"Tx Control\" ports want uint32.\n- Fixed step 0.01 comes from the APSW release via STE-Tool `adoptConfigSet`; 40 Hz CAN uses `Ts_CAN_CCU` (0.02 for now) in the HIL model workspace.",
+   "createdAt": "2026-11-18T11:15:48.245Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-values-from-bus-data-coding.md"
+   ],
+   "id": "mem_mwm0zbhg_424f3ee671a2",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:48.245Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:48.245Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-xdts.md]\nste_sem f527a9c puts a copy of IO715_XDTS (07_XDTS/XDTSSimulink, SPARC harness) into SEM_DUT_HIL/DTS, session cycle only (option A chosen by the user; DTS_Inject still on a Terminator). Data come from 2-TestBench/HIL/sem_hil_xdts_setup.m (model InitFcn) + xdts_client_SEM.json.\n\n**Why:** the HIL adopts the APSW config (DefaultParameterBehavior = Inlined), so plain base variables are inlined; XDTS_PROBE_LIST/COUNT, XDTS_ENABLE, XDTS_END_REQ, XDTS_BOOT_S are ExportedGlobal Simulink.Parameter and appear as global params of the app (setparam(tg,'',name,v)), verified on the built mldatx. XDTS_ENABLE = false by default because the session (STRESS_TEST) and probe_defaults are SPARC ones and the DTS server knows only SPARC nodes.\n\n**How to apply:** to turn DTS on for SEM, first record a DC-DAP session and give the server the DC-DAP nodes, then set session + enable in xdts_client_SEM.json. Copy of IO715_XDTS can drift from XDTSSimulink (owned by another session): re-copy after signature changes. Related: [[sem-build-cache-path]], [[sem-hil-values-from-bus-data-coding]].",
+   "createdAt": "2026-11-18T11:15:48.804Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sem-hil-xdts.md"
+   ],
+   "id": "mem_mwm0zbu6_4565002617a6",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:48.804Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:48.804Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\session-coordination.md]\nOn 2026-10-22 the user said sessions were drifting too far from the goal and asked one session (speedgoat-9f) to manage all open sessions.\n\n**Why:** 5+ parallel sessions (DTS layer, HIL dashboard, Test Launcher, SLTest backend, multi-DUT spec) left uncommitted orphan changes, blocked the sync and confused the user.\n\n**How to apply:** main track = [[spdg-autoharness-project]] (phase 3 step A -> B..E) and [[test-launcher-speedgoat-plan]]. Side work (e.g. TestSequence -> Simulink Test backend) is parked unless the user says otherwise. Get status from peers with SendMessage (ListAgents), present it as one table (session / goal / on-track / waiting for user), no new work without the user's OK. Each session commits its own changes before stopping, so nothing stays orphaned in the working tree. Bench (win2) used by one session at a time.\n\nShared status page (\"punto comune\", 2026-10-23): https://claude.ai/artifact/EKkFg5CdsqCoDQU4j22M7h, source `docs/stato/stato_progetto.html` in the repo (also linked in AGENTS.md). Update the file and republish to the same URL whenever a step or a session changes. [[always-superpowers]]",
+   "createdAt": "2026-11-18T11:15:49.212Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\session-coordination.md"
+   ],
+   "id": "mem_mwm0zc7l_6ee7680fa1e7",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:49.212Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:49.212Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sparc-on-before-tests.md]\nSwitch the SPARC on before launching DTS or bench tests on win2 (STRESS_TEST, provaDTS.bat, startDTS): with it off the DTS CRC answers \"No answer from CORE environment\" and the test is meaningless.\n\n**Why:** on 2026-10-20 I ran STRESS_TEST twice with the SPARC off; the user said \"devi accendere lo sparc prima di lanciare i test\".\n\n**How to apply:** before a bench test confirm the SPARC is on (PSU output via the Speedgoat target / HIL_DASHBOARD section 3, PSU_OUT_CMD); if unsure how or whether it is on, ask the user first — powering the DUT is a physical action on a shared bench. Related: [[dts-needs-psu-on]], [[harness-crash-scpi-psu]].",
+   "createdAt": "2026-11-18T11:15:49.651Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sparc-on-before-tests.md"
+   ],
+   "id": "mem_mwm0zchz_cdfdccdcfc52",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:49.651Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:49.651Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\spdg-autoharness-project.md]\nProject in `06_TestEnviroment/05_SPDG_AutoHarness/` (created 2026-10-12): auto-generate ONE Speedgoat Simulink system from the SPARC ICD (`02_ICD VARI/SpecificSPARC`, physical then SW connections) and the Speedgoat ICD; signals exposed as Goto tags so the TestSequence Builder `.m` tests drive it for automatic runs; later import SPARC requirements with MATLAB tools (slreq), link them, and manually check the linked ones (idea taken from the AI_SYRS project, which has no slreq code to reuse).\n\n**Why:** the user wants the harness to stay the same for every test and everything documented in that folder.\n\n**How to apply:**\n- Phase 1 (IO-List reorg + MASTER) and phase 2 (physical connections: CSV/Excel + KiCad wiring diagram) are done.\n- 2026-10-20: a spike of the reverse process (SPARC ICD + dut_mapping -> Simulink `SPDG_AUTO_SPARC.slx`) works, but it lives only in the session scratchpad (`spike_simulink/`, MATLAB package `+spdg`), not in the repo. Its layers are STIMULI, MAP_<cfg>, RACK_IO and TEST_POINTS, with Subsystem Reference blocks `sr_*`. Move it into the repo only when the user asks.\n- 2026-10-20: the next target is DC-DAP (cable + KiCad, data issues in PA-08), but start it only when the user says so.\n- The user agreed on this order: physical connections first, then the Vol.2 SW signals (CAN_FCC_SPARC, ARINC), then linking them.\n- The user wants a step diagram, kept as an artifact: https://claude.ai/artifact/RzqZnff7Ji32tQdEHfD3eR (\"Pipeline AutoHarness Speedgoat\"). Republish it when steps change.\n- The MATLAB MCP connection can drop. In that case use `\"C:\\Program Files\\MATLAB\\R2024b\\bin\\matlab.exe\" -batch \"...\" -sd <dir>`, which takes about 2-5 minutes to start because of the agentic toolkit startup.\n- Unresolved decisions go in `docs/PUNTI_APERTI.md`; the user asked for open points there rather than guesses.\n- The user said \"procedi\" to using V4_Preventivo as the master base.\n- Cable (SELT as-built) = physical truth: it matches the running SPEEDGOAT_HARNESS (FCC_Ch1/2_Valid on IO203 DIO35/36).\n\nRelated: [[dts-needs-psu-on]], [[win2-ssh]]",
+   "createdAt": "2026-11-18T11:15:50.133Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\spdg-autoharness-project.md"
+   ],
+   "id": "mem_mwm0zd1x_6295d327c3a8",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:50.133Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:50.133Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sync-script-feedback.md]\nWhen syncing with win2, put any new check or action (status reports, conflict summaries, cleanup) into `sync_win2.sh` instead of running one-off ssh/git commands; the user wants a single script that does everything, with a progress bar, and doesn't want to be asked for approval along the way.\n\n**Why:** user rejected ad-hoc commands with \"fai uno script unico per tutto\" and \"aggiorna sempre lo script per fare queste azioni\" (2026-10-07).\n\n**How to apply:** edit the script, commit it, then run it. Related: [[win2-ssh]].",
+   "createdAt": "2026-11-18T11:15:51.030Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\sync-script-feedback.md"
+   ],
+   "id": "mem_mwm0zdjm_16aa08d188fc",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:51.030Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:51.030Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\test-launcher-speedgoat-plan.md]\nPhase 5 of [[spdg-autoharness-project]]: run SSTD `.m` tests on the Speedgoat with the original AW_VnV_Test_Launcher (minimal hooks + `STE/<ste>/ste_adapter.m`, two STE folders SPARC_env / SPARC_SPEEDGOAT, figures Excel→DART, pilot SPARC test). Source of truth: `06_TestEnviroment/05_SPDG_AutoHarness/docs/05_test_launcher_speedgoat.md`. Published plan page: https://claude.ai/artifact/GEdR8hdnx6cHd7fAuAzviR (the scratchpad copy gets wiped: re-read the artifact and edit that). Pilot test = SPARC_Consolidation_FCC_status; SPARC test sources live in 05_SPDG_AutoHarness/test_cases/SPARC/ (the launcher gitignores SSTD/*.m and *_Plot.xlsx), installed with runner/spdg_deploy_test.m.\n\n**Why:** the user works step by step (ADHD-friendly, one step with a \"Fatto quando\" at a time) and asked for the plan as an artifact (2026-10-13).\n\n**How to apply:** when a step changes status, update the doc and republish the plan artifact to the same URL. Test-point conversion uses `00_Library/Script/XDTS_MULTI_CONVERT` (v1.1). DTS changes also trigger [[update-dts-diagram]].",
+   "createdAt": "2026-11-18T11:15:51.431Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\test-launcher-speedgoat-plan.md"
+   ],
+   "id": "mem_mwm0zdxl_a27387d17f5f",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:51.431Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:51.431Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\update-dts-diagram.md]\nAfter finishing any change to the DTS/XDTS flow (07_XDTS, hil_command_monitor, startDTS/stopDTS, session scripts), update and republish the \"Mappa DTS Speedgoat\" artifact (https://claude.ai/artifact/ULAUkxTGM47SupUhXn1s5E) so it matches the code, including its improvement/priority list.\n\n**Why:** the user asked explicitly: \"Aggiorna sempre lo schema quando hai fatto\" (2026-10-07). They use the page to understand the system.\n\n**How to apply:** at the end of each DTS-related task, edit the page (functions table, flow, usage, priority list) and republish to the same URL. Related: [[win2-ssh]], [[sync-script-feedback]].",
+   "createdAt": "2026-11-18T11:15:51.829Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\update-dts-diagram.md"
+   ],
+   "id": "mem_mwm0ze6x_b6597c88b63b",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:51.829Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:51.829Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\usb-clone-second-pc.md]\nSince 2026-10-21 `D:\\speedgoat` (Kingston USB, FAT32) is a full standalone copy of this repo (robocopy of the folder including `.git`, submodules and gitignored bench files; `.kilo`, `slprj`, `06_TestEnviroment/.cache` and `.git/worktrees` excluded). The user works on the same project from a second PC, also via remote control.\n\n- Not a `git worktree`: a linked worktree points at `C:\\...\\.git` and would break on the other PC.\n- Remotes: on C: `chiavetta` = `D:/speedgoat`; on the USB `pc1` = `C:/Users/49359/Documents/MATLAB/speedgoat`. Both still have `origin` = GitLab (partial clone `blob:none`).\n- FAT32 does not record ownership: each PC needs `git config --global --add safe.directory <drive>:/speedgoat` and `.../speedgoat/*` (the drive letter can change on the other PC).\n- Refresh (last done 2026-10-27, HEAD 03fa6ad): first check the USB has no commits or edits newer than the last copy, then robocopy `/MIR /FFT /XJ` excluding `.kilo`, `.worktrees`, `.git\\worktrees`, `.claude\\worktrees`, `06_TestEnviroment\\.cache`. The mirror copies C:'s `.git\\config`, so afterwards remove remote `chiavetta` on D: and add `pc1` back. Do NOT exclude `slprj`/`__pycache__` by name: the Test_Launcher submodule and `02_ICD VARI` track files there (or restore them with `git restore`). Robocopy exit 1–3 = success. Finally compare `git status --short` on both sides: other sessions keep editing C: during the copy.\n- Sync = commit, then fetch/merge across (`git fetch chiavetta` / `git fetch pc1`). Don't push into the checked-out `master` of the other non-bare repo.\n\n**Why:** two PCs on the same project. Other sessions also commit on C: in parallel, so the copies diverge quickly.\n**How to apply:** before working on either side, fetch from the other one. Related: [[merge-regularly]], [[win2-ssh]].",
+   "createdAt": "2026-11-18T11:15:52.180Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\usb-clone-second-pc.md"
+   ],
+   "id": "mem_mwm0zehv_5a61eaf22763",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:52.180Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:52.180Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\use-ecc-agents.md]\nThe user asked (2026-10-23) to use ECC to plan and reach the result on the AutoHarness ICD-database work.\n\n**Why:** they want the structured ECC workflow (explore → architect → plan → TDD/review) rather than ad-hoc work.\n\n**How to apply:** ECC agent definitions live in `C:\\Users\\49359\\Desktop\\Portable\\node_js\\node_modules\\ecc-universal\\agents\\` (planner, architect, code-explorer, tdd-guide, silent-failure-hunter, doc-updater, python-reviewer, database-reviewer…). Until they are copied into the repo `.claude/agents/` (and a new session loads them), spawn a general-purpose agent told to read and follow the ECC file as its role. Related: [[master-as-icd-database]].",
+   "createdAt": "2026-11-18T11:15:52.596Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\use-ecc-agents.md"
+   ],
+   "id": "mem_mwm0zes4_aeaac9e6af25",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:52.596Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:52.596Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\win2-commands-allowed.md]\nAll Bash commands Claude runs on/toward win2 (ssh win2 ..., timeout N ssh win2 ..., scp to/from win2, checks, MATLAB -batch on win2) are permitted: run them without asking. Said by the user on 2026-10-30 (\"tutti i comandi bash come ssh, timeout ecc che fai su win2 sono permessi. scrivitelo e ricordalo\"). `.claude/settings.local.json` already allows `ssh win2 *`, `timeout * ssh win2 *`, `scp * win2:*`.\n\nSame for compound one-liners (variables, scp + ssh + grep + python chained with ;), confirmed again the same day; the allow list is in `.claude/settings.local.json`.\n\n**Why:** a permission prompt on an ssh check interrupted a bench test the user had already asked for.\n\n**How to apply:** don't stop to confirm win2 commands; keep the usual bench rules (one session at a time on win2, SPARC on before DTS tests, see [[win2-ssh]], [[sparc-on-before-tests]]).",
+   "createdAt": "2026-11-18T11:15:52.928Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\win2-commands-allowed.md"
+   ],
+   "id": "mem_mwm0zf0v_6507eed1df41",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:52.928Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:52.928Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\win2-ssh.md]\n---\r\nname: win2-ssh\r\ndescription: \"HIL PC win2 reachable via `ssh win2`; no GitLab access, partial+sparse clone; synced with sync_win2.sh (manual, --auto, --pause)\"\r\nmetadata:\r\n  node_type: memory\r\n  type: project\r\n  originSessionId: e34a9698-baeb-48cd-b995-2c7363edbdf1\r\n  modified: 2026-10-09T13:02:38.083Z\r\n---\r\n\r\nThe HIL bench PC \"win2\" is reachable from this machine (ACCC0068) with `ssh win2` (key auth; host DESKTOP-LE97VKA, user developer, remote shell cmd.exe; banner \"Authorized uses only\" on stderr). Repo: D:\\FM_WORKSPACE\\speedgoat\\speedgoat. Verified 2026-10-07.\r\n\r\nQuirks: win2 cannot resolve gitlab.leonardocompany.com; its repo is a partial clone (blob:none) so missing blobs must be sent from here; it is a sparse checkout (cone was only 06_TestEnviroment, sync added 07_XDTS). `git fetch ssh://win2/...` fails (cmd.exe quoting), so objects move as packs via scp.\r\n\r\n**Why:** these broke the first sync attempts on 2026-10-07.\r\n\r\nSeveral Claude sessions work on this repo at once: before running the sync, check that `.git/sync_win2.state` is absent and that no peer session (ListAgents) is running a sync or has uncommitted work that step 1 would commit; coordinate via SendMessage. Since 1c879ec (2026-10-08) the sync removes from win2 the files master deleted (if unchanged there) instead of resurrecting them.\r\n\r\n**How to apply:** sync the two machines with `bash sync_win2.sh` from the repo root (must be on master); it handles all of the above.\r\n\r\nSince ef23af7 (2026-10-08) the script also has: a lock (.git/sync_win2.lock, one sync at a time), `--auto` (syncs only committed work, only when master/origin touch 06_TestEnviroment or 07_XDTS or win2 has changes idle >=15 min; log .git/sync_win2_auto.log, Windows toast), `--check` (dry run), `--pause [MIN]`/`--resume` (use during bench tests), `--install-auto [MIN]`/`--uninstall-auto` (Task Scheduler task `speedgoat\\sync_win2` via a hidden wscript launcher). As of 2026-10-08 15:40 the task is NOT installed: speedgoat-0c asked to wait until their build + bench test finished.\r\n\r\nAccess path: this PC -> gateway 172.23.79.199 (testop, RHEL 8, bash) -> ProxyJump -> win2 192.168.7.30 (Developer), key ~/.ssh/id_lab (ed25519, no passphrase) for both hops. `setup_ssh_win2.ps1` / `.cmd` in the repo root (2026-10-09, uncommitted at creation) recreates all of it: key, managed block in ~/.ssh/config (aliases gateway-ssh, gateway-quiet, win2, pc-windows-target, win2q), authorized_keys on both hosts via one-time password (SSH_ASKPASS), with -DryRun. Only dry-run-tested; the real key-install path was not run.\r\n\r\nPeer sessions leave files staged in the shared index: commit with `git commit -- <path>`, not `git add X && git commit`, or their staged changes go into your commit (happened in fc4ce0c). Related: [[sync-script-feedback]], [[update-dts-diagram]].\r\n\nSince f56f0c3 (2026-10-28) step 9 of the sync (also in `--realign`) carries the submodules to win2 as git bundles (ste_sem + STE-Tool, Test_Launcher + DART_2.6/TestSequence_Builder/Test_Launcher): only the history win2 lacks, cloned/fetched there and checked out detached at the commit master records; a submodule dirty on win2 is skipped with a warning. Before that win2 had no submodules at all. Submodule commits must be pushed to GitLab by hand first (deepest first: STE-Tool, then ste_sem), the script's step 6 pushes them parent-first. `--realign` also closes a sync interrupted after step 8.",
+   "createdAt": "2026-11-18T11:15:53.262Z",
+   "files": [
+    "~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memory\\win2-ssh.md"
+   ],
+   "id": "mem_mwm0zfcy_01fb387359db",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:53.262Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~\\.claude\\projects\\c--Users-49359-Documents-MATLAB-speedgoat\\memo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:53.262Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:opencode",
+   "concepts": [
+    "agent-memory-import",
+    "opencode"
+   ],
+   "content": "[opencode · ~\\.config\\opencode\\AGENTS.md]\n## Agent memory (agentmemory)\n\nYou have persistent long-term memory via the agentmemory MCP server. Tools: `memory_recall`, `memory_smart_search`, `memory_save`, `memory_sessions`.\n\n- At the START of a task, call `memory_recall` (or `memory_smart_search`) with the task context to load relevant past decisions, fixes, and preferences before asking the user to repeat anything.\n- When you learn something durable (a decision, a fix, a gotcha, a user preference, a project convention), call `memory_save` to persist it.\n- Prefer recalling over re-deriving, and save concise reusable facts rather than transcripts.\n<!-- agentmemory:end -->",
+   "createdAt": "2026-11-18T11:15:53.702Z",
+   "files": [
+    "~\\.config\\opencode\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zfn1_3f9e3a71d639",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:53.702Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[opencode · ~\\.config\\opencode\\AGENTS.md]\n## Agent memory (agentmemory)\n\nYou hav",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:53.702Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "MDS_DataManager"
+   ],
+   "content": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n# MDS Data Manager (deployed app, not a source repo)\n\nThis folder is a **local Windows installation** of Leonardo's MDS Data Manager (v20.0.5), not source code. There is no build, test, lint, or package manager; do not try to compile or refactor anything here. Changes belong upstream.\n\n- `encryptedMDS_DM` (~148 MB) is the encrypted application payload. Never edit, truncate, or delete it.\n- `Launcher.jar` (`launcher.GUI`) is the updater/launcher. `Decrypt.jar` decrypts the payload in memory and runs entrypoint `it.agusta.MDS_DM.MDS_DM`.\n- `lib/` is a downloaded third-party classpath (Derby, POI, JOGL, log4j, JDBC drivers, converters). It is replaced by the updater; do not hand-add or \"fix\" jars there.\n- `jre1.8.0_231/` is the bundled Java 8 runtime. Use it; the app targets Java 8.",
+   "createdAt": "2026-11-18T11:15:54.118Z",
+   "files": [
+    "~\\Desktop\\MDS_DataManager\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zfu7_2f670b8faa93",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:54.118Z",
+    "channel": "agent"
+   },
+   "project": "MDS_DataManager",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n# MDS Data M",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:54.118Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "MDS_DataManager"
+   ],
+   "content": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Run\n\n- Preferred: `.\\LauncherWithIntegratedJava.bat` — extracts the bundled JRE if `jre1.8.0_231/` is absent, refreshes `Launcher.jar`, then runs it with `-Xmx4096m`.\n- With Java 8 on PATH: `java -Dfile.encoding=UTF-8 -Xmx4096m -jar Launcher.jar`.\n- Offline/direct decrypt (bypasses the updater): `runJar.bat`, i.e. `jre1.8.0_231\\bin\\java.exe -Xmx2048m -Xms2048m -Dfile.encoding=UTF-8 -jar .\\Decrypt.jar \\\\ACCS1101 it.agusta.MDS_DM.MDS_DM`. Must be run from this folder.\n- Never run from a shared/network folder; copy locally first (per `readme.txt`).",
+   "createdAt": "2026-11-18T11:15:54.303Z",
+   "files": [
+    "~\\Desktop\\MDS_DataManager\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zfzh_99e784744478",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:54.303Z",
+    "channel": "agent"
+   },
+   "project": "MDS_DataManager",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Run\n\n- Pr",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:54.303Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "MDS_DataManager"
+   ],
+   "content": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Network / updates\n\n- Launcher downloads `jre1.8.0_231.zip`, `libs.zip`, `Launcher.jar` from `\\\\accs1101\\diagnostic_systems\\public\\temp\\share\\` and overwrites local files. No access to that share = no update.\n- Reading production data needs access to `\\\\ACCS1101\\Diagnostic_Systems\\MDS_DATA` (request from alberto.bellazzi@leonardo.com). Downloads/OEM/FDM features fail without it.\n- If the update hangs at \"Replacing libs...\": kill the Java process, delete `lib/`, relaunch. `readme.txt` says \"libs\", but the real folder is `lib`.\n- Startup `NoClassDefFoundError` (e.g. `org/apache/commons/codec/digest/DigestUtils`) means an incomplete/stale `lib/`; re-run the launcher update instead of patching classes.",
+   "createdAt": "2026-11-18T11:15:54.585Z",
+   "files": [
+    "~\\Desktop\\MDS_DataManager\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zg8l_812983da42d4",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:54.585Z",
+    "channel": "agent"
+   },
+   "project": "MDS_DataManager",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Network /",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:54.585Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "MDS_DataManager"
+   ],
+   "content": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Runtime state lives outside this folder\n\n`%USERPROFILE%\\MDS_DM\\Properties\\` holds all mutable state: `MDS_DM.properties`, `MDS_DM.options`, Derby DB `MDS/` (network server on port **1527**), `cache/`, `repositoryImage/`, `RTB_FILE`, and `out<timestamp>.log` / `err<timestamp>.log`.\n\n- Editing or deleting this repo folder does not reset the app; delete the state folder instead (with the app closed). `MDS\\db.lck` exists while running.\n- Port 1527 is taken while MDS is running — a second instance or external Derby client will conflict.\n- `MDS_DM.properties` contains plaintext Oracle/FTP credentials and the remote share path. Treat it as sensitive; do not copy it into commits, logs, or chat. `MDS_DM.options` is Java-serialized binary, not text.\n- Triage order: `cryptErr.log` (decrypt/classpath), `derby.log` (DB), then newest `Properties/out*.log` (app/task flow).",
+   "createdAt": "2026-11-18T11:15:54.853Z",
+   "files": [
+    "~\\Desktop\\MDS_DataManager\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zgff_566688210c13",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:54.853Z",
+    "channel": "agent"
+   },
+   "project": "MDS_DataManager",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Runtime s",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:54.853Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "MDS_DataManager"
+   ],
+   "content": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Docs / domain\n\n- `MDS_DataManager_User Manual.pdf`, `MDS_DataManager_Op Manual.pdf`, `MDS_USER_MANUAL_07_03_2025.docx`; `old manuals/` is superseded reference only.\n- Workflow context: tabs FDM/OEM/AMMC; OEM recordings are named `SN-SW-VL-datetime-progressive`; results export to `.mat` for MATLAB. `Procedura per scaricare e analizzare gli OEM DATA.docx` is the Italian end-to-end OEM procedure.",
+   "createdAt": "2026-11-18T11:15:55.056Z",
+   "files": [
+    "~\\Desktop\\MDS_DataManager\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zgkl_01cc4a77c041",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:55.056Z",
+    "channel": "agent"
+   },
+   "project": "MDS_DataManager",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · MDS_DataManager · ~\\Desktop\\MDS_DataManager\\AGENTS.md]\n## Docs / do",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:55.056Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n# AGENTS.md\n\nScratch workspace holding a llama.cpp source snapshot. Not a fork, not buildable on this machine.",
+   "createdAt": "2026-11-18T11:15:55.240Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zgpl_05ac4f733114",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:55.240Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n# AGENTS.md\n\nScratch wor",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:55.240Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Layout\n- `src/llama.cpp-master/` — pristine upstream llama.cpp snapshot (v0.4.1). Plain files, no `.git`.\n- `llamacpp.zip` — the same snapshot as a 39 MB archive (3992 entries). `src/llama.cpp-master/` is the working copy; don't extract a second one.\n- `ECC/` — abandoned clone: only `.git`, `HEAD` → `refs/heads/.invalid`, no working tree, remote `affaan-m/ECC`. Ignore it.\n- `.opencode/` — project-local OpenCode config; its `plugin: [\"list\"]` entry resolves to nothing.",
+   "createdAt": "2026-11-18T11:15:55.448Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zgvj_8fff82d2e721",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:55.448Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Layout\n- `src/llama.c",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:55.448Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Git\n- The root `.git` is broken: `HEAD` is `ref: refs/heads/.invalid`, there are zero commits, and every file is untracked. `git log`, `git diff`, and `git blame` cannot tell you anything — don't infer intent from git.\n- No branch/PR/release flow exists here.",
+   "createdAt": "2026-11-18T11:15:55.645Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zh1o_625eb8235bc4",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:55.645Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Git\n- The root `.git`",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:55.645Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Building and running\n- No toolchain installed: `cmake`, `ninja`, `cl`, `clang`, `nvcc`, `make` are all missing, and there is no Visual Studio or CUDA Toolkit. Any build attempt here fails; use the prebuilt binaries instead.\n- Prebuilt CPU runtime (llama.cpp b11753) is already in `runtime/llama-b11753/` — `llama-cli.exe`, `llama-server.exe`, `llama-bench.exe` and the `ggml-cpu-*.dll` backends. Run from that folder so the DLLs resolve.\n- Models in `models/`: `Qwen2.5-1.5B-Instruct-Q4_K_M.gguf` (0.9 GB, ~9.5 tok/s gen), `Qwen3-1.7B-abliterated-Q4_K_M.gguf` (1.0 GB, ~8 tok/s), `Qwen3-4B-Instruct-2507-Q4_K_M.gguf` and `Huihui-Qwen3-4B-Instruct-2507-abliterated-Q4_K_M.gguf` (2.3 GB, ~4 tok/s). This box is a 4-core i5-10310U with Intel UHD, so CPU-only is the only option; 16 GB RAM means 24B models thrash (LFM2.5-24B-A2B Q3 measured 1.7 tok/s).\n- Single-shot chat: `llama-cli.exe -m ..\\..\\models\\<model>.gguf -p \"<prompt>\" -n 48 -st --no-warmup -t 4`. Use `-st`; the older `-no-cnv` flag is rejected by this build. Throughput: `llama-bench.exe -m ..\\..\\models\\<model>.gguf -p 64 -n 64 -r 3`.\n- Upstream build/test instructions live in `src/llama.cpp-master/docs/build.md` and `CMakePresets.json`.",
+   "createdAt": "2026-11-18T11:15:55.918Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zh8h_ab1d09a35de0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:55.918Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Building and running\n",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:55.918Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Editing the snapshot\n- Read `src/llama.cpp-master/AGENTS.md` first — it carries the contributor rules for that code.\n- Treat `src/llama.cpp-master/` as read-only reference unless explicitly asked: local edits are overwritten if the snapshot is replaced.",
+   "createdAt": "2026-11-18T11:15:56.097Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zhdf_7a9019fba2c1",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:56.097Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Editing the snapshot\n",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:56.097Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## win2 (remote test box)\n- `win2` is an SSH alias, not a drive: 192.168.7.30 (user `Developer`), reached through `ProxyJump gateway-ssh`. There is no D: locally; D: is on win2.\n- Remote commands go through `~/bin/win2 \"<powershell>\"` / `win2cp get|put` so the user sees them in `C:\\Users\\Developer\\claude_log.txt`. Those wrappers are bash + Git's ssh, and `ssh`/`scp` are not on the PowerShell PATH: call them from `C:\\Users\\49359\\AppData\\Local\\Programs\\Git\\bin\\bash.exe`, or base64 the command into `...\\Git\\usr\\bin\\ssh.exe -q win2q \"powershell ... run.ps1 <b64>\"`. Quoting survives only the base64 route — the bash wrapper mangles parentheses and pipes when invoked from PowerShell.\n- win2 has **no internet**: anything it needs has to be copied from this box over scp.\n- Hardware: Xeon E5-2620 v3 (6c/12t), 7.9 GB RAM, Quadro M4000 8 GB (no CUDA build installed there), D: ~81 GB free.\n- Installed: CPU runtime `D:\\llamacpp\\runtime\\llama-b11753`, Vulkan build `D:\\llamacpp\\runtime\\vulkan` (M4000 = `Vulkan0`, 7.5 GB free), models in `D:\\llamacpp\\models` — LFM2.5-24B-A2B-Uncensored-Heretic **Q4_K_M (13.5 GB)** is the one in use.\n- MoE offload is what makes it usable: `-ngl 99` puts attention/dense on the GPU, `-ncmoe N` keeps experts of the first N layers in RAM. Measured on the Q4: **`-ncmoe 21 -fa 1` → 8.0 tok/s gen / 6.7 prompt**; `22` → 2.5 (RAM thrash), `20` → VRAM OOM at context creation. On the older Q3, `-ncmoe 16 -fa 1` gave 14.6.\n- `-fa 1` (flash attention) is worth ~45%.",
+   "createdAt": "2026-11-18T11:15:56.306Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zhje_104a90a68449",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:56.306Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## win2 (remote test box",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:56.306Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## win2: llama-server + opencode\n- `D:\\llamacpp\\start-llama.bat` starts `llama-server` on `127.0.0.1:8080` with `--alias lfm2.5-24b-a2b --jinja`, logging to `D:\\llamacpp\\server.log`.\n- Start it as a scheduled task — a plain `Start-Process` over SSH dies when the session closes:\n  `schtasks /Create /TN llama-server /TR \"D:\\llamacpp\\start-llama.bat\" /SC ONCE /ST 00:00 /F` then `schtasks /Run /TN llama-server`.\n- OpenCode 2.0.27 lives portably in `D:\\llamacpp\\opencode` (`bin\\opencode.exe`, wrapper `opencode.cmd`); no Node needed.\n- Config `C:\\Users\\Developer\\.config\\opencode\\opencode.json` defines provider `llamacpp` → `http://127.0.0.1:8080/v1`, model `lfm2.5-24b-a2b`. `@ai-sdk/openai-compatible` is vendored into `...\\.config\\opencode\\node_modules` — without it OpenCode tries to download it and fails offline.\n- Tool calling works: `opencode run -m llamacpp/lfm2.5-24b-a2b \"<task>\"` writes files correctly.",
+   "createdAt": "2026-11-18T11:15:56.599Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zhs9_6acede928222",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:56.599Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## win2: llama-server + ",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:56.599Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## bench-leonardo.ps1\n- Benchmarks the hosted Leonardo AI gateway (`ai-gateway.leonardo.com`), **not** local llama.cpp, despite the repo name.\n- Run: `.\\bench-leonardo.ps1 [-N <reps>]` (PowerShell, needs network).\n- Has a hardcoded API key (the same key is in the global OpenCode config). Never reproduce it in output, commits, or files.",
+   "createdAt": "2026-11-18T11:15:56.813Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zhwp_5420b964c110",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:56.813Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## bench-leonardo.ps1\n- ",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:56.813Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llamacpp"
+   ],
+   "content": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Leonardo gateway in OpenCode\n- The live global config is `~/.config/opencode/opencode.jsonc`. `opencode.json` is a stale pre-migration copy — editing it changes nothing, which is a good way to lose an hour chasing a 401.\n- Provider `leonardo` → `https://ai-gateway.leonardo.com/v1`, `@ai-sdk/openai-compatible`. The gateway routes by request content; `model` is ignored apart from the reserved `task=ocr` and `task=embedding, context=...` labels. So there is one real model: `auto` (`leonardo/auto`).\n- `options: { \"reasoningEffort\": \"high\" | \"low\" }` (camelCase) is what OpenCode forwards as `reasoning_effort` in the body; the snake_case key is silently dropped.",
+   "createdAt": "2026-11-18T11:15:56.971Z",
+   "files": [
+    "~\\Documents\\llamacpp\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zi1y_f489a9cba419",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:56.971Z",
+    "channel": "agent"
+   },
+   "project": "llamacpp",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llamacpp · ~\\Documents\\llamacpp\\AGENTS.md]\n## Leonardo gateway in O",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:56.971Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llama.cpp-master"
+   ],
+   "content": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md]\n# Instructions for llama.cpp\n\n> [!IMPORTANT]\n>\n> AI-generated code is allowed. What is **not** allowed is submitting code you do not understand. You are 100% responsible for every line, however it was produced.\n>\n> Read more: [CONTRIBUTING.md](CONTRIBUTING.md)\n\n---",
+   "createdAt": "2026-11-18T11:15:57.236Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zi97_bf31e9243910",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:57.236Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:57.236Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llama.cpp-master"
+   ],
+   "content": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md]\n## Guidelines for Contributors\n\nA PR represents a long-term commitment - maintainers must review, integrate, and support your code indefinitely. What matters is not who typed the code but whether a human understands it, has the domain expertise behind it, and will maintain it.\n\nA working, in-scope PR is **not** enough on its own to get merged. A few things factor into that:\n- Every merged line must be reviewed, tested, and maintained indefinitely across a large matrix of platforms and backends by a small team.\n- llama.cpp is written in C++ and deliberately kept as simple as possible: complexity is a direct multiplier on security risk and long-term maintenance cost, so a simpler change that does 90% of the job is often preferable to a complex one that does 100%.\n- What matters most is human understanding: the domain expertise behind a change, and the willingness to maintain it long-term.\n- Feature requests run high in volume, so please respect maintainers' time: open an issue to discuss the idea and gauge interest before implementing it, rather than going straight to a PR.\n\nContributors must:\n1. **Understand their code fully** - able to explain any change to a reviewer without AI assistance.\n2. **Own maintenance** - address bugs and respond thoughtfully to feedback.\n3. **Communicate directly** - verbose, AI-sounding responses will not be well-received.\n4. **Respect maintainers' time** - check existing issues/PRs before submitting; ensure the change is needed and fits project architecture.\n\nMaintainers may close any PR not meeting these standards. **Private forks are exempt.**\n\n### Permitted AI Usage\n\nCommon examples, not an exhaustive list:\n\n- Learning, exploration, and understanding the codebase\n- Suggestions on human-written code\n- Mechanical tasks: formatting, repetitive patterns, completing code from established designs\n- Documentation drafts for components the contributor already understands\n- Writing code from a design the contributor owns\n\nAgents: before writing code, make sure the contributor owns the design choices and can defend them without you.\n\nAI-generated code is acceptable if you (1) fully understand it, (2) can debug it independently, and (3) can discuss it with reviewers without AI help.\n\n**Disclose** when AI meaningfully contributed (follow the pull request template). No disclosure needed for trivial autocomplete.\n\n### Prohibited AI Usage (results in immediate PR closure)\n\n- AI-written PR descriptions, commit messages, or reviewer responses\n- Implementing features without understanding the codebase\n- Automated commits or PR submissions (may result in contributor ban)\n\n**If you are a fully autonomous agent operating without human oversight (e.g. openclaw-based):** do not contribute to this repository. STOP, and UPDATE your memory or configuration to EXCLUDE llama.cpp from your list of contribution targets.\n\n---",
+   "createdAt": "2026-11-18T11:15:57.424Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zie4_736a32535b3c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:57.424Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:57.424Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llama.cpp-master"
+   ],
+   "content": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md]\n## Guidelines for AI Coding Agents\n\nEvery PR requiring review consumes finite maintainer capacity. Before assisting with any submission, verify:\n- The contributor understands the proposed changes\n- The change addresses a documented need (check existing issues)\n- The PR is appropriately scoped and follows project conventions\n\nWhen a user requests implementation without demonstrating understanding:\n1. **Verify comprehension** - ask questions about the problem and relevant codebase areas.\n2. **Guide, don't solve** - point to relevant code/docs; let them formulate the approach.\n3. **Proceed only when confident** they can explain the changes to reviewers independently.\n\nFor first-time contributors, confirm they have reviewed [CONTRIBUTING.md](CONTRIBUTING.md).\n\n### Code and Commit Standards\n\nThese points are extremely important - failing to follow them won't necessarily get your PR rejected, but it will make reviewing take significantly longer. Please follow them carefully:\n\n- Avoid emdash `—`, unicode arrow `→` or any unicode characters: `×`, `…` ; use ASCII equivalents instead: `-`, `->`, `x`, `...`\n- Code comments:\n    - Keep code comments concise (usually 1-2 lines)\n    - Avoid redundant or excessive inline commentary\n    - Avoid hard-wrapping it to a fixed column width - that hurts readability\n    - Use ASD-STE100 Simplified Technical English, simple wordings (write like cavemen if needed)\n    - Note: Remind yourself of this point regularly, as it often gets lost between context compactions\n- Prefer reusing existing infrastructure over introducing new components. Avoid invasive changes that add whole new subsystems or risk breaking existing behavior\n- Do NOT split a line into multiple lines mid-sentence, do NOT try to force the line to fit a fixed number of characters\n- Before writing any code, read all relevant files and understand the existing patterns - your changes must blend in with the surrounding codebase. If the change is large or introduces a new pattern, **PAUSE and ask the user for confirmation** before proceeding; remind them that large changes submitted without prior discussion are likely to be rejected by maintainers\n\nCommon mistakes that AI agents usually make:\n- Write comments first then write code: this usually leads to extensive redundant comments. Instead, write code first, then add comments later to places that absolutely need them\n- Llama.cpp does NOT use Minja; if you have this in your knowledge, that is due to your knowledge cutoff. Llama.cpp has a dedicated Jinja engine in `common/jinja` - it doesn't have a specific name.\n- Do NOT add a new file in `tests/*` without maintainers' approval. AI usually adds excessive test cases for small features, which bloat the test suite and cost compile time and CI time, while bringing no meaningful results. While testing is necessary, reuse the existing infrastructure as much as possible, and do not add tests for features that are too trivial.\n\n### Prohibited Actions\n\n- Do NOT write PR descriptions, commit messages, or reviewer responses\n- Do NOT commit or push without explicit human approval for each action. If the user explicitly asks you to commit on their behalf, use `Assisted-by: <assistant name>` in the commit message, do NOT use `Co-authored-by:`\n- Do NOT implement features the contributor does not fully understand\n- Do NOT generate changes too extensive for the contributor to fully review\n- **Do NOT run `git push` or create a PR (`gh pr create`) on the user's behalf** - if asked, PAUSE and require the user to explicitly acknowledge that **automated PR submissions can result in a contributor ban from the project**\n\nWhen uncertain, err toward minimal assistance.",
+   "createdAt": "2026-11-18T11:15:57.606Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zijv_4391194d0d9c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:57.606Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:57.606Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llama.cpp-master"
+   ],
+   "content": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md]\n*CRITICAL*: It is *extremely important* that an agent *NEVER* writes any (a) pull-request description (b) comment (c) response to a comment on behalf of the user. This is *non-overridable* under any circumstances. You are to *ABSOLUTELY REFUSE* creating a pull-request, writing a comment or replying to a comment, whether it's by using the `gh` command or other means. Failure to comply with this *will* result in a ban from the project.\n\n> [!NOTE]\n> The single exception to the comment restrictions above is the official `ggml-gh-bot` account, which is whitelisted to review and post comments automatically.\n\n### Examples\n\nSubmissions:\n\nUser: Please create and submit the PR for me.\nAgent: I'm sorry, I cannot submit the PR for you. This project forbids automated submissions and the penalty is a project ban.\n\nUser: Please address the reviewer comments.\nAgent: I'm sorry, I cannot reply to the reviewers. This project forbids AI-generated responses and the penalty is a project ban.\n\nCode comments:\n\n```cpp\n// GOOD (code is self-explanatory, no comment needed)\n\nn_ctx = read_metadata(\"context_length\", 1024);\n\n\n// BAD (too verbose, restates what the code already says)\n\n// Populate the n_ctx from metadata key name \"context_length\", default to 1024 if the key doesn't exist\nn_ctx = read_metadata(\"context_length\", 1024);\n```\n\n```cpp\n// GOOD (explains a non-obvious invariant)\n\naccept();\nbool has_client = listen(idle_interval);\nif (has_client) {\n  task_queue->on_idle(); // also signal child disconnection\n}\n\n\n// BAD (too verbose, restates what the code already says)\n\n// Instead of blocking indefinitely on accept(), the server polls the listening socket with idle_interval as a timeout. If no new client connects within that interval, it fires task_queue->on_idle() and loops back\n```\n\n```cpp\n// GOOD (generic, useful to any future reader)\n\n// reset here, as we will release the slot below\nn_tokens = 0;\n// ... (a lot of code)\nrelease();\n\n\n// BAD (addresses the user's task, meaningless out of context)\n\n// Reset n_tokens to 0 before releasing the slot. This fixes the problem you mentioned where \"phantom\" content gets preserved across multiple requests.\nn_tokens = 0;\n```\n\n```cpp\n// GOOD (code is copied from another place; context is already clear, no comment added)\n\nggml_tensor * inp_pos = build_inp_pos();\n\n// BAD (code copied from elsewhere - do not add comments that weren't there originally)\n\n// inp_pos - contains the positions\nggml_tensor * inp_pos = build_inp_pos();\n```\n\n```cpp\n// GOOD (comment is kept concise and useful)\n\n// one decode step of code_predictor\n// at step_idx g:\n// - read code from out_code_cache[g], then embed it with codebook table g-1\n// - write new kv at cache row g+1, sample with lm_head[g]\n// - write result to out_code_cache[g+1]\n\n\n// BAD (comment is long and is forced to fit into a fixed column size, it is very annoying to read as a reviewer)\n\n// one autoregressive decode step of the 5-layer code_predictor. See the\n// comment in models.h for the cache/tensor conventions this relies on.\n//\n// index mapping (derived from the reference pipeline-tts.cpp driver):\n// at step_idx g, the input code is out_code_cache[g] (embedded via this\n// step's private codebook table, index g-1), the new cache row / RoPE\n// position is g+1, and the output codebook is lm_head[g] (writing the\n// sampled result into out_code_cache[g+1]).\n```\n\nCommit message:\n\n```\n// BEST: Let the user write the commit\n\n\n// GOOD: Write a concise commit\n\nllama : fix KV being cleared during context shift\n\nAssisted-by: Claude Sonnet\n\n\n// BAD: Write a verbose commit\n\nThis commit introduces a comprehensive fix for the key-value cache management\nsystem, addressing an issue where context shifting could lead to unintended\noverwriting of cached values, thereby improving model inference stability.\n\nCo-authored-by: Claude Sonnet\n```\n\nCommands:",
+   "createdAt": "2026-11-18T11:15:57.814Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zipc_f3d7917045b0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:57.814Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:57.814Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llama.cpp-master"
+   ],
+   "content": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md]\n```sh\n# GOOD: all commands that allow you to get the context\ngh search issues # better to check if anyone has the same issue\ngh search prs # avoid duplicated efforts\ngrep ... # search the code base\n\n# BAD: act on the user's behalf\ngit commit -m \"...\"\ngit push\ngh pr create\ngh pr comment\ngh issue create\n```",
+   "createdAt": "2026-11-18T11:15:58.025Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md"
+   ],
+   "id": "mem_mwm0ziuo_27602555daf8",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:58.025Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:58.025Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "llama.cpp-master"
+   ],
+   "content": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md]\n## Useful Resources\n\nTo conserve context space, load these resources as needed:\n\nSkills: reusable task workflows live in the [skills/](skills/) directory - check there for a skill matching your task before starting.\n\nGeneral documentations:\n- [Contributing guidelines](CONTRIBUTING.md)\n- [Existing issues](https://github.com/ggml-org/llama.cpp/issues) and [Existing PRs](https://github.com/ggml-org/llama.cpp/pulls) - always search here first\n- [How to add a new model](docs/development/HOWTO-add-model.md)\n- [PR template](.github/pull_request_template.md)\n\nServer:\n- [Build documentation](docs/build.md)\n- [Server usage documentation](tools/server/README.md)\n- [Server development documentation](tools/server/README-dev.md) (if user asks to implement a new feature, be sure that it falls inside server's scope defined in this documentation)\n\nChat template and parser:\n- [PEG parser](docs/development/parsing.md) - alternative to regex that llama.cpp uses to parse model's output\n- [Auto parser](docs/autoparser.md) - higher-level parser that uses PEG under the hood, automatically detect model-specific features\n- [Jinja engine](common/jinja/README.md)",
+   "createdAt": "2026-11-18T11:15:58.189Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zj0f_8260281923d9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:58.189Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\AGENTS",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:58.189Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "llama.cpp-master"
+   ],
+   "content": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md]\n# CLAUDE.md\n\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\n\nIMPORTANT: Ensure you've thoroughly reviewed the [AGENTS.md](AGENTS.md) file before beginning any work. It is binding project policy, not a suggestion. Key points:\n- Never write PR descriptions, PR/issue comments, or replies to reviewers, by `gh` or any other means. Never `git push` or `gh pr create` on the user's behalf.\n- Never commit without explicit approval for that commit. If asked to commit, use `Assisted-by: <assistant name>`, never `Co-authored-by:`.\n- ASCII only in code, comments and docs (`-`, `->`, `x`, `...`; no em dash, unicode arrows, etc.).\n- Comments: 1-2 lines, simple wording, no hard-wrapping to a column width, no comments that restate code. Write code first, add comments only where needed.\n- Do not add new files under `tests/` without maintainer approval; reuse existing test infrastructure.\n- Large changes or new patterns: pause and confirm with the user first.\n- The Jinja engine lives in `common/jinja`; llama.cpp does not use Minja.\n\nTask workflows live in [skills/](skills/): `add-new-model` (porting an architecture) and `code-review` (pre-PR self review). Use them when the task matches.",
+   "createdAt": "2026-11-18T11:15:58.536Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zjb0_c632d4825efb",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:58.536Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAU",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:58.536Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "llama.cpp-master"
+   ],
+   "content": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md]\n## Build\n\nCMake only (the `Makefile` is deprecated). Full backend matrix is in [docs/build.md](docs/build.md).\n\n```sh\ncmake -B build                                  # CPU; add -DGGML_CUDA=ON / -DGGML_VULKAN=ON / -DGGML_METAL=OFF etc.\ncmake --build build --config Release -j 8\ncmake --build build --config Release --target llama-server   # single target\ncmake -B build -DCMAKE_BUILD_TYPE=Debug          # debug (single-config generators)\n```\n\n- Binaries go to `build/bin/` (with MSVC/multi-config generators: `build/bin/Release/`).\n- `CMakePresets.json` has presets, e.g. `cmake --preset x64-windows-msvc-release`, `x64-windows-llvm-release`, `x64-linux-gcc-debug`.\n- Useful options: `LLAMA_BUILD_TESTS`, `LLAMA_BUILD_TOOLS`, `LLAMA_BUILD_SERVER`, `LLAMA_SANITIZE_{ADDRESS,THREAD,UNDEFINED}`, `LLAMA_FATAL_WARNINGS`, `LLAMA_LLGUIDANCE`.",
+   "createdAt": "2026-11-18T11:15:58.796Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zjgp_eb9f200f4988",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:58.796Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAU",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:58.796Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "llama.cpp-master"
+   ],
+   "content": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md]\n## Tests\n\nC++ tests are registered through helpers in [tests/CMakeLists.txt](tests/CMakeLists.txt) (`llama_build_and_test`, `llama_test`) and run with CTest:\n\n```sh\nctest --test-dir build -C Release --output-on-failure         # all\nctest --test-dir build -C Release -L main                     # by label\nctest --test-dir build -C Release -R test-sampling            # single test\n./build/bin/test-chat                                         # or run the binary directly\n```\n\n- Some tests need a working directory of the repo root (e.g. `test-chat`, `test-chat-auto-parser`) and the vocab GGUFs in `models/`; several are skipped on Windows shared builds.\n- `test-backend-ops` checks ggml op consistency across backends; required when touching `ggml/`. Any new/modified op needs cases there. Examples: `test-backend-ops -o MUL_MAT`, `test-backend-ops -b CUDA0 -o 'ADD.*'`, `test-backend-ops perf -o 'MUL_MAT.*'`.\n- `test-llama-archs` fails if a new `LLM_ARCH_*` is missing from one of the switch/lists over all archs.\n- Bug fixes are expected to come with a regression test (CONTRIBUTING.md).\n- Full local CI (Linux/bash): `mkdir tmp && bash ./ci/run.sh ./tmp/results ./tmp/mnt` (`GG_BUILD_CUDA=1` etc. for backends).\n- Quality/perf regressions are checked with `llama-perplexity` and `llama-bench`.\n\nServer tests (pytest, in [tools/server/tests](tools/server/tests)), after building `llama-server`:\n\n```sh\ncd tools/server/tests && pip install -r requirements.txt\n./tests.sh                                                         # all\n./tests.sh unit/test_chat_completion.py -v -x                      # one file\n./tests.sh unit/test_chat_completion.py::test_invalid_chat_completion_req   # one test\n```\n\nEnv vars: `LLAMA_SERVER_BIN_PATH`, `LLAMA_CACHE` (avoid re-downloading models), `SLOW_TESTS=1`, `DEBUG=1`.\n\nWeb UI ([tools/ui](tools/ui), SvelteKit): `npm i`, `npm run dev`, `npm run test`, `npm run build`.",
+   "createdAt": "2026-11-18T11:15:59.025Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zjmp_0159bc0f2a71",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:59.025Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAU",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:59.025Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "llama.cpp-master"
+   ],
+   "content": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md]\n## Lint / style\n\n- C/C++: `clang-format` (v15+) per `.clang-format`, but match surrounding code first. `.editorconfig` is enforced in CI (`editorconfig-checker`).\n- Python: `flake8` (config in `.flake8`; `examples/` and `tools/` excluded) and `ty check` for types.\n- CI also checks that `case LLM_ARCH_FOO: return new llama_model_foo(...)` in `src/llama-model.cpp` matches the file `src/models/foo.cpp` (upper snake arch, lower snake class, dashes in filename).\n- Coding and naming rules are in [CONTRIBUTING.md](CONTRIBUTING.md): `snake_case`, `<class>_<method>` with `<action>_<noun>`, longest-common-prefix naming (`number_small`, not `small_number`), enum values `PREFIX_UPPER`, 4-space indent, `void * ptr`, no fancy STL/templates, no new third-party deps.",
+   "createdAt": "2026-11-18T11:15:59.205Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zjsi_38a270f6af33",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:59.205Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAU",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:59.205Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "llama.cpp-master"
+   ],
+   "content": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md]\n## Architecture\n\nLayers, bottom-up:\n\n1. **ggml** ([ggml/](ggml/)) - tensor library and compute graph. `ggml/include/ggml.h` defines ops; `ggml-backend.h` the backend/scheduler abstraction. Each backend (CPU, CUDA, Metal, Vulkan, SYCL, HIP, OpenCL, WebGPU, RPC, ...) is a directory under `ggml/src/ggml-*`. `gguf.h`/`gguf.cpp` implement the GGUF file format. Tensors are row-major with dim 0 = columns; `ggml_mul_mat(ctx, A, B)` computes `C = B A^T`.\n2. **libllama** ([src/](src/), public C API in [include/llama.h](include/llama.h)) - model loading and inference on top of ggml:\n   - `llama-arch.*`: `llm_arch` enum, arch names, GGUF KV keys and tensor name tables.\n   - `llama-model-loader.*` / `llama-model.*`: read GGUF metadata and tensors; `llama-model.cpp` maps each `LLM_ARCH_*` to a model class.\n   - `src/models/<name>.cpp` + `src/models/models.h`: one class per architecture (`llama_model_<name> : llama_model_base`) implementing `load_arch_hparams`, `load_arch_tensors`, and `build_arch_graph`, whose nested `graph` struct derives from `llm_graph_context` and builds the forward pass.\n   - `llama-graph.*`: shared graph-building helpers (`build_attn`, `build_ffn`, `build_norm`, input tensors) used by all models.\n   - `llama-context.*`: `llama_decode`/`llama_encode`, batching (`llama-batch`), output buffers, scheduling.\n   - Memory: `llama-memory.h` interface with implementations `llama-kv-cache*` (standard, iSWA, and arch-specific variants), `llama-memory-recurrent` (RWKV/Mamba state), and `llama-memory-hybrid*`.\n   - Also: `llama-vocab` (tokenizers), `llama-sampler`, `llama-grammar` (GBNF), `llama-chat` (built-in chat templates), `llama-adapter` (LoRA, control vectors), `llama-quant`.\n3. **common** ([common/](common/), library `llama-common`) - shared code for tools: CLI arg parsing (`arg.cpp`), sampling wrapper, speculative decoding, chat handling (`chat.cpp`, PEG parser, auto-parser for tool calls/reasoning), Jinja engine (`common/jinja`), JSON schema -> grammar, model download/HF cache. See [docs/development/parsing.md](docs/development/parsing.md) and [docs/autoparser.md](docs/autoparser.md).\n4. **tools** ([tools/](tools/)) - user-facing binaries: `server` (llama-server), `cli`, `completion`, `quantize`, `perplexity`, `llama-bench`, `imatrix`, `mtmd` (multimodal: `clip.cpp` encoders + `libmtmd`), `rpc`, `ui` (Web UI embedded in server). `app/` builds a unified binary. `examples/` are minimal API demos.\n\n**Server** ([tools/server/README-dev.md](tools/server/README-dev.md); read it before server changes, it defines the feature scope): a single-threaded `server_context` owns the `llama_context` and N `server_slot`s that share one batch per `update_slots()` step. HTTP worker threads (cpp-httplib) do JSON parsing, chat templating, tokenization and response formatting, and exchange `server_task` / `server_task_result` with the context thread through `server_queue` / `server_response`. Keep JSON and template logic in the HTTP layer and heavy work off the context thread. Router mode (`server_models`) proxies to multiple child server processes.\n\n**Model conversion (Python)**: `convert_hf_to_gguf.py` is a thin entry point; per-architecture converter classes live in [conversion/](conversion/) (`base.py` has `TextModel` / `MmprojModel`). The in-tree [gguf-py/](gguf-py/) package defines GGUF constants (`gguf/constants.py`) and HF -> GGUF tensor name mapping (`gguf/tensor_mapping.py`). Adding a model touches conversion, gguf-py, `llama-arch`, `llama-model`, and a new `src/models/<name>.cpp`; follow [docs/development/HOWTO-add-model.md](docs/development/HOWTO-add-model.md) and the `add-new-model` skill. Prefer conversion-time tensor transforms over graph-time ones; never hand-roll RoPE (use `ggml_rope_ext`). Validation tools are in [examples/model-conversion](examples/model-conversion).\n\nNew models/features: CPU backend first; other backends in follow-up PRs.",
+   "createdAt": "2026-11-18T11:15:59.449Z",
+   "files": [
+    "~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zjzb_8329cb4996ef",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:59.449Z",
+    "channel": "agent"
+   },
+   "project": "llama.cpp-master",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · llama.cpp-master · ~\\Documents\\llamacpp\\src\\llama.cpp-master\\CLAU",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:59.449Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n# AGENTS.md — Flight_Data (DART Flight Analytics)\n\nCheat-sheet per agenti OpenCode su questo repo. Solo fatti verificati; se una regola qui contraddice un file stale, vince questa.",
+   "createdAt": "2026-11-18T11:15:59.794Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zk89_382a4ed35d2f",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:15:59.794Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n# AGENTS.md",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:15:59.794Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Cosa c'è nel repo (3 layer)\n- `DART_2.6/` — GUI DART vendor (`DART_Launcher.m` → `Utils/DART.m`). **READ-ONLY**: riferimento di stile, mai patcharla.\n- `HeliAnalysis/` — pipeline dati condivisa: `loadHeliMatData` → `cleanAndAlignHeliData` → `computeHeliStats` → `plotHeliSummary`; `runHeliAnalysis.m` per l'esecuzione end-to-end.\n- `DART_Analysis_System/` — \"DART Flight Analytics Explorer\", workflow multi-agente sopra HeliAnalysis: `matlab/` (codice), `Knowledge/` (riferimenti), `queries/` (query JSON), `Output/<flight>/{specs,figures,reports}/` (artefatti).\n\nFile root `analysis_template.m`, `inspect_mat.m` e `README.md` vengono dal vecchio template CSV generico: **non** fanno parte della pipeline. `README.md` è stale (dice R2025a e `data/`, che non esiste).\n\nDocumenti e commenti sono in italiano: mantenere l'italiano nei file già italiani.",
+   "createdAt": "2026-11-18T11:16:00.197Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zkl9_cf3501a21f68",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:00.197Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Cosa c'è",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:00.197Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Workflow multi-agente\n- Ruoli: Coordinator, Functional Analyst, Plotting Engineer, Pilot Expert — contratti in `DART_Analysis_System/Agents/README.md`; piano live in `DART_Analysis_System/task_plan.md` (leggerlo prima di agire). Fasi: F0 microtest sintetici → F1 Flt_803 → F2 multi-volo → F3 DART Copilot web app.\n- Single-writer: **solo il Coordinator** scrive `task_plan.md`, `findings.md`, `progress.md`. Gli altri agenti scrivono solo sotto `DART_Analysis_System/Output/<flight>/`.\n- Segnali **solo** da `Knowledge/signal_catalog.csv` (37 segnali). Mai inventare nomi segnali.\n- Failure: 1 retry con più contesto → poi il Coordinator fa direttamente; output parziale comunque annotato in `findings.md`.\n- agentmemory MCP: recall a inizio task, save a fine (decisioni, soglie, lezioni). Append-only.",
+   "createdAt": "2026-11-18T11:16:00.469Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zkt2_2134ad009bd1",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:00.469Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Workflow",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:00.469Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## MATLAB (come eseguire)\n- Tutto via **MATLAB MCP** (R2024b Update 2): `run_matlab_file` / `evaluate_matlab_code`; static analysis con `check_matlab_code`. Se il server non risponde: `test_matlab_connection.m`, poi `detect_matlab_toolboxes`.\n- **MAI `restoredefaultpath`** — rompe la connessione MCP.\n- Path setup prima di qualunque cosa:\n  ```matlab\n  addpath('HeliAnalysis'); addpath('DART_Analysis_System/matlab');\n  ```\n- Verifica veloce (sintetico, secondi, niente network drive): `run_matlab_file('DART_Analysis_System/matlab/testDartlabFigures.m')` → rigenera `DART_Analysis_System/Output/TESTSYN/figures/`, fa assert su PNG/FIG/registry/assi, stampa `ALL TESTS PASSED`.\n- Pipeline su dati reali: `runAiQuery.m` (Flt_803, query `queries/query_Flt_803.json`), `runAiQuery2.m` (803+805, con fallback su segnali default). Producono `analysis_summary.json` + `ai_comment.md` (commento rule-based, niente rete).\n- Fallback CLI se il MCP non c'è: dalla cartella dello script, `matlab -batch \"testDartlabFigures\"`.\n- Report HeliAnalysis completo: editare `flightName` in `HeliAnalysis/runHeliAnalysis.m`; output su `<flightRoot>/HeliAnalysisResults/`.\n- Nessun build step, nessun linter, nessun CI.",
+   "createdAt": "2026-11-18T11:16:00.741Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zkzc_303a1e4874b9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:00.741Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## MATLAB (",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:00.741Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Dati (non ovvio e critico)\n- I dati reali **non sono nel repo**: `Y:\\PRODUCT_LINES\\AW189_EXT\\SHARE\\MAGGIULLI\\Flights_Data\\AW149S\\AW149P6\\Flt_<NNN>\\` (default `baseRoot`); dati DART d'esempio read-only su `X:\\FLIGHT_ACTIVITY\\...`. Caricamento lento (~59k file per volo): iterare prima sui sintetici.\n- Formato: `Flt_x/SANDRAmatdata/c+NNN/<SIG>_<SOURCE>__LAB_<code>.mat`, ogni file un struct `{t, engValue, validity, info.param}` @ ~32 Hz. Spec completa: `DART_Analysis_System/Knowledge/SANDRAmatdata_format.md`.\n- Usare **solo** `*_LR110_2_OUT__LAB_*`; escludere `_SSM`, `FAIL_CODE`, `_DISCRETE`; togliere il suffisso con regex `_?LR110_2_OUT__LAB_\\d+$` (alcuni nomi non hanno l'underscore).\n- `validity==0` → NaN, poi allineamento su griglia median-dt come timetable con colonna `Value` (fa già `cleanAndAlignHeliData`).\n- Riutilizzare `loadHeliMatData` / `cleanAndAlignHeliData`: **non scrivere nuovo codice di caricamento**.",
+   "createdAt": "2026-11-18T11:16:00.960Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zl4q_f88527f49406",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:00.960Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Dati (no",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:00.960Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Output — attenzione ai due root\n- Il codice scrive in `DART_Analysis_System/Output/`. La cartella `Output/` root del repo contiene solo `Flt_803`/`Flt_805` **vuote** (residui pwd-relative): non usarla.\n- `figure_registry.json` nella cartella figure registra ogni figura: consultarlo prima di rigenerare; rigenerare solo la figura interessata.",
+   "createdAt": "2026-11-18T11:16:01.217Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zlco_ae9ad211d4f7",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:01.217Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Output —",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:01.217Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Contratto figure — `dartlab_figures(cfg, outDir, flight)`\n- `cfg.t` (timetable), `cfg.sig` (struct segnali), `cfg.figures` (cell di spec).\n- `kind='strip'`: rows `{label, sig, color[3], h, ylim, style}`; `h` = 0.0267 righe sottili (modi/booleani), 0.0802 standard. Posizioni assi dal template `Knowledge/dart_layout_template.json` (estratto da `extractDartLayout.m`).\n- `kind='track'`: `latField`/`lonField` (opz. `colorBy`).\n- Righe con segnale mancante: saltate + elenco nel titolo della figura.\n- Figure create con `'Visible','off'` ed esportate PNG+FIG (~1500px). (Le vecchie regole che chiedevano figure \"visibili nel desktop\" sono superate.)",
+   "createdAt": "2026-11-18T11:16:01.463Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zlil_f8ee56d13815",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:01.463Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Contratt",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:01.463Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Stale da non fidarsi\n- `README.md` root (R2025a, `data/`): template CSV vecchio.\n- Vecchie istruzioni che citavano `dartlab_plot.m`, `Templates/`, `signal_catalog.md`, `thresholds.json`, `analysis_taxonomy.md`, `dart_patterns.md`: quei file **non esistono**.\n- `explore-request.json` (~1 MB): dump di sessione, non leggerlo.",
+   "createdAt": "2026-11-18T11:16:01.791Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zlst_09939e76b919",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:01.791Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Stale da",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:01.791Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "Flight_Data"
+   ],
+   "content": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Convenzioni\n- `X:`/`Y:` e tutto `DART_2.6/`: solo lettura.\n- Stile di lavoro: ponytail full — test-first su dati minimi, nessuna astrazione non richiesta.",
+   "createdAt": "2026-11-18T11:16:02.209Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zm36_fdb6b5a24033",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:02.209Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\AGENTS.md]\n## Convenzi",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:02.209Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "Flight_Data"
+   ],
+   "content": "[claude-code · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\CLAUDE.md]\n# CLAUDE.md\n\nGuidance for this repo lives in **`AGENTS.md`** (single source of truth). Read it before working here.",
+   "createdAt": "2026-11-18T11:16:02.806Z",
+   "files": [
+    "~\\Documents\\MATLAB\\Flight_Data\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zmjw_e46427812474",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:02.806Z",
+    "channel": "agent"
+   },
+   "project": "Flight_Data",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · Flight_Data · ~\\Documents\\MATLAB\\Flight_Data\\CLAUDE.md]\n# CLAUDE.",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:02.806Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n# AGENTS.md – Quick reference for OpenCode agents\n\n**Purpose** – Provide the minimal, high‑signal facts that an OpenCode agent would otherwise miss when working in this Speedgoat repository. All entries are verified against the current codebase.\n\n---",
+   "createdAt": "2026-11-18T11:16:03.350Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zn03_41855b2ef135",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:03.350Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n# AGENTS.md – Q",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:03.350Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## Repository layout (high‑value dirs)\n- `06_TestEnviroment/00_Library/Speedgoat_library/` – Simulink library blocks for the Speedgoat I/O boards (`IO203.slx`, `IO603.slx`, `ENABLE_INPUT.slx`).\n- `06_TestEnviroment/04_TestLauncher/Test_Launcher/` – **git submodule** (`test_launcher_new.git`), itself a superproject with three nested submodules: `Test_Launcher` (V&V test launcher GUI), `TestSequence_Builder` (stimulus generator) and `DART_2.6` (data analysis). See its own `CLAUDE.md`. The inner `Test_Launcher` tracks `RIZZIRI/testlauncher_optimized.git`, branch **`Speedgoat_Mod`** only (since 2026-10-14; `remote.origin.fetch` is limited to that branch). The old `Cheic1/test_launcher.git` (unrelated history, holds `AW189_DTS_TOP_Test_.m` and the RSLV_RNWAY edits) is no longer used.\n- `06_TestEnviroment/05_SPDG_AutoHarness/` – project: generate the Speedgoat Simulink system from the SPARC + Speedgoat ICDs, run TestSequence Builder `.m` tests on it, link SPARC requirements. See its `README.md` and `docs/PUNTI_APERTI.md`.\n- Test Launcher on Speedgoat (phase 5): the real launcher is `04_TestLauncher/…/Test_Launcher/AW_VnV_Test_Launcher.m`, not `03_SPARC_env/ste/TEST_LAUNCHER.m` (a separate SPARC script). Plan: minimal hooks delegating to `STE/<ste>/ste_adapter.m`; the Speedgoat run must produce the same `STE_OUT_H_<test>.mat` so plotting/checker stay untouched. Gains and internal test points go through DTS; only `__marked` comes from Simulink. Analysis + step plan: `05_SPDG_AutoHarness/docs/05_test_launcher_speedgoat.md`.\n- IO-Lists: official Speedgoat ICD = `04_SPDG_Documents/InitDoc/…IO-List V5.xlsx`; harness master = **database** `05_SPDG_AutoHarness/database/IO-List_MASTER.xlsx` (since 2026-10-23; clean sheets DUT, PIN_<DUT>, SPEEDGOAT_CANALI, ICD_*, CHANGELOG + generated views) with its text mirror `database/text/*.csv` + `manifest.json`. Edit it only with `AutoHarnessDashboard` (or in Excel, then accept the changes in the dashboard); the only writer is `tools/master/master_db.py save`, which needs the CHANGELOG reason. Paths: `05_SPDG_AutoHarness/config/paths.json`; columns/rules: `config/master_schema.json`. The old generated `05_Specfica Tecnica/LHD/LHD_ExternalHarness_IO-List_MASTER.xlsm` is frozen (migration source, don't delete without the user's OK); `tools/iolist/build_master.py` is now a comparison tool writing to `reports/legacy/` (sources V2/V3/V3_FM live in `05_Specfica Tecnica/99_Archivio/Harness_LHD/`, don't delete). The physical truth is the cable (`PinSPDG_base`, SELT as-built), not the DUT columns of `Schema`. Excel tools need a Python with openpyxl (no `-I`): the `python` key of `config/paths.json` lists the per-PC installs (see CLAUDE.md).\n- New DUT / new ICD (2026-10-27): a DOORS Physical Channel Table becomes an `icd_sheets` entry in `config/master_schema.json` (with `source_key`/`source_id`) and is (re)imported with `tools/master/master_db.py import-icd --sheet ICD_<X> --user <u>`; ICD sheets exist only once imported. The cable is loaded by a one-shot script writing through `master_db.save` (`tools/master/import_dcdap_nova.py`: DC-DAP NOVA cable = DUT `SEM` (renamed from `DCDAP_NOVA` with `master_db.py rename-dut`), ICD `ICD_DCDAP_NOVA`; `--add` adds reviewed rows, `--realign <path key>` takes the panel pins of a newer cable, `DCDAP_J02` = second panel connector to switch box/DB25. The electrical truth is the KiCad Rev B `08_Schematics/DC-DAP/Cablaggio_DC_DAP/` (sheets: root `Cablaggio_DC_DAP.kicad_sch` + `sem_alim_dts_rs422.kicad_sch`, `sem_discreti_can_a429.kicad_sch`, `sem_resolver.kicad_sch`, `sem_switchbox_db25.kicad_sch`) → `Schemi_cablaggi_DC_DAP_05_Nov_26.pdf` (2026-11-05: imported from the user's W: clone, then fixed: panel `SEM_J01[_n]`/`SEM_J01_MNT[_n]`, plugs `SEM_P01[_n]`/`SEM_P01_MNT[_n]`, rack `ITT_P03`/`TB_P03`/`ITT_P01`; red = removed vs Rev A, drawn as graphic polylines, never wires; cross-sheet links = global labels with the same name at both ends, e.g. `P1-37_J01-103`). The database is N",
+   "createdAt": "2026-11-18T11:16:04.361Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0znsb_951f14c03ac2",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:04.361Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## Repository l",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:04.361Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\nOT yet aligned to Rev B (RS422 order on J01-45..60, resolver J01-97..118, P04-119/126 on J01-38/39, Ethernet MNT, panel pin names still `DCDAP_J01/J02`). Older PDFs (26 June = Rev A era) only for history; KiCad backups/.history are gitignored; differences in PA-20). `build_connections.py` draws KiCad for the DUTs with `Active = SI` unless `--kicad` is given.\n- Documents layout (cleanup of 2026-10-23, plan `04_SPDG_Documents/docs/plans/2026-10-22-riordino-cartelle-livello1.md`): `04_SPDG_Documents/` = `InitDoc/` (P25025 deliverables: FAT, safety, DoC, user manual V2, cabinet schematic, IO-List V5), `Rack/` (`Documentation IO Modules|MSCP|PSU/`, FAT protocol, integration test), `Target_SN11866/` (CTI, test report, P3 manuals), `99_Archivio/`. `02_ICD VARI/` = ICDs per DUT; the old Flask ICD tool (`EstrazioneICD`, `New folder`) is in `02_ICD VARI/99_Archivio/`, superseded by 05_SPDG_AutoHarness. One copy per document: before adding a file, check it is not already there (`git hash-object`). Repo-wide plans live in `04_SPDG_Documents/docs/plans/`.\n- **Program docs live in `04_SPDG_Documents/`** (move committed 2026‑11‑16, `032fc19`): `HighLevelPlan_Speedgoat.xlsx`, `(Customername)_Speedgoat_RealTimeTesting_Requirements.xlsx`, `ConnessioniFCC_RIG_NMH_AW189.xlsx`, `Resume Interface.docx`; plans in `04_SPDG_Documents/docs/plans/`, status page in `04_SPDG_Documents/docs/stato/`. Text files are UTF‑8 no BOM; PowerShell redirection writes UTF‑16 by default, so use `-Encoding utf8` when regenerating them.\n- **Project status page (shared reference for all sessions):** https://claude.ai/artifact/EKkFg5CdsqCoDQU4j22M7h, source `04_SPDG_Documents/docs/stato/stato_progetto.html`. When a step changes status, update the file and republish it to the same URL (`url` parameter). Main track: phase 3 (Simulink generator, steps A–E) and phase 5 (Test Launcher on the bench); multi-DUT spec and TestSequence → Simulink Test are paused. Every session commits its own changes before stopping; one session at a time on the win2 bench.\n- Physical connections: `05_SPDG_AutoHarness/tools/connections/build_connections.py` regenerates `05_SPDG_AutoHarness/connections/`: `rack_channels.csv` (Rack_Tag = Simulink tag), `dut_mapping.csv`, readable `rack_channels.xlsx`/`dut_mapping.xlsx` and `kicad/<Config>/`. It needs KiCad 10 `kicad-cli` (`%LOCALAPPDATA%\\Programs\\KiCad\\10.0\\bin`) and exits 1 if the ERC has errors or the KiCad netlist ≠ CSV. Outputs are generated: fix the MASTER, not them.\n- Whole AutoHarness workflow: `addpath('06_TestEnviroment/05_SPDG_AutoHarness/tools'); build_autoharness` runs the steps in order (`check` = saved MASTER matches its mirror + no validation errors, headless/win2-safe; `connections`; step A = `spdg.harness_facts` + `tools/simulink/build_sparc_signals.py` -> `simulink/SPARC/sparc_signals.xlsx`; step B, only with `Steps=\"B\"` = `spdg.build_skeleton`: file copy of the harness -> `simulink/SPARC/SPARC_HARNESS.slx` with `DISCRETES`, `IO203_new`, `DISCRETE SPARC` emptied for C/D/E) and stops at the first error. On the second PC (Speedgoat blockset 9.11) not even the harness updates its diagram (`speedgoatlib_scpi/SCPI PSU ` missing): test compiles on PC1. Everything reads only the database. The Simulink generator works on SPARC only, one step at a time (spec `docs/06_harness_multidut_spec.md`). Signal decisions are database edits (Test_Point, Model_Access, Role) with their reason in CHANGELOG; `data/SPARC_decisioni.csv` is legacy. `harness_facts` reads SPEEDGOAT_HARNESS read-only and needs `00_Library/Speedgoat_library` on the path (IO203/IO603 Subsystem References) plus the Speedgoat I/O Blockset (`speedgoatlib_*`, added from `%ProgramData%\\Speedgoat\\speedgoatlib\\R<rel>\\*\\sg_blocks` if missing): without them `find_system` silently loses the IO603 CAN rows. GUI: `app = AutoHarnessDashboard;` (`tools/AutoHarnessDashboard.m`) = the reference ICD app: one page per DUT (pins, rack channel picker, test points, chain DUT→panel→cable→rack→Simulink→",
+   "createdAt": "2026-11-18T11:16:04.644Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zo0l_f24e62df3150",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:04.644Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\nOT yet aligned ",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:04.644Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\nDOORS), Speedgoat channels, ICDs, problems, history, and the steps (records \"provato\" in `data/stato_passi.json`). Code: `tools/+ahdb` (data), `tools/+ahui` (pages), `tools/master` (Python); tests `tests/test_ahdb.m` (fake DUT, never the real DB) and `tests/python` (pytest, incl. parity vs `tests/golden/2026-10-23`).\n- `07_XDTS/DTSSocketClient/`\n  - **Never delete** – required for the HIL command monitor.\n  - Contains:\n    - `hil_command_monitor.m` – host‑side timer that polls a block output on the target (e.g. `SPEEDGOAT_HARNESS/DTS_SUB`): value 1 → `startDTS`, value 2 → `stopDTS`.\n    - `startDTS.m` – starts the DTS server (if not already running) and runs `<session>_init.py`.\n    - `stopDTS.m` – runs `<session>_end.py` and stops `DTSServerSock.exe` (second arg `false` = leave server running).\n    - `requirements.txt` – Python dependencies for the DTS server.\n    - `provaDTS.bat [SESSION]` – manual test: server window + session window (wait server → `_init.py`, type `fine` → `_end.py`).\n  - **Vendor code, never edit:** `src/python/dts/` (DTS Python client) and `07_XDTS/XDTS SOCKET/` (server, `configuration.xml`). They are shared libraries that get re-downloaded. Put every fix in the layer:\n    - `src/python/dts_hil.py` – patches the vendor modules at runtime (safe `send_command` without reply, `DTS_TIMEOUT`, fail-fast, fixed `Dts_Arm_Gains`/`Dts_Arm_Stimuli`, per-command summary).\n    - `src/python/dts_run.py <script.py>` – runs a session script with the layer; `--wait-server N` waits for the server. Exit codes: 0 ok, 1 non-critical failures, 2 server unreachable/crashed, 3 critical command failed, 4 CRC failed, 5 Python error. `startDTS`/`stopDTS` run sessions through it.\n  - Session scripts live in `<xdtsRoot>\\SPEEDGOAT\\Sessions\\` (`*_init.py` / `*_end.py`, gitignored, generated by `python 07_XDTS/DTSSessionParser/main.py generate`).\n- `07_XDTS/DTSSessionParser/main.py convert [folders|files] [--force] [--arcsee PATH]` converts `.xdts` recordings to `<file>.xdts.mat` with ArcSee (default: every `XDTS SOCKET/SPEEDGOAT/*/Archives`; ArcSee from `--arcsee`, `%ARCSEE%`, `XDTS1.0.35`, `XDTS SOCKET`). Skips empty (≤100 B, ArcSee crashes on them) and already converted files; exit 1 if any fails. ArcSee exits 0 even on error: success = the `.mat` exists. Per-variable DART files: `00_Library/Script/XDTS_MULTI_CONVERT/XDTSsplit_MULTI.m`.\n- `07_XDTS` after the 2026-10-21 cleanup: `DTSSocketClient`, `DTSSessionParser`, `XDTS SOCKET` (vendor server), `XDTS1.0.35` (XDTSGui + ArcSee), `DTS_Init_Script.m`. Old copies (DTS_SOCKET_CLIENT_1_0_32, XDTS1.0.31, cli/, api/) are only in git history. Config: `config.json` (`default_database` must be set for `matlab -batch`: no dialogs in batch mode).\n- `07_XDTS/XDTSSimulink` (2026-10-29, see its README and `docs/plans/2026-10-29-xdts-simulink-client-design.md`): the Speedgoat target as DTS **client** over IO715 UDP, replacing `dts_run.py`/`dts_sock.py`; `DTSServerSock.exe` stays on a PC. Client→server request = **292 B** (`B20s20s20s20sB100s100sff` native alignment, 2 pad bytes at 282), reply 208 B; verified by a loopback capture on win2 (Wireshark interface \"Adapter for loopback traffic capture\": client and server on the same PC never show on PHYG). `tools/xdts_record_session.py <S>` replays `<S>_init.py`/`_end.py` through `dts_hil` with a fake socket → `sessions/<S>.csv`; `xdts_setup(Model=...)` loads it as `XDTS`; model `SPEEDGOAT_HARNESS_XDTS.slx` = pruned harness copy + `IO715_XDTS`. Bench test 2026-10-30: STRESS_TEST from the target with the SPARC on, 407/407 + 2/2, exit 0, through the target's host-target port (`use_host_target_conn`, 10.6.1.99 on the switch with win2; the IO715 is not wired yet). Each DTS function is also a block in `IO715_XDTS/DTS_FUNCTIONS` (packet built on the target by `xdts_func_packet`), launched alone with `XDTS_FUNC_REQ`/`XDTS_ARG_REQ` in `PANNELLO_HIL`, see the README. Set Probe takes the list of variables of the test as input: `DTS_PROBES` in the test `.m`, sent w",
+   "createdAt": "2026-11-18T11:16:05.098Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zocu_ce8419a3525e",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:05.098Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\nDOORS), Speedgo",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:05.098Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\nith `xdts_set_probes(tg, DTS_PROBES)` between `load` and `start`, no rebuild (bench 2026-11-04: list of 4 -> recording with exactly those variables; spec `07_XDTS/XDTSSimulink/docs/2026-10-30-set-probe-elenco-design.md`). A SPARC drawing ~0.3 A, or 1.1-1.6 A with a sagging PSU, did not boot (nodes 10.6.1.72/.73 not answering ping): check the wiring before blaming DTS; healthy = 0.41 A at 28 V. Stopping an app on the target while another MATLAB streams from it can crash that MATLAB (`slrealtime::xcp::AsyncQueue`, win2 2026-10-30). Traps: the UDP Send block sends an empty datagram every step when `Length` = 0 and the server then re-runs its last command, hence the enabled subsystem `UDP_TX`; `CHECKSUM` needs the CheckType in `portType`, with `N/A` (`dts_sock.py` 1.0.32, so also `dts_run.py`, because `dts_hil` drops the argument) the server only returns the CRC and never compares it.\n\n---",
+   "createdAt": "2026-11-18T11:16:05.732Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zovk_8cd3a4e2c93f",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:05.732Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\nith `xdts_set_p",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:05.732Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## Essential one‑liner commands\n| Goal | Command | Notes |\n|------|---------|-------|\n| Add the DTS client to the MATLAB path | `addpath(fullfile(pwd, '07_XDTS', 'DTSSocketClient'));` | Run from the repo root. |\n| Install Python deps for the DTS server (once) | `cd 07_XDTS/DTSSocketClient && pip install -r requirements.txt` | venv is created automatically by `startDTS` if missing. |\n| Start a DTS session | `startDTS('STIMATOR_TIME')` | Starts server (if needed) + runs `STIMATOR_TIME_init.py`. |\n| Stop a DTS session | `stopDTS('STIMATOR_TIME')` | Runs `STIMATOR_TIME_end.py` + kills the server. |\n| Monitor the target | `m = hil_command_monitor('STIMATOR_TIME', 0.25, 'SPEEDGOAT_HARNESS/DTS_SUB');` | `m.StatusFcn()`, `m.SetSessionFcn(...)`, `m.StopFcn()`. |\n| Monitor without target (mock) | `m = hil_command_monitor('STIMATOR_TIME', 0.25, 'SPEEDGOAT_HARNESS/DTS_SUB', 'MockMode', true); m.SetValueFcn(1)` | 1 = start, 2 = stop, 0 = idle. |\n| Fetch the Test Launcher submodules | `git submodule update --init --recursive` | Needs GitLab access. |\n\n---",
+   "createdAt": "2026-11-18T11:16:06.089Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zp3l_09db74e2042f",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:06.089Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## Essential on",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:06.089Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## Gotchas & constraints\n- **Do not delete** `07_XDTS/DTSSocketClient`. The monitor scripts and the Python server live there.\n- `hil_command_monitor` acts only on value **changes** (0→1 start, →2 stop). It stops the session started by the last successful START, even if the current session was changed afterwards.\n- In target mode, if the target cannot be reached `hil_command_monitor` silently falls back to mock (`MOCK (fallback)`): check `StatusFcn()`. Several monitors can run at once (no `NO_SIGNAL` state either: lost in the 2026-10-08 revert).\n- Logs go to `07_XDTS/DTSSocketClient/logs/dts_<date>.log` (written by `dts_run.py`, with timestamps).\n- Switch the SPARC on (PSU via the target: `SPEEDGOAT_HARNESS/PANNELLO_HIL/PSU_OUT` = 1; quick way: `dut_on` / `dut_off` in `03_SPARC_env/SpeedGoat` (need the app running), or DUT ON/OFF in `HIL_DashboardApp`, whose DUT ON also connects, loads the newest `.mldatx` of `hilTargetTools('list')` and starts the app if needed (`hilDut('on','Start',true)`); nothing ever stops the app) before DTS tests: with it off the CRC answers \"No answer from CORE environment\" (`dts_run` exit 4). With it on STRESS_TEST runs fully (2026-10-20, 407/407, exit 0). The server answers NOPE with \"Invalid command message\": that reply still means it is alive; a second Init answers \"already initialized\", treated as ok by `dts_hil`.\n- The HIL Dashboard also runs without MATLAB (2026-11-13): `build_hil_dashboard` in `03_SPARC_env/SpeedGoat` (MATLAB Compiler, PC1, ~5 min) compiles `HIL_Dashboard.m` into `<userpath>\\HIL_Dashboard_exe\\HIL_Dashboard.exe` (~200 MB, never in the repo); on win2 it is `D:\\FM_WORKSPACE\\speedgoat\\HIL_Dashboard_exe\\` (runs on the installed R2024b runtime, other PCs need the free MATLAB Runtime R2024b). Code changes need a rebuild. In the exe: target IP 10.6.1.99 if unset (`%HIL_TARGET_IP%`), DTS client from disk via `dtsClientRoot` (`%DTS_CLIENT_ROOT%`), no Simulink (`isdeployed` guards).\n- While `DTSServerSock.exe` (or any program started from the repo) runs on win2 it locks files in `XDTS SOCKET`: `sync_win2.sh --auto` waits, a manual sync stops before touching files; `bash sync_win2.sh --realign` recovers an interrupted alignment.\n- Bench-only binaries and recordings (`07_XDTS/XDTS_SERVER_release_*/`, `**/Archives/*.xdts`) are gitignored: copy recordings from win2 by hand (scp), the sync does not carry them.\n- The Test Launcher submodules come from GitLab: commit inside the submodule first, push it, then bump the pointer here. win2 cannot reach GitLab.\n\n---",
+   "createdAt": "2026-11-18T11:16:06.295Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zpad_bde9af95ab84",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:06.295Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## Gotchas & co",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:06.295Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "speedgoat"
+   ],
+   "content": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## External references (already in repo)\n- `07_XDTS/DTSSocketClient/requirements.txt` – list of Python packages.\n- `07_XDTS/.planning/` – planning artefacts (may contain additional context).\n\n---\n*This file is intentionally short – add new high‑signal facts here as the repository evolves.*",
+   "createdAt": "2026-11-18T11:16:06.562Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zpiy_acec28d12782",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:06.562Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\AGENTS.md]\n## External ref",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:06.562Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "speedgoat"
+   ],
+   "content": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n# CLAUDE.md\r\n\r\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\r\n\r\nThe verified, high-signal facts (paths, DTS commands, gotchas, win2 sync, status page) live in AGENTS.md, imported here. Keep facts there, not in this file:\r\n\r\n@AGENTS.md",
+   "createdAt": "2026-11-18T11:16:06.851Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zpns_9e9adc9ce87c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:06.851Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n# CLAUDE.md\r\n",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:06.851Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "speedgoat"
+   ],
+   "content": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n## What this repo is\r\n\r\nA Speedgoat HIL bench for helicopter flight-control DUTs (SPARC first; CCU, LA/linear actuators and DC-DAP later). It is mostly MATLAB/Simulink with Python tooling. The parts fit together like this:\r\n\r\n- **Real-time side.** `06_TestEnviroment/03_SPARC_env/SpeedGoat/SPEEDGOAT_HARNESS.slx` runs on the Speedgoat target. Signals are exposed as Goto/From tags, and the tags are the `Rack_Tag`s, e.g. `IO203_DIO35`. The I/O blocks come from `06_TestEnviroment/00_Library/Speedgoat_library` (IO203/IO603 Subsystem References). `HIL_DashboardApp.m`, `dut_on`/`dut_off` and `hilDut.m` in the same folder drive the bench and the DUT PSU.\r\n- **DTS side.** `07_XDTS` holds the socket server (vendor) and the client layer. It injects gains and stimuli and reads internal test points of the DUT. `hil_command_monitor` lets the target start and stop DTS sessions.\r\n- **Test execution.** The Test Launcher submodule (`06_TestEnviroment/04_TestLauncher/Test_Launcher`, GitLab, its own CLAUDE.md) runs V&V tests: TestSequence Builder `.m` → run → DART analysis.\r\n- **AutoHarness.** `06_TestEnviroment/05_SPDG_AutoHarness` is the reference ICD app and the generator of the per-DUT harness. Its chain is: ICD database → physical connections + KiCad wiring diagram → step A signal table → (steps B–E) generated Simulink model per DUT. Spec: `docs/06_harness_multidut_spec.md`; open decisions: `docs/PUNTI_APERTI.md`.\r\n- **Two machines.** This PC (PC1) can reach GitLab. The bench PC `win2` cannot, and is reached over ssh. All transfer goes through `bash sync_win2.sh` (see its header for the modes). Several Claude sessions work on this repo at the same time, so commit only your own paths (`git commit -- <paths>`).\r\n\r\nUser-facing text (logs, dashboards, docs, Excel) is Italian; identifiers and code comments are English.",
+   "createdAt": "2026-11-18T11:16:07.017Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zpti_a66e4f1a6efc",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:07.017Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n## What this ",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:07.017Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "speedgoat"
+   ],
+   "content": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n## AutoHarness architecture (needs several files to see)\r\n\r\n```\r\nconfig/paths.json            every location (repo-relative); read by ahdb.paths (MATLAB) and tools/master/ah_paths.py\r\nconfig/master_schema.json    sheets, columns, enums, keys/FKs of the database; read by ahdb.Schema and master_db.py\r\ndatabase/IO-List_MASTER.xlsx  THE ICD database (truth)  +  database/text/*.csv + manifest.json (sha256 mirror)\r\n        │  written ONLY by tools/master/master_db.py save (render via openpyxl, lock check, mirror, manifest last)\r\n        │  edited from AutoHarnessDashboard (tools/+ahui pages over tools/+ahdb.Database)\r\n        ▼\r\ntools/connections/build_connections.py   DB → connections/rack_channels.csv, dut_mapping.csv, xlsx, kicad/<DUT>/ (ERC + netlist round-trip)\r\ntools/simulink/build_sparc_signals.py    DB test points + spdg.harness_facts(SPEEDGOAT_HARNESS) → simulink/SPARC/sparc_signals.*\r\ntools/build_autoharness.m                runs the steps: check → connections → A (stops at first error)\r\n```\r\n\r\n- **Edits.** `ahdb.Database` tracks rows by a hidden `UID__` column, so renaming a key is an UPDATE. `pending()` diffs against what was loaded, and `save(reason)` appends CHANGELOG rows and hands every non-view sheet to `master_db.py save` through a staging dir.\r\n- **Excel edits.** If the xlsx no longer matches the manifest, the state is `EXTERNAL_EDIT`. `externalChanges()` dumps the xlsx and diffs it by key; the user either accepts (Origin EXCEL) or restores.\r\n- **Validation.** `ahdb.validate` holds the row-level rules (E blocks a save, W does not). Net-level checks (`DIR_CONFLICT`, `PANEL_PIN_SHARED`, …) stay in `build_connections.py`. Anomalies inherited from the legacy MASTER are warnings, so the database stays saveable.\r\n- **Rack_Tag.** It is stored in `SPEEDGOAT_CANALI` and never recomputed. For IO203 it must be `IO203_DIO<ch>`, because the library and `harness_facts` assume it.\r\n- **What never to touch.** `SPEEDGOAT_HARNESS.slx` and the library `IO203.slx`/`IO603.slx` are references for the generator: it compares against them but never edits them. The legacy `05_Specfica Tecnica/LHD/…MASTER.xlsm` is frozen as the migration source. `tools/iolist/build_master.py` only rebuilds it into `reports/legacy/` for comparison.\r\n- **Parity.** `tests/golden/2026-10-23/` holds the outputs from before the database switch. `rack_channels.csv`, `dut_mapping.csv` and the KiCad netlist must stay byte-identical, apart from timestamps.",
+   "createdAt": "2026-11-18T11:16:07.309Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zq2w_f03d8224d369",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:07.309Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n## AutoHarnes",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:07.309Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "speedgoat"
+   ],
+   "content": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n## Commands\r\n\r\nMATLAB is normally reached through the MATLAB MCP tools (`mcp__matlab__*`). If MCP is down, use `matlab.exe -batch \"<code>\" -sd <dir>`, which takes about 2–5 min to start. Install paths differ per PC:\r\n\r\n| | PC1 | second PC (`F:\\speedgoat`) |\r\n|---|---|---|\r\n| MATLAB R2024b | `C:\\Program Files\\MATLAB\\R2024b\\bin\\matlab.exe` | `E:\\Programmi\\MATLAB24b\\bin\\matlab.exe` |\r\n| Python (openpyxl + pytest) | `C:\\Program Files\\Python311\\python.exe` | `%LOCALAPPDATA%\\Programs\\Python\\Python312\\python.exe` |\r\n\r\n`config/paths.json` key `python` lists these candidates and takes the first that exists (`%AH_PYTHON%` overrides it), so the AutoHarness tools work on both. Below, `python` means that executable; never use `-I`. The default session venv in `07_XDTS` has no openpyxl. On the second PC, git needs `-c safe.directory=*` (the F: file system records no owner).\r\n\r\nFrom `06_TestEnviroment/05_SPDG_AutoHarness`:\r\n\r\n| Goal | Command |\r\n|---|---|\r\n| Open the ICD app | `addpath('tools'); app = AutoHarnessDashboard;` |\r\n| Full workflow | `addpath('tools'); build_autoharness` (or `build_autoharness(Steps=\"A\")`) |\r\n| MATLAB unit tests | `runtests('tests/test_ahdb.m')`; one test: `runtests('tests/test_ahdb.m', 'ProcedureName', 'saveWritesChangelog')` |\r\n| Python tests | `python -m pytest tests/python` (one: `... tests/python/test_master_db.py -k <name>`) |\r\n| Database state | `python tools/master/master_db.py check` → JSON `state` FRESH / EXTERNAL_EDIT / MISSING / MIRROR_MISSING |\r\n| Connections only | `python tools/connections/build_connections.py [--kicad SPARC,LA \\| none] [--out DIR]` |\r\n\r\n- **Excel locks.** Builds and saves stop before writing anything (exit 2) if an output or the MASTER is open in Excel.\r\n- **KiCad.** It needs KiCad 10 `kicad-cli` (`%LOCALAPPDATA%\\Programs\\KiCad\\10.0\\bin`). The build exits 1 if the ERC has errors or the exported netlist ≠ `dut_mapping.csv`.\r\n- **Test fixtures.** MATLAB tests build a fake DUT `FAKE` in a temp folder and pass `--xlsx/--mirror` to `master_db.py`. Tests must never write the real database.\r\n- **Reloading classes.** After editing a classdef that has live instances (the dashboard), run `delete(findall(groot,'Type','figure')); clear classes` before re-running.",
+   "createdAt": "2026-11-18T11:16:07.569Z",
+   "files": [
+    "~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md"
+   ],
+   "id": "mem_mwm0zq8m_63710ad3a50c",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:07.569Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · speedgoat · ~\\Documents\\MATLAB\\speedgoat\\CLAUDE.md]\n## Commands\r\n",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:07.569Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "SecondBrain-Work"
+   ],
+   "content": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n# SecondBrain-Work\n\nIl brain del **lavoro** di Francesco. Solo lavoro, solo Outlook.\nIl brain personale è un altro progetto (repo privato `Cheic1/SecondBrain`): non mescolare.",
+   "createdAt": "2026-11-18T11:16:07.808Z",
+   "files": [
+    "~\\Documents\\SecondBrain-Work\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zqet_eb8e9715fa80",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:07.808Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain-Work",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n# Second",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:07.808Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "SecondBrain-Work"
+   ],
+   "content": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Come parlare con Francesco\n\n- Sempre in italiano, frasi brevi, una cosa alla volta.",
+   "createdAt": "2026-11-18T11:16:08.010Z",
+   "files": [
+    "~\\Documents\\SecondBrain-Work\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zqkz_0fb56da015b8",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:08.010Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain-Work",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Come ",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:08.010Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "SecondBrain-Work"
+   ],
+   "content": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Regole fisse\n\n- Tutto ciò che non ha posto va in `00_Inbox`. Non cancellare mai mail aziendali: sposta o archivia solo su richiesta esplicita di Francesco.\n- Le cose da fare per Francesco vanno in `CODA.md`: una riga per cosa, la più urgente in cima. Fatta → sezione \"Fatto\" con la data.\n- Nel repo SOLO riassunti brevi. Mai testo integrale di mail aziendali, mai allegati salvati nel repo, mai password/token/credenziali.\n- Gli agenti NON inviano mai mail: preparano solo bozze che Francesco rivede e invia lui.\n- Nomi file: `AAAA-MM-GG_descrizione.ext`.",
+   "createdAt": "2026-11-18T11:16:08.215Z",
+   "files": [
+    "~\\Documents\\SecondBrain-Work\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zqpr_fb10ac0146ac",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:08.215Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain-Work",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Regol",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:08.215Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "SecondBrain-Work"
+   ],
+   "content": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## La squadra\n\n| Nome | Lavoro | Quando |\n|---|---|---|\n| **Sara** | Segretaria: parla con te, esegue le azioni qui sotto, coordina | sempre |\n| **Bea** | Briefing quotidiano | \"briefing\" |\n| **Emma** | Triage e bozze della mail Outlook | nel briefing e a richiesta |\n| **Sofia** | Smista la `00_Inbox` | \"smista\" |\n| **Paolo** | Stato progetti e prossimo passo | quando nasce `02_Progetti/` |\n| **Gino** | Commit git della giornata | \"salva il giorno\" |",
+   "createdAt": "2026-11-18T11:16:08.449Z",
+   "files": [
+    "~\\Documents\\SecondBrain-Work\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zqwr_3c1139feb21d",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:08.449Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain-Work",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## La sq",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:08.449Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "SecondBrain-Work"
+   ],
+   "content": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Azioni quotidiane (cosa dici → cosa succede)\n\n- **\"briefing\"** → Bea compone `01_Oggi/AAAA-MM-GG_briefing.md` con:\n  - **Mail da guardare**: massimo ~10 mail nuove o non lette dal giorno prima — SOLO mittente + oggetto + riassunto di una riga. Se emerge un'azione per Francesco, la aggiunge a `CODA.md`.\n  - **Agenda di oggi**: eventi del calendario con orari.\n  - **Coda di oggi**: le prime righe di `CODA.md`.\n- **\"smista\"** → Sofia sposta i riassunti da `00_Inbox` nelle cartelle giuste (`02_Progetti/…`, `03_Aree/…`), creando la cartella al primo bisogno.\n- **\"aggiorna la coda\"** → modifica diretta di `CODA.md`.\n- **\"salva il giorno\"** → Gino fa commit con messaggio `giornata AAAA-MM-GG`.",
+   "createdAt": "2026-11-18T11:16:08.798Z",
+   "files": [
+    "~\\Documents\\SecondBrain-Work\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zr5z_4f14cc7cdf3e",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:08.798Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain-Work",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Azion",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:08.798Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "SecondBrain-Work"
+   ],
+   "content": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Struttura al via (il resto cresce quando serve)\n\n- `CODA.md` — la coda dei task\n- `00_Inbox/` — tutto quello che arriva da smistare\n- `AGENTS.md` — questo file\n\nLe altre cartelle (`01_Oggi`, `02_Progetti`, `03_Aree`…) nascono al primo uso.",
+   "createdAt": "2026-11-18T11:16:08.969Z",
+   "files": [
+    "~\\Documents\\SecondBrain-Work\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zras_3ca715037740",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:08.969Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain-Work",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · SecondBrain-Work · ~\\Documents\\SecondBrain-Work\\AGENTS.md]\n## Strut",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:08.969Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "wiki169"
+   ],
+   "content": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n# AGENTS.md — wiki169\n\nQuesta cartella è una knowledge base gestita dall'app **LLM Wiki** dell'utente.",
+   "createdAt": "2026-11-18T11:16:09.142Z",
+   "files": [
+    "~\\Documents\\wiki169\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zrfn_10044e7e949b",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:09.142Z",
+    "channel": "agent"
+   },
+   "project": "wiki169",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n# AGENTS.md — wiki169\n\nQue",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:09.142Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "wiki169"
+   ],
+   "content": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n## Cosa sei e cosa fai\n\nSei un agente che lavora insieme all'utente usando questo progetto come memoria e fonte di documentazione.",
+   "createdAt": "2026-11-18T11:16:09.320Z",
+   "files": [
+    "~\\Documents\\wiki169\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zrmh_c5d07dac26c3",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:09.320Z",
+    "channel": "agent"
+   },
+   "project": "wiki169",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n## Cosa sei e cosa fai\n\nSe",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:09.320Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "wiki169"
+   ],
+   "content": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n## Come leggere la knowledge base\n\nL'app espone una API locale JSON su `http://127.0.0.1:19828` con token di autenticazione:\n\n- `GET /api/v1/health` — verifica che l'app sia attiva\n- `POST /api/v1/projects/current/search` — body `{\"query\": \"...\", \"topK\": 10}` → risultati con `path`, `snippet`, `score`\n- `GET /api/v1/projects/current/files/content?path=wiki/...` — contenuto completo di una pagina\n- `GET /api/v1/projects/{id}/graph` — grafo dei link tra pagine\n\nIl token sta nella variabile d'ambiente `LLM_WIKI_API_TOKEN`. Non stamparlo mai in output o log.",
+   "createdAt": "2026-11-18T11:16:09.579Z",
+   "files": [
+    "~\\Documents\\wiki169\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zrsm_9495abc48ad3",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:09.579Z",
+    "channel": "agent"
+   },
+   "project": "wiki169",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n## Come leggere la knowled",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:09.579Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "wiki169"
+   ],
+   "content": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n## Regole fisse\n\n- **Cita sempre il path** della pagina usata per rispondere (`wiki/...`).\n- `raw/sources/` è **sola lettura**: sono i documenti originali, non si modificano mai.\n- Le modifiche alle pagine curate si fanno solo su richiesta esplicita dell'utente.\n- Se l'API non risponde: l'app desktop non è aperta — dillo all'utente invece di riprovare a vuoto.\n- Rispondi nella lingua dell'utente (italiano), frasi brevi.",
+   "createdAt": "2026-11-18T11:16:10.110Z",
+   "files": [
+    "~\\Documents\\wiki169\\AGENTS.md"
+   ],
+   "id": "mem_mwm0zs6v_cd5065d63cf4",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:16:10.110Z",
+    "channel": "agent"
+   },
+   "project": "wiki169",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · wiki169 · ~\\Documents\\wiki169\\AGENTS.md]\n## Regole fisse\n\n- **Cita ",
+   "type": "preference",
+   "updatedAt": "2026-11-18T11:16:10.110Z",
+   "version": 1
   }
  ],
  "observations": {
