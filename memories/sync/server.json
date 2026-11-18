@@ -33914,6 +33914,103 @@
    "version": 1
   },
   {
+   "concepts": [
+    "MDS",
+    "OEM",
+    "Read output plain text",
+    "LASTOEMUSED properties",
+    "bypass Export dialog",
+    "bypass Browse dialog",
+    "pyjab",
+    "oemFiles binary logs"
+   ],
+   "content": "MDS OEM facts (2026-10): (1) MDS 'Read' output lives in %USERPROFILE%\\MDS_DM\\Properties\\cache\\OEM\\<code>\\ as PLAIN TEXT: '<VL>_time' files = epoch-millis timestamps one per line; parameter files (e.g. ADU1_OAT_AMMC2_AVIO_VL502) = numeric values one per line separated by blank lines; companion '<param>_VALIDITY' files same structure; time bases per VL-code (110_time/501_time/502_time/503_time) at different rates (110_time=6774 samples vs VL502 param=1694). => We can build .mat ourselves from these text files, making the MDS Export save-dialog unnecessary. (2) MDS_DM.properties key 'it.agusta.humm.LASTOEMUSED_dbs_infos' persists last-used OEM folder path; edit it with app closed + restart => internal state restored without Browse dialog (programmatic JAB setText does NOT update internal state, Scan then rejects with 'Please select a valid folder!'). (3) Raw .log in oemFiles are binary proprietary (big-endian float32 mixed patterns) - not decodable without MDS decode tables; do NOT try. (4) Transient shell bug after server restart made python scripts exit code 1 with zero output; retest with trivial python -c before blaming scripts.",
+   "createdAt": "2026-10-28T15:49:03.304Z",
+   "files": [
+    "C:\\Users\\49359\\MDS_DM\\Properties\\cache\\OEM\\2-1-0",
+    "C:\\Users\\49359\\MDS_DM\\Properties\\MDS_DM.properties"
+   ],
+   "id": "mem_mvsahtvq_6dec5104e9b9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-28T15:49:03.304Z",
+    "channel": "agent"
+   },
+   "project": "mds-oem-report",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MDS OEM facts (2026-10): (1) MDS 'Read' output lives in %USERPROFILE%\\MDS_DM\\Pro",
+   "type": "fact",
+   "updatedAt": "2026-10-28T15:49:03.304Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "MDS OEM automation (pyjab/JAB): gotca risolto — il lato-Java dell'AccessBridge dentro la JVM di MDS puo' MORIRE a sessione in corso (isJavaWindow(hwnd)=False su finestra viva e 'Responding', EnumWindows la vede, pyjab client sano). Sintomo: JABDriver TimeoutError 'no java window found by title' mentre Get-Process mostra la finestra con MainWindowTitle corretto. Rimedio: solo riavvio MDS (il bridge si riabilita da C:\\Users\\49359\\.accessibility.properties con assistive_technologies=com.sun.java.accessibility.AccessBridge — il file jre1.8.0_231\\lib\\accessibility.properties e' tutto commentato, NON conta). Comando relaunch testato da Desktop\\MDS_DataManager: jre1.8.0_231\\bin\\java.exe -Xmx2048m -Xms2048m -Dfile.encoding=UTF-8 -jar .\\Decrypt.jar \\\\ACCS1101 it.agusta.MDS_DM.MDS_DM (NON runJar.bat che e' a 4040m e fallisce per RAM libera insufficiente). Startup ~4-5 min. I nomi dei log Properties/out*.log sono UTC.",
+   "createdAt": "2026-10-29T11:47:47.147Z",
+   "files": [],
+   "id": "mem_mvthbez6_ee020e03662b",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-29T11:47:47.147Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "MDS OEM automation (pyjab/JAB): gotca risolto — il lato-Java dell'AccessBridge d",
+   "type": "fact",
+   "updatedAt": "2026-10-29T11:47:47.147Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "SharePoint AI Contest form (list 68ddc769-8dba-4571-9b9a-6b383f30f52b, site leonardocompany.sharepoint.com/teams/FlightControlSystem): REST _api writes are 403-blocked for this user; only the SPFx client form UI can submit. In OpenCode built-in browser the form mounts at listforms.aspx?cid=... after full SSO; fill textarea values with tools.browser.fill_form (CDP trusted events) — native-setter+inputEvent fills DOM but not React state. Choice fields are combobox divs (id displayView-displayDiv-<internal>); click then pick [role=option]. Hidden input[type=file] must be made visible (style overrides) to appear in snapshot as [button] 'Attach Files', then files.upload with its ref; files.drop on the Add attachments button does NOT work. User prefers clicking Submit themselves.",
+   "createdAt": "2026-10-29T14:07:24.551Z",
+   "files": [],
+   "id": "mem_mvtmaz09_147f27852fcf",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-29T14:07:24.551Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "SharePoint AI Contest form (list 68ddc769-8dba-4571-9b9a-6b383f30f52b, site leon",
+   "type": "fact",
+   "updatedAt": "2026-10-29T14:07:24.551Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "OpenWhispr v1.11.0 su Windows: (1) installato in %LOCALAPPDATA%\\Programs\\OpenWhispr, dati in %APPDATA%\\open-whispr. (2) Zscaler blocca gli .exe da release-assets.githubusercontent.com e tutti i mirror GitHub (gh-proxy, moeyy, ghfast, ghproxy) e Uptodown (403 a curl): l'unica via e' il download manuale dal browser, poi verificare SHA256 contro il digest ufficiale dell'API GitHub (campo asset.digest). (3) Config BYOK: provider/baseURL stanno in localStorage (cleanupProvider=custom, cleanupCloudBaseUrl=https://ai-gateway.leonardo.com/v1) ma le CHIAVI API in localStorage vengono cancellate allo startup come 'stale secret': vanno salvate via IPC dell'app con Runtime.evaluate su window.electronAPI.saveCleanupCustomKey(key) (getter getCleanupCustomKey), tramite Chrome DevTools Protocol lanciando l'app con --remote-debugging-port=9222. (4) Il gateway Leonardo NON supporta /v1/audio/transcriptions (404): per la trascrizione vocale serve un modello locale Whisper o altro provider; il gateway funziona solo per la parte testo AI (chat/completions OK).",
+   "createdAt": "2026-10-29T14:52:24.746Z",
+   "files": [],
+   "id": "mem_mvtnwucx_b9b16600212e",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-29T14:52:24.746Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "OpenWhispr v1.11.0 su Windows: (1) installato in %LOCALAPPDATA%\\Programs\\OpenWhi",
+   "type": "fact",
+   "updatedAt": "2026-10-29T14:52:24.746Z",
+   "version": 1
+  },
+  {
    "agentId": "import:claude-code",
    "concepts": [
     "agent-memory-import",
@@ -33974,6 +34071,34 @@
    "version": 4
   },
   {
+   "concepts": [
+    "hyperframes",
+    "ffmpeg",
+    "zscaler",
+    "windows",
+    "env vars",
+    "html-to-video"
+   ],
+   "content": "HyperFrames (npm `hyperframes`, HeyGen) installed globally on this Windows box. Its own binary downloads (chrome-headless-shell, ffmpeg-static) FAIL: corporate Zscaler proxy blocks gyan.dev/GitHub/npm-postinstall TLS. Working fix: ffmpeg/ffprobe via npm @ffmpeg-installer/win32-x64 + @ffprobe-installer/win32-x64 (exes bundled in tarball), copied to C:\\Users\\49359\\AppData\\Local\\Temp\\opencode\\ffmpeg\\. Before any `hyperframes render` set: HYPERFRAMES_FFMPEG_PATH, HYPERFRAMES_FFPROBE_PATH (to those exes) and HYPERFRAMES_BROWSER_PATH=C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe, plus --low-memory-mode --workers 1 (only ~1GB free RAM). Video-from-stills = one index.html with <img class=clip data-start data-duration> per frame + root data-duration, then `hyperframes render`. Full howto: C:\\Users\\49359\\AppData\\Local\\Temp\\opencode\\HYPERFRAMES-HOWTO.md; working demo project: C:\\Users\\49359\\AppData\\Local\\Temp\\opencode\\hf-demo (out.mp4 verified 1920x1080 h264 9s).",
+   "createdAt": "2026-10-30T11:10:53.350Z",
+   "files": [],
+   "id": "mem_mvuvftrk_e74eed00e7c3",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-30T11:10:53.350Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "HyperFrames (npm `hyperframes`, HeyGen) installed globally on this Windows box. ",
+   "type": "workflow",
+   "updatedAt": "2026-10-30T11:10:53.350Z",
+   "version": 1
+  },
+  {
    "agentId": "import:claude-code",
    "concepts": [
     "agent-memory-import",
@@ -34002,6 +34127,252 @@
    "type": "preference",
    "updatedAt": "2026-10-30T11:30:02.672Z",
    "version": 5
+  },
+  {
+   "concepts": [
+    "claude code",
+    "notifica push",
+    "telefono",
+    "background session",
+    "remote control",
+    "workspace trust"
+   ],
+   "content": "NOTIFICA TELEFONO via Claude Code da OpenCode (funziona): il CLI claude non è in PATH, ma il binario vive nell'estensione VS Code: c:\\Users\\49359\\.vscode\\extensions\\anthropic.claude-code-<ver>-win32-x64\\resources\\native-binary\\claude.exe. Pattern: `claude --bg --brief --tools '\"\"' --model haiku -n <nome> \"<testo notifica>\"` → sessione background con /rc active (remote control) → push sul telefono quando completa (agentPushNotifEnabled=true in ~/.claude/settings.json). Verifica: `claude agents --json` (status/state), `claude logs <id>`. GOTCHA 1: --bg confligge con -p, il prompt va posizionale. GOTCHA 2: 'Workspace not trusted' per bg sessions → ~/.claude.json, projects['c:/<path>'].hasTrustDialogAccepted=true (anche chiave con C maiuscolo duplicata); backup auto in ~/.claude.json.bak-notifica. 'claude agents' interattivo richiede TTY → usare --json.",
+   "createdAt": "2026-10-30T14:58:09.771Z",
+   "files": [],
+   "id": "mem_mvv3k376_ac006d928aa6",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-30T14:58:09.771Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "NOTIFICA TELEFONO via Claude Code da OpenCode (funziona): il CLI claude non è in",
+   "type": "workflow",
+   "updatedAt": "2026-10-30T14:58:09.771Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "sharepoint",
+    "contest",
+    "submit",
+    "LLM Wiki",
+    "AW189",
+    "report collaudo"
+   ],
+   "content": "CONTEST AI FCS 2026 SUBMIT COMPLETATO (30/10/2026 ~15:52): SharePoint list 68ddc769-8dba-4571-9b9a-6b383f30f52b (2026 AI Contest for FCS Process Improvement), nuovo item Id=15 con 4 allegati (REPORT-QA-SYRS.pdf versione selling, grafo.png, how-it-works.png, demo.mp4). Report selling: titolo 'Report di collaudo — LLM Wiki knowledge base agentic per la documentazione FCS (progetto pilota AW189)', senza problemi noti, con sezione sicurezza dati (tutto resta in Leonardo). Pipeline PDF: MD → script Python md2pdf_report.py → HTML → Chrome headless --print-to-pdf. Form URL listforms.aspx cid=NjhkZGM3... tab tab_c0962b4b-9940-42a9-a297-cce53de154be.",
+   "createdAt": "2026-10-30T14:58:10.570Z",
+   "files": [],
+   "id": "mem_mvv3k3nb_0d3aba608f25",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-10-30T14:58:10.570Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "CONTEST AI FCS 2026 SUBMIT COMPLETATO (30/10/2026 ~15:52): SharePoint list 68ddc",
+   "type": "fact",
+   "updatedAt": "2026-10-30T14:58:10.570Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "uncommitted move",
+    "encoding utf8",
+    "documents layout",
+    "stato_progetto"
+   ],
+   "content": "speedgoat repo (PC1, C:\\Users\\49359\\Documents\\MATLAB\\speedgoat): as of 2026-11-02 an UNCOMMITTED reorganization sits in the worktree — loose program docs from repo root (HighLevelPlan_Speedgoat.xlsx, (Customername)_Speedgoat_RealTimeTesting_Requirements.xlsx, ConnessioniFCC_RIG_NMH_AW189.xlsx, Resume Interface.docx) and the whole docs/ folder (plans/*.md, stato/stato_progetto.html) moved into 04_SPDG_Documents/ (04_SPDG_Documents/docs/plans|stato). Moved text files re-encoded UTF-16 LE -> UTF-8 no BOM, content verified unchanged; PowerShell redirection writes UTF-16 by default so use -Encoding utf8 when regenerating stato_progetto.html. git HEAD still has old paths. AGENTS.md updated accordingly (commit right after this one). Test_Launcher submodule inner branch = Speedgoat_Mod verified; AutoHarnessDashboard.m is at tools/AutoHarnessDashboard.m.",
+   "createdAt": "2026-11-02T11:47:55.267Z",
+   "files": [
+    "AGENTS.md",
+    "04_SPDG_Documents/docs/stato/stato_progetto.html"
+   ],
+   "id": "mem_mvz72zly_1fff9b2293c9",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-02T11:47:55.267Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "speedgoat repo (PC1, C:\\Users\\49359\\Documents\\MATLAB\\speedgoat): as of 2026-11-0",
+   "type": "fact",
+   "updatedAt": "2026-11-02T11:47:55.267Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "commit ram",
+    "thrashing",
+    "pulizia mcp",
+    "opencode snapshot"
+   ],
+   "content": "Pulizia commit RAM ripetibile: Get-Process matlab-mcp-server | Sort StartTime -Desc | Select -Skip 1 | Stop-Process -Force (poi i rimanenti muoiono da soli alla disconnessione). ATTENZIONE: i processi git.exe su C:\\Users\\49359\\.local\\share\\opencode sono snapshot interni di OpenCode, NON ucciderli. Dopo pulizia: hard fault/s da 2672 a 244, commit da 72% a 68%. Effetto collaterale noto e innocuo: la sessione agent che ordina la pulizia perde il proprio ponte MATLAB MCP.",
+   "createdAt": "2026-11-05T11:30:51.256Z",
+   "files": [],
+   "id": "mem_mw3gsmkt_1ba78c0de8a7",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T11:30:51.256Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Pulizia commit RAM ripetibile: Get-Process matlab-mcp-server | Sort StartTime -D",
+   "type": "workflow",
+   "updatedAt": "2026-11-05T11:30:51.256Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "graphify",
+    "leonardo gateway",
+    "environment variables",
+    "OPENAI_API_KEY",
+    "persistenza API"
+   ],
+   "content": "graphify API now PERSISTENT at Windows user level (HKCU\\Environment, set 2026-11-05): OPENAI_BASE_URL=https://ai-gateway.leonardo.com/v1, OPENAI_API_KEY=dvx_pki_... (same key as opencode.json provider.leonardo), OPENAI_MODEL='task=general, effort=balanced'. Verified e2e: bare 'graphify .' (no flags) auto-detects backend 'openai' from OPENAI_API_KEY and hits the Leonardo gateway (cli.py rewrites 'graphify <path>' to 'graphify extract <path>'; detect_backend_with_source priority gemini>kimi>claude>openai). Only NEW terminals see the vars (already-open ones don't; OpenCode session shells still need inline env). --max-concurrency has NO env var in graphify 0.9.101 (default 4; gateway needs 2 for big runs, else chunks drop and heal on rerun). .graphifyrc only supports viz_node_limit and language.* keys.",
+   "createdAt": "2026-11-05T11:41:24.923Z",
+   "files": [],
+   "id": "mem_mw3h66o2_95abdd1210dd",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T11:41:24.923Z",
+    "channel": "agent"
+   },
+   "project": "speedgoat",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "graphify API now PERSISTENT at Windows user level (HKCU\\Environment, set 2026-11",
+   "type": "fact",
+   "updatedAt": "2026-11-05T11:41:24.923Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "Leonardo AI gateway (ai-gateway.leonardo.com/v1) model discovery DONE: behind /v1/models' single 'auto' entry, ANY model string is accepted and routed to the same deployment — 11 distinct strings probed (task=general low/balanced/high, task=coding, task=extraction, gpt-4o-mini, gpt-4.1, claude-opus-4-1, claude-sonnet-4-5, qwen3-coder-480b) all returned model='airouter', system_fingerprint='vllm-0.32.0-tp4-142f2bbb', x-serving-target='direct', and self-report 'GLM by Z.ai'. Single GLM (Z.ai) vLLM tp4 deployment behind everything; per-category model benchmark is moot; OPENAI_MODEL string choice is cosmetic (current 'task=general, effort=balanced' is fine).",
+   "createdAt": "2026-11-05T14:17:50.587Z",
+   "files": [],
+   "id": "mem_mw3mrco4_1ed43ab773c4",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T14:17:50.587Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Leonardo AI gateway (ai-gateway.leonardo.com/v1) model discovery DONE: behind /v",
+   "type": "fact",
+   "updatedAt": "2026-11-05T14:17:50.587Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "Leonardo gateway capabilities verified (2026-11-05): /v1/models lists only 'auto'; auto chat works (GLM/Z.ai, vllm-0.32.0-tp4). /v1/embeddings EXISTS but requires model='task=embedding, context=X' with X in {512,1024,qwen} (bare 'task=embedding' rejected by router validation); all return dim=1024, model field 'airouter'. Vision: chat model accepts image_url content (multimodal GLM) and answers correctly. /v1/audio/transcriptions EXISTS with only model 'Qwen/Qwen3-ASR-1.7B'; returns {text, usage:{seconds}}; empty text on pure-tone WAV (no speech) = working.",
+   "createdAt": "2026-11-05T14:21:30.925Z",
+   "files": [],
+   "id": "mem_mw3mw2dp_f2732510aee0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-05T14:21:30.925Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Leonardo gateway capabilities verified (2026-11-05): /v1/models lists only 'auto",
+   "type": "fact",
+   "updatedAt": "2026-11-05T14:21:30.925Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "iii",
+    "REST",
+    "worker",
+    "404",
+    "standalone.json",
+    "restart",
+    "kb-sync"
+   ],
+   "content": "Root cause agentmemory REST 404 (rottura dal 28 ott 2026): il worker node che registra le 275 funzioni mem::/api:: sull'engine iii.exe (:3111) era morto (worker.pid=16632 inesistente, nessun child dell'engine PID 19804) → engine senza funzioni registrate → TUTTE le route REST /agentmemory/* rispondevano 404 e il task pianificato kb-sync falliva. Intanto lo shim MCP partiva in fallback embedded scrivendo su ~/.agentmemory/standalone.json (24 memorie mai arrivate all'engine). Fix: stop --force col CLI (node_modules/@agentmemory/agentmemory/dist/cli.mjs) e riavvio via wscript kb-agentmemory.vbs (stesso meccanismo dell'autostart al login); worker riconnesso con 275 funzioni, REST /agentmemory/export vivo in ~16s.",
+   "createdAt": "2026-11-06T14:58:52.049Z",
+   "files": [
+    "C:\\Users\\49359\\.agentmemory\\kb-agentmemory.vbs",
+    "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\kb-agentmemory.cmd"
+   ],
+   "id": "mem_mw53nyaz_fde4f4d24de8",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-06T14:58:52.049Z",
+    "channel": "agent"
+   },
+   "project": "knowledge-base",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Root cause agentmemory REST 404 (rottura dal 28 ott 2026): il worker node che re",
+   "type": "bug",
+   "updatedAt": "2026-11-06T14:58:52.049Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "dual-store",
+    "merge",
+    "memory-log.mjs",
+    "standalone.json"
+   ],
+   "content": "Decisione riconciliazione dual-store agentmemory (engine state_store.db vs shim embedded standalone.json): niente api::import (rischioso), il bridge scripts/memory-log.mjs fonde le due sorgenti IN MEMORIA con union per id tenendo la versione con updatedAt più recente (loadStandalone legge 'mem:memories', chiave NON 'mem'). Le memorie scritte dallo shim durante i periodi di engine morto non si perdono nel log wiki.",
+   "createdAt": "2026-11-06T14:58:53.053Z",
+   "files": [
+    "scripts/memory-log.mjs"
+   ],
+   "id": "mem_mw53nz2x_31cb21d393a0",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-06T14:58:53.053Z",
+    "channel": "agent"
+   },
+   "project": "knowledge-base",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Decisione riconciliazione dual-store agentmemory (engine state_store.db vs shim ",
+   "type": "fact",
+   "updatedAt": "2026-11-06T14:58:53.053Z",
+   "version": 1
   },
   {
    "agentId": "import:claude-code",
@@ -34341,6 +34712,40 @@
    "type": "preference",
    "updatedAt": "2026-11-12T13:30:03.896Z",
    "version": 2
+  },
+  {
+   "concepts": [
+    "agentmemory",
+    "worker",
+    "recidiva",
+    "log capture",
+    "autostart",
+    "vbs",
+    "kb-sync"
+   ],
+   "content": "Recidiva worker agentmemory (12 nov 2026): il worker del CLI e' morto di nuovo silenziosamente entro 6 giorni dal fix del 6 nov (worker.pid stale, engine vivo, REST 404 su tutte le route). Nessun crash nel registro eventi Windows e nessun log: l'autostart wscript scartava stdout/stderr del CLI. Fix infrastrutturale: (1) nuovo wrapper C:\\Users\\49359\\.agentmemory\\kb-agentmemory-run.cmd che lancia il CLI redirigendo output in ~/.agentmemory/kb-agentmemory.log; (2) kb-agentmemory.vbs aggiornato a chiamare il wrapper; (3) scripts/memory-log.mjs aggiunto in coda a kb-sync.cmd cosi' il bridge decision/bug->wiki log.md gira ogni giorno insieme al sync. La prossima morte sara' diagnosticabile dal log.",
+   "createdAt": "2026-11-12T15:09:59.563Z",
+   "files": [
+    "C:\\Users\\49359\\.agentmemory\\kb-agentmemory-run.cmd",
+    "C:\\Users\\49359\\.agentmemory\\kb-agentmemory.vbs",
+    "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\kb-agentmemory.cmd"
+   ],
+   "id": "mem_mwdopdd1_183a0c2cf869",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-12T15:09:59.563Z",
+    "channel": "agent"
+   },
+   "project": "knowledge-base",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Recidiva worker agentmemory (12 nov 2026): il worker del CLI e' morto di nuovo s",
+   "type": "bug",
+   "updatedAt": "2026-11-12T15:09:59.563Z",
+   "version": 1
   },
   {
    "agentId": "import:claude-code",
@@ -34853,6 +35258,58 @@
    "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/jarvis-ha.md]\nSet up ",
    "type": "preference",
    "updatedAt": "2026-11-16T22:30:04.655Z",
+   "version": 1
+  },
+  {
+   "concepts": [
+    "benchmark",
+    "performance",
+    "gateway",
+    "auto",
+    "latenza",
+    "throughput",
+    "tokens"
+   ],
+   "content": "Benchmark gateway 'auto' (17 nov 2026, N=5 per caso, max_tokens=512, chat/completions): latenza min=1021ms p50=2203ms p95=3958ms max=8426ms. Per caso: parola p50=1276ms 44tok/s; matematica p50=1137ms 26tok/s; creativo p50=3671ms 65tok/s (alta varianza, max 8.4s); testo-lungo p50=2989ms 107tok/s. Ogni richiesta costa ~938 prompt tokens anche con prompt utente di poche parole (overhead di sistema costante del gateway). Nota: la chiave hardcoded in bench-leonardo.ps1 e' STORTA (401) e diversa da quella viva nel config globale opencode.jsonc. Output breve = latenza dominata da costo fisso ~1s; il tok/s misurato su risposte di una parola e' poco significativo.",
+   "createdAt": "2026-11-17T17:03:21.916Z",
+   "files": [
+    "C:/Users/49359/Documents/llamacpp/bench-leonardo.ps1"
+   ],
+   "id": "mem_mwkxz9zf_149d97817275",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-17T17:03:21.916Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "Benchmark gateway 'auto' (17 nov 2026, N=5 per caso, max_tokens=512, chat/comple",
+   "type": "fact",
+   "updatedAt": "2026-11-17T17:03:21.916Z",
+   "version": 1
+  },
+  {
+   "concepts": [],
+   "content": "wiki169 ingest - causa fallimenti ricorrenti = SOLO TRASPORTO (proxy 19829 morto -> task zombi \"error sending request\" / \"Chunk analysis stream failed\"; il limite \"4500 token\" era gia' neutralizzato dal rewrite max_tokens del proxy, verificato live alle 18:06). Fix strutturale consegnato: attivita' pianificata \"wiki-supervisor\" (Register-ScheduledTask ogni 5 min x3650gg) esegue C:\\Users\\49359\\Documents\\llamacpp\\supervisor-wiki.ps1 -> TcpClient su 19829 e se morto riavvia python proxy-wiki.py; se coda piena e proxy-wiki.log fermo >=20 min -> ricetta sblocco motore (taskkill llm-wiki.exe -> delete .llm-wiki\\file-snapshot.json -> start llm-wiki.exe -> attendere porta 19828 -> POST rescan /api/v1/projects/f2b5fdbb-200f-40ff-9eb1-a37b10a441a0/wikisources/rescan); cooldown 60min via file .unlock-stamp + mutex anti-overlap. Lezione chiave: il motore LLM Wiki riprende da solo appena il trasporto torna (dimostrato 18:06->18:09 senza intervento). Gotcha ambiente questo box: spawn PowerShell lentissimo/degradato -> usare shell in background; Invoke-WebRequest mente su localhost per WPAD -> solo TcpClient o curl --noproxy \"*\"; Get-CimInstance/WMI va in hang; ID progetto reale wiki169 = f2b5fdbb-200f-40ff-9eb1-a37b10a441a0 (quello negli appunti era corrotto).",
+   "createdAt": "2026-11-17T17:10:29.493Z",
+   "files": [],
+   "id": "mem_mwky7lqd_a2df0865a0a6",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-17T17:10:29.493Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "wiki169 ingest - causa fallimenti ricorrenti = SOLO TRASPORTO (proxy 19829 morto",
+   "type": "fact",
+   "updatedAt": "2026-11-17T17:10:29.493Z",
    "version": 1
   },
   {
