@@ -37993,6 +37993,29 @@
    "type": "preference",
    "updatedAt": "2026-11-18T11:16:10.110Z",
    "version": 1
+  },
+  {
+   "concepts": [
+    "kb-test"
+   ],
+   "content": "kb-test accc0068 2026-11-18",
+   "createdAt": "2026-11-18T11:48:09.697Z",
+   "files": [],
+   "id": "mem_mwm24xpf_3a2128fab284",
+   "isLatest": true,
+   "kbAuthor": "accc0068",
+   "origin": {
+    "capturedAt": "2026-11-18T11:48:09.697Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "kb-test accc0068 2026-11-18",
+   "type": "fact",
+   "updatedAt": "2026-11-18T11:48:09.697Z",
+   "version": 1
   }
  ],
  "observations": {
