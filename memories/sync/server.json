@@ -35215,7 +35215,7 @@
     "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
    ],
    "id": "mem_mwju6q1y_4cd34b527adc",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-16T22:30:04.273Z",
@@ -38015,6 +38015,63 @@
    "title": "kb-test accc0068 2026-11-18",
    "type": "fact",
    "updatedAt": "2026-11-18T11:48:09.697Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EPG setup](iptv-epg-setup.md) — Dispatcharr→Jellyfin chain, EPG sources, pitfalls, ffmpeg wrapper fix for live TV freeze/loop\n- [Server audit Nov 2026](server-audit-2026-11.md) — CPU hogs (hermes-webui loop, crowdsec healthcheck, GNOME), disk 87%, half-done folder migration\n- [Immich](immich.md) — stack foto in /DATA/AppData/immich-app, stato e cose da chiudere\n- [StreamingCommunity + Teldrive](streamingcommunity-teldrive.md) — panel loses moved files; mergerfs union fix (done 2026-11-12)\n- [HA Diorama 3D](home-assistant-diorama.md) — Casa 3D view, floor plan from Drive, Diorama config schema\n- [VidBee](vidbee.md) — downloader on 3010/3110, yt-dlp Alpine wrapper fix, no transcription in Docker, publish via CTM\n- [WhatsApp lettore](whatsapp-lettore.md) — read-only whatsmeow reader in secondbrain, login via QR from his terminal, 14-day purge, pending send/scope decisions\n- [Tuya local](tuya-local.md) — tuya_local fix Luce Camera, pending Smart IR/battery, how to edit root-owned HA storage\n- [Jarvis HA](jarvis-ha.md) — brain-mcp :8765, HA token file, agent/pipeline config via API, pending items\n- [Sono a casa → Emma](sono-a-casa-emma.md) — HA event + host service sends WhatsApp on arrival, guard vs flappy trackers, prova/attivo switch",
+   "createdAt": "2026-11-21T16:30:03.825Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md"
+   ],
+   "id": "mem_mwqmj0dd_5c89af8654bf",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-21T16:30:03.825Z",
+    "channel": "agent"
+   },
+   "parentId": "mem_mwju6q1y_4cd34b527adc",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [
+    "mem_mwju6q1y_4cd34b527adc"
+   ],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/MEMORY.md]\n- [IPTV/EP",
+   "type": "preference",
+   "updatedAt": "2026-11-21T16:30:03.825Z",
+   "version": 10
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code"
+   ],
+   "content": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/sono-a-casa-emma.md]\nBuilt 2026-11-21 at Francesco's request (thread \"messaggio sono a casa a Emma\").\n- HA automation `automation.emma_sono_a_casa` (created via REST config API, id emma_sono_a_casa): triggers when person.francesco_maggiulli / device_tracker.2203129g (Xiaomi GPS) / device_tracker.xiaomi_12_lite(_2) (WiFi, very flappy) go `home` → fires event `sono_a_casa_emma`. Disabling it stops everything.\n- Host service: systemd --user `sono-a-casa-emma.service` → /DATA/AppData/secondbrain/99_Sistema/Script/whatsapp/sono_a_casa/sono_a_casa.py (websocket to HA with /DATA/AppData/jarvis/.ha_token). Guard: sends only if no tracker was home (stable >5 min) for ≥2 h, and ≥6 h since last send; phrase from frasi.txt (no repeat of last 10); waits if wa_lettore running; uses invio/wa_invia. Log/state in sono_a_casa/privato/.\n- config.json `modalita`: \"prova\" = log only, \"attivo\" = real send. Started in \"prova\"; switch to attivo only after Francesco OKs phrases + first real send.\n- Francesco's style with Emma: elongated vowels (amoreeee, casaaaa), Spanish jokes (she was in Seville), \"Pota\", \"playboyyy\", \"Border Olly Jolly\". \"cicchitita\" is a nickname he asked for.\n\n**Why:** Xiaomi GPS/WiFi trackers flap home/not_home every few minutes (MIUI battery saver), so guard lives in the service, not HA conditions.\n**How to apply:** Edit frasi.txt freely (one line = suffix after \"Sono a casa\"); restart not needed. Related: [[whatsapp-lettore]], [[jarvis-ha]].",
+   "createdAt": "2026-11-21T16:30:04.020Z",
+   "files": [
+    "~/.claude/projects/-DATA-AppData-arr/memory/sono-a-casa-emma.md"
+   ],
+   "id": "mem_mwqmj0kz_692942a245cc",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-21T16:30:04.020Z",
+    "channel": "agent"
+   },
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · ~/.claude/projects/-DATA-AppData-arr/memory/sono-a-casa-emma.md]\n",
+   "type": "preference",
+   "updatedAt": "2026-11-21T16:30:04.020Z",
    "version": 1
   }
  ],
