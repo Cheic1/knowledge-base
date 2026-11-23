@@ -38073,6 +38073,470 @@
    "type": "preference",
    "updatedAt": "2026-11-21T16:30:04.020Z",
    "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "firefish"
+   ],
+   "content": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n# AGENTS.md – Pre-APE\n\nSaaS MVP for surveyors (geometri): login → list of site surveys → 6-step wizard (data, building, envelope, systems, photos, results) saved to the server → HTML/PDF report. Repo `Cheic1/pre-ape`, CI in `.github/workflows/build.yml` (flutter analyze + test, backend pytest with Postgres service, root Docker image build, web/android/ios artifacts, Pages deploy on `main`).\n\n- `backend/` – FastAPI API (Python `>=3.11`). Run/test from this dir.\n- `frontend/` – Flutter app (Dart `>=3.3.0 <4.0.0`, `flutter_riverpod`, `http`, `shared_preferences`). No Flutter SDK on host; builds run in Docker (`ghcr.io/cirruslabs/flutter`, persistent `preape-pubcache` volume – `--rm` containers + tool timeouts leave the container alive, check `docker ps` before relaunching). Platform dirs (`android/`, `ios/`, `web/`) are **not committed** – regenerate with `flutter create --org com.preape --project-name pre_ape --platforms=... .` (only adds missing files). `assets/images/.gitkeep` must stay (pubspec lists the dir).\n- Ignore `frontend/backend/` (stale) and `nav.sh` paths pointing at it.\n- Deploy: see `GUIDA_DEPLOY.md` (Italian, user-facing).",
+   "createdAt": "2026-11-23T19:09:24.396Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
+   ],
+   "id": "mem_mwtn3mpr_5a9ed0e8e229",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:24.396Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n# AGENTS.m",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:24.396Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "firefish"
+   ],
+   "content": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n## Deploy shape\n\n- Root `Dockerfile`: stage 1 builds Flutter web (`--base-href /`), stage 2 `python:3.11-slim` runs `uvicorn main:app` on `$PORT` (default 7031) and serves the web build from `STATIC_DIR=/app/static` → **one origin, no CORS**. `ApiClient.resolveBaseUrl` uses the page origin on web unless `--dart-define=API_BASE_URL=...`.\n- `docker-compose.yml` (home server): `app` on `127.0.0.1:${APP_PORT:-7032}` + `db` (postgres 16, volume `pgdata`, no published port). Needs `.env` (`SECRET_KEY`, `POSTGRES_PASSWORD`, `DOCUMENTS_ENCRYPTION_KEY`; template `.env.example`).\n- Public URL `preape.cheic2.it`: the host's single cloudflared tunnel `home` sends `*.cheic2.it` to Nginx Proxy Manager; a service is published by adding it in the **CTM** panel (`/DATA/AppData/Script/native/app`, creates the NPM Proxy Host). The old `ctm` tunnel / `ctm.yml` from DEPLOY_PLAN.md is no longer running. Publishing is a production action: ask the user.\n- `render.yaml`: Render free Blueprint (Docker, Frankfurt) + external Postgres (Neon) via `DATABASE_URL`.",
+   "createdAt": "2026-11-23T19:09:24.649Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
+   ],
+   "id": "mem_mwtn3mx4_4deb0227fdf3",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:24.649Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n## Deploy ",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:24.649Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "firefish"
+   ],
+   "content": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n## Backend\n\n- Entry `backend/main.py` (`main:app`); `init_db()` runs in the lifespan (skip with `SKIP_INIT_DB=1`): `create_all` + idempotent `ALTER TABLE … ADD COLUMN IF NOT EXISTS` list `_ADDITIVE_MIGRATIONS` (no Alembic yet – add new columns there too). Body limit 16 MB (413). `/` is API info only when no static build is present; with a build, unknown paths fall back to `index.html`.\n- Router: all schemas + endpoints in `backend/app/api/v1/__init__.py` (prefix `/api/v1`, contract documented in its module docstring). `backend/app/__init__.py` is intentionally empty.\n- Auth: email+password, PBKDF2 600k (`app/core/security.py`), JWT HS256, 7-day expiry, strict `Bearer` scheme, in-memory per-IP rate limit on `/auth/*` (`app/core/rate_limit.py`, single-process only).\n- Admin: email in `ADMIN_EMAILS` (CSV env, case-insensitive; `is_admin(user)`, `is_admin` in the login/register response). Endpoints in `app/api/v1/admin.py` under `/api/v1/admin` (`require_admin`: 401/403): users with counts, any user's surveys (view/edit with re-estimate/delete, CENED sheet + .zip via `/admin/surveys/{id}/cened-*`: the wizard's CENED card goes through `surveySaveApiProvider` so the admin's `AdminSurveyClient` routes it there; the catasto documents section still uses owner routes), documents, delete user (`?confirm_email=`, cascade surveys + photo_analyses + documents; 409 on self). Every admin call except `GET /admin/audit` writes an `admin_audit_log` row in the same transaction. Normal `/surveys` endpoints stay owner-only for admins too.\n- Cadastral documents: `app/api/v1/documents.py` (`/surveys/{id}/documents`, `/documents/{id}[/content]`; JSON base64 upload, type from magic bytes PDF/JPEG/PNG, ≤10 MB, ≤10 per survey). Visura PDFs are parsed by `app/core/catasto/visura.py` (pypdf; never extracts owners) into `extracted`. Content is **encrypted at rest** (`app/core/crypto.py`, AES-256-GCM, blob `PAE1`+nonce+ct, key `DOCUMENTS_ENCRYPTION_KEY` = base64 of 32 bytes, required outside `APP_ENV=development`, dev fallback HKDF from `SECRET_KEY`); always read content via `document_content_response()` / `decrypt_document()`. Losing the key = documents unrecoverable.\n- Surveys: owned by `user_id` (others' surveys → 404). `GET /surveys` returns summaries without photos. Photos are stored inline as data-URLs (`photos` dict + `additional_photos` list, JPEG/PNG/WebP only, ≤1M chars each, ≤8 slots / ≤6 extra). Energy inputs live in the `building` JSON column (`app.core.energy.inputs.BuildingInputs`). `energy_score`/`estimated_class`/`energy_result`/climate zone are computed **only server-side** by `app/core/energy/` (simplified UNI/TS 11300 seasonal balance, classes A4…G vs the DM 26/06/2015 reference building, climate data from `app/data/comuni_climatici.csv`, rebuilt by `scripts/build_climate_data.py`) on every create/update and by `POST /estimate`; clients sending them get 422 (`extra=\"forbid\"`). `frontend/lib/core/scoring.dart` only maps score → class letter (`round(score/100*9)` from G). Improvements (`_improvements`): each intervention is re-simulated; cost is parametric (`COST_*`), saving = bill difference, simple payback plus incentives (`INCENTIVE_*`, detrazione in 10 rate → `tempo_ritorno_netto_anni`, `flusso_cassa_cumulato` 0…15 years, rate from optional `BuildingInputs.abitazione_principale`). Tests: `tests/test_energy.py`.\n- The estimate is a preliminary assessment from few survey data, **not** an APE – keep the UI/report wording (\"stima preliminare/indicativa\").\n- DB: Postgres only (`sqlalchemy.dialects.postgresql.UUID`), engine created at import from `DATABASE_URL` (default `postgresql://postgres:postgres@localhost:5433/pre_ape`; `postgres://` URLs are normalized; `pool_pre_ping`). Tests need a real Postgres with `uuid-ossp`, e.g. `docker run -d --name tmp_preape_pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pre_ape -p 127.0.0.1:5433:5432 postgres:16`.\n- Deps: runtime deps only in `pyproject.toml` `dependencies` (mirrored in `requirements.txt`,",
+   "createdAt": "2026-11-23T19:09:24.924Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
+   ],
+   "id": "mem_mwtn3n8g_1245dd13b6af",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:24.924Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n## Backend",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:24.924Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "firefish"
+   ],
+   "content": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\nused by the Dockerfile); `[dev]` for tests, `[ai]` for the unwired `app/services/ai_vision_service.py`, `[extras]` for future features. Host python has no deps: run tests in `python:3.11` with `pip install -e \".[dev]\"` and `--network host`. Full suite ~3 min (PBKDF2).\n- Legal: privacy notice / terms / DPA (Italian) in `backend/app/legal/*.md`, served by `GET /legal/{privacy|termini|dpa}` with `{{PLACEHOLDER}}`s filled from `LEGAL_*` settings. `register` requires `accept_terms: true`; `users.terms_version` vs `app.legal.LEGAL_VERSION` → `terms_accepted` in login/register; `POST /auth/accept-terms`. Bump `LEGAL_VERSION` on substantive text changes (everyone re-accepts). Frontend: `lib/features/legal/` (page, consent text, `TermsGate` dialog). Tests: `tests/test_legal.py`, `test/legal_test.dart`.\n- LLM consultant: `app/core/advisor.py` (OpenAI-compatible chat/completions with tool calling, e.g. freellmapi; env `LLM_BASE_URL` ending in `/v1`, `LLM_MODEL`, `LLM_API_KEY`; empty = disabled → `GET /advisor/status` false, `POST /advisor` 503, app hides the card). The LLM only picks/explains interventions: its tool `simula_scenario` runs the engine, and the server re-attaches all numbers by `rif`, dropping unknown refs. Sends only technical data + comune. Tests: `tests/test_advisor.py` (fake transport, no network).\n- Floor plan → CAD: `app/core/planimetria/` (`raster.py` renders the PDF page with pypdfium2 at 300 dpi or loads the image; `walls.py` OpenCV: filled walls, gaps = doors/windows, holes = rooms, everything in metres; `export.py` DXF R2010 in metres with `PA_*` layers + 3D POLYFACE meshes, OBJ Y-up). Endpoints in `documents.py`: `POST /documents/{id}/cad` (only `kind=planimetria`, optional `CadParams` body: scale, wall height, `meters_per_px`; 422 when no walls), `GET …/cad`, `…/cad.dxf`, `…/cad.obj`; result stored in `survey_documents.cad` (JSON), summary `cad_stats` in the document meta. Synthetic fixture `tests/planimetria_fixtures.py`, tests `tests/test_planimetria.py`. Frontend `lib/features/planimetria/` (2D/3D preview via CustomPainter). No DWG output (closed format): users save as DWG from their CAD. Optional vision LLM (`llm.py`, OpenAI-compatible `/chat/completions`, e.g. freellmapi) reads scale, wall height and room names when `LLM_BASE_URL` + `LLM_MODEL` are set (`CadParams.use_ai`, default true); any failure falls back to CV only with a warning (`source` = `cv` / `cv+llm`). Tests `tests/test_planimetria_llm.py` use a local fake server.\n- Demo data: `app/esempi/` (6 fictional surveys + sample floor-plan PDF), loaded through the API by `python -m app.esempi --email … --password …` (idempotent by title; in production `docker compose exec app python -m app.esempi …`). Test `tests/test_esempi.py` keeps them valid against `SurveyCreate`.\n- `AI vision` is not wired: `analyze_generator_photo` is an `asyncio.sleep` stub.",
+   "createdAt": "2026-11-23T19:09:25.308Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
+   ],
+   "id": "mem_mwtn3nib_3cf508576984",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:25.308Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\nused by th",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:25.308Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "firefish"
+   ],
+   "content": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n## Frontend\n\n- `lib/main.dart` → `AuthGate` (must stay inside `ProviderScope`): `LoginPage` (`features/auth/`) or `SurveyListPage` (`features/surveys/`); the wizard `OnboardingPage` is pushed on top. `authProvider` persists the JWT with shared_preferences; any `UnauthorizedException` → `handleUnauthorized()` (pop to first route).\n- Wizard state: `features/onboarding/survey_provider.dart` (`SurveyNotifier`: `startNew`, `loadFrom(SurveyRead)`, `toWire`, `save(api, complete:)`, `dirty`). `windowType` is `\"<frame> <glass>\"` client-side ↔ `window_frame`/`window_glass` on the wire. Save/exit UI via `features/onboarding/survey_save.dart`.\n- Wire DTOs `lib/models/survey.dart`, client `lib/services/api_client.dart` (inject `http.Client`; tests use `MockClient`).\n- Tests in `frontend/test/` (scoring, report, media, API client, SaaS flow, wizard steps, widgets): `flutter test`.\n- E2E against the real stack: Flutter web renders to canvas; enable semantics by clicking `flt-semantics-placeholder`, then use roles. Obscured/new-route text fields often aren't fillable via semantics – click + `keyboard.type`.",
+   "createdAt": "2026-11-23T19:09:25.616Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
+   ],
+   "id": "mem_mwtn3nn7_aad8e285d0d5",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:25.616Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · firefish · ~/orca/workspaces/pre_ape/firefish/AGENTS.md]\n## Fronten",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:25.616Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "firefish"
+   ],
+   "content": "[claude-code · firefish · ~/orca/workspaces/pre_ape/firefish/CLAUDE.md]\n# CLAUDE.md\n\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\n\n@AGENTS.md\n\n`AGENTS.md` (imported above) is the source of truth for architecture, deploy shape and invariants. `README.md` is partly stale (it mentions Google OAuth/Drive and a `/pre-ape/` base href for local builds): trust `AGENTS.md` where they disagree.",
+   "createdAt": "2026-11-23T19:09:25.790Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/CLAUDE.md"
+   ],
+   "id": "mem_mwtn3nrm_1a9dc8c2a7bb",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:25.790Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · firefish · ~/orca/workspaces/pre_ape/firefish/CLAUDE.md]\n# CLAUDE",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:25.790Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "firefish"
+   ],
+   "content": "[claude-code · firefish · ~/orca/workspaces/pre_ape/firefish/CLAUDE.md]\n## Commands\n\nThe host has no Flutter SDK and no Python deps; everything runs in Docker.\n\n```bash\n# Postgres for backend tests (port 5433 matches the default DATABASE_URL)\ndocker run -d --name tmp_preape_pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pre_ape \\\n  -p 127.0.0.1:5433:5432 postgres:16\n\n# Backend tests (full suite ~3 min because of PBKDF2)\ndocker run --rm --network host -v \"$PWD/backend\":/src -w /src python:3.11 \\\n  sh -c 'pip install -q -e \".[dev]\" && python -m pytest tests/ -v'\n# Single test: python -m pytest tests/test_api.py::TestClass::test_name -v   (or -k <expr>)\n\n# Frontend: analyze + test (regenerate platform dirs first if missing)\ndocker run --rm -v preape-pubcache:/pubcache -v \"$PWD/frontend\":/project -w /project \\\n  ghcr.io/cirruslabs/flutter:stable \\\n  sh -c 'flutter pub get && flutter analyze && flutter test'\n# Single test file: flutter test test/scoring_test.dart  (add --plain-name \"<name>\" for one test)\n\n# Full image (Flutter web + FastAPI on one origin), as CI and Render build it\ndocker build -t pre-ape .\ndocker compose up -d        # home-server stack; needs .env (see .env.example)\n```\n\n`./verify.sh [flutter|backend|playwright]` is the local gate script (flutter analyze + backend pytest in Docker; uses containers `pre_ape_postgres` / `preape_pytest`).",
+   "createdAt": "2026-11-23T19:09:25.981Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/CLAUDE.md"
+   ],
+   "id": "mem_mwtn3o1m_6c01ebb22a52",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:25.981Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · firefish · ~/orca/workspaces/pre_ape/firefish/CLAUDE.md]\n## Comma",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:25.981Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "firefish"
+   ],
+   "content": "[claude-code · firefish · ~/orca/workspaces/pre_ape/firefish/CLAUDE.md]\n## Cross-cutting rules\n\n- The energy estimate lives only in `backend/app/core/energy/` (tests in `backend/tests/test_energy.py`); the frontend just renders `energy_result`. If the score → class mapping changes, update `frontend/lib/core/scoring.dart` too.\n- Adding a survey field touches: the SQLAlchemy model (energy inputs usually go in `BuildingInputs` instead — no migration) + `_ADDITIVE_MIGRATIONS` (backend), the Pydantic schemas in `backend/app/api/v1/__init__.py` (`extra=\"forbid\"`, so the client must not send unknown keys), `frontend/lib/models/survey.dart`, and `SurveyNotifier.loadFrom`/`toWire` in `survey_provider.dart`.\n- CI (`.github/workflows/build.yml`) runs Postgres 15 and builds the Pages web bundle with `--base-href /pre-ape/`; the Docker image uses `--base-href /`.",
+   "createdAt": "2026-11-23T19:09:26.305Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/firefish/CLAUDE.md"
+   ],
+   "id": "mem_mwtn3o7s_b679a80a94d1",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:26.305Z",
+    "channel": "agent"
+   },
+   "project": "firefish",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · firefish · ~/orca/workspaces/pre_ape/firefish/CLAUDE.md]\n## Cross",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:26.305Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "sealion"
+   ],
+   "content": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n# AGENTS.md – Pre-APE\n\nSaaS MVP for surveyors (geometri): login → list of site surveys → 6-step wizard (data, building, envelope, systems, photos, results) saved to the server → HTML/PDF report. Repo `Cheic1/pre-ape`, CI in `.github/workflows/build.yml` (flutter analyze + test, backend pytest with Postgres service, root Docker image build, web/android/ios artifacts, Pages deploy on `main`).\n\n- `backend/` – FastAPI API (Python `>=3.11`). Run/test from this dir.\n- `frontend/` – Flutter app (Dart `>=3.3.0 <4.0.0`, `flutter_riverpod`, `http`, `shared_preferences`). No Flutter SDK on host; builds run in Docker (`ghcr.io/cirruslabs/flutter`, persistent `preape-pubcache` volume – `--rm` containers + tool timeouts leave the container alive, check `docker ps` before relaunching). Platform dirs (`android/`, `ios/`, `web/`) are **not committed** – regenerate with `flutter create --org com.preape --project-name pre_ape --platforms=... .` (only adds missing files). `assets/images/.gitkeep` must stay (pubspec lists the dir).\n- Ignore `frontend/backend/` (stale) and `nav.sh` paths pointing at it.\n- Deploy: see `GUIDA_DEPLOY.md` (Italian, user-facing).",
+   "createdAt": "2026-11-23T19:09:26.530Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
+   ],
+   "id": "mem_mwtn3odz_c1fc26591541",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:26.530Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n# AGENTS.md ",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:26.530Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "sealion"
+   ],
+   "content": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n## Deploy shape\n\n- Root `Dockerfile`: stage 1 builds Flutter web (`--base-href /`), stage 2 `python:3.11-slim` runs `uvicorn main:app` on `$PORT` (default 7031) and serves the web build from `STATIC_DIR=/app/static` → **one origin, no CORS**. `ApiClient.resolveBaseUrl` uses the page origin on web unless `--dart-define=API_BASE_URL=...`.\n- `docker-compose.yml` (home server): `app` on `127.0.0.1:${APP_PORT:-7032}` + `db` (postgres 16, volume `pgdata`, no published port). Needs `.env` (`SECRET_KEY`, `POSTGRES_PASSWORD`, `DOCUMENTS_ENCRYPTION_KEY`; template `.env.example`).\n- Public URL `preape.cheic2.it`: the host's single cloudflared tunnel `home` sends `*.cheic2.it` to Nginx Proxy Manager; a service is published by adding it in the **CTM** panel (`/DATA/AppData/Script/native/app`, creates the NPM Proxy Host). The old `ctm` tunnel / `ctm.yml` from DEPLOY_PLAN.md is no longer running. Publishing is a production action: ask the user.\n- `render.yaml`: Render free Blueprint (Docker, Frankfurt) + external Postgres (Neon) via `DATABASE_URL`.",
+   "createdAt": "2026-11-23T19:09:26.747Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
+   ],
+   "id": "mem_mwtn3oi0_7cf7e07949ca",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:26.747Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n## Deploy sh",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:26.747Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "sealion"
+   ],
+   "content": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n## Backend\n\n- Entry `backend/main.py` (`main:app`); `init_db()` runs in the lifespan (skip with `SKIP_INIT_DB=1`): `create_all` + idempotent `ALTER TABLE … ADD COLUMN IF NOT EXISTS` list `_ADDITIVE_MIGRATIONS` (no Alembic yet – add new columns there too). Body limit 16 MB (413). `/` is API info only when no static build is present; with a build, unknown paths fall back to `index.html`.\n- Router: all schemas + endpoints in `backend/app/api/v1/__init__.py` (prefix `/api/v1`, contract documented in its module docstring). `backend/app/__init__.py` is intentionally empty.\n- Auth: email+password, PBKDF2 600k (`app/core/security.py`), JWT HS256, 7-day expiry, strict `Bearer` scheme, in-memory per-IP rate limit on `/auth/*` (`app/core/rate_limit.py`, single-process only).\n- Admin: email in `ADMIN_EMAILS` (CSV env, case-insensitive; `is_admin(user)`, `is_admin` in the login/register response). Endpoints in `app/api/v1/admin.py` under `/api/v1/admin` (`require_admin`: 401/403): users with counts, any user's surveys (view/edit with re-estimate/delete, CENED sheet + .zip via `/admin/surveys/{id}/cened-*`: the wizard's CENED card goes through `surveySaveApiProvider` so the admin's `AdminSurveyClient` routes it there; the catasto documents section still uses owner routes), documents, delete user (`?confirm_email=`, cascade surveys + photo_analyses + documents; 409 on self). Every admin call except `GET /admin/audit` writes an `admin_audit_log` row in the same transaction. Normal `/surveys` endpoints stay owner-only for admins too.\n- Cadastral documents: `app/api/v1/documents.py` (`/surveys/{id}/documents`, `/documents/{id}[/content]`; JSON base64 upload, type from magic bytes PDF/JPEG/PNG, ≤10 MB, ≤10 per survey). Visura PDFs are parsed by `app/core/catasto/visura.py` (pypdf; never extracts owners) into `extracted`. Content is **encrypted at rest** (`app/core/crypto.py`, AES-256-GCM, blob `PAE1`+nonce+ct, key `DOCUMENTS_ENCRYPTION_KEY` = base64 of 32 bytes, required outside `APP_ENV=development`, dev fallback HKDF from `SECRET_KEY`); always read content via `document_content_response()` / `decrypt_document()`. Losing the key = documents unrecoverable.\n- Surveys: owned by `user_id` (others' surveys → 404). `GET /surveys` returns summaries without photos. Photos are stored inline as data-URLs (`photos` dict + `additional_photos` list, JPEG/PNG/WebP only, ≤1M chars each, ≤8 slots / ≤6 extra). Energy inputs live in the `building` JSON column (`app.core.energy.inputs.BuildingInputs`). `energy_score`/`estimated_class`/`energy_result`/climate zone are computed **only server-side** by `app/core/energy/` (simplified UNI/TS 11300 seasonal balance, classes A4…G vs the DM 26/06/2015 reference building, climate data from `app/data/comuni_climatici.csv`, rebuilt by `scripts/build_climate_data.py`) on every create/update and by `POST /estimate`; clients sending them get 422 (`extra=\"forbid\"`). `frontend/lib/core/scoring.dart` only maps score → class letter (`round(score/100*9)` from G). Improvements (`_improvements`): each intervention is re-simulated; cost is parametric (`COST_*`), saving = bill difference, simple payback plus incentives (`INCENTIVE_*`, detrazione in 10 rate → `tempo_ritorno_netto_anni`, `flusso_cassa_cumulato` 0…15 years, rate from optional `BuildingInputs.abitazione_principale`). Tests: `tests/test_energy.py`.\n- The estimate is a preliminary assessment from few survey data, **not** an APE – keep the UI/report wording (\"stima preliminare/indicativa\").\n- DB: Postgres only (`sqlalchemy.dialects.postgresql.UUID`), engine created at import from `DATABASE_URL` (default `postgresql://postgres:postgres@localhost:5433/pre_ape`; `postgres://` URLs are normalized; `pool_pre_ping`). Tests need a real Postgres with `uuid-ossp`, e.g. `docker run -d --name tmp_preape_pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pre_ape -p 127.0.0.1:5433:5432 postgres:16`.\n- Deps: runtime deps only in `pyproject.toml` `dependencies` (mirrored in `requirements.txt`,",
+   "createdAt": "2026-11-23T19:09:26.895Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
+   ],
+   "id": "mem_mwtn3oqm_f7b9d47d802b",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:26.895Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n## Backend\n\n",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:26.895Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "sealion"
+   ],
+   "content": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\nused by the Dockerfile); `[dev]` for tests, `[ai]` for the unwired `app/services/ai_vision_service.py`, `[extras]` for future features. Host python has no deps: run tests in `python:3.11` with `pip install -e \".[dev]\"` and `--network host`. Full suite ~3 min (PBKDF2).\n- Legal: privacy notice / terms / DPA (Italian) in `backend/app/legal/*.md`, served by `GET /legal/{privacy|termini|dpa}` with `{{PLACEHOLDER}}`s filled from `LEGAL_*` settings. `register` requires `accept_terms: true`; `users.terms_version` vs `app.legal.LEGAL_VERSION` → `terms_accepted` in login/register; `POST /auth/accept-terms`. Bump `LEGAL_VERSION` on substantive text changes (everyone re-accepts). Frontend: `lib/features/legal/` (page, consent text, `TermsGate` dialog). Tests: `tests/test_legal.py`, `test/legal_test.dart`.\n- LLM consultant: `app/core/advisor.py` (OpenAI-compatible chat/completions with tool calling, e.g. freellmapi; env `LLM_BASE_URL` ending in `/v1`, `LLM_MODEL`, `LLM_API_KEY`; empty = disabled → `GET /advisor/status` false, `POST /advisor` 503, app hides the card). The LLM only picks/explains interventions: its tool `simula_scenario` runs the engine, and the server re-attaches all numbers by `rif`, dropping unknown refs. Sends only technical data + comune. Tests: `tests/test_advisor.py` (fake transport, no network).\n- Floor plan → CAD: `app/core/planimetria/` (`raster.py` renders the PDF page with pypdfium2 at 300 dpi or loads the image; `walls.py` OpenCV: filled walls, gaps = doors/windows, holes = rooms, everything in metres; `export.py` DXF R2010 in metres with `PA_*` layers + 3D POLYFACE meshes, OBJ Y-up). Endpoints in `documents.py`: `POST /documents/{id}/cad` (only `kind=planimetria`, optional `CadParams` body: scale, wall height, `meters_per_px`; 422 when no walls), `GET …/cad`, `…/cad.dxf`, `…/cad.obj`; result stored in `survey_documents.cad` (JSON), summary `cad_stats` in the document meta. Synthetic fixture `tests/planimetria_fixtures.py`, tests `tests/test_planimetria.py`. Frontend `lib/features/planimetria/` (2D/3D preview via CustomPainter). No DWG output (closed format): users save as DWG from their CAD. Optional vision LLM (`llm.py`, OpenAI-compatible `/chat/completions`, e.g. freellmapi) reads scale, wall height and room names when `LLM_BASE_URL` + `LLM_MODEL` are set (`CadParams.use_ai`, default true); any failure falls back to CV only with a warning (`source` = `cv` / `cv+llm`). Tests `tests/test_planimetria_llm.py` use a local fake server.\n- Demo data: `app/esempi/` (6 fictional surveys + sample floor-plan PDF), loaded through the API by `python -m app.esempi --email … --password …` (idempotent by title; in production `docker compose exec app python -m app.esempi …`). Test `tests/test_esempi.py` keeps them valid against `SurveyCreate`.\n- `AI vision` is not wired: `analyze_generator_photo` is an `asyncio.sleep` stub.",
+   "createdAt": "2026-11-23T19:09:27.339Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
+   ],
+   "id": "mem_mwtn3p2a_b22828790fec",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:27.339Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\nused by the ",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:27.339Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:agents-md",
+   "concepts": [
+    "agent-memory-import",
+    "agents-md",
+    "sealion"
+   ],
+   "content": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n## Frontend\n\n- `lib/main.dart` → `AuthGate` (must stay inside `ProviderScope`): `LoginPage` (`features/auth/`) or `SurveyListPage` (`features/surveys/`); the wizard `OnboardingPage` is pushed on top. `authProvider` persists the JWT with shared_preferences; any `UnauthorizedException` → `handleUnauthorized()` (pop to first route).\n- Wizard state: `features/onboarding/survey_provider.dart` (`SurveyNotifier`: `startNew`, `loadFrom(SurveyRead)`, `toWire`, `save(api, complete:)`, `dirty`). `windowType` is `\"<frame> <glass>\"` client-side ↔ `window_frame`/`window_glass` on the wire. Save/exit UI via `features/onboarding/survey_save.dart`.\n- Wire DTOs `lib/models/survey.dart`, client `lib/services/api_client.dart` (inject `http.Client`; tests use `MockClient`).\n- Tests in `frontend/test/` (scoring, report, media, API client, SaaS flow, wizard steps, widgets): `flutter test`.\n- E2E against the real stack: Flutter web renders to canvas; enable semantics by clicking `flt-semantics-placeholder`, then use roles. Obscured/new-route text fields often aren't fillable via semantics – click + `keyboard.type`.",
+   "createdAt": "2026-11-23T19:09:27.724Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
+   ],
+   "id": "mem_mwtn3pbo_bc0f91d7dcc2",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:27.724Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[agents-md · sealion · ~/orca/workspaces/pre_ape/sealion/AGENTS.md]\n## Frontend\n",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:27.724Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "sealion"
+   ],
+   "content": "[claude-code · sealion · ~/orca/workspaces/pre_ape/sealion/CLAUDE.md]\n# CLAUDE.md\n\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\n\n@AGENTS.md\n\n`AGENTS.md` (imported above) is the source of truth for architecture, deploy shape and invariants. `README.md` is partly stale (it mentions Google OAuth/Drive and a `/pre-ape/` base href for local builds): trust `AGENTS.md` where they disagree.",
+   "createdAt": "2026-11-23T19:09:27.991Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/CLAUDE.md"
+   ],
+   "id": "mem_mwtn3phd_325c5e20a767",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:27.991Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · sealion · ~/orca/workspaces/pre_ape/sealion/CLAUDE.md]\n# CLAUDE.m",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:27.991Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "sealion"
+   ],
+   "content": "[claude-code · sealion · ~/orca/workspaces/pre_ape/sealion/CLAUDE.md]\n## Commands\n\nThe host has no Flutter SDK and no Python deps; everything runs in Docker.\n\n```bash\n# Postgres for backend tests (port 5433 matches the default DATABASE_URL)\ndocker run -d --name tmp_preape_pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pre_ape \\\n  -p 127.0.0.1:5433:5432 postgres:16\n\n# Backend tests (full suite ~3 min because of PBKDF2)\ndocker run --rm --network host -v \"$PWD/backend\":/src -w /src python:3.11 \\\n  sh -c 'pip install -q -e \".[dev]\" && python -m pytest tests/ -v'\n# Single test: python -m pytest tests/test_api.py::TestClass::test_name -v   (or -k <expr>)\n\n# Frontend: analyze + test (regenerate platform dirs first if missing)\ndocker run --rm -v preape-pubcache:/pubcache -v \"$PWD/frontend\":/project -w /project \\\n  ghcr.io/cirruslabs/flutter:stable \\\n  sh -c 'flutter pub get && flutter analyze && flutter test'\n# Single test file: flutter test test/scoring_test.dart  (add --plain-name \"<name>\" for one test)\n\n# Full image (Flutter web + FastAPI on one origin), as CI and Render build it\ndocker build -t pre-ape .\ndocker compose up -d        # home-server stack; needs .env (see .env.example)\n```\n\n`./verify.sh [flutter|backend|playwright]` is the local gate script (flutter analyze + backend pytest in Docker; uses containers `pre_ape_postgres` / `preape_pytest`).",
+   "createdAt": "2026-11-23T19:09:28.166Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/CLAUDE.md"
+   ],
+   "id": "mem_mwtn3pnc_941728677703",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:28.166Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · sealion · ~/orca/workspaces/pre_ape/sealion/CLAUDE.md]\n## Command",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:28.166Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "sealion"
+   ],
+   "content": "[claude-code · sealion · ~/orca/workspaces/pre_ape/sealion/CLAUDE.md]\n## Cross-cutting rules\n\n- The energy estimate lives only in `backend/app/core/energy/` (tests in `backend/tests/test_energy.py`); the frontend just renders `energy_result`. If the score → class mapping changes, update `frontend/lib/core/scoring.dart` too.\n- Adding a survey field touches: the SQLAlchemy model (energy inputs usually go in `BuildingInputs` instead — no migration) + `_ADDITIVE_MIGRATIONS` (backend), the Pydantic schemas in `backend/app/api/v1/__init__.py` (`extra=\"forbid\"`, so the client must not send unknown keys), `frontend/lib/models/survey.dart`, and `SurveyNotifier.loadFrom`/`toWire` in `survey_provider.dart`.\n- CI (`.github/workflows/build.yml`) runs Postgres 15 and builds the Pages web bundle with `--base-href /pre-ape/`; the Docker image uses `--base-href /`.",
+   "createdAt": "2026-11-23T19:09:28.395Z",
+   "files": [
+    "~/orca/workspaces/pre_ape/sealion/CLAUDE.md"
+   ],
+   "id": "mem_mwtn3pr1_877085a02cc4",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T19:09:28.395Z",
+    "channel": "agent"
+   },
+   "project": "sealion",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · sealion · ~/orca/workspaces/pre_ape/sealion/CLAUDE.md]\n## Cross-c",
+   "type": "preference",
+   "updatedAt": "2026-11-23T19:09:28.395Z",
+   "version": 1
   }
  ],
  "observations": {
