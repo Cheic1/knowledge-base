@@ -485,13 +485,13 @@
    "updatedAt": "2026-11-13T20:02:17.588Z"
   },
   {
-   "confidence": 0.749,
+   "confidence": 0.699,
    "content": "save_system of a Speedgoat harness copy (e.g. SPEEDGOAT_SYSTEM_TEST.slx made from SPEEDGOAT_HARNESS.slx) can fail with 'File ... was not saved because it contains dirty referenced subsystem files' for IO203/IO603/ENABLE_INPUT. The dirty state is phantom in-memory state of the SubsystemReference target files. Fix: close_system('IO203',0), close_system('IO603',0), close_system('ENABLE_INPUT',0) (discard, disk untouched), then save_system(topModel). Do NOT use SaveDirtyReferencedModels='on' (would write shared Speedgoat_library files); do not bother with set_param(ref,'Dirty',false) (does not stick for nested refs).",
    "context": "Simulink model surgery on SPEEDGOAT_HARNESS copies via MATLAB MCP in the speedgoat repo",
    "createdAt": "2026-10-26T16:27:01.707Z",
    "decayRate": 0.05,
    "id": "lsn_8b11e0dd660a00f4",
-   "lastDecayedAt": "2026-11-16T20:02:19.053Z",
+   "lastDecayedAt": "2026-11-23T20:02:19.506Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -503,16 +503,16 @@
     "io203",
     "io603"
    ],
-   "updatedAt": "2026-11-16T20:02:19.053Z"
+   "updatedAt": "2026-11-23T20:02:19.506Z"
   },
   {
-   "confidence": 0.749,
+   "confidence": 0.699,
    "content": "When the MATLAB MCP tools are missing from the OpenCode session (server attached before MATLAB started, session drops it), drive matlab-mcp-server.exe directly: Python stdio JSON-RPC client at C:/Users/49359/AppData/Local/Temp/opencode/mcp_client.py - initialize (protocolVersion 2024-11-05) then tools/call evaluate_matlab_code with {code: <matlab source string>}. Same effect as the MCP tool: code runs in the user's live MATLAB session. 14 tools available incl. model_edit/model_scan/run_matlab_file.",
    "context": "speedgoat repo, Windows, MATLAB running with shared engine (matlab-mcp-server --matlab-session-mode=existing)",
    "createdAt": "2026-10-26T16:27:02.131Z",
    "decayRate": 0.05,
    "id": "lsn_d34dfe0f6ba019e1",
-   "lastDecayedAt": "2026-11-16T20:02:19.053Z",
+   "lastDecayedAt": "2026-11-23T20:02:19.506Z",
    "reinforcements": 0,
    "source": "manual",
    "sourceIds": [],
@@ -523,7 +523,7 @@
     "workaround",
     "stdio"
    ],
-   "updatedAt": "2026-11-16T20:02:19.053Z"
+   "updatedAt": "2026-11-23T20:02:19.506Z"
   }
  ],
  "memories": [
@@ -38087,7 +38087,7 @@
     "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
    ],
    "id": "mem_mwtn3mpr_5a9ed0e8e229",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:24.396Z",
@@ -38116,7 +38116,7 @@
     "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
    ],
    "id": "mem_mwtn3mx4_4deb0227fdf3",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:24.649Z",
@@ -38145,7 +38145,7 @@
     "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
    ],
    "id": "mem_mwtn3n8g_1245dd13b6af",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:24.924Z",
@@ -38174,7 +38174,7 @@
     "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
    ],
    "id": "mem_mwtn3nib_3cf508576984",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:25.308Z",
@@ -38203,7 +38203,7 @@
     "~/orca/workspaces/pre_ape/firefish/AGENTS.md"
    ],
    "id": "mem_mwtn3nn7_aad8e285d0d5",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:25.616Z",
@@ -38232,7 +38232,7 @@
     "~/orca/workspaces/pre_ape/firefish/CLAUDE.md"
    ],
    "id": "mem_mwtn3nrm_1a9dc8c2a7bb",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:25.790Z",
@@ -38261,7 +38261,7 @@
     "~/orca/workspaces/pre_ape/firefish/CLAUDE.md"
    ],
    "id": "mem_mwtn3o1m_6c01ebb22a52",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:25.981Z",
@@ -38290,7 +38290,7 @@
     "~/orca/workspaces/pre_ape/firefish/CLAUDE.md"
    ],
    "id": "mem_mwtn3o7s_b679a80a94d1",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:26.305Z",
@@ -38319,7 +38319,7 @@
     "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
    ],
    "id": "mem_mwtn3odz_c1fc26591541",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:26.530Z",
@@ -38348,7 +38348,7 @@
     "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
    ],
    "id": "mem_mwtn3oi0_7cf7e07949ca",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:26.747Z",
@@ -38377,7 +38377,7 @@
     "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
    ],
    "id": "mem_mwtn3oqm_f7b9d47d802b",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:26.895Z",
@@ -38406,7 +38406,7 @@
     "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
    ],
    "id": "mem_mwtn3p2a_b22828790fec",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:27.339Z",
@@ -38435,7 +38435,7 @@
     "~/orca/workspaces/pre_ape/sealion/AGENTS.md"
    ],
    "id": "mem_mwtn3pbo_bc0f91d7dcc2",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:27.724Z",
@@ -38464,7 +38464,7 @@
     "~/orca/workspaces/pre_ape/sealion/CLAUDE.md"
    ],
    "id": "mem_mwtn3phd_325c5e20a767",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:27.991Z",
@@ -38493,7 +38493,7 @@
     "~/orca/workspaces/pre_ape/sealion/CLAUDE.md"
    ],
    "id": "mem_mwtn3pnc_941728677703",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:28.166Z",
@@ -38522,7 +38522,7 @@
     "~/orca/workspaces/pre_ape/sealion/CLAUDE.md"
    ],
    "id": "mem_mwtn3pr1_877085a02cc4",
-   "isLatest": true,
+   "isLatest": false,
    "kbAuthor": "server",
    "origin": {
     "capturedAt": "2026-11-23T19:09:28.395Z",
