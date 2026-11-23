@@ -38769,6 +38769,209 @@
    "type": "preference",
    "updatedAt": "2026-11-23T19:20:33.292Z",
    "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n# CLAUDE.md\n\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.",
+   "createdAt": "2026-11-23T20:00:03.063Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtowrc6_6f0c9ec4caeb",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:03.063Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n# CLAUDE.md\n\nThis file pro",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:03.063Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Cos'è\n\nIl \"second brain\" personale di Francesco. Non è codice: sono solo cartelle e file Markdown.\nNon c'è build, lint o test. È un repo git privato (github.com/Cheic1/SecondBrain), clonato su PC e mini PC.\nPunto d'ingresso per Francesco: `INIZIA_QUI.md`.",
+   "createdAt": "2026-11-23T20:00:03.237Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtowrhe_ff4615a40219",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:03.237Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Cos'è\n\nIl \"second brain",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:03.237Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Come parlare con Francesco\n\n- Sempre in italiano, frasi brevi, una cosa alla volta (Francesco potrebbe avere ADHD).",
+   "createdAt": "2026-11-23T20:00:03.391Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtowrl4_94c63ed82a8e",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:03.391Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Come parlare con France",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:03.391Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Regole fisse\n\n- Tutto ciò che non ha posto va in `00_Inbox`. Non cancellare mai: sposta in `09_Archivio`.\n- Le cose da **fare** per Francesco vanno in `CODA.md` (una riga, la più urgente in cima; quando fatta → sezione \"Fatto\" con data).\n- Le cose da **costruire** nel sistema vanno in `99_Sistema/backlog.md`.\n- Leggi sempre `99_Sistema/Regole/sicurezza.md` prima di usare mail o chat. Ogni canale ha anche la sua regola in `99_Sistema/Regole/` (`gmail.md`, `telegram.md`, `whatsapp.md`).\n- Nomi file: `AAAA-MM-GG_descrizione.ext` (vedi `99_Sistema/Regole/nomi_file.md`).\n- Mai salvare password, token o chat complete. Solo riassunti. `.gitignore` esclude già segreti, sessioni e video.",
+   "createdAt": "2026-11-23T20:00:03.535Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtowrqb_097621352614",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:03.535Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Regole fisse\n\n- Tutto c",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:03.535Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Sincronizzazione PC ↔ mini PC\n\n- Ogni 15 minuti `99_Sistema/Script/sync/sync.py` fa da solo commit, pull e push (vedi il suo README). Non serve fare git a mano.\n- Cosa non va su GitHub lo decide `.gitignore`: segreti e sessioni vanno sempre lì.\n- `.gitattributes` (`*.md merge=union`): se la stessa nota cambia su due macchine si tengono le righe di entrambe.\n- Il second brain e la knowledge-base (repo `knowledge-base`) sono due progetti separati: non collegarli né fonderli senza chiedere a Francesco.",
+   "createdAt": "2026-11-23T20:00:03.725Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtowrux_aa43ad1416d1",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:03.725Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Sincronizzazione PC ↔ m",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:03.725Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Struttura (metodo tipo PARA)\n\n- `01_Oggi/AAAA-MM-GG.md`: briefing del giorno, dal template `99_Sistema/Template/briefing.md`.\n- `02_Progetti/`: cose con una fine. Una cartella per progetto con `README.md` (obiettivo, stato, prossimo passo).\n  - `02_Progetti/_collegati/`: progetti che stanno **fuori** da qui (es. `D:\\Francesco\\Desktop\\Python\\...`). Non spostarli: qui solo riassunto e percorso.\n- `03_Aree/`: cose senza fine (Lavoro, Spesa, Nutrizione, Salute, Drone, Video, Social_Instagram, Soldi, Casa). Una sottocartella per area.\n- `06_Comunicazioni/{Gmail,Telegram,WhatsApp}/`: solo riassunti. Le azioni che ne escono vanno in `CODA.md`.\n- `08_Revisioni/AAAA-Wnn.md`: revisione settimanale, dal template `99_Sistema/Template/revisione_settimanale.md`.",
+   "createdAt": "2026-11-23T20:00:03.877Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtowryq_0eee9cf13210",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:03.877Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Struttura (metodo tipo ",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:03.877Z",
+   "version": 1
+  },
+  {
+   "agentId": "import:claude-code",
+   "concepts": [
+    "agent-memory-import",
+    "claude-code",
+    "SecondBrain"
+   ],
+   "content": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Agenti\n\nLa squadra è in `07_Agenti/agenti.md` (per ora è solo un piano: nessuno è attivo).\nFrancesco parla solo con **Sara**, che smista agli altri. Un nuovo agente si aggiunge lì, con strumenti e regole in `99_Sistema/Regole/`.",
+   "createdAt": "2026-11-23T20:00:04.015Z",
+   "files": [
+    "~/SecondBrain/CLAUDE.md"
+   ],
+   "id": "mem_mwtows2q_be0201c5dbe7",
+   "isLatest": true,
+   "kbAuthor": "server",
+   "origin": {
+    "capturedAt": "2026-11-23T20:00:04.015Z",
+    "channel": "agent"
+   },
+   "project": "SecondBrain",
+   "sessionIds": [],
+   "sourceObservationIds": [],
+   "strength": 7,
+   "supersedes": [],
+   "title": "[claude-code · SecondBrain · ~/SecondBrain/CLAUDE.md]\n## Agenti\n\nLa squadra è in",
+   "type": "preference",
+   "updatedAt": "2026-11-23T20:00:04.015Z",
+   "version": 1
   }
  ],
  "observations": {
